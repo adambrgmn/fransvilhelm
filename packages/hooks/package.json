@@ -12,7 +12,7 @@
   "private": false,
   "scripts": {
     "test": "jest",
-    "build": "microbundle build"
+    "build": "microbundle build --target browser --strict"
   },
   "files": [
     "dist/**"
