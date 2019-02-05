@@ -12,7 +12,6 @@
   "private": false,
   "scripts": {
     "test": "jest",
-    "test:coverage": "rm -rf dist && jest --coverage",
     "build": "microbundle build"
   },
   "files": [
