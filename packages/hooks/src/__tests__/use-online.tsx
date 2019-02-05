@@ -16,7 +16,6 @@ it('should determine if a client is online or not', () => {
   flushEffects();
   expect(getByText('online')).toBeInTheDocument();
 
-  Object.defineProperty(navigator, 'onLine', { value: false });
   const evt = new Event('offline', { bubbles: true });
   window.dispatchEvent(evt);
 
