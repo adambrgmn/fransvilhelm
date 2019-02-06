@@ -9,13 +9,15 @@ interface UseInputResult {
  * Get necessary props to handle an input. The hook returns a value and an
  * onChange handler.
  *
- * @example
- *   const input = useInput('foo');
- *   return <input value={input.value} onChange={input.onChange} />
- *   // Or spread props for easier use: <input {...input} />
- *
  * @param {string} [initialValue=''] Initial value of input
  * @returns {UseInputResult} Current value and onChange handler
+ *
+ * @example
+ *   const Input = () => {
+ *     const input = useInput('foo');
+ *     return <input value={input.value} onChange={input.onChange} />
+ *     // Or spread props for easier use: <input {...input} />
+ *   };
  */
 const useInput = (initialValue: string = ''): UseInputResult => {
   const [value, setValue] = useState(initialValue);

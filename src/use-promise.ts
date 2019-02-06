@@ -29,9 +29,12 @@ const useCurrentPromise = <T>() => {
 /**
  * Executes a promise and eventually returns the resolved or rejected value.
  *
- * @example
- *   import { usePromise, AsyncState } from "@adambrgmn/hooks";
+ * @template T The expected resolved value
+ * @param {UsePromiseInput<T>} promise A function returning a promise, or an async function
+ * @param {(ReadonlyArray<any> | undefined)} [deps] Dependecy array for when to rerun promise
+ * @returns {UsePromiseResult<T>} Array containing [state, result, error]
  *
+ * @example
  *   const Username = ({ id }) => {
  *     const [state, result, error] = usePromise(
  *       () => fetch(`/user/${id}`).then(res => res.json()),
@@ -42,11 +45,6 @@ const useCurrentPromise = <T>() => {
  *     if (state === AsyncState.rejected) return <p>An error occured ({error.message})</p>;
  *     return <p>Loading</p>;
  *   }
- *
- * @template T The expected resolved value
- * @param {UsePromiseInput<T>} promise A function returning a promise, or an async function
- * @param {(ReadonlyArray<any> | undefined)} [deps] Dependecy array for when to rerun promise
- * @returns {UsePromiseResult<T>} Array containing [state, result, error]
  */
 const usePromise = <T>(
   promise: UsePromiseInput<T>,

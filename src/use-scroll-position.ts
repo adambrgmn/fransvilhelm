@@ -26,12 +26,16 @@ const getPosition = () => ({
  * e.g. using [lodash.throttle](https://www.npmjs.com/package/lodash.throttle)
  * or window.requestAnimationFrame).
  *
- * @example
- *   const throttler = fn => () => window.requestAnimationFrame(fn);
- *   const pos = useScrollPosition(throttler);
- *
- * @param {ThrottleWrapper} [throttleWrapper=passThrough] A wrapper function to throttle the update calls
+ * @param {ThrottleWrapper} [throttleWrapper=passThrough] Optional wrapper function useful to throttle calls
  * @returns {{ x: number; y: number }}
+ *
+ * @example
+ *   const throttler = fn => _.throttle(fn, 100);
+ *   const Message = () => {
+ *     const pos = useScrollPosition(throttler);
+ *     const message = pos > 1000 ? 'Yeah, you made it down here!' : '...';
+ *     return <p>{message}</p>
+ *   }
  */
 const useScrollPosition = (
   throttleWrapper: ThrottleWrapper = passThrough,

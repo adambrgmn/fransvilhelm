@@ -5,6 +5,8 @@ import { useRef, useEffect } from 'react';
  * probably an anti-pattern but can be useful when trying to use promises inside
  * a hook to not risk setting state on an unmounted component.
  *
+ * @returns {() => boolean} A function that tells if a component is mounted or not
+ *
  * @example
  *   const Username = ({ id }) => {
  *     const isMounted = useIsMounted();
@@ -22,8 +24,6 @@ import { useRef, useEffect } from 'react';
  *
  *     return <p>Username: {username}</p>
  *   };
- *
- * @returns {() => boolean} A function that tells if a component is mounted or not
  */
 const useIsMounted = (): (() => boolean) => {
   const ref = useRef(false);
