@@ -12,7 +12,8 @@
   "private": false,
   "scripts": {
     "test": "jest",
-    "build": "microbundle build --target browser --strict"
+    "build": "microbundle build --target browser --strict",
+    "create": "node scripts/create-hook.js"
   },
   "files": [
     "dist/**"
@@ -22,14 +23,15 @@
     "@types/react": "^16.8.1",
     "cz-conventional-changelog": "^2.1.0",
     "husky": "^1.3.1",
-    "jest-dom": "^3.0.1",
     "jest": "^24.0.0",
+    "jest-dom": "^3.0.1",
     "lint-staged": "^8.1.3",
     "microbundle": "^0.9.0",
     "prettier": "^1.16.4",
+    "react": "^16.8.0-alpha.1",
     "react-dom": "^16.8.0-alpha.1",
     "react-testing-library": "^5.4.4",
-    "react": "^16.8.0-alpha.1",
+    "strman": "^2.0.1",
     "ts-jest": "^23.10.5",
     "typescript": "^3.3.1"
   },

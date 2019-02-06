@@ -5973,6 +5973,11 @@ strip-json-comments@~2.0.1:
   resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-2.0.1.tgz#3c531942e908c2697c0ec344858c286c7ca0a60a"
   integrity sha1-PFMZQukIwml8DsNEhYwobHygpgo=
 
+strman@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/strman/-/strman-2.0.1.tgz#d43bb91c91e100609f336fd4a6539fd8e980e1de"
+  integrity sha512-00kB9pulmzaQUBl8DJQ4255QXnQn/MHnJzYqKz4a/W5KqCMSaqmv0VReOzkSg2u4FYkKpNhxpp6bs6aEMZeLPw==
+
 style-inject@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/style-inject/-/style-inject-0.3.0.tgz#d21c477affec91811cc82355832a700d22bf8dd3"
