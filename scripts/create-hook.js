@@ -8,7 +8,7 @@ const { toCamelCase, toKebabCase } = require('strman');
 const readFile = promisify(fs.readFile);
 const writeFile = promisify(fs.writeFile);
 
-const moduleTemplate = ({ name }) => `import * as React from 'react';
+const moduleTemplate = ({ name }) => `import {} from 'react';
 
 const ${toCamelCase(name)} = () => {};
 
@@ -24,11 +24,11 @@ afterEach(cleanup);
 
 const TestComponent = (): JSX.Element => {
   const result = ${toCamelCase(name)}();
-  return <p>{result}</p>;
+  return <p />;
 };
 
 it('should ...', () => {
-  const doc = render(<TestComponent />);
+  const {} = render(<TestComponent />);
 });
 `;
 
