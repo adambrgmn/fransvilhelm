@@ -24,4 +24,4 @@ const useCheckbox = (initialValue: boolean = false): UseCheckboxResult => {
   return { checked, onChange };
 };
 
-export { useCheckbox };
+export { useCheckbox, UseCheckboxResult };
