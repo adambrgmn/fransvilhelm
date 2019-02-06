@@ -11,6 +11,8 @@
     "skipLibCheck": true,
     "noImplicitAny": true,
     "resolveJsonModule": true,
-    "preserveWatchOutput": true
-  }
+    "preserveWatchOutput": true,
+    "jsx": "react"
+  },
+  "include": ["src"]
 }
