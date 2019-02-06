@@ -1,3 +1,4 @@
+export { useInput } from './use-input';
 export { useInterval } from './use-interval';
 export { useMediaQuery } from './use-media-query';
 export { useOnline } from './use-online';
