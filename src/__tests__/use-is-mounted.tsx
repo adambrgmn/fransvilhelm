@@ -5,7 +5,13 @@ import { useIsMounted } from '../use-is-mounted';
 
 afterEach(cleanup);
 
-const TestComponent = ({ fn, delay }: { fn: () => void; delay: number }) => {
+const TestComponent = ({
+  fn,
+  delay,
+}: {
+  fn: () => void;
+  delay: number;
+}): JSX.Element => {
   const isMounted = useIsMounted();
 
   useEffect(() => {

@@ -26,7 +26,8 @@ const useMediaQuery = (query: string): boolean => {
     const queryList = window.matchMedia(query);
     setMatches(queryList.matches);
 
-    const listener = (evt: MediaQueryListEvent) => setMatches(evt.matches);
+    const listener = (evt: MediaQueryListEvent): void =>
+      setMatches(evt.matches);
 
     queryList.addListener(listener);
     return () => queryList.removeListener(listener);

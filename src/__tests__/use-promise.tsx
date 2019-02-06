@@ -11,7 +11,7 @@ function TestComponent<T>({
 }: {
   fn: () => Promise<T>;
   deps?: ReadonlyArray<any>;
-}) {
+}): JSX.Element {
   const [state, result, error] = usePromise(fn, deps);
 
   return (
@@ -43,7 +43,7 @@ it('should handle rejected promises', async () => {
 it('should handle multiple promises ignoring the previous ones', async () => {
   const mock = jest.fn();
 
-  const Component = ({ value }: { value: string }) => {
+  const Component = ({ value }: { value: string }): JSX.Element => {
     const fn = React.useCallback(async () => {
       const val = await Promise.resolve(value);
       mock(val);
@@ -65,8 +65,8 @@ it('should handle multiple promises ignoring the previous ones', async () => {
 it('should handle multiple rejected promises', async () => {
   const mock = jest.fn();
 
-  const Component = ({ value }: { value: string }) => {
-    const fn = React.useCallback(async () => {
+  const Component = ({ value }: { value: string }): JSX.Element => {
+    const fn = React.useCallback(async (): Promise<void> => {
       const val = await Promise.resolve(value);
       mock(val);
       throw new Error(val);

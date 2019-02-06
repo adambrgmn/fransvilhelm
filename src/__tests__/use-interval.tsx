@@ -15,7 +15,7 @@ const MockComponent = ({
   initialCount = 1,
   initialRunning = true,
   initialDelay = 1000,
-}: Props) => {
+}: Props): JSX.Element => {
   const [count, setCount] = React.useState(initialCount);
   const [running, setRunning] = React.useState(initialRunning);
   const [delay, setDelay] = React.useState(initialDelay);
@@ -40,6 +40,7 @@ const MockComponent = ({
   );
 };
 
+// eslint-disable-next-line
 const renderComp = () => {
   const { getByTestId } = render(<MockComponent />);
 

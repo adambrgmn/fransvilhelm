@@ -21,7 +21,7 @@ interface UseCheckboxResult {
  */
 const useCheckbox = (initialValue: boolean = false): UseCheckboxResult => {
   const [checked, setChecked] = useState(initialValue);
-  const onChange = () => setChecked(!checked);
+  const onChange = (): void => setChecked(!checked);
 
   return { checked, onChange };
 };

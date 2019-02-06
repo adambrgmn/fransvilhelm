@@ -18,7 +18,12 @@ type UsePromiseResult<T> =
   | [AsyncState.fullfilled, T, null]
   | [AsyncState.rejected, null, any];
 
-const useCurrentPromise = <T>() => {
+interface UseCurrentPromiseResult<T> {
+  set(promise: Promise<T>): void;
+  is(promise: Promise<T>): boolean;
+}
+
+const useCurrentPromise = <T>(): UseCurrentPromiseResult<T> => {
   const ref: React.MutableRefObject<Promise<T> | null> = useRef(null);
   return {
     set: (promise: Promise<T>) => (ref.current = promise),
@@ -59,7 +64,7 @@ const usePromise = <T>(
   const currentPromise = useCurrentPromise();
   const isMounted = useIsMounted();
 
-  const shouldHandlePromise = (promise: Promise<T>) => {
+  const shouldHandlePromise = (promise: Promise<T>): boolean => {
     return isMounted() && currentPromise.is(promise);
   };
 

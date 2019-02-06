@@ -5,7 +5,7 @@ import { useCheckbox } from '../use-checkbox';
 
 afterEach(cleanup);
 
-const TestComponent = () => {
+const TestComponent = (): JSX.Element => {
   const checkbox = useCheckbox();
   return (
     <div>
