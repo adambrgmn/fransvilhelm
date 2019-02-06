@@ -30,7 +30,9 @@ const useIsMounted = (): (() => boolean) => {
 
   useEffect(() => {
     ref.current = true;
-    return () => (ref.current = false);
+    return () => {
+      ref.current = false;
+    };
   }, []);
 
   return () => ref.current;
