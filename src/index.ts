@@ -1,4 +1,5 @@
 export * from './use-checkbox';
+export * from './use-debounce';
 export * from './use-input';
 export * from './use-interval';
 export * from './use-is-mounted';
