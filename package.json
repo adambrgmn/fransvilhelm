@@ -4,7 +4,7 @@
   "description": "A set of reusable React hooks",
   "main": "dist/hooks.js",
   "umd:main": "dist/hooks.umd.js",
-  "module": "dist/hooks.mjs",
+  "module": "dist/hooks.esm.js",
   "source": "src/index.ts",
   "repository": "git@github.com:adambrgmn/utils",
   "author": "Adam Bergman <adam@fransvilhelm.com>",
@@ -12,7 +12,9 @@
   "private": false,
   "scripts": {
     "test": "jest",
+    "prebuild": "rm -rf dist",
     "build": "microbundle build --target browser --strict",
+    "postbuild": "rm -rf dist/**/__tests__",
     "create": "node scripts/create-hook.js"
   },
   "files": [
