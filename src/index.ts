@@ -1,3 +1,4 @@
+export { useCheckbox } from './use-checkbox';
 export { useInput } from './use-input';
 export { useInterval } from './use-interval';
 export { useMediaQuery } from './use-media-query';
