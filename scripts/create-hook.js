@@ -30,8 +30,7 @@ it('should ...', () => {
 });
 `;
 
-const indexTemplate = ({ name }) =>
-  `export { ${toCamelCase(name)} } from './${toKebabCase(name)}';`;
+const indexTemplate = ({ name }) => `export * from './${toKebabCase(name)}';`;
 
 const exists = async filePath => {
   try {
