@@ -5,6 +5,7 @@ try {
   const opts = Object.defineProperty({}, 'passive', {
     get: function() {
       supportsPassive = true;
+      return true;
     },
   });
 
@@ -13,9 +14,9 @@ try {
 } catch (e) {}
 
 type ThrottleWrapper = (fn: () => void) => () => void;
-const passThrough: ThrottleWrapper = fn => () => fn();
+const passThrough: ThrottleWrapper = fn => () => fn(); // eslint-disable-line
 
-const getPosition = () => ({
+const getPosition = (): { x: number; y: number } => ({
   x: window.pageXOffset,
   y: window.pageYOffset,
 });

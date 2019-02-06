@@ -5,7 +5,11 @@ import { useScrollPosition, ThrottleWrapper } from '../use-scroll-position';
 
 afterEach(cleanup);
 
-const TestComponent = ({ throttle }: { throttle?: ThrottleWrapper }) => {
+const TestComponent = ({
+  throttle,
+}: {
+  throttle?: ThrottleWrapper;
+}): JSX.Element => {
   const position = useScrollPosition(throttle);
   return (
     <div style={{ height: '200vh' }}>
@@ -19,21 +23,21 @@ it('should track scroll position', () => {
   const { getByText } = render(<TestComponent />);
   flushEffects();
 
-  expect(getByText(/x\: \d+/)).toHaveTextContent('x: 0');
-  expect(getByText(/y\: \d+/)).toHaveTextContent('y: 0');
+  expect(getByText(/x: \d+/)).toHaveTextContent('x: 0');
+  expect(getByText(/y: \d+/)).toHaveTextContent('y: 0');
 
   Object.defineProperty(window, 'pageXOffset', { value: 100 });
   Object.defineProperty(window, 'pageYOffset', { value: 100 });
   const scrollEv = new Event('scroll');
   window.dispatchEvent(scrollEv);
 
-  expect(getByText(/x\: \d+/)).toHaveTextContent('x: 100');
-  expect(getByText(/y\: \d+/)).toHaveTextContent('y: 100');
+  expect(getByText(/x: \d+/)).toHaveTextContent('x: 100');
+  expect(getByText(/y: \d+/)).toHaveTextContent('y: 100');
 });
 
 it('should accept an optional throttle wrapper', () => {
   jest.spyOn(window, 'requestAnimationFrame');
-  const throttle = (fn: () => void) => () => window.requestAnimationFrame(fn);
+  const throttle = (fn: () => void) => () => window.requestAnimationFrame(fn); // eslint-disable-line
 
   render(<TestComponent throttle={throttle} />);
   flushEffects();

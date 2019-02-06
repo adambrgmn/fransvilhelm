@@ -19,7 +19,7 @@ beforeEach(() => {
   Object.defineProperty(window, 'matchMedia', { value: matchMedia });
 });
 
-const TestComponent = ({ query }: { query: string }) => {
+const TestComponent = ({ query }: { query: string }): JSX.Element => {
   const matches = useMediaQuery(query);
   return <p>{matches ? 'true' : 'false'}</p>;
 };

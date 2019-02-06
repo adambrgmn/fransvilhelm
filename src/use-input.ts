@@ -21,7 +21,7 @@ interface UseInputResult {
  */
 const useInput = (initialValue: string = ''): UseInputResult => {
   const [value, setValue] = useState(initialValue);
-  const onChange = (event: React.FormEvent<HTMLInputElement>) => {
+  const onChange = (event: React.FormEvent<HTMLInputElement>): void => {
     setValue(event.currentTarget.value);
   };
 

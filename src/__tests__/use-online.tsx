@@ -5,7 +5,7 @@ import { useOnline } from '../use-online';
 
 afterEach(cleanup);
 
-const TestComponent = () => {
+const TestComponent = (): JSX.Element => {
   const isOnline = useOnline();
   return <p>{isOnline ? 'online' : 'offline'}</p>;
 };

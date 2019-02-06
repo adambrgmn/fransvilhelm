@@ -5,7 +5,7 @@ import { useInput } from '../use-input';
 
 afterEach(cleanup);
 
-const TestComponent = () => {
+const TestComponent = (): JSX.Element => {
   const input = useInput();
   return (
     <div>
