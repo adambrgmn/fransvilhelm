@@ -4,4 +4,5 @@ export { useInterval } from './use-interval';
 export { useIsMounted } from './use-is-mounted';
 export { useMediaQuery } from './use-media-query';
 export { useOnline } from './use-online';
+export { usePromise, AsyncState } from './use-promise';
 export { useScrollPosition } from './use-scroll-position';
