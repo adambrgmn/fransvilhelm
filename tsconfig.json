@@ -1,6 +1,17 @@
 {
-  "extends": "../../configs/tsconfig.base.json",
   "compilerOptions": {
+    "lib": ["esnext", "dom"],
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "target": "es2017",
+    "strict": true,
+    "declaration": true,
+    "esModuleInterop": true,
+    "composite": true,
+    "skipLibCheck": true,
+    "noImplicitAny": true,
+    "resolveJsonModule": true,
+    "preserveWatchOutput": true,
     "jsx": "react"
   },
   "include": ["src"]
