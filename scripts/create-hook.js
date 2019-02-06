@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-var-requires, strict */
+'use strict';
 const fs = require('fs');
 const path = require('path');
 const { promisify } = require('util');
@@ -15,14 +17,14 @@ export { ${toCamelCase(name)} };
 
 const testTemplate = ({ name }) => `import 'jest-dom/extend-expect';
 import * as React from 'react';
-import { render, cleanup, fireEvent } from 'react-testing-library';
+import { render, cleanup } from 'react-testing-library';
 import { ${toCamelCase(name)} } from '../${toKebabCase(name)}';
 
 afterEach(cleanup);
 
-const TestComponent = () => {
+const TestComponent = (): JSX.Element => {
   const result = ${toCamelCase(name)}();
-  return null;
+  return <p>{result}</p>;
 };
 
 it('should ...', () => {
@@ -41,7 +43,7 @@ const exists = async filePath => {
   }
 };
 
-const createFile = async ({ name, path, content }) => {
+const createFile = async ({ path, content }) => {
   await writeFile(path, content, 'utf-8');
 };
 
@@ -74,12 +76,8 @@ async function main() {
 
     await Promise.all([
       updateIndex({ name }),
-      createFile({
-        name,
-        path: file.module,
-        content: moduleTemplate({ name }),
-      }),
-      createFile({ name, path: file.test, content: testTemplate({ name }) }),
+      createFile({ path: file.module, content: moduleTemplate({ name }) }),
+      createFile({ path: file.test, content: testTemplate({ name }) }),
     ]);
 
     console.log(`👍 Created new hook ${name}`);
