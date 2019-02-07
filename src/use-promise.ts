@@ -90,4 +90,4 @@ const usePromise = <T>(
   return state;
 };
 
-export { usePromise, AsyncState, UsePromiseInput, UsePromiseResult };
+export { usePromise, AsyncState };

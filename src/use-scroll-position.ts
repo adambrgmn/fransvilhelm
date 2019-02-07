@@ -60,4 +60,4 @@ const useScrollPosition = (
   return position;
 };
 
-export { useScrollPosition, ThrottleWrapper };
+export { useScrollPosition };

@@ -28,4 +28,4 @@ const useInput = (initialValue: string = ''): UseInputResult => {
   return { value, onChange };
 };
 
-export { useInput, UseInputResult };
+export { useInput };

@@ -66,4 +66,4 @@ const useDimensions = <T extends Element>(): UseDimensionsResult<T> => {
   return { ref, rect };
 };
 
-export { useDimensions, UseDimensionsResult };
+export { useDimensions };
