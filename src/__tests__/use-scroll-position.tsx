@@ -1,6 +1,6 @@
 import 'jest-dom/extend-expect';
 import * as React from 'react';
-import { render, cleanup, flushEffects } from 'react-testing-library';
+import { render, cleanup } from 'react-testing-library';
 import { useScrollPosition, ThrottleWrapper } from '../use-scroll-position';
 
 afterEach(cleanup);
@@ -21,7 +21,6 @@ const TestComponent = ({
 
 it('should track scroll position', () => {
   const { getByText } = render(<TestComponent />);
-  flushEffects();
 
   expect(getByText(/x: \d+/)).toHaveTextContent('x: 0');
   expect(getByText(/y: \d+/)).toHaveTextContent('y: 0');
@@ -40,7 +39,6 @@ it('should accept an optional throttle wrapper', () => {
   const throttle = (fn: () => void) => () => window.requestAnimationFrame(fn); // eslint-disable-line
 
   render(<TestComponent throttle={throttle} />);
-  flushEffects();
 
   const scrollEv = new Event('scroll');
   window.dispatchEvent(scrollEv);

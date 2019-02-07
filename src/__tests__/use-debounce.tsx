@@ -1,11 +1,6 @@
 import 'jest-dom/extend-expect';
 import * as React from 'react';
-import {
-  render,
-  cleanup,
-  flushEffects,
-  fireEvent,
-} from 'react-testing-library';
+import { render, cleanup, fireEvent } from 'react-testing-library';
 import { useDebounce } from '../use-debounce';
 import { useInput } from '../use-input';
 
@@ -28,7 +23,6 @@ it('should debounce a value and only update once within the given delay', () => 
   const { getByTestId } = render(<TestComponent delay={100} />);
   const debouncedValue = getByTestId('debounced');
   const input = getByTestId('input');
-  flushEffects();
 
   const inputs = ['a', 'ab', 'abc'];
   inputs.forEach((value, index) => {

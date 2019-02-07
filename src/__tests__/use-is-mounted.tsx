@@ -1,6 +1,6 @@
 import 'jest-dom/extend-expect';
 import React, { useEffect } from 'react';
-import { render, cleanup, flushEffects } from 'react-testing-library';
+import { render, cleanup } from 'react-testing-library';
 import { useIsMounted } from '../use-is-mounted';
 
 afterEach(cleanup);
@@ -31,7 +31,6 @@ it('should return a boolean indicating if the component is still mounted', () =>
   const delay = 1000;
   const { unmount } = render(<TestComponent fn={mock} delay={delay} />);
 
-  flushEffects();
   unmount();
 
   jest.advanceTimersByTime(delay);
