@@ -15,6 +15,8 @@
     "prebuild": "rm -rf dist",
     "build": "microbundle build --target browser --strict",
     "postbuild": "rm -rf dist/**/__tests__",
+    "docz:dev": "docz dev",
+    "docz:build": "docz build",
     "lint": "eslint 'src/**/*.{ts,tsx}'",
     "create": "node scripts/create-hook.js"
   },
@@ -29,6 +31,8 @@
     "@typescript-eslint/parser": "^1.3.0",
     "babel-eslint": "9.x",
     "cz-conventional-changelog": "^2.1.0",
+    "docz": "^0.13.7",
+    "docz-theme-default": "^0.13.7",
     "eslint": "5.x",
     "eslint-config-prettier": "^4.0.0",
     "eslint-config-react-app": "^3.0.6",
