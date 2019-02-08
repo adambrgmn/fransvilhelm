@@ -1,0 +1,51 @@
+---
+name: useEventListener
+menu: Hooks
+route: /hook/use-event-listener
+---
+
+import { Playground } from 'docz';
+import { UseEventListenerExample } from './use-event-listener.example.tsx';
+
+# useEventListener
+
+Will setup a listener on the window object and run handler every time that
+action is triggered.
+
+## Usage
+
+```jsx
+import React from 'react';
+import { useEventListener } from '@adambrgmn/hooks';
+
+const UseEventListenerExample = (): JSX.Element => {
+  const [keys, setKeys] = React.useState<string[]>([]);
+  useEventListener('keypress', ev => {
+    setKeys([...keys, ev.key]);
+  });
+
+  return <output>{keys.join(' > ')}</output>;
+};
+```
+
+# Example
+
+<Playground>
+  <UseEventListenerExample />
+</Playground>
+
+## Parameters
+
+`useEventListener` accepts one argument
+
+| Param | Type | Required | Default | Description |
+| :---- | :--- | :------- | :------ | :---------- |
+| param | type | boolean  | boolean | description |
+
+## Returns
+
+`useEventListener` returns...
+
+| Prop | Type | Description |
+| :--- | :--- | :---------- |
+| prop | type | description |
