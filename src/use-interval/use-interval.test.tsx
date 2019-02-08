@@ -1,9 +1,15 @@
 import 'jest-dom/extend-expect';
 import * as React from 'react';
-import { render, cleanup, fireEvent } from 'react-testing-library';
+import { render, cleanup, fireEvent, act } from 'react-testing-library';
 import { useInterval } from './';
 
 afterEach(cleanup);
+
+const advanceByTime = (time: number): void => {
+  act(() => {
+    jest.advanceTimersByTime(time);
+  });
+};
 
 interface Props {
   initialCount?: number;
@@ -57,10 +63,10 @@ it('should run an interval', () => {
 
   expect(count).toHaveTextContent('1');
 
-  jest.advanceTimersByTime(1000);
+  advanceByTime(1000);
   expect(count).toHaveTextContent('2');
 
-  jest.advanceTimersByTime(1000);
+  advanceByTime(1000);
   expect(count).toHaveTextContent('3');
 });
 
@@ -70,7 +76,7 @@ it('should be pausable', () => {
 
   expect(count).toHaveTextContent('1');
   fireEvent.click(pause);
-  jest.advanceTimersByTime(2000);
+  advanceByTime(2000);
   expect(count).toHaveTextContent('1');
 });
 
@@ -81,10 +87,11 @@ it('should be possible to adjust interval speed', () => {
   expect(count).toHaveTextContent('1');
 
   fireEvent.change(delay, { target: { value: '500' } });
-  jest.advanceTimersByTime(500);
+  advanceByTime(500);
   expect(count).toHaveTextContent('2');
 
   fireEvent.change(delay, { target: { value: '5000' } });
-  jest.advanceTimersByTime(10000);
+  advanceByTime(5000);
+  advanceByTime(5000);
   expect(count).toHaveTextContent('4');
 });

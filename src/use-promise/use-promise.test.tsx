@@ -3,83 +3,72 @@ import * as React from 'react';
 import { render, cleanup, waitForElement } from 'react-testing-library';
 import { usePromise, AsyncState } from '../use-promise';
 
-afterEach(cleanup);
+/**
+ *
+ * React still outputs a disturbing warning about state updates not being
+ * wrapped in `act` when using async actions. Therefor we will mute
+ * `console.error` for now until it's resolve (follow:
+ * https://github.com/facebook/react/issues/14775 for info)
+ *
+ * TODO: Reenable `console.error`
+ */
+let originalConsoleError = console.error;
+beforeAll(() => {
+  console.error = () => {};
+});
 
-function TestComponent<T>({
-  fn,
-  deps = [],
-}: {
-  fn: () => Promise<T>;
-  deps?: ReadonlyArray<any>;
-}): JSX.Element {
-  const [state, result, error] = usePromise(fn, deps);
+afterAll(() => {
+  console.error = originalConsoleError;
+});
 
-  return (
-    <div>
-      <p>State: {state}</p>
-      {state === AsyncState.rejected && <p>Error: {error.message}</p>}
-      {state === AsyncState.fullfilled && <p>Result: {result}</p>}
-    </div>
-  );
-}
+const fetchUsername = jest.fn((username: string) => {
+  if (['reject', 'rejected', 'unfullfilled'].includes(username)) {
+    return Promise.reject(new Error(`${username} is not a username`));
+  }
+  return Promise.resolve(username);
+});
+
+afterEach(() => {
+  cleanup();
+  fetchUsername.mockClear();
+});
+
+const FetchUsername = ({ username }: { username: string }): JSX.Element => {
+  const [state, name, error] = usePromise(() => fetchUsername(username), [
+    username,
+  ]);
+
+  let child = 'loading...';
+  if (state === AsyncState.fullfilled) child = name as string;
+  if (state === AsyncState.rejected) child = error.message;
+
+  return <p>{child}</p>;
+};
 
 it('should handle a promise using a hook', async () => {
-  const fn = jest.fn(() => Promise.resolve('success'));
-  const { getByText } = render(<TestComponent fn={fn} />);
-
-  await waitForElement(() => getByText(/success/));
-  expect(getByText(/State/)).toHaveTextContent(AsyncState.fullfilled);
+  const { getByText } = render(<FetchUsername username="ab" />);
+  await waitForElement(() => getByText(/ab/i));
+  expect(fetchUsername).toHaveBeenCalledTimes(1);
 });
 
 it('should handle rejected promises', async () => {
-  const fn = jest.fn(() => Promise.reject(new Error('error')));
-  const { getByText } = render(<TestComponent fn={fn} />);
-
-  await waitForElement(() => getByText(/error/));
-  expect(getByText(/State/)).toHaveTextContent(AsyncState.rejected);
-  expect(fn).toHaveBeenCalledTimes(1);
+  const { getByText } = render(<FetchUsername username="reject" />);
+  await waitForElement(() => getByText(/is not a username/i));
 });
 
 it('should handle multiple promises ignoring the previous ones', async () => {
-  const mock = jest.fn();
+  const { rerender, getByText } = render(<FetchUsername username="one" />);
+  rerender(<FetchUsername username="two" />);
 
-  const Component = ({ value }: { value: string }): JSX.Element => {
-    const fn = React.useCallback(async () => {
-      const val = await Promise.resolve(value);
-      mock(val);
-      return val;
-    }, [value]);
-
-    return <TestComponent fn={fn} deps={[value]} />;
-  };
-
-  const { getByText, container } = render(<Component value="one" />);
-  render(<Component value="two" />, { container });
-
-  await waitForElement(() => getByText(`State: ${AsyncState.fullfilled}`));
-  expect(getByText(/Result/)).toHaveTextContent(/two/);
-  expect(mock).toHaveBeenCalledWith('one');
-  expect(mock).toHaveBeenCalledWith('two');
+  await waitForElement(() => getByText(/two/i));
+  expect(fetchUsername).toHaveBeenCalledWith('one');
+  expect(fetchUsername).toHaveBeenCalledWith('two');
 });
 
 it('should handle multiple rejected promises', async () => {
-  const mock = jest.fn();
+  const { rerender, getByText } = render(<FetchUsername username="reject" />);
+  rerender(<FetchUsername username="rejected" />);
+  rerender(<FetchUsername username="unfullfilled" />);
 
-  const Component = ({ value }: { value: string }): JSX.Element => {
-    const fn = React.useCallback(async (): Promise<void> => {
-      const val = await Promise.resolve(value);
-      mock(val);
-      throw new Error(val);
-    }, [value]);
-
-    return <TestComponent fn={fn} deps={[value]} />;
-  };
-
-  const { getByText, container } = render(<Component value="one" />);
-  render(<Component value="two" />, { container });
-
-  await waitForElement(() => getByText(`State: ${AsyncState.rejected}`));
-  expect(getByText(/Error/)).toHaveTextContent(/two/);
-  expect(mock).toHaveBeenCalledWith('one');
-  expect(mock).toHaveBeenCalledWith('two');
+  await waitForElement(() => getByText(/is not a username/i));
 });

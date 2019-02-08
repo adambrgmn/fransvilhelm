@@ -1,6 +1,6 @@
 import 'jest-dom/extend-expect';
 import * as React from 'react';
-import { render, cleanup } from 'react-testing-library';
+import { render, cleanup, fireEvent } from 'react-testing-library';
 import { useScrollPosition } from '../use-scroll-position';
 
 afterEach(cleanup);
@@ -24,7 +24,7 @@ it('should track scroll position', () => {
   Object.defineProperty(window, 'pageXOffset', { value: 100 });
   Object.defineProperty(window, 'pageYOffset', { value: 100 });
   const scrollEv = new Event('scroll');
-  window.dispatchEvent(scrollEv);
+  fireEvent(window, scrollEv);
 
   expect(getByText(/x: \d+/)).toHaveTextContent('x: 100');
   expect(getByText(/y: \d+/)).toHaveTextContent('y: 100');
@@ -37,7 +37,7 @@ it('should accept an optional throttle wrapper', () => {
   render(<TestComponent throttle={throttle} />);
 
   const scrollEv = new Event('scroll');
-  window.dispatchEvent(scrollEv);
+  fireEvent(window, scrollEv);
 
   expect(window.requestAnimationFrame).toHaveBeenCalled();
 });
