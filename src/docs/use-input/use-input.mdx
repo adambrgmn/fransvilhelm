@@ -1,0 +1,57 @@
+---
+name: useInput
+menu: Hooks
+---
+
+import { Playground } from 'docz';
+import { UseInputExample } from './use-input.tsx';
+
+# useInput
+
+Use this hook to debounce a value only updating it once within the given delay.
+Useful if you need to request data when an input updates but don't want to fetch
+the new data on every keystroke.
+
+## Usage
+
+```jsx
+import React from 'react';
+import { useInput } from '@adambrgmn/hooks';
+
+const Input = ({ initialValue }) => {
+  const input = useInput(initialValue);
+  return (
+    <div>
+      <label htmlFor="input">Greeting:</label>
+      <input type="text" {...input} />
+    </div>
+  );
+};
+```
+
+<Playground>
+  <UseInputExample />
+</Playground>
+
+## Parameters
+
+`useInput` accepts one parameter – the initial value of the input. It should be
+of type string (even if the input type is number, since the inputs value will
+always be an string regardless of input type).
+
+| Param       | Type   | Required | Default | Description                       |
+| :---------- | :----- | :------- | :------ | :-------------------------------- |
+| initalValue | string |  false   | ''      | Initial value of the `value`-prop |
+
+## Returns
+
+`useInput` returns an object with two props – the current value of the input and
+an onChange-handler.
+
+**TIP:** You can spread the object returned from `useInput` directly onto the
+`<input />`-element for easier use.
+
+| Prop     | Type     | Description                                       |
+| :------- | :------- | :------------------------------------------------ |
+| value    | string   | Current value of the input                        |
+| onChange | function | `onChange`-handler to handle updates on the input |
