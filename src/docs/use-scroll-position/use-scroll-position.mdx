@@ -1,0 +1,57 @@
+---
+name: useScrollPosition
+menu: Hooks
+route: /hook/use-scroll-position
+---
+
+import { Playground } from 'docz';
+import { UseScrollPositionExample } from './use-scroll-position.tsx';
+
+# useScrollPosition
+
+Keep track of window scroll position while the user scrolls. Optionally you can
+pass in a throttle wrapper to throttle the update calls (e.g. using
+[lodash.throttle](https://www.npmjs.com/package/lodash.throttle) or
+`window.requestAnimationFrame`).
+
+## Usage
+
+```jsx
+import React from 'react';
+import { useScrollPosition } from '@adambrgmn/hooks';
+
+const FadeInOnPosition = ({ breakpoint, children }) => {
+  const { y } = useScrollPosition(fn => () => window.requestAnimationFrame(fn));
+  const fadeIn = y >= breakpoint;
+
+  return (
+    <Animation type="fadeIn" enable={fadeIn}>
+      {children}
+    </Animation>
+  );
+};
+```
+
+## Example
+
+<Playground>
+  <UseScrollPositionExample />
+</Playground>
+
+## Parameters
+
+`useScrollPosition` accepts one optional parameter – a throttling function
+
+| Param     | Type            | Required | Default | Description                                                                                                                                  |
+| :-------- | :-------------- | :------- | :------ | :------------------------------------------------------------------------------------------------------------------------------------------- |
+| throttler | ThrottleWrapper | false    | -       | The throttle function should accept a callback as initial argument and the return another function that when called will throttle the update |
+
+## Returns
+
+`useScrollPosition` returns an object with the current coordinates for the
+scroll position.
+
+| Prop | Type   | Description                                                 |
+| :--- | :----- | :---------------------------------------------------------- |
+| x    | number | The current coordinate on the x-axis (`window.pageXOffset`) |
+| y    | number | The current coordinate on the y-axis (`window.pageYOffset`) |
