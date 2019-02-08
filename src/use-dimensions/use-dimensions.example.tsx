@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useDimensions } from './';
-import { useInput } from '../../use-input';
+import { useInput } from '../use-input';
 
 const Input = ({ label, id, ...props }: any): JSX.Element => (
   <React.Fragment>

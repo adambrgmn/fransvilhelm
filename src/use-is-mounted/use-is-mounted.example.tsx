@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useIsMounted } from './';
-import { useCheckbox } from '../../use-checkbox';
+import { useCheckbox } from '../use-checkbox';
 
 const getUsername = (): Promise<string> =>
   new Promise(resolve => {
