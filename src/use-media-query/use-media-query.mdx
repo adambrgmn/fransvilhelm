@@ -1,0 +1,53 @@
+---
+name: useMediaQuery
+menu: Hooks
+route: /hook/use-media-query
+---
+
+import { Playground } from 'docz';
+import { UseMediaQueryExample } from './use-media-query.example.tsx';
+
+# useMediaQuery
+
+Test to see if a query is matched and listen for changes on that query. This
+value will be updated if the window is resized.
+
+## Usage
+
+```jsx
+import React from 'react';
+import { useMediaQuery } from '@adambrgmn/hooks';
+
+const MobileOnly = ({ children }) => {
+  const isMobileOnly = useMediaQuery('(max-width: 375px)');
+  return isMobileOnly ? children : null;
+};
+
+const AboveTablet = ({ children }) => {
+  const isAboveTablet = useMediaQuery('(min-width: 378px)');
+  return isAboveTablet ? children : null;
+};
+```
+
+# Example
+
+<Playground>
+  <UseMediaQueryExample />
+</Playground>
+
+## Parameters
+
+`useMediaQuery` accepts one parameter, the media query to check against.
+
+| Param | Type   | Required | Default | Description                |
+| :---- | :----- | :------- | :------ | :------------------------- |
+| query | string |  true    | -       | The query to check against |
+
+## Returns
+
+`useMediaQuery` returns a boolean indicating if the media query is matched or
+not.
+
+| Returns | Type    | Description                      |
+| :------ | :------ | :------------------------------- |
+| matches | boolean | If the media query is met or not |

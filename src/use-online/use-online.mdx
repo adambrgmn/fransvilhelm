@@ -1,0 +1,48 @@
+---
+name: useOnline
+menu: Hooks
+route: /hook/use-online
+---
+
+import { Playground } from 'docz';
+import { UseOnlineExample } from './use-online.example.tsx';
+
+# useOnline
+
+Determine if the client is online or offline and update the value if the state
+changes.
+
+## Usage
+
+```jsx
+import React from 'react';
+import { useOnline } from '@adambrgmn/hooks';
+
+const ConnectionIndicator = () => {
+  const online = useOnline();
+  return (
+    <div>
+      <CircleIcon color={online ? 'green' : 'red'} />
+      {online ? 'connected' : 'disconnected'}
+    </div>
+  );
+};
+```
+
+# Example
+
+<Playground>
+  <UseOnlineExample />
+</Playground>
+
+## Parameters
+
+`useOnline` accepts no parameters
+
+## Returns
+
+`useOnline` returns a boolean indicating if the client is online or not.
+
+| Returns | Type    | Description                       |
+| :------ | :------ | :-------------------------------- |
+| online  | boolean | If the client is connected or not |

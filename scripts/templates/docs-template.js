@@ -12,7 +12,7 @@ route: /hook/${kebab}
 ---
 
 import { Playground } from 'docz';
-import { ${studly}Example } from './${kebab}.tsx';
+import { ${studly}Example } from './${kebab}.example.tsx';
 
 # ${camel}
 

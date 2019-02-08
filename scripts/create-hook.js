@@ -45,20 +45,19 @@ async function main() {
     const [, , n] = process.argv;
     const name = toKebabCase(n);
 
-    const srcRoot = path.join(__dirname, '../src');
-    const docsRoot = path.join(srcRoot, 'docs', name);
+    const srcRoot = path.join(__dirname, '../src', name);
 
     const file = {
-      hook: path.join(srcRoot, `${name}.ts`),
-      test: path.join(srcRoot, '__tests__', `${name}.tsx`),
-      docs: path.join(docsRoot, `${name}.mdx`),
-      example: path.join(docsRoot, `${name}.tsx`),
+      hook: path.join(srcRoot, `index.ts`),
+      test: path.join(srcRoot, `${name}.test.tsx`),
+      docs: path.join(srcRoot, `${name}.mdx`),
+      example: path.join(srcRoot, `${name}.example.tsx`),
     };
 
-    const hookExists = await exists(file.hook);
+    const hookExists = await exists(srcRoot);
     if (hookExists) throw new Error(`hook ${name} already exists`);
 
-    await mkdir(docsRoot);
+    await mkdir(srcRoot);
     await Promise.all([
       updateIndex({ name }),
       createFile({ path: file.hook, content: hookTemplate({ name }) }),
