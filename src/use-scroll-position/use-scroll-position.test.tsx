@@ -1,15 +1,11 @@
 import 'jest-dom/extend-expect';
 import * as React from 'react';
 import { render, cleanup } from 'react-testing-library';
-import { useScrollPosition, ThrottleWrapper } from '../use-scroll-position';
+import { useScrollPosition } from '../use-scroll-position';
 
 afterEach(cleanup);
 
-const TestComponent = ({
-  throttle,
-}: {
-  throttle?: ThrottleWrapper;
-}): JSX.Element => {
+const TestComponent = ({ throttle }: { throttle?: any }): JSX.Element => {
   const position = useScrollPosition(throttle);
   return (
     <div style={{ height: '200vh' }}>
