@@ -3,34 +3,15 @@
 const fs = require('fs');
 const path = require('path');
 const { promisify } = require('util');
-const { toCamelCase, toKebabCase } = require('strman');
+const { toKebabCase } = require('strman');
+const hookTemplate = require('./templates/hook-template');
+const testTemplate = require('./templates/test-template');
+const docsTemplate = require('./templates/docs-template');
+const exampleTemplate = require('./templates/example-template');
 
+const mkdir = promisify(fs.mkdir);
 const readFile = promisify(fs.readFile);
 const writeFile = promisify(fs.writeFile);
-
-const moduleTemplate = ({ name }) => `import {} from 'react';
-
-const ${toCamelCase(name)} = () => {};
-
-export { ${toCamelCase(name)} };
-`;
-
-const testTemplate = ({ name }) => `import 'jest-dom/extend-expect';
-import * as React from 'react';
-import { render, cleanup } from 'react-testing-library';
-import { ${toCamelCase(name)} } from '../${toKebabCase(name)}';
-
-afterEach(cleanup);
-
-const TestComponent = (): JSX.Element => {
-  const result = ${toCamelCase(name)}();
-  return <p />;
-};
-
-it('should ...', () => {
-  const {} = render(<TestComponent />);
-});
-`;
 
 const indexTemplate = ({ name }) => `export * from './${toKebabCase(name)}';`;
 
@@ -61,23 +42,29 @@ const updateIndex = async ({ name }) => {
 
 async function main() {
   try {
-    const [, , name] = process.argv;
+    const [, , n] = process.argv;
+    const name = toKebabCase(n);
+
+    const srcRoot = path.join(__dirname, '../src');
+    const docsRoot = path.join(srcRoot, 'docs', name);
+
     const file = {
-      module: path.join(__dirname, '../src', `${toKebabCase(name)}.ts`),
-      test: path.join(
-        __dirname,
-        '../src/__tests__',
-        `${toKebabCase(name)}.tsx`,
-      ),
+      hook: path.join(srcRoot, `${name}.ts`),
+      test: path.join(srcRoot, '__tests__', `${name}.tsx`),
+      docs: path.join(docsRoot, `${name}.mdx`),
+      example: path.join(docsRoot, `${name}.tsx`),
     };
 
-    const moduleExists = await exists(file.module);
-    if (moduleExists) throw new Error(`Module ${name} already exists`);
+    const hookExists = await exists(file.hook);
+    if (hookExists) throw new Error(`hook ${name} already exists`);
 
+    await mkdir(docsRoot);
     await Promise.all([
       updateIndex({ name }),
-      createFile({ path: file.module, content: moduleTemplate({ name }) }),
+      createFile({ path: file.hook, content: hookTemplate({ name }) }),
       createFile({ path: file.test, content: testTemplate({ name }) }),
+      createFile({ path: file.docs, content: docsTemplate({ name }) }),
+      createFile({ path: file.example, content: exampleTemplate({ name }) }),
     ]);
 
     console.log(`👍 Created new hook ${name}`);

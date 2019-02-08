@@ -1,0 +1,56 @@
+---
+name: useCheckbox
+menu: Hooks
+route: /hook/use-checkbox
+---
+
+import { Playground } from 'docz';
+import { UseCheckboxExample } from './use-checkbox.tsx';
+
+# useCheckbox
+
+`useCheckbox` is when you want to have easy control over a checkbox. It will
+provide you with the necessare props to make a controlled checkbox – `checked`
+and `onChange`.
+
+## Usage
+
+```jsx
+import React from 'react';
+import { useCheckbox } from '@adambrgmn/hooks';
+
+const Checkbox = () => {
+  const checkbox = useCheckbox();
+  return (
+    <div>
+      <input type="checkbox" id="checkbox" {...checkbox} />
+      <label htmlFor="checkbox">Check me!</label>
+    </div>
+  );
+};
+```
+
+# Example
+
+<Playground>
+  <UseCheckboxExample />
+</Playground>
+
+## Parameters
+
+`useCheckbox` accepts one argument – `initialValue` to define the initial value
+of the checkbox.
+
+| Param       | Type    | Required | Default | Description                         |
+| :---------- | :------ | :------- | :------ | :---------------------------------- |
+| initalValue | boolean |  false   | false   | Initial value of the `checked`-prop |
+
+## Returns
+
+`useCheckbox` returns an object with two props – `checked` and `onChange`. This
+objects can easily be spread on the input element.
+
+| Prop     | Type     | Description                          |
+| :------- | :------- | :----------------------------------- |
+| checked  | boolean  | If checkbox is checked or not        |
+| onChange | function | onChange handler to put on the input |

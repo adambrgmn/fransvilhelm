@@ -1,0 +1,55 @@
+---
+name: useDebounce
+menu: Hooks
+route: /hook/use-debounce
+---
+
+import { Playground } from 'docz';
+import { UseDebounceExample } from './use-decounce.tsx';
+
+# useDebounce
+
+Use this hook to debounce a value only updating it once within the given delay.
+Useful if you need to request data when an input updates but don't want to fetch
+the new data on every keystroke.
+
+## Usage
+
+```jsx
+import React from 'react';
+import { useDebounce, useInput } from '@adambrgmn/hooks';
+
+const DebouncedInput = () => {
+  const input = useInput('hello world');
+  const debouncedValue = useDebounce(input.value, 1000);
+
+  return (
+    <div>
+      <input type="text" {...input} />
+      <p>
+        This only updates once every second: <code>{debouncedValue}</code>
+      </p>
+    </div>
+  );
+};
+```
+
+# Example
+
+<Playground>
+  <UseDebounceExample />
+</Playground>
+
+## Parameters
+
+`useDebounce` accepts two parameters, the value to debounce and the delay.
+
+| Param | Type   | Required | Default | Description                                                 |
+| :---- | :----- | :------- | :------ | :---------------------------------------------------------- |
+| value | any    | true     | -       | The value to debounce                                       |
+| delay | number | true     | -       | The amount of time that must pass before updating the value |
+
+## Returns
+
+`useDebounce` returns a debounced value of same type as the inputted value, but
+it will only update once within the given timeframe

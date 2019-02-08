@@ -1,6 +1,9 @@
 # Build output
 dist
 
+# Docz
+.docz
+
 # Logs
 logs
 *.log
