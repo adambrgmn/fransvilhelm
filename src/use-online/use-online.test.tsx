@@ -1,6 +1,6 @@
 import 'jest-dom/extend-expect';
 import * as React from 'react';
-import { render, cleanup } from 'react-testing-library';
+import { render, cleanup, fireEvent } from 'react-testing-library';
 import { useOnline } from './';
 
 afterEach(cleanup);
@@ -16,7 +16,7 @@ it('should determine if a client is online or not', () => {
   expect(getByText('online')).toBeInTheDocument();
 
   const evt = new Event('offline', { bubbles: true });
-  window.dispatchEvent(evt);
+  fireEvent(window, evt);
 
   expect(getByText('offline')).toBeInTheDocument();
 });

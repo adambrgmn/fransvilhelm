@@ -1,10 +1,16 @@
 import 'jest-dom/extend-expect';
 import * as React from 'react';
-import { render, cleanup, fireEvent } from 'react-testing-library';
+import { render, cleanup, fireEvent, act } from 'react-testing-library';
 import { useDebounce } from './';
 import { useInput } from '../use-input';
 
 afterEach(cleanup);
+
+const advanceByTime = (time: number): void => {
+  act(() => {
+    jest.advanceTimersByTime(time);
+  });
+};
 
 const TestComponent = ({ delay }: { delay: number }): JSX.Element => {
   const input = useInput('');
@@ -31,12 +37,12 @@ it('should debounce a value and only update once within the given delay', () => 
     }, 50 * (index + 1));
   });
 
-  jest.advanceTimersByTime(100);
+  advanceByTime(100);
   expect(debouncedValue).toHaveTextContent('');
 
-  jest.advanceTimersByTime(100);
+  advanceByTime(100);
   expect(debouncedValue).toHaveTextContent('');
 
-  jest.advanceTimersByTime(100);
+  advanceByTime(100);
   expect(debouncedValue).toHaveTextContent('abc');
 });
