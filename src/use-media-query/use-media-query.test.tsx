@@ -1,7 +1,7 @@
 import 'jest-dom/extend-expect';
 import * as React from 'react';
 import { render, cleanup } from 'react-testing-library';
-import { useMediaQuery } from '../use-media-query';
+import { useMediaQuery } from './';
 
 afterEach(cleanup);
 

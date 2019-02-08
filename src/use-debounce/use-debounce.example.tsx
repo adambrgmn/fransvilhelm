@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useInput } from '../../use-input';
-import { useDebounce } from '../../use-debounce';
+import { useDebounce } from './';
 
 const UseDebounceExample = (): JSX.Element => {
   const input = useInput('hello world');

@@ -1,7 +1,7 @@
 import 'jest-dom/extend-expect';
 import * as React from 'react';
 import { render, cleanup } from 'react-testing-library';
-import { useLockBodyScroll } from '../use-lock-body-scroll';
+import { useLockBodyScroll } from './';
 
 afterEach(cleanup);
 

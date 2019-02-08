@@ -1,7 +1,7 @@
 import 'jest-dom/extend-expect';
 import * as React from 'react';
 import { render, cleanup } from 'react-testing-library';
-import { useDimensions } from '../use-dimensions';
+import { useDimensions } from './';
 
 afterEach(cleanup);
 

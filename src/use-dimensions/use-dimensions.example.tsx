@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useDimensions } from '../../use-dimensions';
+import { useDimensions } from './';
 import { useInput } from '../../use-input';
 
 const Input = ({ label, id, ...props }: any): JSX.Element => (

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useOnline } from '../../use-online';
+import { useOnline } from './';
 
 const UseOnlineExample = (): JSX.Element => {
   const online = useOnline();

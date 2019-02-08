@@ -2,7 +2,7 @@ import 'jest-dom/extend-expect';
 import * as React from 'react';
 import { act } from 'react-dom/test-utils';
 import { render, cleanup } from 'react-testing-library';
-import { useKeypress } from '../use-keypress';
+import { useKeypress } from './';
 
 afterEach(cleanup);
 

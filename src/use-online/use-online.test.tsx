@@ -1,7 +1,7 @@
 import 'jest-dom/extend-expect';
 import * as React from 'react';
 import { render, cleanup } from 'react-testing-library';
-import { useOnline } from '../use-online';
+import { useOnline } from './';
 
 afterEach(cleanup);
 

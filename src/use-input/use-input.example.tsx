@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useInput } from '../../use-input';
+import { useInput } from './';
 
 const UseInputExample = (): JSX.Element => {
   const input = useInput('Hi, friend!');

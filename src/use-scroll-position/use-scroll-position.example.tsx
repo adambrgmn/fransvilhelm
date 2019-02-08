@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useScrollPosition } from '../../use-scroll-position';
+import { useScrollPosition } from './';
 
 // eslint-disable-next-line
 const throttler = (fn: () => void) => () => window.requestAnimationFrame(fn);

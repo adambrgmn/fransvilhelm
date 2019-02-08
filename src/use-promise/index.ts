@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { useIsMounted } from './use-is-mounted';
+import { useIsMounted } from '../use-is-mounted';
 
 enum AsyncState {
   initial = 'INITIAL',

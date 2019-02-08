@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useInterval } from '../../use-interval';
+import { useInterval } from './';
 
 const UseIntervalExample = (): JSX.Element => {
   const [run, setRun] = React.useState(false);

@@ -1,7 +1,7 @@
 import 'jest-dom/extend-expect';
 import * as React from 'react';
 import { render, cleanup, fireEvent } from 'react-testing-library';
-import { useInput } from '../use-input';
+import { useInput } from './';
 
 afterEach(cleanup);
 

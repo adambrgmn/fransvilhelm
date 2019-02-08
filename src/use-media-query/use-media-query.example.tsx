@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useMediaQuery } from '../../use-media-query';
+import { useMediaQuery } from './';
 
 const UseMediaQueryExample = (): JSX.Element => {
   const isMobile = useMediaQuery('(max-width: 375px)');

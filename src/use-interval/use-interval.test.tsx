@@ -1,7 +1,7 @@
 import 'jest-dom/extend-expect';
 import * as React from 'react';
 import { render, cleanup, fireEvent } from 'react-testing-library';
-import { useInterval } from '../use-interval';
+import { useInterval } from './';
 
 afterEach(cleanup);
 

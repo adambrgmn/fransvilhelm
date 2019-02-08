@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useKeypress } from '../../use-keypress';
+import { useKeypress } from './';
 
 const Indicator = ({ pressed }: { pressed: boolean }): JSX.Element => (
   <span
