@@ -1,5 +1,11 @@
 import { useState, useEffect } from 'react';
 
+/**
+ * Checks if a key is pressed or not
+ *
+ * @param {string} key The key to look for
+ * @returns {boolean} true if key is down, false otherwise
+ */
 const useKeypress = (key: string): boolean => {
   const [pressing, setPressing] = useState(false);
 
