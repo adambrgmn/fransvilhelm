@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState, useCallback } from 'react';
+import { useEventListener } from '../use-event-listener';
 
 /**
  * Checks if a key is pressed or not
@@ -8,24 +9,18 @@ import { useState, useEffect } from 'react';
  */
 const useKeypress = (key: string): boolean => {
   const [pressing, setPressing] = useState(false);
+  const deps = [key];
 
-  useEffect(() => {
-    const downHandler = (event: KeyboardEvent): void => {
-      if (event.key === key) setPressing(true);
-    };
+  const keydownHandler = useCallback((event: KeyboardEvent) => {
+    if (event.key === key) setPressing(true);
+  }, deps);
 
-    const upHandler = (event: KeyboardEvent): void => {
-      if (event.key === key) setPressing(false);
-    };
+  const keyupHandler = useCallback((event: KeyboardEvent) => {
+    if (event.key === key) setPressing(false);
+  }, deps);
 
-    window.addEventListener('keydown', downHandler);
-    window.addEventListener('keyup', upHandler);
-
-    return () => {
-      window.removeEventListener('keydown', downHandler);
-      window.removeEventListener('keyup', upHandler);
-    };
-  }, [key]);
+  useEventListener('keydown', keydownHandler);
+  useEventListener('keyup', keyupHandler);
 
   return pressing;
 };
