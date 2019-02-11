@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState, useMemo } from 'react';
+import { useEventListener } from '../use-event-listener';
 
 let supportsPassive = false;
 try {
@@ -43,19 +44,16 @@ const useScrollPosition = (
 ): { x: number; y: number } => {
   const [position, setPosition] = useState(getPosition());
 
-  useEffect(() => {
-    const listener = throttleWrapper(() => setPosition(getPosition()));
+  const listener = useMemo(
+    () => throttleWrapper(() => setPosition(getPosition())),
+    [],
+  );
 
-    window.addEventListener(
-      'scroll',
-      listener,
-      supportsPassive ? { passive: true } : false,
-    );
-
-    return () => {
-      window.removeEventListener('scroll', listener);
-    };
-  }, []);
+  useEventListener(
+    'scroll',
+    listener,
+    supportsPassive ? { passive: true } : false,
+  );
 
   return position;
 };

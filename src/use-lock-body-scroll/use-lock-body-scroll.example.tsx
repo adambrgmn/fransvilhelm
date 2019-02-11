@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useCheckbox } from '../../use-checkbox';
+import { useCheckbox } from '../use-checkbox';
 import { useLockBodyScroll } from './';
 
 const UseLockBodyScrollExample = (): JSX.Element => {

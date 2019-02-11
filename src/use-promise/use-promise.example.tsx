@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { usePromise, AsyncState } from '../../use-promise';
+import { usePromise, AsyncState } from './';
 
 const users: { [key: string]: string } = {
   'id-0': 'adambrgmn',
