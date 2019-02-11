@@ -13,6 +13,10 @@ notifications:
 
 script: yarn test && yarn build
 
+branches:
+  only:
+    - master
+
 jobs:
   include:
     - stage: release
