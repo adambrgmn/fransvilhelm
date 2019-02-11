@@ -18,7 +18,7 @@ pass in a throttle wrapper to throttle the update calls (e.g. using
 
 ```jsx
 import React from 'react';
-import { useScrollPosition } from '@adambrgmn/hooks';
+import { useScrollPosition } from '@fransvilhelm/hooks';
 
 const FadeInOnPosition = ({ breakpoint, children }) => {
   const { y } = useScrollPosition(fn => () => window.requestAnimationFrame(fn));

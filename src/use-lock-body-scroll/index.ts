@@ -8,7 +8,7 @@ import { useLayoutEffect } from 'react';
  * @param {boolean} [lock=true] Optional value if you want to lock body or not
  *
  * @example
- *   import { useLockBodyScroll } from '@adambrgmn/hooks';
+ *   import { useLockBodyScroll } from '@fransvilhelm/hooks';
  *
  *   const Modal = () => {
  *     useLockBodyScroll();

@@ -1,27 +1,37 @@
 {
-  "name": "@adambrgmn/hooks",
-  "version": "0.1.0",
+  "name": "@fransvilhelm/hooks",
+  "version": "0.0.0-development",
   "description": "A set of reusable React hooks",
   "main": "dist/hooks.js",
   "umd:main": "dist/hooks.umd.js",
   "module": "dist/hooks.esm.js",
   "source": "src/index.ts",
-  "repository": "git@github.com:adambrgmn/utils",
+  "types": "dist/src/index.d.ts",
+  "repository": "git@github.com:adambrgmn/hooks",
+  "homepage": "https://hooks.fransvilhelm.com",
   "author": "Adam Bergman <adam@fransvilhelm.com>",
   "license": "MIT",
   "private": false,
   "scripts": {
     "test": "jest",
     "prebuild": "del dist",
-    "build": "microbundle build --target browser --strict",
+    "build": "microbundle --target web --no-sourcemap",
     "postbuild": "del dist/**/*.{test,example}.d.ts",
-    "docz:dev": "docz dev",
-    "docz:build": "docz build",
+    "dev": "microbundle watch --target web --no-compress",
+    "docz:dev": "node scripts/create-index-doc.js && docz dev",
+    "docz:build": "node scripts/create-index-doc.js && docz build",
     "lint": "eslint 'src/**/*.{ts,tsx}'",
-    "create": "node scripts/create-hook.js"
+    "create": "node scripts/create-hook.js",
+    "semantic-release": "semantic-release"
   },
   "files": [
     "dist/**"
+  ],
+  "keywords": [
+    "react-hooks",
+    "hooks",
+    "react",
+    "utils"
   ],
   "devDependencies": {
     "@types/jest": "^24.0.0",
@@ -50,6 +60,7 @@
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
     "react-testing-library": "^5.5.3",
+    "semantic-release": "^15.13.3",
     "strman": "^2.0.1",
     "ts-jest": "^23.10.5",
     "typescript": "^3.3.1"

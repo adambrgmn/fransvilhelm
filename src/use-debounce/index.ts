@@ -11,7 +11,7 @@ import { useState, useEffect } from 'react';
  * @returns {T} The value, only updated once within the given delay
  *
  * @example
- *   import { useDebounce, useInput } from '@adambrgmn/hooks';
+ *   import { useDebounce, useInput } from '@fransvilhelm/hooks';
  *
  *   const Search = () => {
  *     const searchInput = useInput('');

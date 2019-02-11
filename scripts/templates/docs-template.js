@@ -22,7 +22,7 @@ Will...
 
 \`\`\`jsx
 import React from 'react';
-import { ${camel} } from '@adambrgmn/hooks';
+import { ${camel} } from '@fransvilhelm/hooks';
 
 const Checkbox = () => {
   const result = ${camel}();

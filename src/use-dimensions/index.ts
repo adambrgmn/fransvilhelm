@@ -20,7 +20,7 @@ interface UseDimensionsResult<T extends Element> {
  *          measurements
  *
  * @example
- *   import { useDimensions } from '@adambrgmn/hooks';
+ *   import { useDimensions } from '@fransvilhelm/hooks';
  *
  *   const Square = () => {
  *     const { ref, rect } = useDimensions();
