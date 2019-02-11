@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { useLocalStorage } from './';
+import { usePersistedState } from './';
 
 const Counter = (): JSX.Element => {
-  const [count, setCount] = useLocalStorage(0, 'persisted-count');
+  const [count, setCount] = usePersistedState(0, 'persisted-count');
   return (
     <div>
       <button onClick={() => setCount(count - 1)}>-</button>
@@ -12,7 +12,7 @@ const Counter = (): JSX.Element => {
   );
 };
 
-const UseLocalStorageExample = (): JSX.Element => {
+const UsePersistedStateExample = (): JSX.Element => {
   return (
     <div>
       <p>
@@ -30,4 +30,4 @@ const UseLocalStorageExample = (): JSX.Element => {
   );
 };
 
-export { UseLocalStorageExample };
+export { UsePersistedStateExample };

@@ -83,15 +83,15 @@ const createGlobalState = <S>(
  * @template S The state value
  * @param {(S | (() => S))} initialState Default initial state, if non is found on `localStorage`
  * @param {string} [key='local-storage-hook'] Key to store value on
- * @returns {UseLocalStorageResult<S>} Returns state and setState as an array tuple (same as `React.useState`)
+ * @returns {[S, Dispatch<SetStateAction<S>>]} Returns state and setState as an array tuple (same as `React.useState`)
  *
  * @example
  *   const PersistedCounter = () => {
- *     const [count, setCount] = useLocalStorage(0, 'counter');
+ *     const [count, setCount] = usePersistedState(0, 'counter');
  *     return <button onClick={() => setCount(count + 1)}>{count}</button>;
  *   }
  */
-const useLocalStorage = <S>(
+const usePersistedState = <S>(
   initialState: S | (() => S),
   key: string = 'local-storage-hook',
 ): [S, Dispatch<SetStateAction<S>>] => {
@@ -126,4 +126,4 @@ const useLocalStorage = <S>(
   return [state, setState];
 };
 
-export { useLocalStorage };
+export { usePersistedState };

@@ -1,7 +1,7 @@
 import 'jest-dom/extend-expect';
 import * as React from 'react';
 import { render, cleanup, fireEvent } from 'react-testing-library';
-import { useLocalStorage } from '.';
+import { usePersistedState } from '.';
 
 const localStorageMock = {
   getItem: jest.fn(),
@@ -19,7 +19,7 @@ afterEach(() => {
 
 it('should be a drop in replacement for the useState hook', () => {
   const Comp = (): JSX.Element => {
-    const [count, setState] = useLocalStorage(0);
+    const [count, setState] = usePersistedState(0);
     return <button onClick={() => setState(count + 1)}>{count}</button>;
   };
 
@@ -38,7 +38,7 @@ it('should be a drop in replacement for the useState hook', () => {
 it('should use persisted value as initial state (if set)', () => {
   localStorageMock.getItem.mockImplementationOnce(() => '100');
   const Comp = (): JSX.Element => {
-    const [count, setCount] = useLocalStorage(0);
+    const [count, setCount] = usePersistedState(0);
     return <button onClick={() => setCount(count + 1)}>{count}</button>;
   };
 
@@ -50,7 +50,7 @@ it('should use persisted value as initial state (if set)', () => {
 
 it('should emit updates to other components using the same key', () => {
   const CountButton = ({ testId }: { testId: string }): JSX.Element => {
-    const [count, setCount] = useLocalStorage(0, 'counter');
+    const [count, setCount] = usePersistedState(0, 'counter');
     return (
       <button data-testid={testId} onClick={() => setCount(count + 1)}>
         {count}
@@ -79,7 +79,7 @@ it('should emit updates to other components using the same key', () => {
 
 it('should update state in reaction to window storage event', () => {
   const Comp = (): JSX.Element => {
-    const [count, setState] = useLocalStorage(0, 'test-key');
+    const [count, setState] = usePersistedState(0, 'test-key');
     return <button onClick={() => setState(count + 1)}>{count}</button>;
   };
 

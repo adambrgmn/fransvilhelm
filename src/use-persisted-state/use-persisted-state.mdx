@@ -1,13 +1,13 @@
 ---
-name: useLocalStorage
+name: usePersistedState
 menu: Hooks
-route: /hook/use-local-storage
+route: /hook/use-persisted-state
 ---
 
 import { Playground } from 'docz';
-import { UseLocalStorageExample } from './use-local-storage.example.tsx';
+import { UsePersistedStateExample } from './use-persisted-state.example.tsx';
 
-# useLocalStorage
+# usePersistedState
 
 Use persisted state as a drop in replacement for Reacts built-in hook
 `useState`.
@@ -23,10 +23,10 @@ instances of you application running in other windows/tabs.
 
 ```jsx
 import React from 'react';
-import { useLocalStorage } from '@adambrgmn/hooks';
+import { usePersistedState } from '@adambrgmn/hooks';
 
 const Counter = () => {
-  const [count, setCount] = useLocalStorage(0, 'counter');
+  const [count, setCount] = usePersistedState(0, 'counter');
   return (
     <div>
       <button onClick={() => setCount(count - 1)}>-</button>
@@ -40,13 +40,13 @@ const Counter = () => {
 ## Example
 
 <Playground>
-  <UseLocalStorageExample />
+  <UsePersistedStateExample />
 </Playground>
 
 ## Parameters
 
-`useLocalStorage` accepts two arguments, the default initial state and a key to
-store the state on (preferably unique across your application).
+`usePersistedState` accepts two arguments, the default initial state and a key
+to store the state on (preferably unique across your application).
 
 | Param        | Type         | Required | Default            | Description                                              |
 | :----------- | :----------- | :------- | :----------------- | :------------------------------------------------------- |
@@ -55,8 +55,8 @@ store the state on (preferably unique across your application).
 
 ## Returns
 
-`useLocalStorage` returns an array tuple, similar to `React.useState`. The first
-value is the current state, the second is a state updater function.
+`usePersistedState` returns an array tuple, similar to `React.useState`. The
+first value is the current state, the second is a state updater function.
 
 | Index | Item     | Type     | Description                                                                                                                  |
 | :---- | :------- | :------- | :--------------------------------------------------------------------------------------------------------------------------- |
