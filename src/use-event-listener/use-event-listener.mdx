@@ -18,7 +18,7 @@ action is triggered.
 import React from 'react';
 import { useEventListener } from '@adambrgmn/hooks';
 
-const UseEventListenerExample = (): JSX.Element => {
+const UseEventListenerExample = () => {
   const [keys, setKeys] = React.useState<string[]>([]);
   useEventListener('keypress', ev => {
     setKeys([...keys, ev.key]);
@@ -36,16 +36,14 @@ const UseEventListenerExample = (): JSX.Element => {
 
 ## Parameters
 
-`useEventListener` accepts one argument
+`useEventListener` accepts three arguments.
 
-| Param | Type | Required | Default | Description |
-| :---- | :--- | :------- | :------ | :---------- |
-| param | type | boolean  | boolean | description |
+| Param   | Type                                                                               | Required | Default   | Description                                                            |
+| :------ | :--------------------------------------------------------------------------------- | :------- | :-------- | :--------------------------------------------------------------------- |
+| type    | string                                                                             | true     | -         | The event type to listen for (e.g. `scroll`, `keypress`)               |
+| handler | function                                                                           | true     | -         | The event handler, recieving an untouched version of the emitted event |
+| options | boolean \| [AddEventListenerOptions](https://github.com/WICG/EventListenerOptions) | false    | undefined | Options to provide as last arguments to window.addEventListener        |
 
 ## Returns
 
-`useEventListener` returns...
-
-| Prop | Type | Description |
-| :--- | :--- | :---------- |
-| prop | type | description |
+`useEventListener` returns nothing.

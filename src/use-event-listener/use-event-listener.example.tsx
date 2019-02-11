@@ -7,7 +7,12 @@ const UseEventListenerExample = (): JSX.Element => {
     setKeys([...keys, ev.key]);
   });
 
-  return <output>{keys.join(' > ')}</output>;
+  return (
+    <div>
+      <strong>Press any keys: </strong>
+      <output>{keys.join(' > ')}</output>
+    </div>
+  );
 };
 
 export { UseEventListenerExample };
