@@ -6,6 +6,7 @@
   "umd:main": "dist/hooks.umd.js",
   "module": "dist/hooks.esm.js",
   "source": "src/index.ts",
+  "types": "dist/src/index.d.ts",
   "repository": "git@github.com:adambrgmn/utils",
   "author": "Adam Bergman <adam@fransvilhelm.com>",
   "license": "MIT",
@@ -13,8 +14,9 @@
   "scripts": {
     "test": "jest",
     "prebuild": "del dist",
-    "build": "microbundle build --target browser --strict",
+    "build": "microbundle --target web --no-sourcemap",
     "postbuild": "del dist/**/*.{test,example}.d.ts",
+    "dev": "microbundle watch --target web --no-compress",
     "docz:dev": "docz dev",
     "docz:build": "docz build",
     "lint": "eslint 'src/**/*.{ts,tsx}'",

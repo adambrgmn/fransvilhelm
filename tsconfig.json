@@ -12,7 +12,8 @@
     "noImplicitAny": true,
     "resolveJsonModule": true,
     "preserveWatchOutput": true,
-    "jsx": "react"
+    "jsx": "react",
+    "sourceMap": true
   },
   "include": ["src", "types"]
 }
