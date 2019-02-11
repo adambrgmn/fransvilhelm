@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires, strict */
 'use strict';
 const fs = require('fs');
+const cp = require('child_process');
 const path = require('path');
 const { promisify } = require('util');
 const { toKebabCase } = require('strman');
@@ -12,6 +13,7 @@ const exampleTemplate = require('./templates/example-template');
 const mkdir = promisify(fs.mkdir);
 const readFile = promisify(fs.readFile);
 const writeFile = promisify(fs.writeFile);
+const exec = promisify(cp.exec);
 
 const indexTemplate = ({ name }) => `export * from './${toKebabCase(name)}';`;
 
@@ -65,6 +67,8 @@ async function main() {
       createFile({ path: file.docs, content: docsTemplate({ name }) }),
       createFile({ path: file.example, content: exampleTemplate({ name }) }),
     ]);
+
+    await exec(`code ${file.hook} ${file.test} ${file.docs} ${file.example}`);
 
     console.log(`👍 Created new hook ${name}`);
   } catch (error) {
