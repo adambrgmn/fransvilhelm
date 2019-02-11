@@ -1,0 +1,64 @@
+---
+name: useLocalStorage
+menu: Hooks
+route: /hook/use-local-storage
+---
+
+import { Playground } from 'docz';
+import { UseLocalStorageExample } from './use-local-storage.example.tsx';
+
+# useLocalStorage
+
+Use persisted state as a drop in replacement for Reacts built-in hook
+`useState`.
+
+By default it will use the key `local-storage-hook`. But you probably want to
+set another key if you plan to use this hook on several places across your
+application.
+
+Any changes to state will be emitted both across your application and across
+instances of you application running in other windows/tabs.
+
+## Usage
+
+```jsx
+import React from 'react';
+import { useLocalStorage } from '@adambrgmn/hooks';
+
+const Counter = () => {
+  const [count, setCount] = useLocalStorage(0, 'counter');
+  return (
+    <div>
+      <button onClick={() => setCount(count - 1)}>-</button>
+      <output>{count}</output>
+      <button onClick={() => setCount(count + 1)}>+</button>
+    </div>
+  );
+};
+```
+
+## Example
+
+<Playground>
+  <UseLocalStorageExample />
+</Playground>
+
+## Parameters
+
+`useLocalStorage` accepts two arguments, the default initial state and a key to
+store the state on (preferably unique across your application).
+
+| Param        | Type         | Required | Default            | Description                                              |
+| :----------- | :----------- | :------- | :----------------- | :------------------------------------------------------- |
+| initialState | S \| () => S | true     | -                  | Default initial state, if non is found on `localStorage` |
+| key          | string       | false    | local-storage-hook | Key to persist value to                                  |
+
+## Returns
+
+`useLocalStorage` returns an array tuple, similar to `React.useState`. The first
+value is the current state, the second is a state updater function.
+
+| Index | Item     | Type     | Description                                                                                                                  |
+| :---- | :------- | :------- | :--------------------------------------------------------------------------------------------------------------------------- |
+| 0     | state    | S        | Current state                                                                                                                |
+| 1     | setState | function | A state updater function, accepts either a number or a factory function retrieving the current state and returns a new state |
