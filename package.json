@@ -97,5 +97,8 @@
     "singleQuote": true,
     "trailingComma": "all",
     "proseWrap": "always"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
