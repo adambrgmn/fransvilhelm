@@ -9,7 +9,7 @@ import { useState, RefObject, useLayoutEffect } from 'react';
  *
  * @template E extends Element
  * @param {RefObject<E>} ref A RefObject attached to an element
- * @param {string} [rootMargin='0px'] Root margins to determine the bounding box
+ * @param {IntersectionObserverInit | undefined} options Options applied to the new IntersectionObserver
  * @returns {boolean} If the element is in view or not
  */
 const useInView = <E extends Element>(
@@ -19,16 +19,19 @@ const useInView = <E extends Element>(
   const [inView, setInView] = useState(false);
 
   useLayoutEffect(() => {
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.target === ref.current) setInView(entry.isIntersecting);
-      });
-    }, options);
+    if (ref.current) {
+      const current = ref.current;
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.target === current) setInView(entry.isIntersecting);
+        });
+      }, options);
 
-    if (ref.current) observer.observe(ref.current);
-    return () => {
-      if (ref.current) observer.unobserve(ref.current);
-    };
+      observer.observe(current);
+      return () => {
+        observer.unobserve(current);
+      };
+    }
   }, [ref.current, options]);
 
   return inView;
