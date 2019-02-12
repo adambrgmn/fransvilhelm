@@ -35,9 +35,10 @@ const Modal = ({ children }) => {
 
 `useLockBodyScroll` accepts one parameter – lock.
 
-| Param | Type    | Required | Default | Description                     |
-| :---- | :------ | :------- | :------ | :------------------------------ |
-| lock  | boolean |  false   | true    | Wether to apply the lock or not |
+| Param | Type                     | Required | Default               | Description                                              |
+| :---- | :----------------------- | :------- | :-------------------- | :------------------------------------------------------- |
+| lock  | boolean                  |  false   | true                  | Wether to apply the lock or not                          |
+| ref   | RefObject\<HTMLElement\> | false    | useRef(document.body) | A ref object pointing to an element to lock scrolling on |
 
 ## Returns
 

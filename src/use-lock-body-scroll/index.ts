@@ -1,4 +1,4 @@
-import { useLayoutEffect } from 'react';
+import { useLayoutEffect, useRef, RefObject } from 'react';
 
 /**
  * Will lock body and prevent it from being scrolled. Useful when showing a
@@ -19,15 +19,21 @@ import { useLayoutEffect } from 'react';
  *     );
  *   }
  */
-const useLockBodyScroll = (lock: boolean = true): void => {
+const useLockBodyScroll = (
+  lock: boolean = true,
+  ref: RefObject<HTMLElement> = useRef(document.body),
+): void => {
   useLayoutEffect(() => {
+    if (!ref.current) return;
     if (lock) {
-      document.body.style.overflow = 'hidden';
+      const previousValue = ref.current.style.overflow || 'visible';
+      ref.current.style.overflow = 'hidden';
       return () => {
-        document.body.style.overflow = 'visible';
+        if (!ref.current) return;
+        ref.current.style.overflow = previousValue;
       };
     }
-  }, [lock]);
+  }, [lock, ref]);
 };
 
 export { useLockBodyScroll };
