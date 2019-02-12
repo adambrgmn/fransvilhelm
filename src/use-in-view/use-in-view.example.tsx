@@ -2,22 +2,31 @@ import * as React from 'react';
 import { useInView } from './';
 
 const UseInViewExample = (): JSX.Element => {
-  const ref = React.useRef<HTMLParagraphElement>(null);
-  const inView = useInView(ref, { rootMargin: '-10%' });
+  const paragraphRef = React.useRef<HTMLParagraphElement>(null);
+  const containerRef = React.useRef<HTMLDivElement>(null);
+  const opts = React.useMemo(
+    () => ({ rootMargin: '-15%', root: containerRef.current }),
+    [containerRef.current],
+  );
+
+  const inView = useInView(paragraphRef, opts);
+
   return (
-    <div>
-      <p>
-        The text below will change between visible and hidden when it passes the
-        edges of the window (currently with a 10% margin inwards for
-        deomnstration purposes).
-      </p>
-      <p>
-        There's some extensive padding added to the bottom of this page to
-        demonstrate what happens when the object gets close to the edge.
-      </p>
-      <p ref={ref}>
-        Currently: <strong>{inView ? 'visible' : 'hidden'}</strong>
-      </p>
+    <div ref={containerRef} style={{ height: 200, overflow: 'scroll' }}>
+      <div style={{ height: '100vh' }}>
+        <p>
+          The text below will change between visible and hidden when it passes
+          the edges of the window (currently with a 15% margin inwards for
+          demonstration purposes).
+        </p>
+        <p>
+          There's some extensive padding added to the bottom of this page to
+          demonstrate what happens when the object gets close to the edge.
+        </p>
+        <p ref={paragraphRef}>
+          Currently: <strong>{inView ? 'visible' : 'hidden'}</strong>
+        </p>
+      </div>
     </div>
   );
 };
