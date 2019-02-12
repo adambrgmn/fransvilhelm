@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { useEventListener } from '../use-event-listener';
 
 const getInitialStatus = (): boolean => {
   return typeof navigator !== 'undefined' &&
@@ -24,18 +25,8 @@ const getInitialStatus = (): boolean => {
 const useOnline = (): boolean => {
   const [online, setOnline] = useState(getInitialStatus());
 
-  useEffect(() => {
-    const goOnline = (): void => setOnline(true);
-    const goOffline = (): void => setOnline(false);
-
-    window.addEventListener('online', goOnline);
-    window.addEventListener('offline', goOffline);
-
-    return () => {
-      window.removeEventListener('online', goOnline);
-      window.removeEventListener('offline', goOffline);
-    };
-  }, []);
+  useEventListener('online', () => setOnline(true));
+  useEventListener('offline', () => setOnline(false));
 
   return online;
 };
