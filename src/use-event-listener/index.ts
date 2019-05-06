@@ -17,7 +17,7 @@ const useEventListener = <K extends keyof WindowEventMap>(
     return () => {
       window.removeEventListener(type, listener, options);
     };
-  }, [type]);
+  }, [type, options]);
 };
 
 export { useEventListener };

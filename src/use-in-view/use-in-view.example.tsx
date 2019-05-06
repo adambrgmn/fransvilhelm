@@ -6,7 +6,7 @@ const UseInViewExample = (): JSX.Element => {
   const containerRef = React.useRef<HTMLDivElement>(null);
   const opts = React.useMemo(
     () => ({ rootMargin: '-15%', root: containerRef.current }),
-    [containerRef.current],
+    [containerRef],
   );
 
   const inView = useInView(paragraphRef, opts);

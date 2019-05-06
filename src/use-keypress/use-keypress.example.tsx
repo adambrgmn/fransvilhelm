@@ -13,24 +13,24 @@ const Indicator = ({ pressed }: { pressed: boolean }): JSX.Element => (
   </span>
 );
 
+const Char = ({ char }: { char: string }) => {
+  const pressed = useKeypress(char);
+  return (
+    <code>
+      {char}: <Indicator pressed={pressed} />
+    </code>
+  );
+};
+
 const UseKeypressExample = (): JSX.Element => {
-  const keys: { [key: string]: boolean } = 'abcdefghijklmnopqrstuvwxyz'
-    .split('')
-    .reduce((acc, key) => {
-      return {
-        ...acc,
-        [key]: useKeypress(key),
-      };
-    }, {});
+  const keys = 'abcdefghijklmnopqrstuvwxyz'.split('');
 
   return (
     <div>
       <ul>
-        {Object.keys(keys).map(key => (
+        {keys.map(key => (
           <li key={key}>
-            <code>
-              {key}: <Indicator pressed={keys[key]} />
-            </code>
+            <Char char={key} />
           </li>
         ))}
       </ul>

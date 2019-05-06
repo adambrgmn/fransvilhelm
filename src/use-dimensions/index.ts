@@ -37,7 +37,7 @@ const useDimensions = <T extends Element>(): UseDimensionsResult<T> => {
       const clientRect = ref.current.getBoundingClientRect();
       setRect(clientRect);
     }
-  }, [ref.current]);
+  }, [ref]);
 
   useLayoutEffect(() => {
     if (ref.current == null) return;
@@ -61,7 +61,7 @@ const useDimensions = <T extends Element>(): UseDimensionsResult<T> => {
         window.removeEventListener('resize', handleResize);
       };
     }
-  }, [ref.current]);
+  }, [ref, handleResize]);
 
   return { ref, rect };
 };

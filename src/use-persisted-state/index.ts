@@ -106,7 +106,7 @@ const usePersistedState = <S>(
         if (nextState !== state) setState(nextState);
       }
     },
-    [key],
+    [key, state],
   );
 
   useEventListener('storage', storageListener);
@@ -116,12 +116,12 @@ const usePersistedState = <S>(
     return () => {
       if (globalState.current) globalState.current.deregister();
     };
-  }, []);
+  }, [initialState, key]);
 
   useEffect(() => {
     storage.set(state);
     if (globalState.current) globalState.current.emit(state);
-  }, [state]);
+  }, [state, storage]);
 
   return [state, setState];
 };
