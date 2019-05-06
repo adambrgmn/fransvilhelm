@@ -46,7 +46,7 @@ const useScrollPosition = (
 
   const listener = useMemo(
     () => throttleWrapper(() => setPosition(getPosition())),
-    [],
+    [throttleWrapper],
   );
 
   useEventListener(

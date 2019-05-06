@@ -27,7 +27,7 @@ const SafeUsername = (): JSX.Element => {
     return () => {
       console.log('Safe: component unmounted');
     };
-  }, []);
+  }, [isMounted]);
 
   return <span>{username}</span>;
 };

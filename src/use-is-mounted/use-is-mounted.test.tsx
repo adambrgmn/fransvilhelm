@@ -20,7 +20,7 @@ const TestComponent = ({
      * cancel the timeout in the returning function provided to useEffect.
      */
     setTimeout(() => isMounted() && fn(), delay);
-  }, []);
+  }, [isMounted, delay, fn]);
 
   return <p />;
 };

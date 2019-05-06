@@ -32,7 +32,7 @@ const useInView = <E extends Element>(
         observer.unobserve(current);
       };
     }
-  }, [ref.current, options]);
+  }, [ref, options]);
 
   return inView;
 };

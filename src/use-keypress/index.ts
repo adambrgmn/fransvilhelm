@@ -9,15 +9,20 @@ import { useEventListener } from '../use-event-listener';
  */
 const useKeypress = (key: string): boolean => {
   const [pressing, setPressing] = useState(false);
-  const deps = [key];
 
-  const keydownHandler = useCallback((event: KeyboardEvent) => {
-    if (event.key === key) setPressing(true);
-  }, deps);
+  const keydownHandler = useCallback(
+    (event: KeyboardEvent) => {
+      if (event.key === key) setPressing(true);
+    },
+    [key],
+  );
 
-  const keyupHandler = useCallback((event: KeyboardEvent) => {
-    if (event.key === key) setPressing(false);
-  }, deps);
+  const keyupHandler = useCallback(
+    (event: KeyboardEvent) => {
+      if (event.key === key) setPressing(false);
+    },
+    [key],
+  );
 
   useEventListener('keydown', keydownHandler);
   useEventListener('keyup', keyupHandler);

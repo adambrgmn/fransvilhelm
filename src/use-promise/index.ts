@@ -85,7 +85,7 @@ const usePromise = <T>(
         }
       },
     );
-  }, deps);
+  }, deps); // eslint-disable-line
 
   return state;
 };
