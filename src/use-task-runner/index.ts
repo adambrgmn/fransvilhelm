@@ -1,24 +1,24 @@
-import { useRef, useReducer, Reducer, useMemo, useEffect } from 'react';
+import { useRef, useReducer, useMemo, useEffect } from 'react';
 import { AsyncState } from '../use-promise';
 
 const clamp = (n: number, min: number, max: number): number => {
   return n < min ? min : n > max ? max : n;
 };
 
-interface TaskDefinition<R> {
+interface TaskDefinition {
   title: string;
-  action: () => PromiseLike<R>;
+  action: (arg?: any) => PromiseLike<any>;
 }
 
-interface Task<R> extends TaskDefinition<R> {
+interface Task extends TaskDefinition {
   id: string;
   state: AsyncState;
-  returnValue?: R;
+  value?: any;
   error?: any;
 }
 
-interface TaskRunnerState<R> {
-  tasks: Task<R>[];
+interface TaskRunnerState {
+  tasks: Task[];
   current: number;
   hasRejected: boolean;
 }
@@ -29,25 +29,28 @@ enum TaskRunnerActions {
   SET_REJECTED,
 }
 
-type TaskRunnerAction<R> =
-  | { type: TaskRunnerActions.SET_PENDING; payload: { task: Task<R> } }
+type TaskRunnerAction =
+  | { type: TaskRunnerActions.SET_PENDING; payload: { task: Task } }
   | {
       type: TaskRunnerActions.SET_FULFILLED;
-      payload: { returnValue?: R; task: Task<R> };
+      payload: { value?: any; task: Task };
     }
   | {
       type: TaskRunnerActions.SET_REJECTED;
-      payload: { error: any; task: Task<R> };
+      payload: { error: any; task: Task };
     };
 
 interface TaskRunnerOptions {
   abortOnReject?: boolean;
+  onAllSettled?: (tasks: Task[]) => void;
+  onFulfilled?: (task: Task) => void;
+  onRejected?: (task: Task) => void;
 }
 
-const reducer = <R>(
-  state: TaskRunnerState<R>,
-  action: TaskRunnerAction<R>,
-): TaskRunnerState<R> => {
+const reducer = (
+  state: TaskRunnerState,
+  action: TaskRunnerAction,
+): TaskRunnerState => {
   switch (action.type) {
     case TaskRunnerActions.SET_PENDING:
       return {
@@ -79,7 +82,7 @@ const reducer = <R>(
             return {
               ...t,
               state: AsyncState.fullfilled,
-              returnValue: action.payload.returnValue,
+              value: action.payload.value,
             };
           }
 
@@ -112,22 +115,26 @@ const reducer = <R>(
   }
 };
 
-const useTaskRunner = <R>(
-  taskDefinitions: TaskDefinition<R>[],
-  { abortOnReject }: TaskRunnerOptions = {},
-): Task<R>[] => {
+const useTaskRunner = (
+  taskDefinitions: TaskDefinition[],
+  {
+    abortOnReject,
+    onAllSettled,
+    onFulfilled,
+    onRejected,
+  }: TaskRunnerOptions = {},
+): Task[] => {
   const initialTasks = useMemo(() => prepareTasks(taskDefinitions), [
     taskDefinitions,
   ]);
 
-  const [state, dispatch] = useReducer<
-    Reducer<TaskRunnerState<R>, TaskRunnerAction<R>>
-  >(reducer, {
+  const [state, dispatch] = useReducer(reducer, {
     tasks: initialTasks,
     current: 0,
     hasRejected: false,
   });
 
+  const previousResultRef = useRef<any>();
   const currentActionRef = useRef<string>();
 
   useEffect(() => {
@@ -144,23 +151,58 @@ const useTaskRunner = <R>(
       payload: { task: currentTask },
     });
 
-    currentTask.action().then(
-      returnValue => {
+    currentTask.action(previousResultRef.current).then(
+      value => {
+        previousResultRef.current = value;
         dispatch({
           type: TaskRunnerActions.SET_FULFILLED,
-          payload: { task: currentTask, returnValue },
+          payload: { task: currentTask, value },
         });
+
+        if (onFulfilled) {
+          currentTask.value = value;
+          currentTask.state = AsyncState.fullfilled;
+          onFulfilled(currentTask);
+        }
       },
       error => {
+        previousResultRef.current = error;
         dispatch({
           type: TaskRunnerActions.SET_REJECTED,
           payload: { task: currentTask, error },
         });
+
+        if (onRejected) {
+          currentTask.error = error;
+          currentTask.state = AsyncState.rejected;
+          onRejected(currentTask);
+        }
       },
     );
-  }, [state, abortOnReject]);
+  }, [state, abortOnReject, onFulfilled, onRejected]);
+
+  useEffect(() => {
+    const { tasks } = state;
+    if (
+      onAllSettled != null &&
+      allPass(
+        tasks,
+        t => t.state !== AsyncState.initial && t.state !== AsyncState.pending,
+      )
+    ) {
+      onAllSettled(tasks);
+    }
+  }, [state, onAllSettled]);
 
   return state.tasks;
+};
+
+const prepareTasks = (taskDefinitions: TaskDefinition[]): Task[] => {
+  return taskDefinitions.map(t => ({
+    ...t,
+    id: generateId(),
+    state: AsyncState.initial,
+  }));
 };
 
 const generateId = (): string =>
@@ -168,12 +210,12 @@ const generateId = (): string =>
     .toString(36)
     .substr(2, 9)}`;
 
-const prepareTasks = <R>(taskDefinitions: TaskDefinition<R>[]): Task<R>[] => {
-  return taskDefinitions.map(t => ({
-    ...t,
-    id: generateId(),
-    state: AsyncState.initial,
-  }));
+const allPass = <I>(arr: I[], cond: (i: I) => boolean): boolean => {
+  for (let i = 0; i < arr.length; i++) {
+    if (!cond(arr[i])) return false;
+  }
+
+  return true;
 };
 
 export { useTaskRunner, AsyncState };
