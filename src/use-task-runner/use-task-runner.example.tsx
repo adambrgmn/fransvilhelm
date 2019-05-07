@@ -27,7 +27,7 @@ const RunTasks = ({
             <span style={{ color: 'gray' }}>pending</span>
           )}
           {task.state === AsyncState.fullfilled && (
-            <span style={{ color: 'green' }}>{task.returnValue}</span>
+            <span style={{ color: 'green' }}>{task.value}</span>
           )}
           {task.state === AsyncState.rejected && (
             <span style={{ color: 'red' }}>{task.error.message}</span>
