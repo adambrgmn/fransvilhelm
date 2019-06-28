@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useCallback } from 'react';
 
 /**
  * Use this hook to determine if a component is still mounted or not. This is
@@ -27,6 +27,7 @@ import { useRef, useEffect } from 'react';
  */
 const useIsMounted = (): (() => boolean) => {
   const ref = useRef(false);
+  const cb = useCallback(() => ref.current, []);
 
   useEffect(() => {
     ref.current = true;
@@ -35,7 +36,7 @@ const useIsMounted = (): (() => boolean) => {
     };
   }, []);
 
-  return () => ref.current;
+  return cb;
 };
 
 export { useIsMounted };
