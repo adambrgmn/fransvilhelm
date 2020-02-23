@@ -1,0 +1,53 @@
+---
+name: useLifecycle
+menu: Hooks
+route: /hook/use-lifecycle
+---
+
+import { Playground } from 'docz';
+import { UseLifecycleExample } from './use-lifecycle.example.tsx';
+
+# useLifecycle
+
+`useLifecycle` is not one hook but three – `useMount`, `useUpdate` and
+`useUnmount`. They are hooks that can be used as replacements for lifecycle
+hooks found on class components.
+
+## Usage
+
+```jsx
+import React from 'react';
+import { useMount, useUpdate, useUnmount } from '@fransvilhelm/hooks';
+
+const Lifecycles = () => {
+  useMount(() => console.log('Mounted'));
+  useUpdate(() => console.log('Updated'));
+  useUnmount(() => console.log('Unmounted'));
+
+  return <p />;
+};
+```
+
+## Example
+
+<Playground>
+  <UseLifecycleExample />
+</Playground>
+
+## Parameters
+
+### `useMount`
+
+`useMount` accepts a callback function that will be called once directly after
+initial render of the component.
+
+### `useUpdate`
+
+`useUpdate` accepts a callback function that will be called on every update
+happening on the component (state or props updated). It's practically
+`useEffect` but without the initial call on first render.
+
+### `useUnmount`
+
+`useUnmount` accepts a callback function that will be called once in connection
+to the component being unmounted.
