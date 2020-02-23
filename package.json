@@ -25,10 +25,11 @@
     "build": "tsdx build",
     "postbuild": "del dist/**/*.{test,example}.d.ts",
     "test": "tsdx test",
-    "docz:dev": "node scripts/create-index-doc.js && docz dev",
-    "docz:build": "node scripts/create-index-doc.js && docz build",
+    "docz:dev": "docz dev",
+    "docz:build": "docz build",
     "lint": "eslint 'src/**/*.{ts,tsx}'",
-    "create": "node scripts/create-hook.js",
+    "plop": "plop",
+    "plop:hook": "plop hook",
     "semantic-release": "semantic-release"
   },
   "dependencies": {
@@ -61,11 +62,11 @@
     "eslint-plugin-react-hooks": "2.x",
     "husky": "^4.2.3",
     "lint-staged": "^10.0.7",
+    "plop": "^2.5.4",
     "prettier": "^1.19.1",
     "react": "16.12.0",
     "react-dom": "16.12.0",
     "semantic-release": "^17.0.4",
-    "strman": "^2.0.1",
     "tsdx": "^0.12.3",
     "tslib": "^1.11.0",
     "typescript": "^3.8.2"
