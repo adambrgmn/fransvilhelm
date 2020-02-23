@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { usePromise, AsyncState } from './';
+import { usePromise } from './';
+import { AsyncState } from '../shared';
 
 const users: { [key: string]: string } = {
   'id-0': 'adambrgmn',

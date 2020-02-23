@@ -27,7 +27,7 @@
     "test": "tsdx test",
     "docz:dev": "docz dev",
     "docz:build": "docz build",
-    "lint": "eslint 'src/**/*.{ts,tsx}'",
+    "lint": "eslint 'src/**/*.{ts,tsx}' && tsdx lint src",
     "plop": "plop",
     "plop:hook": "plop hook",
     "semantic-release": "semantic-release"
