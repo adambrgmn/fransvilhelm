@@ -1,9 +1,10 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useMemo } from 'react';
+import { Subscription, useSubscription } from 'use-subscription';
 
 const useEventListener = <K extends keyof WindowEventMap>(
   type: K,
   handler: (ev: WindowEventMap[K]) => any,
-  options?: boolean | AddEventListenerOptions | undefined,
+  options?: boolean | AddEventListenerOptions,
 ): void => {
   const handlerRef = useRef(handler);
 
@@ -20,4 +21,25 @@ const useEventListener = <K extends keyof WindowEventMap>(
   }, [type, options]);
 };
 
-export { useEventListener };
+const useWindowSubscription = <K extends keyof WindowEventMap, V>(
+  event: K,
+  getCurrentValue: () => V,
+  options?: boolean | AddEventListenerOptions,
+): V => {
+  const optionsRef = useRef(options);
+  const subscription: Subscription<V> = useMemo(
+    () => ({
+      getCurrentValue,
+      subscribe: callback => {
+        window.addEventListener(event, callback, optionsRef.current);
+        return () => window.removeEventListener(event, callback);
+      },
+    }),
+    [event, getCurrentValue],
+  );
+
+  const value = useSubscription(subscription);
+  return value;
+};
+
+export { useEventListener, useWindowSubscription };

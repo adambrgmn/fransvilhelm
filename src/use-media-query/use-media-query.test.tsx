@@ -1,20 +1,18 @@
 import * as React from 'react';
-import { render, cleanup } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { useMediaQuery } from './';
 
-afterEach(cleanup);
-
-const addListener = jest.fn();
-const removeListener = jest.fn();
+const addEventListener = jest.fn();
+const removeEventListener = jest.fn();
 const matchMedia = jest.fn(() => ({
   matches: true,
-  addListener,
-  removeListener,
+  addEventListener,
+  removeEventListener,
 }));
 
 beforeEach(() => {
-  addListener.mockClear();
-  removeListener.mockClear();
+  addEventListener.mockClear();
+  removeEventListener.mockClear();
   Object.defineProperty(window, 'matchMedia', { value: matchMedia });
 });
 
@@ -25,7 +23,5 @@ const TestComponent = ({ query }: { query: string }): JSX.Element => {
 
 it('should test if a media query is satisfied', () => {
   const { getByText } = render(<TestComponent query="(max-width: 400px)" />);
-
   expect(getByText(/true/)).toBeInTheDocument();
-  expect(addListener).toHaveBeenCalled();
 });
