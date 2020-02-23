@@ -14,3 +14,4 @@ export * from './use-persisted-state';
 export * from './use-promise';
 export * from './use-scroll-position';
 export * from './use-task-runner';
+export * from './shared';
