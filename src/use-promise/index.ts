@@ -1,12 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useIsMounted } from '../use-is-mounted';
-
-enum AsyncState {
-  initial = 'INITIAL',
-  pending = 'PENDING',
-  fullfilled = 'FULLFILLED',
-  rejected = 'REJECTED',
-}
+import { AsyncState } from '../shared';
 
 interface UsePromiseInput<T> {
   (): Promise<T>;
@@ -90,4 +84,4 @@ const usePromise = <T>(
   return state;
 };
 
-export { usePromise, AsyncState };
+export { usePromise };

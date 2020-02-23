@@ -1,6 +1,4 @@
-import { useState, useMemo } from 'react';
-import { Subscription, useSubscription } from 'use-subscription';
-import { useEventListener, useWindowSubscription } from '../use-event-listener';
+import { useWindowSubscription } from '../use-event-listener';
 
 let supportsPassive = false;
 try {

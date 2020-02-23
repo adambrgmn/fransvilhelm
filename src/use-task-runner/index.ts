@@ -1,5 +1,5 @@
 import { useRef, useReducer, useMemo, useEffect } from 'react';
-import { AsyncState } from '../use-promise';
+import { AsyncState } from '../shared';
 
 const clamp = (n: number, min: number, max: number): number => {
   return n < min ? min : n > max ? max : n;
@@ -218,4 +218,4 @@ const allPass = <I>(arr: I[], cond: (i: I) => boolean): boolean => {
   return true;
 };
 
-export { useTaskRunner, AsyncState };
+export { useTaskRunner };
