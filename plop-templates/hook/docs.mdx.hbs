@@ -1,0 +1,46 @@
+---
+name: {{ camelCase name }}
+menu: Hooks
+route: /hook/{{ kebabCase name }}
+---
+
+import { Playground } from 'docz';
+import { {{ pascalCase name }}Example } from './{{ kebabCase name }}.example.tsx';
+
+# {{ camelCase name }}
+
+Will...
+
+## Usage
+
+```jsx
+import React from 'react';
+import { {{ camelCase name }} } from '{{ pkg 'name' }}';
+
+const Checkbox = () => {
+  const result = {{ camelCase name }}();
+  return <p />;
+};
+```
+
+## Example
+
+<Playground>
+  <{{ pascalCase name }}Example />
+</Playground>
+
+## Parameters
+
+`{{ camelCase name }}` accepts ...
+
+| Param | Type | Required | Default | Description |
+| :---- | :--- | :------- | :------ | :---------- |
+| param | type | boolean  | boolean | description |
+
+## Returns
+
+`{{ camelCase name }}` returns...
+
+| Prop | Type | Description |
+| :--- | :--- | :---------- |
+| prop | type | description |
