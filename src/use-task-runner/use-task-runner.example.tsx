@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { useTaskRunner, AsyncState } from './';
+import { useTaskRunner } from './';
+import { AsyncState } from '../shared';
 
 const delay = (ms: number) => new Promise(r => setTimeout(r, ms));
 async function sendLater<T>(val: T): Promise<T> {

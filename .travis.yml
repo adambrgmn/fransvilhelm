@@ -11,11 +11,11 @@ cache:
 notifications:
   email: false
 
-script: yarn test && yarn build
+script:
+  - yarn lint && yarn test --coverage && yarn build
 
-branches:
-  only:
-    - master
+after_success:
+  - npx codecov
 
 jobs:
   include:
@@ -26,3 +26,7 @@ jobs:
         skip_cleanup: true
         script:
           - yarn run semantic-release
+
+branches:
+  only:
+    - master
