@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 interface UseInputResult {
   value: string;
-  onChange: React.FormEventHandler<HTMLInputElement>;
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
 }
 
 /**
@@ -19,9 +19,13 @@ interface UseInputResult {
  *     // Or spread props for easier use: <input {...input} />
  *   };
  */
-const useInput = (initialValue: string = ''): UseInputResult => {
+const useInput = (
+  initialValue: string = '',
+  _onChange?: (value: string) => void,
+): UseInputResult => {
   const [value, setValue] = useState(initialValue);
-  const onChange = (event: React.FormEvent<HTMLInputElement>): void => {
+  const onChange: React.ChangeEventHandler<HTMLInputElement> = event => {
+    _onChange?.(event.currentTarget.value);
     setValue(event.currentTarget.value);
   };
 
