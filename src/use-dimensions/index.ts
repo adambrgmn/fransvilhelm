@@ -1,10 +1,5 @@
-import { useRef, useMemo } from 'react';
+import { useMemo } from 'react';
 import { useSubscription, Subscription } from 'use-subscription';
-
-interface UseDimensionsResult<T extends Element> {
-  ref: React.RefObject<T>;
-  rect: ClientRect | null;
-}
 
 /**
  * Get the current measurements of an element in the document. It will also
@@ -16,22 +11,19 @@ interface UseDimensionsResult<T extends Element> {
  * the window gets resized. In that case you have to mock ResizeObserver.
  *
  * @template T extends Element
- * @returns {UseDimensionsResult<T>} An object containing a ref object to
- *          attatch to an element and a (possibly null) rect object with
- *          measurements
+ * @returns {ClientRect | null} A (possibly null) rect object with measurements
  *
  * @example
  *   import { useDimensions } from '@fransvilhelm/hooks';
  *
  *   const Square = () => {
- *     const { ref, rect } = useDimensions();
+ *     const ref = useRef(null);
+ *     const rect = useDimensions(ref);
  *     const { width, height } = rect | {};
  *     return <div ref={ref}>{width}x{height}px</div>;
  *   };
  */
-const useDimensions = <T extends Element>(): UseDimensionsResult<T> => {
-  const ref = useRef<T>(null);
-
+const useDimensions = (ref: React.RefObject<Element>): ClientRect | null => {
   const subscription: Subscription<DOMRect | null> = useMemo(
     () => ({
       getCurrentValue: () => ref.current?.getBoundingClientRect() ?? null,
@@ -54,12 +46,11 @@ const useDimensions = <T extends Element>(): UseDimensionsResult<T> => {
         return () => window.removeEventListener('resize', callback);
       },
     }),
-    [],
+    [ref],
   );
 
   const rect = useSubscription(subscription);
-
-  return { ref, rect };
+  return rect;
 };
 
 export { useDimensions };

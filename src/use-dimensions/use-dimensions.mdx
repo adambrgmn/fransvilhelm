@@ -20,10 +20,11 @@ import React from 'react';
 import { useDimensions } from '@fransvilhelm/hooks';
 
 const SquareWithDimensions = () => {
-  const { ref, rect } = useDimensions();
+  const ref = React.useRef(null);
+  const rect = useDimensions(ref);
   return (
     <div ref={ref}>
-      {rect.width}px / {rect.height} px
+      {rect?.width} px / {rect?.height} px
     </div>
   );
 };
@@ -37,13 +38,17 @@ const SquareWithDimensions = () => {
 
 ## Parameters
 
-`useDimensions` accepts no parameters.
+`useDimensions` accepts one parameter – a React ref object attached to a DOM
+element
+
+| Param | Type                       | Required | Default | Description                          |
+| :---- | :------------------------- | :------- | :------ | :----------------------------------- |
+| ref   | `React.RefObject<Element>` | true     | -       | Ref object attached to a dom element |
 
 ## Returns
 
-`useDimensions` returns an object with two props – a ref object and the rect.
+`useDimensions` returns an client rect object.
 
 | Prop | Type       | Description                                                                                                                                       |
 | :--- | :--------- | :------------------------------------------------------------------------------------------------------------------------------------------------ |
-| ref  | RefObject  | Ref to be applied onto an element of choice                                                                                                       |
 | rect | ClientRect | rect object containing dimensions and position of the current element. This is the same object as one gets from `element.getBoundingClientRect()` |
