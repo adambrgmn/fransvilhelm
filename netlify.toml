@@ -2,6 +2,9 @@
   command = "yarn plop docz-index && yarn docz:build"
   publish = ".docz/dist"
 
+[build.environment]
+  NODE_VERSION = "12"
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
