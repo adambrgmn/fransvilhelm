@@ -11,7 +11,15 @@
   "homepage": "https://hooks.fransvilhelm.com",
   "author": "Adam Bergman <adam@fransvilhelm.com>",
   "license": "MIT",
-  "private": false,
+  "files": [
+    "dist/**"
+  ],
+  "keywords": [
+    "react-hooks",
+    "hooks",
+    "react",
+    "utils"
+  ],
   "scripts": {
     "test": "jest",
     "prebuild": "del dist",
@@ -24,50 +32,51 @@
     "create": "node scripts/create-hook.js",
     "semantic-release": "semantic-release"
   },
-  "files": [
-    "dist/**"
-  ],
-  "keywords": [
-    "react-hooks",
-    "hooks",
-    "react",
-    "utils"
-  ],
   "devDependencies": {
-    "@types/jest": "^24.0.12",
+    "@babel/core": "^7.8.4",
+    "@babel/preset-env": "^7.8.4",
+    "@babel/preset-react": "^7.8.3",
+    "@babel/preset-typescript": "^7.8.3",
+    "@testing-library/jest-dom": "^5.1.1",
+    "@testing-library/react": "^9.4.1",
+    "@testing-library/user-event": "^10.0.0",
+    "@types/jest": "^25.1.3",
+    "@types/node": "^13.7.4",
     "@types/react": "^16.8.16",
     "@types/react-dom": "^16.8.4",
-    "@typescript-eslint/eslint-plugin": "^1.7.0",
-    "@typescript-eslint/parser": "^1.7.0",
+    "@typescript-eslint/eslint-plugin": "2.x",
+    "@typescript-eslint/parser": "2.x",
     "babel-eslint": "10.x",
-    "cz-conventional-changelog": "^2.1.0",
+    "cz-conventional-changelog": "^3.1.0",
     "del-cli": "^1.1.0",
     "docz": "^1.1.0",
     "docz-theme-default": "^1.1.0",
-    "eslint": "5.x",
+    "eslint": "6.x",
     "eslint-config-prettier": "^4.0.0",
-    "eslint-config-react-app": "^4.0.0",
-    "eslint-plugin-flowtype": "2.x",
+    "eslint-config-react-app": "5.2.0",
+    "eslint-plugin-flowtype": "4.x",
     "eslint-plugin-import": "2.x",
     "eslint-plugin-jsx-a11y": "6.x",
     "eslint-plugin-react": "7.x",
-    "eslint-plugin-react-hooks": "1.5.0",
-    "husky": "^2.2.0",
-    "jest": "^24.8.0",
+    "eslint-plugin-react-hooks": "2.x",
+    "husky": "^4.2.3",
+    "jest": "^25.1.0",
     "jest-dom": "^3.2.0",
-    "lint-staged": "^8.1.6",
+    "lint-staged": "^10.0.7",
     "microbundle": "^0.11.0",
-    "prettier": "^1.17.0",
+    "prettier": "^1.19.1",
     "react": "16.9.0-alpha.0",
     "react-dom": "16.9.0-alpha.0",
     "react-testing-library": "^7.0.0",
-    "semantic-release": "^15.13.3",
+    "semantic-release": "^17.0.4",
     "strman": "^2.0.1",
-    "ts-jest": "^24.0.2",
-    "typescript": "^3.4.5"
+    "typescript": "^3.8.2"
   },
   "peerDependencies": {
     "react": "^16.8.0"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "config": {
     "commitizen": {
@@ -75,9 +84,7 @@
     }
   },
   "eslintConfig": {
-    "extends": [
-      "react-app"
-    ]
+    "extends": "react-app"
   },
   "husky": {
     "hooks": {
@@ -85,26 +92,14 @@
     }
   },
   "lint-staged": {
-    "concurrent": true,
-    "linters": {
-      "*.{js,ts,jsx,tsx}": [
-        "eslint --fix",
-        "prettier --write",
-        "git add"
-      ],
-      "*.{json,css,scss,md,mdx,yml}": [
-        "prettier --write",
-        "git add"
-      ]
-    }
+    "*.{js,ts,jsx,tsx,json,md,yml,html}": [
+      "prettier --write"
+    ]
   },
   "prettier": {
     "semi": true,
     "singleQuote": true,
     "trailingComma": "all",
     "proseWrap": "always"
-  },
-  "publishConfig": {
-    "access": "public"
   }
 }
