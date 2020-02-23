@@ -1,5 +1,5 @@
 [build]
-  command = "yarn add --dev react react-dom && yarn docz:build"
+  command = "yarn docz:build"
   publish = ".docz/dist"
 
 [[redirects]]
