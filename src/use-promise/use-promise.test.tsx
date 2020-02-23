@@ -1,6 +1,5 @@
-import 'jest-dom/extend-expect';
 import * as React from 'react';
-import { render, cleanup, waitForElement } from 'react-testing-library';
+import { render, cleanup, waitForElement } from '@testing-library/react';
 import { usePromise, AsyncState } from '../use-promise';
 
 /**
