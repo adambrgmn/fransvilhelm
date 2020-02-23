@@ -41,9 +41,10 @@ const Checkbox = () => {
 `useCheckbox` accepts one argument – `initialValue` to define the initial value
 of the checkbox.
 
-| Param       | Type    | Required | Default | Description                         |
-| :---------- | :------ | :------- | :------ | :---------------------------------- |
-| initalValue | boolean |  false   | false   | Initial value of the `checked`-prop |
+| Param       | Type                         | Required | Default | Description                                                  |
+| :---------- | :--------------------------- | :------- | :------ | :----------------------------------------------------------- |
+| initalValue | boolean                      | false    | false   | Initial value of the `checked`-prop                          |
+| onChange    | `(checked: boolean) => void` | false    | -       | Optional change handler called with current checked value on |
 
 ## Returns
 

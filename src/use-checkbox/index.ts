@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 interface UseCheckboxResult {
   checked: boolean;
-  onChange: React.FormEventHandler<HTMLInputElement>;
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
 }
 
 /**
@@ -19,9 +19,15 @@ interface UseCheckboxResult {
  *     // Or spread props for easier use: <input type="checkbox" {...checkbox} />
  *   };
  */
-const useCheckbox = (initialValue: boolean = false): UseCheckboxResult => {
+const useCheckbox = (
+  initialValue: boolean = false,
+  _onChange?: (checked: boolean) => void,
+): UseCheckboxResult => {
   const [checked, setChecked] = useState(initialValue);
-  const onChange = (): void => setChecked(!checked);
+  const onChange: React.ChangeEventHandler<HTMLInputElement> = event => {
+    _onChange?.(event.currentTarget.checked);
+    setChecked(event.currentTarget.checked);
+  };
 
   return { checked, onChange };
 };
