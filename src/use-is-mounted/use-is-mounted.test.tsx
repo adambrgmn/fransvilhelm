@@ -1,6 +1,5 @@
-import 'jest-dom/extend-expect';
 import React, { useEffect } from 'react';
-import { render, cleanup } from 'react-testing-library';
+import { render, cleanup } from '@testing-library/react';
 import { useIsMounted } from './';
 
 afterEach(cleanup);

@@ -1,6 +1,5 @@
-import 'jest-dom/extend-expect';
 import * as React from 'react';
-import { render, cleanup, act } from 'react-testing-library';
+import { render, cleanup, act } from '@testing-library/react';
 import { useInView } from './';
 
 afterEach(cleanup);
