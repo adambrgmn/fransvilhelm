@@ -4,8 +4,10 @@ import { useCheckbox } from './';
 
 afterEach(cleanup);
 
-const TestComponent = (): JSX.Element => {
-  const checkbox = useCheckbox();
+const TestComponent: React.FC<{ onChange?: () => void }> = ({
+  onChange,
+}): JSX.Element => {
+  const checkbox = useCheckbox(false, onChange);
   return (
     <div>
       <p data-testid="result">Checked: {checkbox.checked ? 'true' : 'false'}</p>
@@ -23,4 +25,14 @@ it('should provide checked value and onChange handler for a checkbox', () => {
 
   fireEvent.click(checkbox);
   expect(result).toHaveTextContent('Checked: true');
+});
+
+it('accepts a onChange callback', () => {
+  const onChange = jest.fn();
+  const { getByTestId } = render(<TestComponent onChange={onChange} />);
+  const checkbox = getByTestId('checkbox');
+  fireEvent.click(checkbox);
+
+  expect(onChange).toHaveBeenCalled();
+  expect(onChange).toHaveBeenCalledWith(true);
 });
