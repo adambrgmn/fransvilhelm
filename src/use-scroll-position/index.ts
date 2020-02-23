@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
-import { useEventListener } from '../use-event-listener';
+import { Subscription, useSubscription } from 'use-subscription';
+import { useEventListener, useWindowSubscription } from '../use-event-listener';
 
 let supportsPassive = false;
 try {
@@ -13,9 +14,6 @@ try {
   window.addEventListener('testPassive', () => {}, opts);
   window.removeEventListener('testPassive', () => {}, opts);
 } catch (e) {}
-
-type ThrottleWrapper = (fn: () => void) => () => void;
-const passThrough: ThrottleWrapper = fn => () => fn(); // eslint-disable-line
 
 const getPosition = (): { x: number; y: number } => ({
   x: window.pageXOffset,
@@ -39,19 +37,10 @@ const getPosition = (): { x: number; y: number } => ({
  *     return <p>{message}</p>
  *   }
  */
-const useScrollPosition = (
-  throttleWrapper: ThrottleWrapper = passThrough,
-): { x: number; y: number } => {
-  const [position, setPosition] = useState(getPosition());
-
-  const listener = useMemo(
-    () => throttleWrapper(() => setPosition(getPosition())),
-    [throttleWrapper],
-  );
-
-  useEventListener(
+const useScrollPosition = (): { x: number; y: number } => {
+  const position = useWindowSubscription(
     'scroll',
-    listener,
+    getPosition,
     supportsPassive ? { passive: true } : false,
   );
 
