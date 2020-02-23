@@ -7,6 +7,7 @@ const useEventListener = <K extends keyof WindowEventMap>(
   options?: boolean | AddEventListenerOptions,
 ): void => {
   const handlerRef = useRef(handler);
+  const optionsRef = useRef(options);
 
   useEffect(() => {
     handlerRef.current = handler;
@@ -14,9 +15,9 @@ const useEventListener = <K extends keyof WindowEventMap>(
 
   useEffect(() => {
     const listener = (ev: WindowEventMap[K]): any => handlerRef.current(ev);
-    window.addEventListener(type, listener, options);
+    window.addEventListener(type, listener, optionsRef.current);
     return () => {
-      window.removeEventListener(type, listener, options);
+      window.removeEventListener(type, listener);
     };
   }, [type, options]);
 };
