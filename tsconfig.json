@@ -1,19 +1,19 @@
 {
   "compilerOptions": {
-    "lib": ["esnext", "dom"],
-    "module": "ESNext",
-    "moduleResolution": "node",
-    "target": "es2017",
-    "strict": true,
-    "declaration": true,
-    "esModuleInterop": true,
-    "composite": true,
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
     "skipLibCheck": true,
-    "noImplicitAny": false,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "esnext",
+    "moduleResolution": "node",
     "resolveJsonModule": true,
-    "preserveWatchOutput": true,
-    "jsx": "react",
-    "sourceMap": true
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react"
   },
-  "include": ["src", "types"]
+  "include": ["src"]
 }

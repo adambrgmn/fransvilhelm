@@ -1,12 +1,11 @@
-import 'jest-dom/extend-expect';
 import * as React from 'react';
-import { render, act } from 'react-testing-library';
+import { render, act } from '@testing-library/react';
 import { useTaskRunner } from './';
 
 const TaskList = ({ tasks }: any) => {
   return (
     <ul>
-      {tasks.map(task => (
+      {tasks.map((task: any) => (
         <li key={task.title}>
           <span data-testid="title">{task.title}:</span>{' '}
           <span data-testid="status">status {task.state}</span>{' '}
