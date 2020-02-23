@@ -42,9 +42,10 @@ const Input = ({ initialValue }) => {
 of type string (even if the input type is number, since the inputs value will
 always be an string regardless of input type).
 
-| Param       | Type   | Required | Default | Description                       |
-| :---------- | :----- | :------- | :------ | :-------------------------------- |
-| initalValue | string |  false   | ''      | Initial value of the `value`-prop |
+| Param       | Type                        | Required | Default | Description                                                 |
+| :---------- | :-------------------------- | :------- | :------ | :---------------------------------------------------------- |
+| initalValue | string                      | false    | ''      | Initial value of the `value`-prop                           |
+| onChange    | `(checked: string) => void` | false    | -       | Optional change handler called with current value on change |
 
 ## Returns
 

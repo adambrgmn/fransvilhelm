@@ -4,8 +4,8 @@ import { useInput } from './';
 
 afterEach(cleanup);
 
-const TestComponent = (): JSX.Element => {
-  const input = useInput();
+const TestComponent: React.FC<{ onChange?: () => void }> = ({ onChange }) => {
+  const input = useInput('', onChange);
   return (
     <div>
       <p data-testid="result">{input.value}</p>
@@ -21,4 +21,14 @@ it('should provide an input value and onChange handler', () => {
 
   fireEvent.change(input, { target: { value: 'Jane Doe' } });
   expect(result).toHaveTextContent('Jane Doe');
+});
+
+it('accepts an onChange handler', () => {
+  const onChange = jest.fn();
+  const { getByTestId } = render(<TestComponent onChange={onChange} />);
+  const input = getByTestId('input');
+
+  fireEvent.change(input, { target: { value: 'Jane Doe' } });
+  expect(onChange).toHaveBeenCalled();
+  expect(onChange).toHaveBeenCalledWith('Jane Doe');
 });
