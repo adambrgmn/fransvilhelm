@@ -4,8 +4,8 @@ import { useScrollPosition } from '../use-scroll-position';
 
 afterEach(cleanup);
 
-const TestComponent = ({ throttle }: { throttle?: any }): JSX.Element => {
-  const position = useScrollPosition(throttle);
+const TestComponent: React.FC = () => {
+  const position = useScrollPosition();
   return (
     <div style={{ height: '200vh' }}>
       <p>x: {position.x}</p>
@@ -27,16 +27,4 @@ it('should track scroll position', () => {
 
   expect(getByText(/x: \d+/)).toHaveTextContent('x: 100');
   expect(getByText(/y: \d+/)).toHaveTextContent('y: 100');
-});
-
-it('should accept an optional throttle wrapper', () => {
-  jest.spyOn(window, 'requestAnimationFrame');
-  const throttle = (fn: () => void) => () => window.requestAnimationFrame(fn); // eslint-disable-line
-
-  render(<TestComponent throttle={throttle} />);
-
-  const scrollEv = new Event('scroll');
-  fireEvent(window, scrollEv);
-
-  expect(window.requestAnimationFrame).toHaveBeenCalled();
 });

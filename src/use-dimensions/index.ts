@@ -1,4 +1,5 @@
-import { useRef, useLayoutEffect, useState, useCallback } from 'react';
+import { useRef, useMemo } from 'react';
+import { useSubscription, Subscription } from 'use-subscription';
 
 interface UseDimensionsResult<T extends Element> {
   ref: React.RefObject<T>;
@@ -30,38 +31,33 @@ interface UseDimensionsResult<T extends Element> {
  */
 const useDimensions = <T extends Element>(): UseDimensionsResult<T> => {
   const ref = useRef<T>(null);
-  const [rect, setRect] = useState<ClientRect | null>(null);
 
-  const handleResize = useCallback(() => {
-    if (ref.current != null) {
-      const clientRect = ref.current.getBoundingClientRect();
-      setRect(clientRect);
-    }
-  }, [ref]);
+  const subscription: Subscription<DOMRect | null> = useMemo(
+    () => ({
+      getCurrentValue: () => ref.current?.getBoundingClientRect() ?? null,
+      subscribe: callback => {
+        if ('ResizeObserver' in window) {
+          const observer = new ResizeObserver(entries => {
+            entries.forEach(
+              ({ target }) => target === ref.current && callback(),
+            );
+          });
 
-  useLayoutEffect(() => {
-    if (ref.current == null) return;
-    handleResize();
+          if (ref.current) observer.observe(ref.current);
+          return () => {
+            if (ref.current) observer.unobserve(ref.current);
+            observer.disconnect();
+          };
+        }
 
-    if (typeof ResizeObserver === 'function') {
-      const observer = new ResizeObserver(entries => {
-        entries.forEach(({ target, contentRect }) => {
-          if (target === ref.current) setRect(contentRect);
-        });
-      });
+        window.addEventListener('resize', callback);
+        return () => window.removeEventListener('resize', callback);
+      },
+    }),
+    [],
+  );
 
-      observer.observe(ref.current);
-
-      return () => {
-        observer.disconnect();
-      };
-    } else {
-      window.addEventListener('resize', handleResize);
-      return () => {
-        window.removeEventListener('resize', handleResize);
-      };
-    }
-  }, [ref, handleResize]);
+  const rect = useSubscription(subscription);
 
   return { ref, rect };
 };

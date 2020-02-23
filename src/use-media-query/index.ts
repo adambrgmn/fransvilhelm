@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useMemo } from 'react';
+import { Subscription, useSubscription } from 'use-subscription';
 
 /**
  * Test to see if a query is matched and listen for changes on that query. This
@@ -18,21 +19,19 @@ import { useState, useEffect } from 'react';
  *   };
  */
 const useMediaQuery = (query: string): boolean => {
-  const [matches, setMatches] = useState(
-    () => window.matchMedia(query).matches,
+  const mediaQueryList = useMemo(() => window.matchMedia(query), [query]);
+  const subscription: Subscription<boolean> = useMemo(
+    () => ({
+      getCurrentValue: () => mediaQueryList.matches,
+      subscribe: callback => {
+        mediaQueryList.addEventListener('change', callback);
+        return () => mediaQueryList.removeEventListener('change', callback);
+      },
+    }),
+    [mediaQueryList],
   );
 
-  useEffect(() => {
-    const queryList = window.matchMedia(query);
-    setMatches(queryList.matches);
-
-    const listener = (evt: MediaQueryListEvent): void =>
-      setMatches(evt.matches);
-
-    queryList.addListener(listener);
-    return () => queryList.removeListener(listener);
-  }, [query]);
-
+  const matches = useSubscription(subscription);
   return matches;
 };
 
