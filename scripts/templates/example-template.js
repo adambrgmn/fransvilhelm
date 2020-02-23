@@ -8,7 +8,7 @@ module.exports = ({ name }) => {
   return `import * as React from 'react';
 import { ${camel} } from './';
 
-const ${studly}Example = (): JSX.Element => {
+const ${studly}Example: React.FC = () => {
   const result = ${camel}();
   return <p />;
 };
