@@ -2,17 +2,15 @@
   "name": "@fransvilhelm/hooks",
   "version": "0.0.0-development",
   "description": "A set of reusable React hooks",
-  "main": "dist/hooks.js",
-  "umd:main": "dist/hooks.umd.js",
+  "main": "dist/index.js",
   "module": "dist/hooks.esm.js",
-  "source": "src/index.ts",
-  "types": "dist/src/index.d.ts",
+  "typings": "dist/index.d.ts",
   "repository": "git@github.com:adambrgmn/hooks",
   "homepage": "https://hooks.fransvilhelm.com",
   "author": "Adam Bergman <adam@fransvilhelm.com>",
   "license": "MIT",
   "files": [
-    "dist/**"
+    "dist"
   ],
   "keywords": [
     "react-hooks",
@@ -22,7 +20,7 @@
   ],
   "scripts": {
     "start": "tsdx watch",
-    "build": "tsdx build",
+    "build": "rm -rf ./dist && tsdx build --format=cjs,esm",
     "postbuild": "del dist/**/*.{test,example}.d.ts",
     "test": "tsdx test",
     "docz:dev": "docz dev",
