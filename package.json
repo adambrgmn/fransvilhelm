@@ -2,12 +2,21 @@
   "name": "@fransvilhelm/hooks",
   "version": "0.0.0-development",
   "description": "A set of reusable React hooks",
-  "main": "dist/index.js",
+  "source": "src/index.ts",
+  "main": "dist/hooks.js",
   "module": "dist/hooks.esm.js",
-  "typings": "dist/index.d.ts",
-  "repository": "git@github.com:adambrgmn/hooks",
+  "esmodule": "dist/hooks.modern.js",
+  "umd:main": "dist/hooks.umd.js",
+  "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/adambrgmn/hooks.git"
+  },
+  "author": {
+    "name": "Adam Bergman",
+    "email": "adam@fransvilhelm.com"
+  },
   "homepage": "https://hooks.fransvilhelm.com",
-  "author": "Adam Bergman <adam@fransvilhelm.com>",
   "license": "MIT",
   "files": [
     "dist"
@@ -19,55 +28,61 @@
     "utils"
   ],
   "scripts": {
-    "start": "tsdx watch",
-    "build": "rm -rf ./dist && tsdx build --format=cjs,esm",
-    "postbuild": "del dist/**/*.{test,example}.d.ts",
-    "test": "tsdx test",
-    "docz:dev": "docz dev",
-    "docz:build": "docz build",
-    "lint": "eslint 'src/**/*.{ts,tsx}' && tsdx lint src",
+    "start": "yarn build --watch",
+    "build": "microbundle --jsx=React.createElement",
+    "test": "jest",
+    "lint": "eslint src --ext .ts --ext .tsx --ext .js",
+    "type-check": "tsc --noEmit",
+    "release": "yarn build && yarn changeset publish",
     "plop": "plop",
     "plop:hook": "plop hook",
-    "semantic-release": "semantic-release"
+    "docz:dev": "docz dev",
+    "docz:build": "docz build"
   },
   "dependencies": {
     "use-subscription": "^1.3.0"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^5.1.1",
-    "@testing-library/react": "^9.4.1",
+    "@babel/core": "^7.11.6",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.10.4",
+    "@babel/plugin-proposal-optional-chaining": "^7.11.0",
+    "@babel/preset-env": "^7.11.5",
+    "@babel/preset-react": "^7.10.4",
+    "@babel/preset-typescript": "^7.10.4",
+    "@changesets/cli": "^2.10.2",
+    "@fransvilhelm/changeset-changelog": "^1.0.0",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.0.4",
     "@testing-library/user-event": "^10.0.0",
-    "@types/jest": "^25.1.3",
-    "@types/node": "^13.7.4",
+    "@types/jest": "^26.0.14",
+    "@types/node": "^14.10.3",
     "@types/react": "^16.9.22",
     "@types/react-dom": "^16.9.5",
-    "@types/testing-library__jest-dom": "^5.0.1",
-    "@types/testing-library__react": "^9.1.2",
+    "@types/testing-library__jest-dom": "^5.9.2",
+    "@types/testing-library__react": "^10.2.0",
     "@types/testing-library__user-event": "^4.1.1",
     "@types/use-subscription": "^1.0.0",
-    "@typescript-eslint/eslint-plugin": "2.x",
-    "@typescript-eslint/parser": "2.x",
-    "babel-eslint": "10.0.3",
-    "cz-conventional-changelog": "^3.1.0",
-    "del-cli": "^3.0.0",
+    "@typescript-eslint/eslint-plugin": "^2.34.0",
+    "@typescript-eslint/parser": "^2.34.0",
+    "babel-eslint": "^10.1.0",
     "docz": "^2.2.0",
-    "eslint": "6.x",
-    "eslint-config-react-app": "5.2.0",
-    "eslint-plugin-flowtype": "4.x",
-    "eslint-plugin-import": "2.20.1",
-    "eslint-plugin-jsx-a11y": "6.2.3",
-    "eslint-plugin-react": "7.18.3",
-    "eslint-plugin-react-hooks": "2.x",
-    "husky": "^4.2.3",
-    "lint-staged": "^10.0.7",
+    "eslint": "^6.8.0",
+    "eslint-config-react-app": "^5.2.1",
+    "eslint-plugin-flowtype": "^4.7.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-react": "^7.20.6",
+    "eslint-plugin-react-hooks": "^2.5.1",
+    "husky": "^4.3.0",
+    "jest": "^26.4.2",
+    "lint-staged": "^10.4.0",
+    "microbundle": "^0.12.3",
     "plop": "^2.5.4",
-    "prettier": "^1.19.1",
+    "prettier": "^2.1.2",
     "react": "16.12.0",
     "react-dom": "16.12.0",
     "semantic-release": "^17.0.4",
-    "tsdx": "^0.12.3",
-    "tslib": "^1.11.0",
-    "typescript": "^3.8.2"
+    "typescript": "^4.0.2"
   },
   "peerDependencies": {
     "react": "^16.8.0"
@@ -81,7 +96,25 @@
     }
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": "react-app",
+    "rules": {
+      "import/order": [
+        "warn",
+        {
+          "newlines-between": "always",
+          "groups": [
+            "builtin",
+            "external",
+            "internal",
+            [
+              "parent",
+              "sibling",
+              "index"
+            ]
+          ]
+        }
+      ]
+    }
   },
   "husky": {
     "hooks": {
