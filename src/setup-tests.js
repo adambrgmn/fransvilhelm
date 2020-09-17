@@ -2,8 +2,8 @@ const observers = [];
 
 class IntersectionObserver {
   static emit(baseEntry) {
-    observers.forEach(observer => {
-      const targets = observer.targets.map(target => ({
+    observers.forEach((observer) => {
+      const targets = observer.targets.map((target) => ({
         target,
         ...baseEntry,
       }));
@@ -27,7 +27,7 @@ class IntersectionObserver {
   }
 
   unobserve(target) {
-    this.targets = this.targets.filter(e => e !== target);
+    this.targets = this.targets.filter((e) => e !== target);
   }
 }
 
@@ -69,7 +69,7 @@ function Deferred() {
      * Initially in pending state.
      */
     this.promise = new Promise(
-      function(resolve, reject) {
+      function (resolve, reject) {
         this.resolve = resolve;
         this.reject = reject;
       }.bind(this),

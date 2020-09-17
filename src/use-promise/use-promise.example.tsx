@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import { usePromise } from './';
 import { AsyncState } from '../shared';
 
@@ -29,7 +30,7 @@ const UsePromiseExample = (): JSX.Element => {
   return (
     <div>
       <div>
-        {[0, 1, 2, 3].map(idx => (
+        {[0, 1, 2, 3].map((idx) => (
           <div key={idx}>
             <input
               type="radio"

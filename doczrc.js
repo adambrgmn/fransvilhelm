@@ -1,6 +1,5 @@
-import pkg from './package.json';
-
 export default {
-  title: pkg.name,
+  title: '@fransvilhelm/hooks',
+  description: 'A set of reusable React hooks',
   typescript: true,
 };

@@ -1,9 +1,10 @@
 import * as React from 'react';
+
 import { useIsMounted } from './';
 import { useCheckbox } from '../use-checkbox';
 
 const getUsername = (): Promise<string> =>
-  new Promise(resolve => {
+  new Promise((resolve) => {
     setTimeout(() => resolve('adambrgmn'), 2000);
   });
 
@@ -13,7 +14,7 @@ const SafeUsername = (): JSX.Element => {
 
   React.useEffect(() => {
     console.log('Safe: fetching username');
-    getUsername().then(u => {
+    getUsername().then((u) => {
       if (isMounted()) {
         console.log('Safe: fetched username and will update state');
         setUsername(u);
@@ -37,7 +38,7 @@ const UnsafeUsername = (): JSX.Element => {
 
   React.useEffect(() => {
     console.log('Unsafe: fetching username');
-    getUsername().then(u => {
+    getUsername().then((u) => {
       console.log('Unsafe: username fetched will update state regardless');
       setUsername(u);
     });

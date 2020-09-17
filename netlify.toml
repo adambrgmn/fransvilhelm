@@ -1,5 +1,5 @@
 [build]
-  command = "yarn plop docz-index && yarn docz:build"
+  command = "yarn docz:build"
   publish = ".docz/dist"
 
 [build.environment]
@@ -7,5 +7,5 @@
 
 [[redirects]]
   from = "/*"
-  to = "/index.html"
+  to = "/"
   status = 200

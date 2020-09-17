@@ -27,9 +27,9 @@ const useDimensions = (ref: React.RefObject<Element>): ClientRect | null => {
   const subscription: Subscription<DOMRect | null> = useMemo(
     () => ({
       getCurrentValue: () => ref.current?.getBoundingClientRect() ?? null,
-      subscribe: callback => {
+      subscribe: (callback) => {
         if ('ResizeObserver' in window) {
-          const observer = new ResizeObserver(entries => {
+          const observer = new ResizeObserver((entries) => {
             entries.forEach(
               ({ target }) => target === ref.current && callback(),
             );

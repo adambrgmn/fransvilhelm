@@ -1,8 +1,7 @@
 import * as React from 'react';
-import { render, cleanup } from '@testing-library/react';
-import { useDimensions } from './';
+import { render, screen } from '@testing-library/react';
 
-afterEach(cleanup);
+import { useDimensions } from './';
 
 const TestComponent = (): JSX.Element => {
   const ref = React.useRef<HTMLParagraphElement>(null);
@@ -11,6 +10,6 @@ const TestComponent = (): JSX.Element => {
 };
 
 it('should make dom measurements', () => {
-  const { getByText } = render(<TestComponent />);
-  expect(getByText(/\d+/)).toBeInTheDocument();
+  render(<TestComponent />);
+  expect(screen.getByText(/\d+/)).toBeInTheDocument();
 });

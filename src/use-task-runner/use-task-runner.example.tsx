@@ -1,8 +1,9 @@
 import * as React from 'react';
+
 import { useTaskRunner } from './';
 import { AsyncState } from '../shared';
 
-const delay = (ms: number) => new Promise(r => setTimeout(r, ms));
+const delay = (ms: number) => new Promise((r) => setTimeout(r, ms));
 async function sendLater<T>(val: T): Promise<T> {
   await delay(1000);
   return val;
@@ -18,7 +19,7 @@ const RunTasks = ({
   const tasks = useTaskRunner(taskDefs, { abortOnReject });
   return (
     <ul>
-      {tasks.map(task => (
+      {tasks.map((task) => (
         <li key={task.id}>
           <span>{task.title}: </span>
           {task.state === AsyncState.initial && (

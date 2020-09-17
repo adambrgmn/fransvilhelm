@@ -1,5 +1,7 @@
 import * as React from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
 import { useMount, useUnmount, useUpdate } from './';
 
 const TestComponent: React.FC<{
@@ -21,11 +23,11 @@ it('should ...', () => {
   const onUpdate = jest.fn();
   const onUnmount = jest.fn();
 
-  const { getByText, unmount } = render(
+  const { unmount } = render(
     <TestComponent {...{ onMount, onUpdate, onUnmount }} />,
   );
 
-  const btn = getByText('+');
+  const btn = screen.getByText('+');
 
   // Mount
   expect(onMount).toHaveBeenCalledTimes(1);
@@ -35,8 +37,8 @@ it('should ...', () => {
   expect(onUnmount).not.toHaveBeenCalled();
 
   // Update
-  fireEvent.click(btn);
-  fireEvent.click(btn);
+  userEvent.click(btn);
+  userEvent.click(btn);
 
   expect(onUpdate).toHaveBeenCalledTimes(2);
   expect(onUpdate).toHaveBeenNthCalledWith(1, 1);

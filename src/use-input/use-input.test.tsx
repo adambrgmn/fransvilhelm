@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { render, cleanup, fireEvent } from '@testing-library/react';
-import { useInput } from './';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
-afterEach(cleanup);
+import { useInput } from './';
 
 const TestComponent: React.FC<{ onChange?: () => void }> = ({ onChange }) => {
   const input = useInput('', onChange);
@@ -15,20 +15,20 @@ const TestComponent: React.FC<{ onChange?: () => void }> = ({ onChange }) => {
 };
 
 it('should provide an input value and onChange handler', () => {
-  const { getByTestId } = render(<TestComponent />);
-  const result = getByTestId('result');
-  const input = getByTestId('input');
+  render(<TestComponent />);
+  const result = screen.getByTestId('result');
+  const input = screen.getByTestId('input');
 
-  fireEvent.change(input, { target: { value: 'Jane Doe' } });
+  userEvent.type(input, 'Jane Doe');
   expect(result).toHaveTextContent('Jane Doe');
 });
 
 it('accepts an onChange handler', () => {
   const onChange = jest.fn();
-  const { getByTestId } = render(<TestComponent onChange={onChange} />);
-  const input = getByTestId('input');
+  render(<TestComponent onChange={onChange} />);
+  const input = screen.getByTestId('input');
 
-  fireEvent.change(input, { target: { value: 'Jane Doe' } });
+  userEvent.type(input, 'Jane Doe');
   expect(onChange).toHaveBeenCalled();
   expect(onChange).toHaveBeenCalledWith('Jane Doe');
 });

@@ -1,5 +1,7 @@
 import * as React from 'react';
-import { render, cleanup, fireEvent } from '@testing-library/react';
+import { render, fireEvent, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
 import { usePersistedState } from '.';
 
 const localStorageMock = {
@@ -10,7 +12,6 @@ const localStorageMock = {
 Object.defineProperty(window, 'localStorage', { value: localStorageMock });
 
 afterEach(() => {
-  cleanup();
   localStorageMock.getItem.mockClear();
   localStorageMock.setItem.mockClear();
   localStorageMock.clear.mockClear();
@@ -22,10 +23,10 @@ it('should be a drop in replacement for the useState hook', () => {
     return <button onClick={() => setState(count + 1)}>{count}</button>;
   };
 
-  const { getByText } = render(<Comp />);
-  const btn = getByText(/\d+/);
+  render(<Comp />);
+  const btn = screen.getByText(/\d+/);
 
-  fireEvent.click(btn);
+  userEvent.click(btn);
 
   expect(btn).toHaveTextContent('1');
   expect(localStorageMock.setItem).toHaveBeenCalledWith(
@@ -41,8 +42,8 @@ it('should use persisted value as initial state (if set)', () => {
     return <button onClick={() => setCount(count + 1)}>{count}</button>;
   };
 
-  const { getByText } = render(<Comp />);
-  const btn = getByText(/\d+/);
+  render(<Comp />);
+  const btn = screen.getByText(/\d+/);
 
   expect(btn).toHaveTextContent('100');
 });
@@ -66,12 +67,12 @@ it('should emit updates to other components using the same key', () => {
     );
   };
 
-  const { getByTestId } = render(<Comp />);
+  render(<Comp />);
 
-  const btn1 = getByTestId('btn-1');
-  const btn2 = getByTestId('btn-2');
+  const btn1 = screen.getByTestId('btn-1');
+  const btn2 = screen.getByTestId('btn-2');
 
-  fireEvent.click(btn1);
+  userEvent.click(btn1);
   expect(btn1).toHaveTextContent('1');
   expect(btn2).toHaveTextContent('1');
 });
@@ -82,8 +83,8 @@ it('should update state in reaction to window storage event', () => {
     return <button onClick={() => setState(count + 1)}>{count}</button>;
   };
 
-  const { getByText } = render(<Comp />);
-  const btn = getByText(/\d+/);
+  render(<Comp />);
+  const btn = screen.getByText(/\d+/);
 
   fireEvent(
     window,

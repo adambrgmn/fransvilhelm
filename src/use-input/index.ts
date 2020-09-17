@@ -24,7 +24,7 @@ const useInput = (
   _onChange?: (value: string) => void,
 ): UseInputResult => {
   const [value, setValue] = useState(initialValue);
-  const onChange: React.ChangeEventHandler<HTMLInputElement> = event => {
+  const onChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     _onChange?.(event.currentTarget.value);
     setValue(event.currentTarget.value);
   };

@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { render, cleanup, waitForElement } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+
 import { usePromise } from '../use-promise';
 import { AsyncState } from '../shared';
 
@@ -29,7 +30,6 @@ const fetchUsername = jest.fn((username: string) => {
 });
 
 afterEach(() => {
-  cleanup();
   fetchUsername.mockClear();
 });
 
@@ -46,29 +46,30 @@ const FetchUsername = ({ username }: { username: string }): JSX.Element => {
 };
 
 it('should handle a promise using a hook', async () => {
-  const { getByText } = render(<FetchUsername username="ab" />);
-  await waitForElement(() => getByText(/ab/i));
+  render(<FetchUsername username="ab" />);
+
+  await screen.findByText(/ab/i);
   expect(fetchUsername).toHaveBeenCalledTimes(1);
 });
 
 it('should handle rejected promises', async () => {
-  const { getByText } = render(<FetchUsername username="reject" />);
-  await waitForElement(() => getByText(/is not a username/i));
+  render(<FetchUsername username="reject" />);
+  await screen.findByText(/is not a username/i);
 });
 
 it('should handle multiple promises ignoring the previous ones', async () => {
-  const { rerender, getByText } = render(<FetchUsername username="one" />);
+  const { rerender } = render(<FetchUsername username="one" />);
   rerender(<FetchUsername username="two" />);
 
-  await waitForElement(() => getByText(/two/i));
+  await screen.findByText(/two/i);
   expect(fetchUsername).toHaveBeenCalledWith('one');
   expect(fetchUsername).toHaveBeenCalledWith('two');
 });
 
 it('should handle multiple rejected promises', async () => {
-  const { rerender, getByText } = render(<FetchUsername username="reject" />);
+  const { rerender } = render(<FetchUsername username="reject" />);
   rerender(<FetchUsername username="rejected" />);
   rerender(<FetchUsername username="unfullfilled" />);
 
-  await waitForElement(() => getByText(/is not a username/i));
+  await screen.findByText(/is not a username/i);
 });

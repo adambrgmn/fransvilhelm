@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import { useKeypress } from './';
 
 const Indicator = ({ pressed }: { pressed: boolean }): JSX.Element => (
@@ -28,7 +29,7 @@ const UseKeypressExample = (): JSX.Element => {
   return (
     <div>
       <ul>
-        {keys.map(key => (
+        {keys.map((key) => (
           <li key={key}>
             <Char char={key} />
           </li>

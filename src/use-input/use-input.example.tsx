@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import { useInput } from './';
 
 const UseInputExample = (): JSX.Element => {

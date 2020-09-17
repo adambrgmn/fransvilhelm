@@ -1,8 +1,7 @@
 import * as React from 'react';
-import { render, cleanup, fireEvent } from '@testing-library/react';
-import { useOnline } from './';
+import { render, fireEvent, screen } from '@testing-library/react';
 
-afterEach(cleanup);
+import { useOnline } from './';
 
 const TestComponent = (): JSX.Element => {
   const isOnline = useOnline();
@@ -10,12 +9,12 @@ const TestComponent = (): JSX.Element => {
 };
 
 it('should determine if a client is online or not', () => {
-  const { getByText } = render(<TestComponent />);
+  render(<TestComponent />);
 
-  expect(getByText('online')).toBeInTheDocument();
+  expect(screen.getByText('online')).toBeInTheDocument();
 
   const evt = new Event('offline', { bubbles: true });
   fireEvent(window, evt);
 
-  expect(getByText('offline')).toBeInTheDocument();
+  expect(screen.getByText('offline')).toBeInTheDocument();
 });

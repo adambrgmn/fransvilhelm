@@ -1,8 +1,7 @@
 import * as React from 'react';
-import { render, cleanup, fireEvent } from '@testing-library/react';
-import { useScrollPosition } from '../use-scroll-position';
+import { render, fireEvent, screen } from '@testing-library/react';
 
-afterEach(cleanup);
+import { useScrollPosition } from '../use-scroll-position';
 
 const TestComponent: React.FC = () => {
   const position = useScrollPosition();
@@ -15,16 +14,16 @@ const TestComponent: React.FC = () => {
 };
 
 it('should track scroll position', () => {
-  const { getByText } = render(<TestComponent />);
+  render(<TestComponent />);
 
-  expect(getByText(/x: \d+/)).toHaveTextContent('x: 0');
-  expect(getByText(/y: \d+/)).toHaveTextContent('y: 0');
+  expect(screen.getByText(/x: \d+/)).toHaveTextContent('x: 0');
+  expect(screen.getByText(/y: \d+/)).toHaveTextContent('y: 0');
 
   Object.defineProperty(window, 'pageXOffset', { value: 100 });
   Object.defineProperty(window, 'pageYOffset', { value: 100 });
   const scrollEv = new Event('scroll');
   fireEvent(window, scrollEv);
 
-  expect(getByText(/x: \d+/)).toHaveTextContent('x: 100');
-  expect(getByText(/y: \d+/)).toHaveTextContent('y: 100');
+  expect(screen.getByText(/x: \d+/)).toHaveTextContent('x: 100');
+  expect(screen.getByText(/y: \d+/)).toHaveTextContent('y: 100');
 });

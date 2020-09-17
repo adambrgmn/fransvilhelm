@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { render, cleanup, fireEvent } from '@testing-library/react';
-import { useCheckbox } from './';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
-afterEach(cleanup);
+import { useCheckbox } from './';
 
 const TestComponent: React.FC<{ onChange?: () => void }> = ({
   onChange,
@@ -17,21 +17,21 @@ const TestComponent: React.FC<{ onChange?: () => void }> = ({
 };
 
 it('should provide checked value and onChange handler for a checkbox', () => {
-  const { getByTestId } = render(<TestComponent />);
-  const result = getByTestId('result');
-  const checkbox = getByTestId('checkbox');
+  render(<TestComponent />);
+  const result = screen.getByTestId('result');
+  const checkbox = screen.getByTestId('checkbox');
 
   expect(result).toHaveTextContent('Checked: false');
 
-  fireEvent.click(checkbox);
+  userEvent.click(checkbox);
   expect(result).toHaveTextContent('Checked: true');
 });
 
 it('accepts a onChange callback', () => {
   const onChange = jest.fn();
-  const { getByTestId } = render(<TestComponent onChange={onChange} />);
-  const checkbox = getByTestId('checkbox');
-  fireEvent.click(checkbox);
+  render(<TestComponent onChange={onChange} />);
+  const checkbox = screen.getByTestId('checkbox');
+  userEvent.click(checkbox);
 
   expect(onChange).toHaveBeenCalled();
   expect(onChange).toHaveBeenCalledWith(true);

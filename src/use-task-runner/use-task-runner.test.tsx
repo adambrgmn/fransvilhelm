@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { render, act } from '@testing-library/react';
+import { render, act, screen } from '@testing-library/react';
+
 import { useTaskRunner } from './';
 
 const TaskList = ({ tasks }: any) => {
@@ -61,7 +62,7 @@ it('should ignore errors by default and keep running', async () => {
   }));
 
   const Test = () => <TaskList tasks={useTaskRunner(tasks)} />;
-  const { queryAllByText } = render(<Test />);
+  render(<Test />);
 
   for (let i = 0; i < tasks.length; i++) {
     const deferred = defers[i];
@@ -83,8 +84,8 @@ it('should ignore errors by default and keep running', async () => {
     }
   }
 
-  expect(queryAllByText(/rejected/i)).toHaveLength(1);
-  expect(queryAllByText(/fullfilled/i)).toHaveLength(4);
+  expect(screen.queryAllByText(/rejected/i)).toHaveLength(1);
+  expect(screen.queryAllByText(/fullfilled/i)).toHaveLength(4);
 });
 
 it('should abort on first error if abortOnReject is true', async () => {
@@ -101,7 +102,7 @@ it('should abort on first error if abortOnReject is true', async () => {
   const Test = () => (
     <TaskList tasks={useTaskRunner(tasks, { abortOnReject: true })} />
   );
-  const { queryAllByText } = render(<Test />);
+  render(<Test />);
 
   for (let i = 0; i < tasks.length; i++) {
     const deferred = defers[i];
@@ -123,9 +124,9 @@ it('should abort on first error if abortOnReject is true', async () => {
     }
   }
 
-  expect(queryAllByText(/fullfilled/i)).toHaveLength(2);
-  expect(queryAllByText(/rejected/i)).toHaveLength(1);
-  expect(queryAllByText(/initial/i)).toHaveLength(2);
+  expect(screen.queryAllByText(/fullfilled/i)).toHaveLength(2);
+  expect(screen.queryAllByText(/rejected/i)).toHaveLength(1);
+  expect(screen.queryAllByText(/initial/i)).toHaveLength(2);
 });
 
 it('should report the resolved value for each task', async () => {
@@ -140,7 +141,7 @@ it('should report the resolved value for each task', async () => {
   }));
 
   const Test = () => <TaskList tasks={useTaskRunner(tasks)} />;
-  const { queryAllByTestId } = render(<Test />);
+  render(<Test />);
 
   for (let i = 0; i < tasks.length; i++) {
     const deferred = defers[i];
@@ -151,7 +152,7 @@ it('should report the resolved value for each task', async () => {
     });
   }
 
-  expect(queryAllByTestId('data-resolved')).toHaveLength(tasks.length);
+  expect(screen.queryAllByTestId('data-resolved')).toHaveLength(tasks.length);
 });
 
 it('should report the rejected value for each task', async () => {
@@ -166,7 +167,7 @@ it('should report the rejected value for each task', async () => {
   }));
 
   const Test = () => <TaskList tasks={useTaskRunner(tasks)} />;
-  const { queryAllByTestId } = render(<Test />);
+  render(<Test />);
 
   for (let i = 0; i < tasks.length; i++) {
     const deferred = defers[i];
@@ -181,7 +182,7 @@ it('should report the rejected value for each task', async () => {
     });
   }
 
-  expect(queryAllByTestId('data-rejected')).toHaveLength(tasks.length);
+  expect(screen.queryAllByTestId('data-rejected')).toHaveLength(tasks.length);
 });
 
 it('should pass the resolved/rejected value from the previous task into the next task', async () => {
@@ -196,7 +197,7 @@ it('should pass the resolved/rejected value from the previous task into the next
   }));
 
   const Test = () => <TaskList tasks={useTaskRunner(tasks)} />;
-  const { queryAllByTestId } = render(<Test />);
+  render(<Test />);
 
   for (let i = 0; i < tasks.length; i++) {
     const deferred = defers[i];
@@ -212,7 +213,7 @@ it('should pass the resolved/rejected value from the previous task into the next
     }
   }
 
-  expect(queryAllByTestId('data-resolved')).toHaveLength(tasks.length);
+  expect(screen.queryAllByTestId('data-resolved')).toHaveLength(tasks.length);
 });
 
 const expectTask = expect.objectContaining({

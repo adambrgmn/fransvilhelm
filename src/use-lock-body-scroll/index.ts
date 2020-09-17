@@ -1,4 +1,6 @@
-import { useLayoutEffect, RefObject } from 'react';
+import { RefObject } from 'react';
+
+import { useIsomorphicLayoutEffect } from '../utils';
 
 /**
  * Will lock body and prevent it from being scrolled. Useful when showing a
@@ -23,7 +25,7 @@ const useLockBodyScroll = (
   lock: boolean = true,
   ref?: RefObject<HTMLElement>,
 ): void => {
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (ref && !ref.current) return;
 
     const el = ref && ref.current ? ref.current : document.body;

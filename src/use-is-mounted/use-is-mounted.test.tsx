@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
-import { render, cleanup } from '@testing-library/react';
-import { useIsMounted } from './';
+import { render } from '@testing-library/react';
 
-afterEach(cleanup);
+import { useIsMounted } from './';
 
 const TestComponent = ({
   fn,
