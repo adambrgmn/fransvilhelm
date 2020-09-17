@@ -68,12 +68,12 @@ const usePromise = <T>(
     currentPromise.set(p);
 
     p.then(
-      result => {
+      (result) => {
         if (shouldHandlePromise(p)) {
           setState([AsyncState.fullfilled, result, null]);
         }
       },
-      error => {
+      (error) => {
         if (shouldHandlePromise(p)) {
           setState([AsyncState.rejected, null, error]);
         }

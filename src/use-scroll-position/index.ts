@@ -3,7 +3,7 @@ import { useWindowSubscription } from '../use-event-listener';
 let supportsPassive = false;
 try {
   const opts = Object.defineProperty({}, 'passive', {
-    get: function() {
+    get: function () {
       supportsPassive = true;
       return true;
     },

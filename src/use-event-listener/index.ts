@@ -31,7 +31,7 @@ const useWindowSubscription = <K extends keyof WindowEventMap, V>(
   const subscription: Subscription<V> = useMemo(
     () => ({
       getCurrentValue,
-      subscribe: callback => {
+      subscribe: (callback) => {
         window.addEventListener(event, callback, optionsRef.current);
         return () => window.removeEventListener(event, callback);
       },

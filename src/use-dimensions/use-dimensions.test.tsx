@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { render, cleanup } from '@testing-library/react';
+
 import { useDimensions } from './';
 
 afterEach(cleanup);

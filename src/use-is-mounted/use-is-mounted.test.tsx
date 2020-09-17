@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { render, cleanup } from '@testing-library/react';
+
 import { useIsMounted } from './';
 
 afterEach(cleanup);

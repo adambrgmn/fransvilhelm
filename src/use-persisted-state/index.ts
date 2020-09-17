@@ -55,7 +55,7 @@ const createGlobalState = <S>(
       const state = globalStates.get(key);
       if (state && state.value !== value) {
         state.value = value;
-        state.callbacks.forEach(cb => {
+        state.callbacks.forEach((cb) => {
           if (cb !== callback) cb(value);
         });
 
@@ -65,7 +65,7 @@ const createGlobalState = <S>(
     deregister: () => {
       const state = globalStates.get(key);
       if (state) {
-        state.callbacks = state.callbacks.filter(cb => cb !== callback);
+        state.callbacks = state.callbacks.filter((cb) => cb !== callback);
         globalStates.set(key, state);
       }
     },

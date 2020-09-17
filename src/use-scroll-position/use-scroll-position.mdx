@@ -21,7 +21,9 @@ import React from 'react';
 import { useScrollPosition } from '@fransvilhelm/hooks';
 
 const FadeInOnPosition = ({ breakpoint, children }) => {
-  const { y } = useScrollPosition(fn => () => window.requestAnimationFrame(fn));
+  const { y } = useScrollPosition((fn) => () =>
+    window.requestAnimationFrame(fn),
+  );
   const fadeIn = y >= breakpoint;
 
   return (

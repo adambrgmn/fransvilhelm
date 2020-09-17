@@ -24,7 +24,7 @@ const useCheckbox = (
   _onChange?: (checked: boolean) => void,
 ): UseCheckboxResult => {
   const [checked, setChecked] = useState(initialValue);
-  const onChange: React.ChangeEventHandler<HTMLInputElement> = event => {
+  const onChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     _onChange?.(event.currentTarget.checked);
     setChecked(event.currentTarget.checked);
   };

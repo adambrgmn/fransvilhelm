@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import { useMediaQuery } from './';
 
 const UseMediaQueryExample = (): JSX.Element => {

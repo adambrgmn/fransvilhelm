@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { render, cleanup, fireEvent } from '@testing-library/react';
+
 import { useScrollPosition } from '../use-scroll-position';
 
 afterEach(cleanup);

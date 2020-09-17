@@ -1,4 +1,5 @@
 import { useRef, useReducer, useMemo, useEffect } from 'react';
+
 import { AsyncState } from '../shared';
 
 const clamp = (n: number, min: number, max: number): number => {
@@ -55,7 +56,7 @@ const reducer = (
     case TaskRunnerActions.SET_PENDING:
       return {
         ...state,
-        tasks: state.tasks.map(t => {
+        tasks: state.tasks.map((t) => {
           if (
             t.id === action.payload.task.id &&
             t.state !== AsyncState.pending
@@ -74,7 +75,7 @@ const reducer = (
       return {
         ...state,
         current: clamp(state.current + 1, 0, state.tasks.length - 1),
-        tasks: state.tasks.map(t => {
+        tasks: state.tasks.map((t) => {
           if (
             t.id === action.payload.task.id &&
             t.state !== AsyncState.fullfilled
@@ -95,7 +96,7 @@ const reducer = (
         ...state,
         current: clamp(state.current + 1, 0, state.tasks.length - 1),
         hasRejected: true,
-        tasks: state.tasks.map(t => {
+        tasks: state.tasks.map((t) => {
           if (
             t.id === action.payload.task.id &&
             t.state !== AsyncState.rejected
@@ -152,7 +153,7 @@ const useTaskRunner = (
     });
 
     currentTask.action(previousResultRef.current).then(
-      value => {
+      (value) => {
         previousResultRef.current = value;
         dispatch({
           type: TaskRunnerActions.SET_FULFILLED,
@@ -165,7 +166,7 @@ const useTaskRunner = (
           onFulfilled(currentTask);
         }
       },
-      error => {
+      (error) => {
         previousResultRef.current = error;
         dispatch({
           type: TaskRunnerActions.SET_REJECTED,
@@ -187,7 +188,7 @@ const useTaskRunner = (
       onAllSettled != null &&
       allPass(
         tasks,
-        t => t.state !== AsyncState.initial && t.state !== AsyncState.pending,
+        (t) => t.state !== AsyncState.initial && t.state !== AsyncState.pending,
       )
     ) {
       onAllSettled(tasks);
@@ -198,17 +199,14 @@ const useTaskRunner = (
 };
 
 const prepareTasks = (taskDefinitions: TaskDefinition[]): Task[] => {
-  return taskDefinitions.map(t => ({
+  return taskDefinitions.map((t) => ({
     ...t,
     id: generateId(),
     state: AsyncState.initial,
   }));
 };
 
-const generateId = (): string =>
-  `_${Math.random()
-    .toString(36)
-    .substr(2, 9)}`;
+const generateId = (): string => `_${Math.random().toString(36).substr(2, 9)}`;
 
 const allPass = <I>(arr: I[], cond: (i: I) => boolean): boolean => {
   for (let i = 0; i < arr.length; i++) {

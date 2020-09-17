@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { render, cleanup, fireEvent, act } from '@testing-library/react';
+
 import { useInterval } from './';
 
 afterEach(cleanup);
@@ -34,7 +35,7 @@ const MockComponent = ({
         type="number"
         data-testid="delay"
         value={delay}
-        onChange={e => {
+        onChange={(e) => {
           setDelay(Number.parseInt(e.target.value, 10));
         }}
       />

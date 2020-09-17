@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { render, cleanup, waitForElement } from '@testing-library/react';
+
 import { usePromise } from '../use-promise';
 import { AsyncState } from '../shared';
 

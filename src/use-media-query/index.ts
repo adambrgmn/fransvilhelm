@@ -23,7 +23,7 @@ const useMediaQuery = (query: string): boolean => {
   const subscription: Subscription<boolean> = useMemo(
     () => ({
       getCurrentValue: () => mediaQueryList.matches,
-      subscribe: callback => {
+      subscribe: (callback) => {
         mediaQueryList.addEventListener('change', callback);
         return () => mediaQueryList.removeEventListener('change', callback);
       },

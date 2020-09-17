@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import { useOnline } from './';
 
 const UseOnlineExample = (): JSX.Element => {

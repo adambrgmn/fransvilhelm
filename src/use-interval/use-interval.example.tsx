@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import { useInterval } from './';
 
 const UseIntervalExample = (): JSX.Element => {

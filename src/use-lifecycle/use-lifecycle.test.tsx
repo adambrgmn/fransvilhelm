@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { render, fireEvent } from '@testing-library/react';
+
 import { useMount, useUnmount, useUpdate } from './';
 
 const TestComponent: React.FC<{

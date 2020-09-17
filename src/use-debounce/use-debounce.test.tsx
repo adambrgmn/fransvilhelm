@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { render, cleanup, fireEvent, act } from '@testing-library/react';
+
 import { useDebounce } from './';
 import { useInput } from '../use-input';
 

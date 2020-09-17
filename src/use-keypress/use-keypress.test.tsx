@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { act } from 'react-dom/test-utils';
 import { render, cleanup } from '@testing-library/react';
+
 import { useKeypress } from './';
 
 afterEach(cleanup);

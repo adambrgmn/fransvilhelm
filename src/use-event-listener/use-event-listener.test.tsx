@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { render, cleanup, fireEvent } from '@testing-library/react';
+
 import { useEventListener } from './';
 
 afterEach(cleanup);
@@ -10,7 +11,7 @@ const KeysPressed = ({
   type?: 'keypress' | 'keydown';
 }): JSX.Element => {
   const [keys, setKeys] = React.useState('');
-  useEventListener(type, ev => {
+  useEventListener(type, (ev) => {
     setKeys(`${keys}${ev.key}`);
   });
 
@@ -28,7 +29,7 @@ it('should handle events', () => {
 it('should handle simultaneous events', () => {
   const { getByText } = render(<KeysPressed />);
 
-  ['a', 'b', 'c'].forEach(key => {
+  ['a', 'b', 'c'].forEach((key) => {
     const ev = new KeyboardEvent('keypress', { key });
     fireEvent(window, ev);
   });

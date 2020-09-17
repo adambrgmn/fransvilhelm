@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import { useCheckbox } from './';
 
 const UseCheckboxExample: React.FC = () => {
