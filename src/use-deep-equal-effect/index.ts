@@ -1,4 +1,9 @@
-import { DependencyList, EffectCallback, useEffect } from 'react';
+import {
+  DependencyList,
+  EffectCallback,
+  useEffect,
+  useLayoutEffect,
+} from 'react';
 import isEqual from 'react-fast-compare';
 
 import { usePrevious } from '../use-previous';
@@ -13,4 +18,17 @@ const useDeepEqualEffect = (effect: EffectCallback, deps?: DependencyList) => {
   });
 };
 
-export { useDeepEqualEffect };
+const useDeepEqualLayoutEffect = (
+  effect: EffectCallback,
+  deps?: DependencyList,
+) => {
+  const previousDeps = usePrevious(deps);
+
+  useLayoutEffect(() => {
+    if (deps == null || !isEqual(deps, previousDeps)) {
+      return effect();
+    }
+  });
+};
+
+export { useDeepEqualEffect, useDeepEqualLayoutEffect };
