@@ -1,7 +1,7 @@
 const path = require('path');
-const fs = require('fs').promises;
+const { promises: fs } = require('fs');
 
-module.exports = function(
+module.exports = function (
   /** @type {import('plop').NodePlopAPI} */
   plop,
 ) {
@@ -13,7 +13,6 @@ module.exports = function(
         type: 'add',
         path: 'src/index.mdx',
         templateFile: 'README.md',
-        abortOnFail: false,
       },
     ],
   });
@@ -26,7 +25,7 @@ module.exports = function(
         type: 'input',
         name: 'name',
         message: 'hook name please (format: use-{hooks-name})',
-        filter: str => `use-${kebabCase(str.replace(/^use-/, ''))}`,
+        filter: (str) => `use-${kebabCase(str.replace(/^use-/, ''))}`,
       },
     ],
     actions: [
