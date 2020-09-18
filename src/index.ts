@@ -15,6 +15,4 @@ export * from './use-media-query';
 export * from './use-online';
 export * from './use-persisted-state';
 export * from './use-previous';
-export * from './use-promise';
 export * from './use-scroll-position';
-export * from './use-task-runner';
