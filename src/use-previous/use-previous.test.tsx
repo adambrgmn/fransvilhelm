@@ -21,7 +21,7 @@ it('should return previous value', () => {
   let input = screen.getByRole('textbox');
   let output = screen.getByText(/previous:/i);
 
-  expect(output).toHaveTextContent('Previous: hello');
+  expect(output).toHaveTextContent('Previous:');
 
   fireEvent.change(input, { target: { value: 'hello world' } });
   expect(output).toHaveTextContent('Previous: hello');
