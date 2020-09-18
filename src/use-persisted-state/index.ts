@@ -7,6 +7,7 @@ import {
   useRef,
   useCallback,
 } from 'react';
+
 import { useEventListener } from '../use-event-listener';
 import { canUseDOM } from '../utils';
 
