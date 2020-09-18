@@ -1,0 +1,53 @@
+---
+name: usePrevious
+menu: Hooks
+route: /hook/use-previous
+---
+
+import { Playground } from 'docz';
+import { UsePreviousExample } from './use-previous.example.tsx';
+
+# usePrevious
+
+Will always return the previous value passed to the hook. It is useful if you
+want to compare a new value to its previous value when it was last rendered.
+
+## Usage
+
+```jsx
+import React from 'react';
+import { usePrevious, useInput } from '@fransvilhelm/hooks';
+
+const Checkbox = () => {
+  const input = useInput('');
+  const previous = usePrevious(input.value);
+
+  React.useEffect(() => {
+    if (input.value !== previous) {
+      // do side effect
+    }
+  });
+
+  return <input {...input} />;
+};
+```
+
+## Example
+
+<Playground>
+  <UsePreviousExample />
+</Playground>
+
+## Parameters
+
+`usePrevious` accepts one parameter – the value. It will always return the
+previous version of that value, meaning the value it had on the previous render.
+
+| Param | Type | Required | Default | Description     |
+| :---- | :--- | :------- | :------ | :-------------- |
+| value | any  | true     | -       | Value to return |
+
+## Returns
+
+`usePrevious` returns the state of the value from previous render. On initial
+render the value will always be undefined.
