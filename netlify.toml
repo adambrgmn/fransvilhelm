@@ -2,6 +2,9 @@
   command = "yarn docz:build"
   publish = ".docz/dist"
 
+[build.environment]
+  NODE_VERSION = "12"
+
 [[redirects]]
   from = "/*"
   to = "/"
