@@ -79,9 +79,8 @@
     "microbundle": "^0.12.3",
     "plop": "^2.5.4",
     "prettier": "^2.1.2",
-    "react": "16.12.0",
-    "react-dom": "16.12.0",
-    "semantic-release": "^17.0.4",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
     "typescript": "^4.0.2"
   },
   "peerDependencies": {
