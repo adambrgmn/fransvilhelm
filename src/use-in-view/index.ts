@@ -1,4 +1,6 @@
-import { useState, RefObject, useLayoutEffect } from 'react';
+import { useState, RefObject } from 'react';
+
+import { useIsomorphicLayoutEffect } from '../utils';
 
 /**
  * Determine if an element is currently in the viewport or not using
@@ -18,7 +20,7 @@ const useInView = <E extends Element>(
 ): boolean => {
   const [inView, setInView] = useState(false);
 
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (ref.current) {
       const current = ref.current;
       const observer = new IntersectionObserver((entries) => {

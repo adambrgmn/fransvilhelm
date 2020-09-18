@@ -1,3 +1,5 @@
+import { useLayoutEffect, useEffect } from 'react';
+
 export function canUseDOM() {
   return !!(
     typeof window !== 'undefined' &&
@@ -5,3 +7,7 @@ export function canUseDOM() {
     window.document.createElement
   );
 }
+
+export const useIsomorphicLayoutEffect = canUseDOM()
+  ? useLayoutEffect
+  : useEffect;
