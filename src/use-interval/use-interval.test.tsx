@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { render, cleanup, fireEvent, act } from '@testing-library/react';
+import { render, fireEvent, act, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import { useInterval } from './';
-
-afterEach(cleanup);
 
 const advanceByTime = (time: number): void => {
   act(() => {
@@ -46,13 +45,12 @@ const MockComponent = ({
   );
 };
 
-// eslint-disable-next-line
 const renderComp = () => {
-  const { getByTestId } = render(<MockComponent />);
+  render(<MockComponent />);
 
-  const count = getByTestId('count');
-  const delay = getByTestId('delay');
-  const pause = getByTestId('pause');
+  const count = screen.getByTestId('count');
+  const delay = screen.getByTestId('delay');
+  const pause = screen.getByTestId('pause');
 
   return { count, delay, pause };
 };
@@ -75,7 +73,7 @@ it('should be pausable', () => {
   const { count, pause } = renderComp();
 
   expect(count).toHaveTextContent('1');
-  fireEvent.click(pause);
+  userEvent.click(pause);
   advanceByTime(2000);
   expect(count).toHaveTextContent('1');
 });

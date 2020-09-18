@@ -1,10 +1,9 @@
 import * as React from 'react';
-import { render, cleanup, fireEvent, act } from '@testing-library/react';
+import { render, act, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import { useDebounce } from './';
 import { useInput } from '../use-input';
-
-afterEach(cleanup);
 
 const advanceByTime = (time: number): void => {
   act(() => {
@@ -26,14 +25,14 @@ const TestComponent = ({ delay }: { delay: number }): JSX.Element => {
 
 it('should debounce a value and only update once within the given delay', async () => {
   jest.useFakeTimers();
-  const { getByTestId } = render(<TestComponent delay={100} />);
-  const debouncedValue = getByTestId('debounced');
-  const input = getByTestId('input');
+  render(<TestComponent delay={100} />);
+  const debouncedValue = screen.getByTestId('debounced');
+  const input = screen.getByTestId('input');
 
   const inputs = ['a', 'ab', 'abc'];
   inputs.forEach((value, index) => {
     setTimeout(() => {
-      fireEvent.change(input, { target: { value } });
+      userEvent.type(input, value);
     }, 50 * (index + 1));
   });
 

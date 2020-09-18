@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 import { useMediaQuery } from './';
 
@@ -23,6 +23,6 @@ const TestComponent = ({ query }: { query: string }): JSX.Element => {
 };
 
 it('should test if a media query is satisfied', () => {
-  const { getByText } = render(<TestComponent query="(max-width: 400px)" />);
-  expect(getByText(/true/)).toBeInTheDocument();
+  render(<TestComponent query="(max-width: 400px)" />);
+  expect(screen.getByText(/true/)).toBeInTheDocument();
 });

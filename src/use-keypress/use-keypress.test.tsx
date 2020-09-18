@@ -1,10 +1,7 @@
 import * as React from 'react';
-import { act } from 'react-dom/test-utils';
-import { render, cleanup } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
 
 import { useKeypress } from './';
-
-afterEach(cleanup);
 
 const TestComponent = ({ char }: { char: string }): JSX.Element => {
   const pressing = useKeypress(char);
@@ -18,9 +15,9 @@ const dispatchKeyboardEvent = (type: string, key: string): void => {
 };
 
 it('should react to keypresses', () => {
-  const { getByText } = render(<TestComponent char="a" />);
+  render(<TestComponent char="a" />);
 
-  const result = getByText(/Pressing:/);
+  const result = screen.getByText(/Pressing:/);
   expect(result).toHaveTextContent('false');
 
   dispatchKeyboardEvent('keydown', 'a');

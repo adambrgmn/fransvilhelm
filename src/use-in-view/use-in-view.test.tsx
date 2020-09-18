@@ -1,9 +1,7 @@
 import * as React from 'react';
-import { render, cleanup, act } from '@testing-library/react';
+import { render, act, screen } from '@testing-library/react';
 
 import { useInView } from './';
-
-afterEach(cleanup);
 
 const TestComponent = (): JSX.Element => {
   const ref = React.useRef<HTMLParagraphElement>(null);
@@ -16,8 +14,8 @@ const TestComponent = (): JSX.Element => {
 };
 
 it('should trigger an event when in view', () => {
-  const { getByTestId } = render(<TestComponent />);
-  const textNode = getByTestId('text-node');
+  render(<TestComponent />);
+  const textNode = screen.getByTestId('text-node');
 
   expect(textNode).toHaveTextContent('hidden');
 

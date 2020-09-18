@@ -1,9 +1,7 @@
 import * as React from 'react';
-import { render, cleanup } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 import { useLockBodyScroll } from './';
-
-afterEach(cleanup);
 
 const TestComponent = ({ lock }: { lock: boolean }): JSX.Element => {
   useLockBodyScroll(lock);
@@ -30,8 +28,8 @@ it('should accept a second argument to pick a target a specific element', () => 
     );
   };
 
-  const { getByTestId } = render(<Comp />);
-  const container = getByTestId('container');
+  render(<Comp />);
+  const container = screen.getByTestId('container');
 
   expect(container.style.overflow).toEqual('hidden');
 });
