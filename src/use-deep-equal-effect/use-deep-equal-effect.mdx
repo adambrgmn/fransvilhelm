@@ -9,7 +9,15 @@ import { UseDeepEqualEffectExample } from './use-deep-equal-effect.example.tsx';
 
 # useDeepEqualEffect
 
-Will...
+Use `useDeepEqualEffect` when react normal dependecy compare feature doesn't do
+it. This hook is used in the same way as `useEffect` but will do a deeper
+equality check on the dependecy array than React's version.
+
+```js
+const dep = { an: 'object' };
+useEffect(effect, [dep]); // this will rerun after each render
+useDeepEqualEffect(effect, [dep]); // this will on run on initial render
+```
 
 ## Usage
 
@@ -17,8 +25,10 @@ Will...
 import React from 'react';
 import { useDeepEqualEffect } from '@fransvilhelm/hooks';
 
-const Checkbox = () => {
-  const result = useDeepEqualEffect();
+const Checkbox = ({ dep }) => {
+  useDeepEqualEffect(() => {
+    doSomethingCostly(dep);
+  }, [dep]);
   return <p />;
 };
 ```
@@ -31,16 +41,9 @@ const Checkbox = () => {
 
 ## Parameters
 
-`useDeepEqualEffect` accepts ...
+`useDeepEqualEffect` accepts same kind of arguments as `React.useEffect`.
 
-| Param | Type | Required | Default | Description |
-| :---- | :--- | :------- | :------ | :---------- |
-| param | type | boolean  | boolean | description |
-
-## Returns
-
-`useDeepEqualEffect` returns...
-
-| Prop | Type | Description |
-| :--- | :--- | :---------- |
-| prop | type | description |
+| Param       | Type                         | Required | Default     | Description                                                          |
+| :---------- | :--------------------------- | :------- | :---------- | :------------------------------------------------------------------- |
+| effect      | `() => (void \| () => void)` | true     | -           | Effect to run after render (when dependecy array are not deep equal) |
+| dependecies | `any[]`                      | false    | `undefined` | Dependecies to check before running effect                           |

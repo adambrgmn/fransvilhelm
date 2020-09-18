@@ -5,23 +5,23 @@ import userEvent from '@testing-library/user-event';
 import { useDeepEqualEffect } from './';
 import { useInput } from '../use-input';
 
-const TestComponent: React.FC<{ effect: () => void }> = ({ effect }) => {
-  const input = useInput('');
-  const [, forceUpdate] = React.useState<any>();
-
-  useDeepEqualEffect(() => effect(), [{ value: input.value }]);
-
-  return (
-    <div>
-      <input {...input} />
-      <button onClick={() => forceUpdate({})}>Force update</button>
-    </div>
-  );
-};
-
 it('should only run effect if dependencies are on deeply equal', () => {
   const effect = jest.fn();
-  render(<TestComponent effect={effect} />);
+  const TestComponent: React.FC = () => {
+    const input = useInput('');
+    const [, forceUpdate] = React.useState<any>();
+
+    useDeepEqualEffect(() => effect(), [{ value: input.value }]);
+
+    return (
+      <div>
+        <input {...input} />
+        <button onClick={() => forceUpdate({})}>Force update</button>
+      </div>
+    );
+  };
+
+  render(<TestComponent />);
 
   let input = screen.getByRole('textbox');
   let force = screen.getByRole('button');
@@ -33,4 +33,28 @@ it('should only run effect if dependencies are on deeply equal', () => {
   fireEvent.change(input, { target: { value: 'hello' } });
   fireEvent.change(input, { target: { value: 'hello' } });
   expect(effect).toHaveBeenCalledTimes(2);
+});
+
+it('will run on all renders without dependecies', () => {
+  const effect = jest.fn();
+  const TestComponent: React.FC = () => {
+    const [, forceUpdate] = React.useState<any>();
+
+    useDeepEqualEffect(() => effect());
+
+    return (
+      <div>
+        <button onClick={() => forceUpdate({})}>Force update</button>
+      </div>
+    );
+  };
+
+  render(<TestComponent />);
+
+  let force = screen.getByRole('button');
+
+  userEvent.click(force);
+  userEvent.click(force);
+
+  expect(effect).toHaveBeenCalledTimes(3);
 });

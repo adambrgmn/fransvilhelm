@@ -3,11 +3,11 @@ import isEqual from 'react-fast-compare';
 
 import { usePrevious } from '../use-previous';
 
-const useDeepEqualEffect = (effect: EffectCallback, deps: DependencyList) => {
+const useDeepEqualEffect = (effect: EffectCallback, deps?: DependencyList) => {
   const previousDeps = usePrevious(deps);
 
   useEffect(() => {
-    if (!isEqual(deps, previousDeps)) {
+    if (deps == null || !isEqual(deps, previousDeps)) {
       return effect();
     }
   });
