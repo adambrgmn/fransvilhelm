@@ -38,10 +38,10 @@ it('should debounce a value and only update once within the given delay', async 
   });
 
   advanceByTime(100);
-  expect(debouncedValue).toBeEmpty();
+  expect(debouncedValue).toBeEmptyDOMElement();
 
   advanceByTime(100);
-  expect(debouncedValue).toBeEmpty();
+  expect(debouncedValue).toBeEmptyDOMElement();
 
   advanceByTime(100);
   expect(debouncedValue).toHaveTextContent('abc');

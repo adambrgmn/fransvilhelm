@@ -47,29 +47,30 @@ const FetchUsername = ({ username }: { username: string }): JSX.Element => {
 };
 
 it('should handle a promise using a hook', async () => {
-  const { getByText } = render(<FetchUsername username="ab" />);
-  await waitForElement(() => getByText(/ab/i));
+  const { findByText } = render(<FetchUsername username="ab" />);
+
+  await findByText(/ab/i);
   expect(fetchUsername).toHaveBeenCalledTimes(1);
 });
 
 it('should handle rejected promises', async () => {
-  const { getByText } = render(<FetchUsername username="reject" />);
-  await waitForElement(() => getByText(/is not a username/i));
+  const { findByText } = render(<FetchUsername username="reject" />);
+  await findByText(/is not a username/i);
 });
 
 it('should handle multiple promises ignoring the previous ones', async () => {
-  const { rerender, getByText } = render(<FetchUsername username="one" />);
+  const { rerender, findByText } = render(<FetchUsername username="one" />);
   rerender(<FetchUsername username="two" />);
 
-  await waitForElement(() => getByText(/two/i));
+  await findByText(/two/i);
   expect(fetchUsername).toHaveBeenCalledWith('one');
   expect(fetchUsername).toHaveBeenCalledWith('two');
 });
 
 it('should handle multiple rejected promises', async () => {
-  const { rerender, getByText } = render(<FetchUsername username="reject" />);
+  const { rerender, findByText } = render(<FetchUsername username="reject" />);
   rerender(<FetchUsername username="rejected" />);
   rerender(<FetchUsername username="unfullfilled" />);
 
-  await waitForElement(() => getByText(/is not a username/i));
+  await findByText(/is not a username/i);
 });
