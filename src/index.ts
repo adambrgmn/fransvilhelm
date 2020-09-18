@@ -1,4 +1,3 @@
-export * from './shared';
 export * from './use-checkbox';
 export * from './use-debounce';
 export * from './use-deep-equal-effect';
