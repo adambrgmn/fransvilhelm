@@ -1,4 +1,5 @@
 import { useWindowSubscription } from '../use-event-listener';
+import { canUseDOM } from '../utils';
 
 let supportsPassive = false;
 try {
@@ -14,8 +15,8 @@ try {
 } catch (e) {}
 
 const getPosition = (): { x: number; y: number } => ({
-  x: window.pageXOffset,
-  y: window.pageYOffset,
+  x: canUseDOM() ? window.pageXOffset : 0,
+  y: canUseDOM() ? window.pageYOffset : 0,
 });
 
 /**

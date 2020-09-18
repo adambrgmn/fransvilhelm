@@ -8,6 +8,7 @@ import {
   useCallback,
 } from 'react';
 import { useEventListener } from '../use-event-listener';
+import { canUseDOM } from '../utils';
 
 interface StorageAdapter<S> {
   get(defaultValue: S | (() => S)): S;
@@ -72,6 +73,8 @@ const createGlobalState = <S>(
   };
 };
 
+const isFn = <S>(x: S | (() => S)): x is () => S => typeof x === 'function';
+
 /**
  * Use persisted state as a drop in replacement for Reacts built-in hook
  * `useState`.
@@ -97,7 +100,13 @@ const usePersistedState = <S>(
 ): [S, Dispatch<SetStateAction<S>>] => {
   const globalState = useRef<GlobalState<S> | null>(null);
   const storage = useMemo(() => createStorageAdapter<S>(key), [key]);
-  const [state, setState] = useState(() => storage.get(initialState));
+  const [state, setState] = useState(() =>
+    canUseDOM()
+      ? storage.get(initialState)
+      : isFn(initialState)
+      ? initialState()
+      : initialState,
+  );
 
   const storageListener = useCallback(
     (event: StorageEvent) => {

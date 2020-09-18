@@ -1,6 +1,8 @@
 import { useMemo } from 'react';
 import { Subscription, useSubscription } from 'use-subscription';
 
+import { canUseDOM } from '../utils';
+
 /**
  * Test to see if a query is matched and listen for changes on that query. This
  * value will be updated if the window is resized.
@@ -19,13 +21,17 @@ import { Subscription, useSubscription } from 'use-subscription';
  *   };
  */
 const useMediaQuery = (query: string): boolean => {
-  const mediaQueryList = useMemo(() => window.matchMedia(query), [query]);
+  const mediaQueryList = useMemo(
+    () => (canUseDOM() ? window.matchMedia(query) : null),
+    [query],
+  );
+
   const subscription: Subscription<boolean> = useMemo(
     () => ({
-      getCurrentValue: () => mediaQueryList.matches,
+      getCurrentValue: () => mediaQueryList?.matches ?? false,
       subscribe: (callback) => {
-        mediaQueryList.addEventListener('change', callback);
-        return () => mediaQueryList.removeEventListener('change', callback);
+        mediaQueryList?.addEventListener('change', callback);
+        return () => mediaQueryList?.removeEventListener('change', callback);
       },
     }),
     [mediaQueryList],
