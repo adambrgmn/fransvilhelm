@@ -13,6 +13,9 @@ Use this hook to debounce a value only updating it once within the given delay.
 Useful if you need to request data when an input updates but don't want to fetch
 the new data on every keystroke.
 
+This hook is heavily inspired by
+[Reach's useRect hook](https://reach.tech/rect).
+
 ## Usage
 
 ```jsx
@@ -38,17 +41,20 @@ const SquareWithDimensions = () => {
 
 ## Parameters
 
-`useDimensions` accepts one parameter – a React ref object attached to a DOM
-element
+`useDimensions` accepts one required parameter – a React ref object attached to
+a DOM element – and two optional parameters related to observing dimensions
+changes.
 
-| Param | Type                       | Required | Default | Description                          |
-| :---- | :------------------------- | :------- | :------ | :----------------------------------- |
-| ref   | `React.RefObject<Element>` | true     | -       | Ref object attached to a dom element |
+| Param    | Type                       | Required | Default | Description                                                    |
+| :------- | :------------------------- | :------- | :------ | :------------------------------------------------------------- |
+| ref      | `React.RefObject<Element>` | true     | -       | Ref object attached to a dom element                           |
+| observe  | `boolean`                  | false    | false   | Set to true to subscribe to changes on the elements dimensions |
+| callback | `(rect: DOMRect) => void`  | false    | -       | Callback called every time the rect is updated                 |
 
 ## Returns
 
 `useDimensions` returns an client rect object.
 
-| Prop | Type       | Description                                                                                                                                       |
-| :--- | :--------- | :------------------------------------------------------------------------------------------------------------------------------------------------ |
-| rect | ClientRect | rect object containing dimensions and position of the current element. This is the same object as one gets from `element.getBoundingClientRect()` |
+| Prop | Type              | Description                                                                                                                                    |
+| :--- | :---------------- | :--------------------------------------------------------------------------------------------------------------------------------------------- |
+| rect | `DOMRect \| null` | rect object containing dimensions and position of the current element. This is the same object as one gets from `element.getBoundingDOMRect()` |
