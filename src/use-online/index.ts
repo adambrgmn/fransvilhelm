@@ -13,7 +13,7 @@ const getInitialStatus = (): boolean => {
  * Determine if the client is online or offline and update the value if the
  * state changes.
  *
- * @returns {boolean} True if connected to internet, false otherwise
+ * @returns `true` if connected to internet, `false` otherwise
  *
  * @example
  *   const Status = () => {

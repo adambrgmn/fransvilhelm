@@ -9,10 +9,9 @@ import { useIsomorphicLayoutEffect } from '../utils';
  * **Note:** This uses the IntersectionObserver API which is not available in
  * all browsers yet, so you might want to polyfill it before using this hook.
  *
- * @template E extends Element
- * @param {RefObject<E>} ref A RefObject attached to an element
- * @param {IntersectionObserverInit | undefined} options Options applied to the new IntersectionObserver
- * @returns {boolean} If the element is in view or not
+ * @param ref A RefObject attached to an element
+ * @param options Options applied to the new IntersectionObserver
+ * @returns Boolean indicating if the element is in view or not
  */
 const useInView = <E extends Element>(
   ref: RefObject<E>,

@@ -5,10 +5,9 @@ import { useState, useEffect } from 'react';
  * delay. Useful if you need to request data when an input updates but don't
  * want to fetch the new data on every keystroke.
  *
- * @template T The expected value
- * @param {T} value The value to debounce
- * @param {number} delay The delay in milliseconds
- * @returns {T} The value, only updated once within the given delay
+ * @param value The value to debounce
+ * @param delay The delay in milliseconds
+ * @returns The value, only updated once within the given delay
  *
  * @example
  *   import { useDebounce, useInput } from '@fransvilhelm/hooks';

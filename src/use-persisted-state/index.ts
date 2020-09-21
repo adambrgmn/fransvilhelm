@@ -84,10 +84,9 @@ const isFn = <S>(x: S | (() => S)): x is () => S => typeof x === 'function';
  * set another key if you plan to use this hook on several places across your
  * application
  *
- * @template S The state value
- * @param {(S | (() => S))} initialState Default initial state, if non is found on `localStorage`
- * @param {string} [key='local-storage-hook'] Key to store value on
- * @returns {[S, Dispatch<SetStateAction<S>>]} Returns state and setState as an array tuple (same as `React.useState`)
+ * @param initialState Default initial state, if non is found on `localStorage`
+ * @param key Key to store value on
+ * @returns Returns state and setState as an array tuple (same as `React.useState`)
  *
  * @example
  *   const PersistedCounter = () => {
