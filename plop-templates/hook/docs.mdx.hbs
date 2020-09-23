@@ -5,7 +5,7 @@ route: /hook/{{ kebabCase name }}
 ---
 
 import { Playground } from 'docz';
-import { {{ pascalCase name }}Example } from './{{ kebabCase name }}.example.tsx';
+import { {{ camelCase name }} } from './';
 
 # {{ camelCase name }}
 
@@ -17,7 +17,7 @@ Will...
 import React from 'react';
 import { {{ camelCase name }} } from '{{ pkg 'name' }}';
 
-const Checkbox = () => {
+const Example = () => {
   const result = {{ camelCase name }}();
   return <p />;
 };
@@ -26,7 +26,10 @@ const Checkbox = () => {
 ## Example
 
 <Playground>
-  <{{ pascalCase name }}Example />
+  {() => {
+    const result = {{ camelCase name }}();
+    return <p />;
+  }}
 </Playground>
 
 ## Parameters
