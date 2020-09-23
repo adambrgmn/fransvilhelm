@@ -9,7 +9,9 @@ import { usePromise, useInput } from '../';
 
 # usePromise
 
-Will...
+`usePromise` will run the given function and await its result. It can either run
+immediatedly on mount or when calling the `execute` function returned by the
+hook.
 
 ## Usage
 
@@ -18,8 +20,27 @@ import React from 'react';
 import { usePromise } from '@fransvilhelm/hooks';
 
 const Checkbox = () => {
-  const result = usePromise();
-  return <p />;
+  const { state, result, error, execute } = usePromise(
+    () => fetch('/api').then((res) => res.json()),
+    true,
+    {
+      onSuccess: () => console.log('Success!'),
+      onError: () => console.error('Error!'),
+    },
+  );
+
+  return (
+    <div>
+      {state === 'pending' && <p>Loading...</p>}
+      {state === 'rejected' && <p>An error occured ({error.message})</p>}
+      {state === 'resolved' && (
+        <div>
+          <img src={result.avatar_url} alt="" />
+          <p>{result.login}</p>
+        </div>
+      )}
+    </div>
+  );
 };
 ```
 
@@ -68,16 +89,21 @@ const Checkbox = () => {
 
 ## Parameters
 
-`usePromise` accepts ...
+`usePromise` accepts three parameters – one required and two optional.
 
-| Param | Type | Required | Default | Description |
-| :---- | :--- | :------- | :------ | :---------- |
-| param | type | boolean  | boolean | description |
+| Param     | Type                 | Required | Default | Description                                                                               |
+| :-------- | :------------------- | :------- | :------ | :---------------------------------------------------------------------------------------- |
+| promise   | `() => Promise<any>` | `true`   | -       | A function returning a promise                                                            |
+| immediate | `boolean`            | `false`  | `false` | Wether to run the promise immediatedly on mount or only when `execute` function is called |
+| options   | `object`             | `false`  | -       | An object with the optional methods `onSuccess` and `onError`                             |
 
 ## Returns
 
-`usePromise` returns...
+`usePromise` returns an object with four properties
 
-| Prop | Type | Description |
-| :--- | :--- | :---------- |
-| prop | type | description |
+| Prop      | Type                                                    | Description                                                                  |
+| :-------- | :------------------------------------------------------ | :--------------------------------------------------------------------------- |
+| `state`   | `'idle'` \| `'pending'` \| `'resolved'` \| `'rejected'` | Current state of the promise                                                 |
+| `result`  | `null` \| `any`                                         | Promise functions result if `state === 'resolved'`, otherwise `null`         |
+| `error`   |  `null` \| `unknown`                                    | Error thrown by promise function if `state === 'rejected'`, otherwise `null` |
+| `execute` | `() => void`                                            | Callback function to execute the given promise functions                     |

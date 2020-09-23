@@ -1,5 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 
+import { useMount } from '../use-lifecycle';
+
 type State<T> =
   | { state: 'idle'; result: null; error: null; execute: () => void }
   | { state: 'pending'; result: null; error: null; execute: () => void }
@@ -11,6 +13,15 @@ type Options<T> = {
   onError?: (error: unknown) => void;
 };
 
+/**
+ * `usePromise` will run the given function and await its result. It can either
+ * run immediatedly on mount or when calling the `execute` function returned by
+ * the hook.
+ *
+ * @param promise Promise returning function
+ * @param immediate Wether to run the function on mount or only when calling `execute`
+ * @param options Optional callback handler onSuccess and onError
+ */
 const usePromise = <T>(
   promise: () => Promise<T>,
   immediate: boolean = false,
@@ -67,9 +78,9 @@ const usePromise = <T>(
     optionsRef.current = options;
   });
 
-  useEffect(() => {
+  useMount(() => {
     if (immediateRef.current) execute();
-  }, [execute]);
+  });
 
   return { ...state, execute } as State<T>;
 };
