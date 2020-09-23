@@ -1,4 +1,3 @@
-export * from './use-callback-ref';
 export * from './use-checkbox';
 export * from './use-debounce';
 export * from './use-deep-equal-effect';
@@ -15,4 +14,5 @@ export * from './use-media-query';
 export * from './use-online';
 export * from './use-persisted-state';
 export * from './use-previous';
+export * from './use-promise';
 export * from './use-scroll-position';

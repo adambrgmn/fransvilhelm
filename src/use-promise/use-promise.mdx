@@ -1,0 +1,83 @@
+---
+name: usePromise
+menu: Hooks
+route: /hook/use-promise
+---
+
+import { Playground } from 'docz';
+import { usePromise, useInput } from '../';
+
+# usePromise
+
+Will...
+
+## Usage
+
+```jsx
+import React from 'react';
+import { usePromise } from '@fransvilhelm/hooks';
+
+const Checkbox = () => {
+  const result = usePromise();
+  return <p />;
+};
+```
+
+## Example
+
+<Playground>
+  {() => {
+    const input = useInput('');
+    const { state, result, error, execute } = usePromise(
+      () =>
+        fetch('https://api.github.com/users/' + input.value).then((res) => {
+          if (res.ok) {
+            return res.json();
+          }
+          throw new Error('Error fetching the specified user');
+        }),
+      false,
+    );
+    return (
+      <div>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            execute();
+          }}
+        >
+          <label>
+            <span>Username:</span>
+            <input type="search" {...input} />
+          </label>
+          <button type="submit">Search</button>
+        </form>
+        {state === 'idle' && <p>Search for a GitHub user</p>}
+        {state === 'pending' && <p>Loading...</p>}
+        {state === 'rejected' && <p>An error occured ({error.message})</p>}
+        {state === 'resolved' && result.login && (
+          <div>
+            <img src={result.avatar_url} alt="" />
+            <p>{result.login}</p>
+          </div>
+        )}
+      </div>
+    );
+  }}
+</Playground>
+
+## Parameters
+
+`usePromise` accepts ...
+
+| Param | Type | Required | Default | Description |
+| :---- | :--- | :------- | :------ | :---------- |
+| param | type | boolean  | boolean | description |
+
+## Returns
+
+`usePromise` returns...
+
+| Prop | Type | Description |
+| :--- | :--- | :---------- |
+| prop | type | description |
