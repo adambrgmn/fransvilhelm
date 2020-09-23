@@ -1,4 +1,5 @@
 export * from './use-checkbox';
+export * from './use-click-outside';
 export * from './use-dark-mode';
 export * from './use-debounce';
 export * from './use-deep-equal-effect';
