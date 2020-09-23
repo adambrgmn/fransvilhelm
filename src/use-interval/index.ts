@@ -5,8 +5,8 @@ import { useRef, useEffect, MutableRefObject } from 'react';
  * The implementation is shamelessly copied from
  * [Dan Abramov](https://overreacted.io/making-setinterval-declarative-with-react-hooks/).
  *
- * @param {Function} callback Callback to be executed on each tick
- * @param {(number | null)} delay Interval delay
+ * @param callback Callback to be executed on each tick
+ * @param delay Interval delay
  *
  * @example
  *   const Counter = () => {

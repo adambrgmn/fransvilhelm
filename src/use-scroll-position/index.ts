@@ -10,8 +10,10 @@ try {
     },
   });
 
-  window.addEventListener('testPassive', () => {}, opts);
-  window.removeEventListener('testPassive', () => {}, opts);
+  if (canUseDOM()) {
+    window.addEventListener('testPassive', () => {}, opts);
+    window.removeEventListener('testPassive', () => {}, opts);
+  }
 } catch (e) {}
 
 const getPosition = (): { x: number; y: number } => ({
@@ -25,8 +27,8 @@ const getPosition = (): { x: number; y: number } => ({
  * e.g. using [lodash.throttle](https://www.npmjs.com/package/lodash.throttle)
  * or window.requestAnimationFrame).
  *
- * @param {ThrottleWrapper} [throttleWrapper=passThrough] Optional wrapper function useful to throttle calls
- * @returns {{ x: number; y: number }}
+ * @param throttleWrapper Optional wrapper function useful to throttle calls
+ * @returns Current scroll position
  *
  * @example
  *   const throttler = fn => _.throttle(fn, 100);

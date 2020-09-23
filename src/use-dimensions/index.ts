@@ -1,5 +1,6 @@
-import { useMemo } from 'react';
-import { useSubscription, Subscription } from 'use-subscription';
+import { useRef, useState } from 'react';
+
+import { observeRect, useIsomorphicLayoutEffect } from '../utils';
 
 /**
  * Get the current measurements of an element in the document. It will also
@@ -10,8 +11,10 @@ import { useSubscription, Subscription } from 'use-subscription';
  * resize into account, since an element can be resized in other ways than that
  * the window gets resized. In that case you have to mock ResizeObserver.
  *
- * @template T extends Element
- * @returns {ClientRect | null} A (possibly null) rect object with measurements
+ * @param ref React ref object containing an Element
+ * @param observe Boolean flag indicating wether to observe changes or not
+ * @param callback Callback function fired each time an objects dimension changes
+ * @returns A (possibly null) DOMRect object with measurements
  *
  * @example
  *   import { useDimensions } from '@fransvilhelm/hooks';
@@ -23,33 +26,58 @@ import { useSubscription, Subscription } from 'use-subscription';
  *     return <div ref={ref}>{width}x{height}px</div>;
  *   };
  */
-const useDimensions = (ref: React.RefObject<Element>): ClientRect | null => {
-  const subscription: Subscription<DOMRect | null> = useMemo(
-    () => ({
-      getCurrentValue: () => ref.current?.getBoundingClientRect() ?? null,
-      subscribe: (callback) => {
-        if ('ResizeObserver' in window) {
-          const observer = new ResizeObserver((entries) => {
-            entries.forEach(
-              ({ target }) => target === ref.current && callback(),
-            );
-          });
+const useDimensions = (
+  ref: React.RefObject<Element>,
+  observe?: boolean,
+  callback?: (rect: DOMRect) => void,
+): DOMRect | null => {
+  const [element, setElement] = useState(ref.current);
+  const [rect, setRect] = useState<DOMRect | null>(null);
+  const initialRectSet = useRef(false);
+  const initialRefSet = useRef(false);
+  const callbackRef = useRef<typeof callback>(callback);
 
-          if (ref.current) observer.observe(ref.current);
-          return () => {
-            if (ref.current) observer.unobserve(ref.current);
-            observer.disconnect();
-          };
-        }
+  useIsomorphicLayoutEffect(() => {
+    callbackRef.current = callback;
+    if (ref.current !== element) {
+      setElement(ref.current);
+    }
+  });
 
-        window.addEventListener('resize', callback);
-        return () => window.removeEventListener('resize', callback);
-      },
-    }),
-    [ref],
-  );
+  useIsomorphicLayoutEffect(() => {
+    if (element && !initialRectSet.current) {
+      initialRectSet.current = true;
+      setRect(element.getBoundingClientRect());
+    }
+  }, [element]);
 
-  const rect = useSubscription(subscription);
+  useIsomorphicLayoutEffect(() => {
+    let observer: ReturnType<typeof observeRect>;
+    let elem = element;
+
+    const cleanup = () => {
+      observer && observer.unobserve();
+    };
+
+    if (!initialRefSet.current) {
+      initialRefSet.current = true;
+      elem = ref.current;
+    }
+
+    if (!elem) {
+      return cleanup;
+    }
+
+    observer = observeRect(elem, (rect) => {
+      callbackRef.current && callbackRef.current(rect);
+      setRect(rect);
+    });
+
+    observe && observer.observe();
+
+    return cleanup;
+  }, [observe, element]);
+
   return rect;
 };
 

@@ -9,8 +9,9 @@ interface UseInputResult {
  * Get necessary props to handle an input. The hook returns a value and an
  * onChange handler.
  *
- * @param {string} [initialValue=''] Initial value of input
- * @returns {UseInputResult} Current value and onChange handler
+ * @param initialValue Initial value of input
+ * @param callback Optional callback that will be called on changes with next state of the input
+ * @returns Current value and onChange handler
  *
  * @example
  *   const Input = () => {
@@ -21,11 +22,11 @@ interface UseInputResult {
  */
 const useInput = (
   initialValue: string = '',
-  _onChange?: (value: string) => void,
+  callback?: (value: string) => void,
 ): UseInputResult => {
   const [value, setValue] = useState(initialValue);
   const onChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    _onChange?.(event.currentTarget.value);
+    callback?.(event.currentTarget.value);
     setValue(event.currentTarget.value);
   };
 

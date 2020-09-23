@@ -5,7 +5,7 @@ import { useRef, useEffect, useCallback } from 'react';
  * probably an anti-pattern but can be useful when trying to use promises inside
  * a hook to not risk setting state on an unmounted component.
  *
- * @returns {() => boolean} A function that tells if a component is mounted or not
+ * @returns A function that tells if a component is mounted or not
  *
  * @example
  *   const Username = ({ id }) => {

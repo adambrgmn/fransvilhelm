@@ -7,7 +7,7 @@ import { useIsomorphicLayoutEffect } from '../utils';
  * modal or anything else when you don't want the user to be able to scroll the
  * body. From [useHooks](https://usehooks.com/useLockBodyScroll/).
  *
- * @param {boolean} [lock=true] Optional value if you want to lock body or not
+ * @param lock Optional value if you want to lock body or not. Defaults to `true`
  *
  * @example
  *   import { useLockBodyScroll } from '@fransvilhelm/hooks';
@@ -28,7 +28,7 @@ const useLockBodyScroll = (
   useIsomorphicLayoutEffect(() => {
     if (ref && !ref.current) return;
 
-    const el = ref && ref.current ? ref.current : document.body;
+    const el = ref?.current ?? document.body;
 
     if (lock) {
       const previousValue = el.style.overflow || 'visible';

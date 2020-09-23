@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { {{ camelCase name }} } from './';
 
 const TestComponent: React.FC = () => {
@@ -8,5 +8,5 @@ const TestComponent: React.FC = () => {
 };
 
 it('should ...', () => {
-  const {} = render(<TestComponent />);
+  render(<TestComponent />);
 });

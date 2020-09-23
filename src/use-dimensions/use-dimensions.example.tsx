@@ -22,7 +22,7 @@ const UseDimensionsExample = (): JSX.Element => {
   const widthInput = useInput('300');
   const heightInput = useInput('300');
   const ref = React.useRef<HTMLDivElement>(null);
-  const rect = useDimensions(ref);
+  const rect = useDimensions(ref, true);
   const { width, height } = rect || { width: 0, height: 0 };
 
   return (

@@ -7,8 +7,8 @@ import { canUseDOM } from '../utils';
  * Test to see if a query is matched and listen for changes on that query. This
  * value will be updated if the window is resized.
  *
- * @param {string} query Query string like used in css
- * @returns {boolean} True if query condition is met or not, false otherwise
+ * @param query Query string like used in css
+ * @returns `true` if query condition is met or not, `false` otherwise
  *
  * @example
  *   const Device = () => {

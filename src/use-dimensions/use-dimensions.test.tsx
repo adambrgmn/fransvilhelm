@@ -3,13 +3,54 @@ import { render, screen } from '@testing-library/react';
 
 import { useDimensions } from './';
 
-const TestComponent = (): JSX.Element => {
-  const ref = React.useRef<HTMLParagraphElement>(null);
-  const rect = useDimensions(ref);
-  return <p ref={ref}>{rect && rect.width}</p>;
-};
+let getBoundingClientRect = jest
+  .fn<Partial<DOMRect>, void[]>()
+  .mockImplementation(() => ({
+    width: 0,
+    height: 0,
+  }));
 
-it('should make dom measurements', () => {
-  render(<TestComponent />);
-  expect(screen.getByText(/\d+/)).toBeInTheDocument();
+beforeEach(() => {
+  Object.defineProperty(Element.prototype, 'getBoundingClientRect', {
+    value: getBoundingClientRect,
+  });
 });
+
+it('should make dom measurements and subscribe to changes', async () => {
+  let callback = jest.fn();
+  const TestComponent = () => {
+    const ref = React.useRef<HTMLParagraphElement>(null);
+    const rect = useDimensions(ref, true, callback);
+
+    return <p ref={ref}>Width: {rect?.width ?? '-'}</p>;
+  };
+
+  getBoundingClientRect.mockReturnValue({ width: 100 });
+
+  render(<TestComponent />);
+  expect(screen.getByText('Width: 100')).toBeInTheDocument();
+
+  getBoundingClientRect.mockReturnValue({ width: 200 });
+  expect(await screen.findByText('Width: 200')).toBeInTheDocument();
+
+  expect(callback).toHaveBeenCalled();
+});
+
+it('should not listen for changes if observe is false/undefined', async () => {
+  const TestComponent = () => {
+    const ref = React.useRef<HTMLParagraphElement>(null);
+    const rect = useDimensions(ref);
+
+    return <p ref={ref}>Width: {rect?.width ?? '-'}</p>;
+  };
+
+  getBoundingClientRect.mockReturnValue({ width: 100 });
+  render(<TestComponent />);
+  expect(screen.getByText('Width: 100')).toBeInTheDocument();
+
+  getBoundingClientRect.mockReturnValue({ width: 200 });
+  await delay(100);
+  expect(screen.getByText('Width: 100')).toBeInTheDocument();
+});
+
+let delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));

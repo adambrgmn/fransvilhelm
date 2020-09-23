@@ -1,6 +1,14 @@
 import { useRef, useEffect, useMemo } from 'react';
 import { Subscription, useSubscription } from 'use-subscription';
 
+/**
+ * Will setup a listener on the window object and run handler every time that
+ * action is triggered.
+ *
+ * @param type Event type
+ * @param handler Event handler
+ * @param options Event listener options
+ */
 const useEventListener = <K extends keyof WindowEventMap>(
   type: K,
   handler: (ev: WindowEventMap[K]) => any,
