@@ -11,6 +11,7 @@ let getBoundingClientRect = jest
   }));
 
 beforeEach(() => {
+  getBoundingClientRect.mockClear();
   Object.defineProperty(Element.prototype, 'getBoundingClientRect', {
     value: getBoundingClientRect,
   });
@@ -51,6 +52,20 @@ it('should not listen for changes if observe is false/undefined', async () => {
   getBoundingClientRect.mockReturnValue({ width: 200 });
   await delay(100);
   expect(screen.getByText('Width: 100')).toBeInTheDocument();
+});
+
+it('will not fail when element is never referenced', async () => {
+  const TestComponent = () => {
+    const ref = React.useRef<HTMLElement>(null);
+    const rect = useDimensions(ref);
+
+    return <p>{rect ? rect.width : 'No rect'}</p>;
+  };
+
+  render(<TestComponent />);
+
+  await delay(100);
+  expect(screen.getByText('No rect')).toBeInTheDocument();
 });
 
 let delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
