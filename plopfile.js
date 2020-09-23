@@ -30,24 +30,10 @@ module.exports = function (
     ],
     actions: [
       {
-        type: 'add',
-        path: 'src/{{ kebabCase name }}/index.ts',
-        templateFile: 'plop-templates/hook/index.ts.hbs',
-      },
-      {
-        type: 'add',
-        path: 'src/{{ kebabCase name }}/{{ kebabCase name }}.example.tsx',
-        templateFile: 'plop-templates/hook/example.tsx.hbs',
-      },
-      {
-        type: 'add',
-        path: 'src/{{ kebabCase name }}/{{ kebabCase name }}.mdx',
-        templateFile: 'plop-templates/hook/docs.mdx.hbs',
-      },
-      {
-        type: 'add',
-        path: 'src/{{ kebabCase name }}/{{ kebabCase name }}.test.tsx',
-        templateFile: 'plop-templates/hook/test.tsx.hbs',
+        type: 'addMany',
+        destination: 'src/{{ kebabCase name }}',
+        templateFiles: 'plop-templates/hook/**/*',
+        base: 'plop-templates/hook',
       },
       {
         type: 'append-sorted',

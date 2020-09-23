@@ -14,6 +14,7 @@ import { canUseDOM } from '../utils';
 interface StorageAdapter<S> {
   get(defaultValue: S | (() => S)): S;
   set(value: S): void;
+  remove(): void;
 }
 
 const createStorageAdapter = <S>(key: string): StorageAdapter<S> => {
@@ -25,6 +26,9 @@ const createStorageAdapter = <S>(key: string): StorageAdapter<S> => {
     },
     set: (value: S) => {
       window.localStorage.setItem(key, JSON.stringify(value));
+    },
+    remove: () => {
+      window.localStorage.removeItem(key);
     },
   };
 };
@@ -128,7 +132,12 @@ const usePersistedState = <S>(
   }, [initialState, key]);
 
   useEffect(() => {
-    storage.set(state);
+    if (state != null) {
+      storage.set(state);
+    } else {
+      storage.remove();
+    }
+
     if (globalState.current) globalState.current.emit(state);
   }, [state, storage]);
 
