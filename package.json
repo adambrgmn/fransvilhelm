@@ -1,6 +1,6 @@
 {
   "name": "@fransvilhelm/hooks",
-  "version": "2.0.1",
+  "version": "3.0.0",
   "description": "A set of reusable React hooks",
   "source": "src/index.ts",
   "main": "dist/hooks.js",
@@ -18,9 +18,7 @@
   },
   "homepage": "https://hooks.fransvilhelm.com",
   "license": "MIT",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "keywords": [
     "react-hooks",
     "hooks",
