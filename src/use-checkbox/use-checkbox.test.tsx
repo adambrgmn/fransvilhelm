@@ -4,10 +4,11 @@ import userEvent from '@testing-library/user-event';
 
 import { useCheckbox } from './';
 
-const TestComponent: React.FC<{ onChange?: () => void }> = ({
-  onChange,
-}): JSX.Element => {
-  const checkbox = useCheckbox(false, onChange);
+const TestComponent: React.FC<{
+  onChange?: () => void;
+  initialValue?: boolean;
+}> = ({ initialValue, onChange }): JSX.Element => {
+  const checkbox = useCheckbox(initialValue, onChange);
   return (
     <div>
       <p data-testid="result">Checked: {checkbox.checked ? 'true' : 'false'}</p>
@@ -17,7 +18,7 @@ const TestComponent: React.FC<{ onChange?: () => void }> = ({
 };
 
 it('should provide checked value and onChange handler for a checkbox', () => {
-  render(<TestComponent />);
+  render(<TestComponent initialValue={false} />);
   const result = screen.getByTestId('result');
   const checkbox = screen.getByTestId('checkbox');
 
@@ -35,4 +36,11 @@ it('accepts a onChange callback', () => {
 
   expect(onChange).toHaveBeenCalled();
   expect(onChange).toHaveBeenCalledWith(true);
+});
+
+it('accepts an initial value', () => {
+  render(<TestComponent initialValue={true} />);
+  const result = screen.getByTestId('result');
+
+  expect(result).toHaveTextContent('Checked: true');
 });

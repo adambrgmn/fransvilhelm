@@ -2,6 +2,10 @@ import * as React from 'react';
 import { render, screen } from '@testing-library/react';
 
 import { useMediaQuery } from './';
+import * as utils from '../utils';
+
+jest.mock('../utils.ts', () => ({ canUseDOM: jest.fn(() => true) }));
+let canUseDOM = (utils.canUseDOM as unknown) as jest.Mock<boolean, []>;
 
 const addEventListener = jest.fn();
 const removeEventListener = jest.fn();
@@ -25,4 +29,10 @@ const TestComponent = ({ query }: { query: string }): JSX.Element => {
 it('should test if a media query is satisfied', () => {
   render(<TestComponent query="(max-width: 400px)" />);
   expect(screen.getByText(/true/)).toBeInTheDocument();
+});
+
+it('works on the server', () => {
+  canUseDOM.mockReturnValue(false);
+  render(<TestComponent query="(max-width: 400px)" />);
+  expect(screen.getByText(/false/)).toBeInTheDocument();
 });
