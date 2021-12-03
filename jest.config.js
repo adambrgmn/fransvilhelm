@@ -4,6 +4,9 @@ module.exports = {
     '@testing-library/jest-dom',
     '<rootDir>/src/setup-tests.js',
   ],
+  transform: {
+    '^.+\\.tsx?$': 'esbuild-jest',
+  },
   testPathIgnorePatterns: ['/node_modules/', '/.docz/'],
   collectCoverageFrom: [
     '**/*.{ts,tsx}',
