@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { useInterval } from './';
 
-const UseIntervalExample = (): JSX.Element => {
+const UseIntervalExample: React.FC = () => {
   const [run, setRun] = useState(false);
   const [count, setCount] = useState(0);
 

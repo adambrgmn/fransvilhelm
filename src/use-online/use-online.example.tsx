@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { useOnline } from './';
 
-const UseOnlineExample = (): JSX.Element => {
+const UseOnlineExample: React.FC = () => {
   const online = useOnline();
   return (
     <div>

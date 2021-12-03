@@ -5,7 +5,7 @@ import { useMediaQuery } from './';
 import * as utils from '../utils';
 
 jest.mock('../utils.ts', () => ({ canUseDOM: jest.fn(() => true) }));
-let canUseDOM = (utils.canUseDOM as unknown) as jest.Mock<boolean, []>;
+let canUseDOM = utils.canUseDOM as unknown as jest.Mock<boolean, []>;
 
 const addEventListener = jest.fn();
 const removeEventListener = jest.fn();
@@ -21,7 +21,7 @@ beforeEach(() => {
   Object.defineProperty(window, 'matchMedia', { value: matchMedia });
 });
 
-const TestComponent = ({ query }: { query: string }): JSX.Element => {
+const TestComponent: React.FC<{ query: string }> = ({ query }) => {
   const matches = useMediaQuery(query);
   return <p>{matches ? 'true' : 'false'}</p>;
 };

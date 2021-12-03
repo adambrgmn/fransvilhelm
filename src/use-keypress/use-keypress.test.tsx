@@ -3,7 +3,7 @@ import { render, screen, act } from '@testing-library/react';
 
 import { useKeypress } from './';
 
-const TestComponent = ({ char }: { char: string }): JSX.Element => {
+const TestComponent: React.FC<{ char: string }> = ({ char }) => {
   const pressing = useKeypress(char);
   return <p>Pressing: {pressing ? 'true' : 'false'}</p>;
 };

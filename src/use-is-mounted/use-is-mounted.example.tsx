@@ -8,7 +8,7 @@ const getUsername = (): Promise<string> =>
     setTimeout(() => resolve('adambrgmn'), 2000);
   });
 
-const SafeUsername = (): JSX.Element => {
+const SafeUsername: React.FC = () => {
   const isMounted = useIsMounted();
   const [username, setUsername] = useState('[loading]');
 
@@ -33,7 +33,7 @@ const SafeUsername = (): JSX.Element => {
   return <span>{username}</span>;
 };
 
-const UnsafeUsername = (): JSX.Element => {
+const UnsafeUsername: React.FC = () => {
   const [username, setUsername] = useState('[loading]');
 
   useEffect(() => {
@@ -51,7 +51,7 @@ const UnsafeUsername = (): JSX.Element => {
   return <span>{username}</span>;
 };
 
-const UseIsMountedExample = (): JSX.Element => {
+const UseIsMountedExample: React.FC = () => {
   const safeCheckbox = useCheckbox(false);
   const unsafeCheckbox = useCheckbox(false);
 

@@ -3,7 +3,7 @@ import { render, fireEvent, screen } from '@testing-library/react';
 
 import { useOnline } from './';
 
-const TestComponent = (): JSX.Element => {
+const TestComponent: React.FC = () => {
   const isOnline = useOnline();
   return <p>{isOnline ? 'online' : 'offline'}</p>;
 };

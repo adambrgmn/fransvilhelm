@@ -3,7 +3,7 @@ import { useRef, Fragment } from 'react';
 import { useDimensions } from './';
 import { useInput } from '../use-input';
 
-const Input = ({ label, id, ...props }: any): JSX.Element => (
+const Input: React.FC<any> = ({ label, id, ...props }) => (
   <Fragment>
     <label htmlFor={id}>{label}</label>
     <input
@@ -18,7 +18,7 @@ const Input = ({ label, id, ...props }: any): JSX.Element => (
   </Fragment>
 );
 
-const UseDimensionsExample = (): JSX.Element => {
+const UseDimensionsExample: React.FC = () => {
   const widthInput = useInput('300');
   const heightInput = useInput('300');
   const ref = useRef<HTMLDivElement>(null);

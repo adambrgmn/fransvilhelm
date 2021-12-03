@@ -16,11 +16,11 @@ interface Props {
   initialDelay?: number;
 }
 
-const MockComponent = ({
+const MockComponent: React.FC<Props> = ({
   initialCount = 1,
   initialRunning = true,
   initialDelay = 1000,
-}: Props): JSX.Element => {
+}) => {
   const [count, setCount] = useState(initialCount);
   const [running, setRunning] = useState(initialRunning);
   const [delay, setDelay] = useState(initialDelay);

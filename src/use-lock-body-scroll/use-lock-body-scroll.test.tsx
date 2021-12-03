@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 
 import { useLockBodyScroll } from './';
 
-const TestComponent = ({ lock }: { lock: boolean }): JSX.Element => {
+const TestComponent: React.FC<{ lock: boolean }> = ({ lock }) => {
   useLockBodyScroll(lock);
   return <p />;
 };
@@ -17,7 +17,7 @@ it('should lock scrolling of body when enabled', () => {
 });
 
 it('should accept a second argument to pick a target a specific element', () => {
-  const Comp = (): JSX.Element => {
+  const Comp: React.FC = () => {
     const ref = useRef<HTMLDivElement>(null);
     useLockBodyScroll(true, ref);
 

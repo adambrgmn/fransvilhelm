@@ -3,7 +3,7 @@ import { useRef } from 'react';
 import { useCheckbox } from '../use-checkbox';
 import { useLockBodyScroll } from './';
 
-const UseLockBodyScrollExample = (): JSX.Element => {
+const UseLockBodyScrollExample: React.FC = () => {
   const ref = useRef<HTMLDivElement>(null);
   const checkbox = useCheckbox(false);
   useLockBodyScroll(checkbox.checked, ref);

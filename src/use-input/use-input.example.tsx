@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { useInput } from './';
 
-const UseInputExample = (): JSX.Element => {
+const UseInputExample: React.FC = () => {
   const input = useInput('Hi, friend!');
   return (
     <div>

@@ -11,7 +11,7 @@ const advanceByTime = (time: number): void => {
   });
 };
 
-const TestComponent = ({ delay }: { delay: number }): JSX.Element => {
+const TestComponent: React.FC<{ delay: number }> = ({ delay }) => {
   const input = useInput('');
   const debouncedValue = useDebounce(input.value, delay);
 
