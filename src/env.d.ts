@@ -1,3 +1,6 @@
+/// <reference types="react-dom/experimental" />
+/// <reference types="react/experimental" />
+
 /**
  * The **ResizeObserver** interface reports changes to the dimensions of an
  * [Element](https://developer.mozilla.org/en-US/docs/Web/API/Element)'s content
