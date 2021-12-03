@@ -29,7 +29,7 @@
     "start": "./build.js --watch",
     "build": "./build.js",
     "test": "jest",
-    "lint": "eslint src --ext .ts --ext .tsx --ext .js",
+    "lint": "eslint . --ext .ts --ext .tsx --ext .js --ignore-pattern dist",
     "release": "yarn build && yarn changeset publish",
     "plop": "plop",
     "plop:hook": "plop hook",
@@ -51,20 +51,20 @@
     "@types/react": "^16.9.56",
     "@types/react-dom": "^16.9.9",
     "@types/use-subscription": "^1.0.0",
-    "@typescript-eslint/eslint-plugin": "^4.7.0",
-    "@typescript-eslint/parser": "^4.7.0",
+    "@typescript-eslint/eslint-plugin": "^4.33.0",
+    "@typescript-eslint/parser": "^4.33.0",
     "babel-eslint": "^10.1.0",
     "docz": "^2.2.0",
     "esbuild-jest": "^0.5.0",
-    "eslint": "^7.13.0",
+    "eslint": "^7.32.0",
     "eslint-config-react-app": "^6.0.0",
-    "eslint-plugin-flowtype": "^5.2.0",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jest": "^24.1.0",
-    "eslint-plugin-jsx-a11y": "^6.4.1",
-    "eslint-plugin-react": "^7.21.5",
-    "eslint-plugin-react-hooks": "^4.2.0",
-    "eslint-plugin-testing-library": "^3.10.0",
+    "eslint-plugin-flowtype": "^5.10.0",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jest": "^24.7.0",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.27.1",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "eslint-plugin-testing-library": "^3.10.2",
     "estrella": "^1.4.1",
     "husky": "^4.3.0",
     "jest": "^27.4.3",
@@ -87,8 +87,15 @@
       "path": "cz-conventional-changelog"
     }
   },
+  "bugs": {
+    "url": "https://github.com/adambrgmn/hooks/issues"
+  },
   "eslintConfig": {
-    "extends": "react-app",
+    "extends": [
+      "react-app",
+      "react-app/jest",
+      "plugin:testing-library/react"
+    ],
     "rules": {
       "import/order": [
         "warn",
