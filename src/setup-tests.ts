@@ -1,3 +1,5 @@
 import failOnConsole from 'jest-fail-on-console';
 
-failOnConsole();
+if (process.env.CI === 'true') {
+  failOnConsole();
+}

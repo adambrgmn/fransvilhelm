@@ -9,10 +9,10 @@ const TestComponent: React.FC<{ lock: boolean }> = ({ lock }) => {
 };
 
 it('should lock scrolling of body when enabled', () => {
-  const { container } = render(<TestComponent lock={true} />);
+  const { rerender } = render(<TestComponent lock={true} />);
   expect(document.body.style.overflow).toEqual('hidden');
 
-  render(<TestComponent lock={false} />, { container });
+  rerender(<TestComponent lock={false} />);
   expect(document.body.style.overflow).toEqual('visible');
 });
 
