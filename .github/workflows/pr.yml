@@ -13,7 +13,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@master
         with:
-          node-version: 12.x
+          node-version: 16.x
 
       - name: Yarn Cache
         id: yarn-cache-dir-path
