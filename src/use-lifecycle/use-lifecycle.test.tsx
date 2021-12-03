@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
@@ -9,7 +9,7 @@ const TestComponent: React.FC<{
   onUnmount: (x: number) => void;
   onUpdate: (x: number) => void;
 }> = ({ onMount, onUpdate, onUnmount }) => {
-  const [state, setState] = React.useState(0);
+  const [state, setState] = useState(0);
 
   useMount(() => onMount(state));
   useUpdate(() => onUpdate(state));

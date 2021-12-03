@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
 
 import { useEventListener } from './';
@@ -8,7 +8,7 @@ const KeysPressed = ({
 }: {
   type?: 'keypress' | 'keydown';
 }): JSX.Element => {
-  const [keys, setKeys] = React.useState('');
+  const [keys, setKeys] = useState('');
   useEventListener(type, (ev) => {
     setKeys(`${keys}${ev.key}`);
   });

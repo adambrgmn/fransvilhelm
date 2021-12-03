@@ -4,7 +4,7 @@ import { render, act, screen } from '@testing-library/react';
 import { setupIntersectionObserverMock } from '../test-utils/setup-intersection-observer';
 import { useInView } from './';
 
-const TestComponent = (): JSX.Element => {
+const TestComponent: React.FC = () => {
   const ref = React.useRef<HTMLParagraphElement>(null);
   const inView = useInView(ref);
   return (

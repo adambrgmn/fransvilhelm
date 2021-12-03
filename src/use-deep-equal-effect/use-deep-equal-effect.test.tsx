@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
@@ -10,7 +10,7 @@ describe('useDeepEqualEffect', () => {
     const effect = jest.fn();
     const TestComponent: React.FC = () => {
       const input = useInput('');
-      const [, forceUpdate] = React.useState<any>();
+      const [, forceUpdate] = useState<any>();
 
       useDeepEqualEffect(() => effect(), [{ value: input.value }]);
 
@@ -39,7 +39,7 @@ describe('useDeepEqualEffect', () => {
   it('will run on all renders without dependecies', () => {
     const effect = jest.fn();
     const TestComponent: React.FC = () => {
-      const [, forceUpdate] = React.useState<any>();
+      const [, forceUpdate] = useState<any>();
 
       useDeepEqualEffect(() => effect());
 
@@ -66,7 +66,7 @@ describe('useDeepEqualLayoutEffect', () => {
     const effect = jest.fn();
     const TestComponent: React.FC = () => {
       const input = useInput('');
-      const [, forceUpdate] = React.useState<any>();
+      const [, forceUpdate] = useState<any>();
 
       useDeepEqualLayoutEffect(() => effect(), [{ value: input.value }]);
 
@@ -95,7 +95,7 @@ describe('useDeepEqualLayoutEffect', () => {
   it('will run on all renders without dependecies', () => {
     const effect = jest.fn();
     const TestComponent: React.FC = () => {
-      const [, forceUpdate] = React.useState<any>();
+      const [, forceUpdate] = useState<any>();
 
       useDeepEqualLayoutEffect(() => effect());
 

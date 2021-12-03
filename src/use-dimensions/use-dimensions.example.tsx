@@ -1,10 +1,10 @@
-import * as React from 'react';
+import { useRef, Fragment } from 'react';
 
 import { useDimensions } from './';
 import { useInput } from '../use-input';
 
 const Input = ({ label, id, ...props }: any): JSX.Element => (
-  <React.Fragment>
+  <Fragment>
     <label htmlFor={id}>{label}</label>
     <input
       type="number"
@@ -15,13 +15,13 @@ const Input = ({ label, id, ...props }: any): JSX.Element => (
       style={{ marginRight: '1rem' }}
       {...props}
     />
-  </React.Fragment>
+  </Fragment>
 );
 
 const UseDimensionsExample = (): JSX.Element => {
   const widthInput = useInput('300');
   const heightInput = useInput('300');
-  const ref = React.useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
   const rect = useDimensions(ref, true);
   const { width, height } = rect || { width: 0, height: 0 };
 

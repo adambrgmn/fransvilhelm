@@ -90,7 +90,7 @@ const isFn = <S>(x: S | (() => S)): x is () => S => typeof x === 'function';
  *
  * @param initialState Default initial state, if non is found on `localStorage`
  * @param key Key to store value on
- * @returns Returns state and setState as an array tuple (same as `React.useState`)
+ * @returns Returns state and setState as an array tuple (same as `useState`)
  *
  * @example
  *   const PersistedCounter = () => {

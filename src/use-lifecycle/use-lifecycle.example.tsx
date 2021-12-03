@@ -1,9 +1,9 @@
-import * as React from 'react';
+import { useState } from 'react';
 
 import { useMount, useUpdate, useUnmount } from './';
 
 const Example: React.FC = () => {
-  const [count, setCount] = React.useState(0);
+  const [count, setCount] = useState(0);
   useMount(() => console.log('Mount', { count }));
   useUpdate(() => console.log('Update', { count }));
   useUnmount(() => console.log('Unmount', { count }));
@@ -18,7 +18,7 @@ const Example: React.FC = () => {
 };
 
 const UseLifecycleExample: React.FC = () => {
-  const [key, setKey] = React.useState(0);
+  const [key, setKey] = useState(0);
   return (
     <div>
       <p>

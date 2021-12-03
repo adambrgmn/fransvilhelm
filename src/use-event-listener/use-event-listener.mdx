@@ -15,11 +15,11 @@ action is triggered.
 ## Usage
 
 ```jsx
-import React from 'react';
+import { useState } from 'react';
 import { useEventListener } from '@fransvilhelm/hooks';
 
 const UseEventListenerExample = () => {
-  const [keys, setKeys] = React.useState<string[]>([]);
+  const [keys, setKeys] = useState<string[]>([]);
   useEventListener('keypress', ev => {
     setKeys([...keys, ev.key]);
   });

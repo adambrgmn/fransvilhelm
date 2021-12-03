@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useRef } from 'react';
 import { render, screen } from '@testing-library/react';
 
 import { useLockBodyScroll } from './';
@@ -18,7 +18,7 @@ it('should lock scrolling of body when enabled', () => {
 
 it('should accept a second argument to pick a target a specific element', () => {
   const Comp = (): JSX.Element => {
-    const ref = React.useRef<HTMLDivElement>(null);
+    const ref = useRef<HTMLDivElement>(null);
     useLockBodyScroll(true, ref);
 
     return (

@@ -1,9 +1,9 @@
-import * as React from 'react';
+import { useState } from 'react';
 
 import { useDeepEqualEffect } from './';
 
 const UseDeepEqualEffectExample: React.FC = () => {
-  const [state, forceUpdate] = React.useState({});
+  const [state, forceUpdate] = useState({});
 
   useDeepEqualEffect(() => {
     console.log('Updated');
