@@ -3,10 +3,8 @@
   "version": "3.0.0",
   "description": "A set of reusable React hooks",
   "source": "src/index.ts",
-  "main": "dist/hooks.js",
-  "module": "dist/hooks.esm.js",
-  "esmodule": "dist/hooks.modern.js",
-  "umd:main": "dist/hooks.umd.js",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
@@ -28,11 +26,10 @@
     "utils"
   ],
   "scripts": {
-    "start": "yarn build --watch",
-    "build": "microbundle --jsx=React.createElement",
+    "start": "./build.js --watch",
+    "build": "./build.js",
     "test": "jest",
     "lint": "eslint src --ext .ts --ext .tsx --ext .js",
-    "type-check": "tsc --noEmit",
     "release": "yarn build && yarn changeset publish",
     "plop": "plop",
     "plop:hook": "plop hook",
@@ -45,8 +42,6 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",
-    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.12.1",
-    "@babel/plugin-proposal-optional-chaining": "^7.12.1",
     "@babel/preset-env": "^7.12.1",
     "@babel/preset-react": "^7.12.5",
     "@babel/preset-typescript": "^7.12.1",
@@ -76,14 +71,15 @@
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-testing-library": "^3.10.0",
+    "estrella": "^1.4.1",
     "husky": "^4.3.0",
     "jest": "^26.6.3",
     "lint-staged": "^10.5.1",
-    "microbundle": "^0.12.4",
     "plop": "^2.5.4",
     "prettier": "^2.1.2",
     "react": "17.0.1",
     "react-dom": "17.0.1",
+    "rimraf": "^3.0.2",
     "typescript": "^4.0.5"
   },
   "peerDependencies": {
