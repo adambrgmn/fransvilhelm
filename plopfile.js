@@ -31,7 +31,7 @@ module.exports = function (
     actions: [
       {
         type: 'addMany',
-        destination: 'src/{{ kebabCase name }}',
+        destination: 'src',
         templateFiles: 'plop-templates/hook/**/*',
         base: 'plop-templates/hook',
       },
