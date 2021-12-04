@@ -33,8 +33,6 @@
     "release": "yarn build && yarn changeset publish",
     "plop": "plop",
     "plop:hook": "plop hook",
-    "docz:dev": "docz dev",
-    "docz:build": "docz build",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -55,7 +53,6 @@
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
     "babel-eslint": "^10.1.0",
-    "docz": "^2.2.0",
     "esbuild-jest": "^0.5.0",
     "eslint": "^7.32.0",
     "eslint-config-react-app": "^6.0.0",

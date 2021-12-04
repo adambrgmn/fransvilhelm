@@ -1,7 +1,6 @@
 # @fransvilhelm/hooks
 
-A set of reusable hooks to use inside react components.  
-[Documentation and examples](https://hooks.fransvilhelm.com/)
+A set of reusable hooks to use inside react components.
 
 ## Installation
 
