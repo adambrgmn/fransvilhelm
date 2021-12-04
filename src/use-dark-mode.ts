@@ -1,3 +1,4 @@
+import { UseStateTuple } from './types';
 import { useMediaQuery } from './use-media-query';
 import { usePersistedState } from './use-persisted-state';
 import { useIsomorphicLayoutEffect } from './utils';
@@ -11,7 +12,7 @@ import { useIsomorphicLayoutEffect } from './utils';
  */
 export function useDarkMode(
   className?: string,
-): [boolean, React.Dispatch<React.SetStateAction<boolean | null>>, boolean] {
+): [...UseStateTuple<boolean, boolean | null>, boolean] {
   const [enabled, setEnabled] = usePersistedState<boolean | null>(
     null,
     'dark-mode',
