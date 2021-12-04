@@ -14,9 +14,12 @@ const TestComponent: React.FC = () => {
   );
 };
 
-it('should trigger an event when in view', () => {
-  let { emit } = setupIntersectionObserverMock();
+let { emit, prepare, teardown } = setupIntersectionObserverMock();
 
+beforeEach(prepare);
+afterEach(teardown);
+
+it('should trigger an event when in view', () => {
   render(<TestComponent />);
   const textNode = screen.getByTestId('text-node');
 

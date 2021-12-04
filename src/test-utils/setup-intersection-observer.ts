@@ -106,19 +106,37 @@ export function setupIntersectionObserverMock({
     }
   }
 
-  Object.defineProperty(window, 'IntersectionObserver', {
-    writable: true,
-    configurable: true,
-    value: MockIntersectionObserver,
-  });
+  let original = global.IntersectionObserver;
 
-  Object.defineProperty(global, 'IntersectionObserver', {
-    writable: true,
-    configurable: true,
-    value: MockIntersectionObserver,
-  });
+  function prepare() {
+    Object.defineProperty(window, 'IntersectionObserver', {
+      writable: true,
+      configurable: true,
+      value: MockIntersectionObserver,
+    });
 
-  return { observers, emit };
+    Object.defineProperty(global, 'IntersectionObserver', {
+      writable: true,
+      configurable: true,
+      value: MockIntersectionObserver,
+    });
+  }
+
+  function teardown() {
+    Object.defineProperty(window, 'IntersectionObserver', {
+      writable: true,
+      configurable: true,
+      value: original,
+    });
+
+    Object.defineProperty(global, 'IntersectionObserver', {
+      writable: true,
+      configurable: true,
+      value: original,
+    });
+  }
+
+  return { observers, emit, prepare, teardown };
 }
 
 function emptyDomRect(): DOMRectReadOnly {
