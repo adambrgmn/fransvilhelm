@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
@@ -9,7 +8,7 @@ jest.mock('../use-media-query/index.ts', () => ({
   useMediaQuery: jest.fn(() => false),
 }));
 
-let useMediaQuery = (hook.useMediaQuery as unknown) as jest.Mock<
+let useMediaQuery = hook.useMediaQuery as unknown as jest.Mock<
   boolean,
   [string]
 >;

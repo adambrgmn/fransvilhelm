@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { useInput } from '../use-input';
 import { useDebounce } from './';

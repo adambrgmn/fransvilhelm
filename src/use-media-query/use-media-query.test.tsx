@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { act, render, screen } from '@testing-library/react';
 
 import { useMediaQuery } from './';

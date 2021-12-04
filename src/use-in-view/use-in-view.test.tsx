@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { render, act, screen } from '@testing-library/react';
 
 import { setupIntersectionObserverMock } from '../test-utils/setup-intersection-observer';
