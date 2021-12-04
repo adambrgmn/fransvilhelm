@@ -22,11 +22,11 @@ type Options<T> = {
  * @param immediate Wether to run the function on mount or only when calling `execute`
  * @param options Optional callback handler onSuccess and onError
  */
-const usePromise = <T>(
+export function usePromise<T>(
   promise: () => Promise<T>,
   immediate: boolean = false,
   options: Options<T> = {},
-): State<T> => {
+): State<T> {
   const [state, setState] = useState<Omit<State<T>, 'execute'>>({
     state: immediate ? 'pending' : 'idle',
     result: null,
@@ -83,6 +83,4 @@ const usePromise = <T>(
   });
 
   return { ...state, execute } as State<T>;
-};
-
-export { usePromise };
+}

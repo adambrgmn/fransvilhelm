@@ -16,11 +16,6 @@ try {
   }
 } catch (e) {}
 
-const getPosition = (): { x: number; y: number } => ({
-  x: canUseDOM() ? window.pageXOffset : 0,
-  y: canUseDOM() ? window.pageYOffset : 0,
-});
-
 /**
  * Keep track of window scroll position while the user scrolls.
  * Optionally you can pass in a throttle wrapper to throttle the update calls (
@@ -38,7 +33,7 @@ const getPosition = (): { x: number; y: number } => ({
  *     return <p>{message}</p>
  *   }
  */
-const useScrollPosition = (): { x: number; y: number } => {
+export function useScrollPosition(): ScrollPosition {
   const position = useWindowSubscription(
     'scroll',
     getPosition,
@@ -46,6 +41,16 @@ const useScrollPosition = (): { x: number; y: number } => {
   );
 
   return position;
-};
+}
 
-export { useScrollPosition };
+function getPosition(): ScrollPosition {
+  return {
+    x: canUseDOM() ? window.pageXOffset : 0,
+    y: canUseDOM() ? window.pageYOffset : 0,
+  };
+}
+
+interface ScrollPosition {
+  x: number;
+  y: number;
+}

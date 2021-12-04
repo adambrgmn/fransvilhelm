@@ -98,10 +98,10 @@ const isFn = <S>(x: S | (() => S)): x is () => S => typeof x === 'function';
  *     return <button onClick={() => setCount(count + 1)}>{count}</button>;
  *   }
  */
-const usePersistedState = <S>(
+export function usePersistedState<S>(
   initialState: S | (() => S),
   key: string = 'local-storage-hook',
-): [S, Dispatch<SetStateAction<S>>] => {
+): [S, Dispatch<SetStateAction<S>>] {
   const globalState = useRef<GlobalState<S> | null>(null);
   const storage = useMemo(() => createStorageAdapter<S>(key), [key]);
   const [state, setState] = useState(() =>
@@ -142,6 +142,4 @@ const usePersistedState = <S>(
   }, [state, storage]);
 
   return [state, setState];
-};
-
-export { usePersistedState };
+}

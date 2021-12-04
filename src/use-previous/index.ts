@@ -5,7 +5,7 @@ import { useEffect, useRef } from 'react';
  * want to compare a new value to its previous value when it was last rendered.
  * @param value Value to keep in "history"
  */
-const usePrevious = <T>(value: T): T | undefined => {
+export function usePrevious<T>(value: T): T | undefined {
   const ref = useRef<T>();
 
   useEffect(() => {
@@ -13,6 +13,4 @@ const usePrevious = <T>(value: T): T | undefined => {
   });
 
   return ref.current;
-};
-
-export { usePrevious };
+}

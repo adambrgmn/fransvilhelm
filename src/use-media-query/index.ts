@@ -20,7 +20,7 @@ import { canUseDOM } from '../utils';
  *     return <p>You're on a desktop computer right now</p>;
  *   };
  */
-const useMediaQuery = (query: string): boolean => {
+export function useMediaQuery(query: string): boolean {
   const mediaQueryList = useMemo(
     () => (canUseDOM() ? window.matchMedia(query) : null),
     [query],
@@ -39,6 +39,4 @@ const useMediaQuery = (query: string): boolean => {
 
   const matches = useSubscription(subscription);
   return matches;
-};
-
-export { useMediaQuery };
+}

@@ -23,13 +23,11 @@ const getInitialStatus = (): boolean => {
  *     return <p style={{ color }}>{label}</p>;
  *   }
  */
-const useOnline = (): boolean => {
+export function useOnline(): boolean {
   const [online, setOnline] = useState(getInitialStatus());
 
   useEventListener('online', () => setOnline(true));
   useEventListener('offline', () => setOnline(false));
 
   return online;
-};
-
-export { useOnline };
+}

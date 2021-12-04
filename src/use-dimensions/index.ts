@@ -21,11 +21,11 @@ import { observeRect, useIsomorphicLayoutEffect } from '../utils';
  *     return <div ref={ref}>{width}x{height}px</div>;
  *   };
  */
-const useDimensions = (
+export function useDimensions(
   ref: React.RefObject<Element>,
   observe?: boolean,
   callback?: (rect: DOMRect) => void,
-): DOMRect | null => {
+): DOMRect | null {
   const [element, setElement] = useState(ref.current);
   const [rect, setRect] = useState<DOMRect | null>(null);
   const initialRectSet = useRef(false);
@@ -74,6 +74,4 @@ const useDimensions = (
   }, [observe, element]);
 
   return rect;
-};
-
-export { useDimensions };
+}

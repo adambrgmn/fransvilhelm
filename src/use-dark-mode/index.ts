@@ -9,9 +9,9 @@ import { useIsomorphicLayoutEffect } from '../utils';
 
  * @param className Optional class name to append to body element
  */
-const useDarkMode = (
+export function useDarkMode(
   className?: string,
-): [boolean, React.Dispatch<React.SetStateAction<boolean | null>>, boolean] => {
+): [boolean, React.Dispatch<React.SetStateAction<boolean | null>>, boolean] {
   const [enabled, setEnabled] = usePersistedState<boolean | null>(
     null,
     'dark-mode',
@@ -33,6 +33,4 @@ const useDarkMode = (
   }, [active]);
 
   return [active, setEnabled, isUserOverridden];
-};
-
-export { useDarkMode };
+}

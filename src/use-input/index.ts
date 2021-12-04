@@ -20,10 +20,10 @@ interface UseInputResult {
  *     // Or spread props for easier use: <input {...input} />
  *   };
  */
-const useInput = (
+export function useInput(
   initialValue: string = '',
   callback?: (value: string) => void,
-): UseInputResult => {
+): UseInputResult {
   const [value, setValue] = useState(initialValue);
   const onChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     callback?.(event.currentTarget.value);
@@ -31,6 +31,4 @@ const useInput = (
   };
 
   return { value, onChange };
-};
-
-export { useInput };
+}
