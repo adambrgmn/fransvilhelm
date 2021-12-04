@@ -7,7 +7,7 @@ import { useCheckbox } from './';
 const TestComponent: React.FC<{
   onChange?: () => void;
   initialValue?: boolean;
-}> = ({ initialValue, onChange }): JSX.Element => {
+}> = ({ initialValue, onChange }) => {
   const checkbox = useCheckbox(initialValue, onChange);
   return (
     <div>

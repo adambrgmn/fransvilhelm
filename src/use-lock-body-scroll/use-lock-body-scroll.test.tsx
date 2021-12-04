@@ -1,24 +1,24 @@
-import * as React from 'react';
+import React, { useRef } from 'react';
 import { render, screen } from '@testing-library/react';
 
 import { useLockBodyScroll } from './';
 
-const TestComponent = ({ lock }: { lock: boolean }): JSX.Element => {
+const TestComponent: React.FC<{ lock: boolean }> = ({ lock }) => {
   useLockBodyScroll(lock);
   return <p />;
 };
 
 it('should lock scrolling of body when enabled', () => {
-  const { container } = render(<TestComponent lock={true} />);
+  const { rerender } = render(<TestComponent lock={true} />);
   expect(document.body.style.overflow).toEqual('hidden');
 
-  render(<TestComponent lock={false} />, { container });
+  rerender(<TestComponent lock={false} />);
   expect(document.body.style.overflow).toEqual('visible');
 });
 
 it('should accept a second argument to pick a target a specific element', () => {
-  const Comp = (): JSX.Element => {
-    const ref = React.useRef<HTMLDivElement>(null);
+  const Comp: React.FC = () => {
+    const ref = useRef<HTMLDivElement>(null);
     useLockBodyScroll(true, ref);
 
     return (

@@ -16,7 +16,10 @@ import { usePrevious } from '../use-previous';
  * @param effect Effect to run when deps are not deeply equal
  * @param deps Dependecies that, when changed, will trigger effect
  */
-const useDeepEqualEffect = (effect: EffectCallback, deps?: DependencyList) => {
+export function useDeepEqualEffect(
+  effect: EffectCallback,
+  deps?: DependencyList,
+) {
   const previousDeps = usePrevious(deps);
 
   useEffect(() => {
@@ -24,7 +27,7 @@ const useDeepEqualEffect = (effect: EffectCallback, deps?: DependencyList) => {
       return effect();
     }
   });
-};
+}
 
 /**
  * Use `useDeepEqualLayoutEffect` when react normal dependecy compare feature
@@ -34,10 +37,10 @@ const useDeepEqualEffect = (effect: EffectCallback, deps?: DependencyList) => {
  * @param effect Effect to run when deps are not deeply equal
  * @param deps Dependecies that, when changed, will trigger effect
  */
-const useDeepEqualLayoutEffect = (
+export function useDeepEqualLayoutEffect(
   effect: EffectCallback,
   deps?: DependencyList,
-) => {
+) {
   const previousDeps = usePrevious(deps);
 
   useLayoutEffect(() => {
@@ -45,6 +48,4 @@ const useDeepEqualLayoutEffect = (
       return effect();
     }
   });
-};
-
-export { useDeepEqualEffect, useDeepEqualLayoutEffect };
+}

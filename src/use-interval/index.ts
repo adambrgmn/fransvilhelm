@@ -16,7 +16,7 @@ import { useRef, useEffect, MutableRefObject } from 'react';
  *     return <p>{count} seconds have passed</p>;
  *   };
  */
-const useInterval = (callback: () => void, delay: number | null): void => {
+export function useInterval(callback: () => void, delay: number | null): void {
   const savedCallback: MutableRefObject<() => void> = useRef(callback);
 
   useEffect(() => {
@@ -30,6 +30,4 @@ const useInterval = (callback: () => void, delay: number | null): void => {
       return () => clearInterval(id);
     }
   }, [delay]);
-};
-
-export { useInterval };
+}

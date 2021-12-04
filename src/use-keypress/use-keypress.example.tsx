@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { useKeypress } from './';
 
-const Indicator = ({ pressed }: { pressed: boolean }): JSX.Element => (
+const Indicator: React.FC<{ pressed: boolean }> = ({ pressed }) => (
   <span
     style={{
       display: 'inline-block',
@@ -23,7 +23,7 @@ const Char = ({ char }: { char: string }) => {
   );
 };
 
-const UseKeypressExample = (): JSX.Element => {
+const UseKeypressExample: React.FC = () => {
   const keys = 'abcdefghijklmnopqrstuvwxyz'.split('');
 
   return (

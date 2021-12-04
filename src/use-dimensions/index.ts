@@ -4,12 +4,7 @@ import { observeRect, useIsomorphicLayoutEffect } from '../utils';
 
 /**
  * Get the current measurements of an element in the document. It will also
- * listen for resize changes. Note that it's most performant using
- * [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver)
- * but this api is not available in all browsers. In that case it will listen
- * for the resize-event on the window, but this will not take every type of
- * resize into account, since an element can be resized in other ways than that
- * the window gets resized. In that case you have to mock ResizeObserver.
+ * listen for resize changes.
  *
  * @param ref React ref object containing an Element
  * @param observe Boolean flag indicating wether to observe changes or not
@@ -26,11 +21,11 @@ import { observeRect, useIsomorphicLayoutEffect } from '../utils';
  *     return <div ref={ref}>{width}x{height}px</div>;
  *   };
  */
-const useDimensions = (
+export function useDimensions(
   ref: React.RefObject<Element>,
   observe?: boolean,
   callback?: (rect: DOMRect) => void,
-): DOMRect | null => {
+): DOMRect | null {
   const [element, setElement] = useState(ref.current);
   const [rect, setRect] = useState<DOMRect | null>(null);
   const initialRectSet = useRef(false);
@@ -79,6 +74,4 @@ const useDimensions = (
   }, [observe, element]);
 
   return rect;
-};
-
-export { useDimensions };
+}

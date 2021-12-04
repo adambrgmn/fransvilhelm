@@ -1,9 +1,9 @@
 import { useEffect, useRef } from 'react';
 
-const useClickOutside = (
+export function useClickOutside(
   ref: React.RefObject<HTMLElement>,
   handler: (event: Event) => void,
-) => {
+) {
   let handlerRef = useRef(handler);
 
   useEffect(() => {
@@ -29,6 +29,4 @@ const useClickOutside = (
       document.removeEventListener('touchstart', listener);
     };
   }, [handler, ref]);
-};
-
-export { useClickOutside };
+}

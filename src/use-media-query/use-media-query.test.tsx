@@ -1,27 +1,19 @@
 import * as React from 'react';
-import { render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 
 import { useMediaQuery } from './';
 import * as utils from '../utils';
+import { setupMatchMedia } from '../test-utils/setup-match-media';
 
 jest.mock('../utils.ts', () => ({ canUseDOM: jest.fn(() => true) }));
-let canUseDOM = (utils.canUseDOM as unknown) as jest.Mock<boolean, []>;
+let canUseDOM = utils.canUseDOM as unknown as jest.Mock<boolean, []>;
 
-const addEventListener = jest.fn();
-const removeEventListener = jest.fn();
-const matchMedia = jest.fn(() => ({
-  matches: true,
-  addEventListener,
-  removeEventListener,
-}));
+let { emit, prepare, teardown } = setupMatchMedia(true);
 
-beforeEach(() => {
-  addEventListener.mockClear();
-  removeEventListener.mockClear();
-  Object.defineProperty(window, 'matchMedia', { value: matchMedia });
-});
+beforeEach(prepare);
+afterEach(teardown);
 
-const TestComponent = ({ query }: { query: string }): JSX.Element => {
+const TestComponent: React.FC<{ query: string }> = ({ query }) => {
   const matches = useMediaQuery(query);
   return <p>{matches ? 'true' : 'false'}</p>;
 };
@@ -29,6 +21,9 @@ const TestComponent = ({ query }: { query: string }): JSX.Element => {
 it('should test if a media query is satisfied', () => {
   render(<TestComponent query="(max-width: 400px)" />);
   expect(screen.getByText(/true/)).toBeInTheDocument();
+
+  act(() => emit(false));
+  expect(screen.getByText(/false/)).toBeInTheDocument();
 });
 
 it('works on the server', () => {

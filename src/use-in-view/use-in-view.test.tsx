@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { render, act, screen } from '@testing-library/react';
 
+import { setupIntersectionObserverMock } from '../test-utils/setup-intersection-observer';
 import { useInView } from './';
 
-const TestComponent = (): JSX.Element => {
+const TestComponent: React.FC = () => {
   const ref = React.useRef<HTMLParagraphElement>(null);
   const inView = useInView(ref);
   return (
@@ -13,19 +14,21 @@ const TestComponent = (): JSX.Element => {
   );
 };
 
+let { emit, prepare, teardown } = setupIntersectionObserverMock();
+
+beforeEach(prepare);
+afterEach(teardown);
+
 it('should trigger an event when in view', () => {
   render(<TestComponent />);
   const textNode = screen.getByTestId('text-node');
 
   expect(textNode).toHaveTextContent('hidden');
 
-  act(() => {
-    // @ts-ignore: This is a mocked method used to fake emitting an Intersection
-    // event. Source can be found in src/setup-tests.js.
-    window.IntersectionObserver.emit({
-      isIntersecting: true,
-    });
-  });
+  act(() => emit({ isIntersecting: true }));
 
   expect(textNode).toHaveTextContent('visible');
+
+  act(() => emit({ isIntersecting: false }));
+  expect(textNode).toHaveTextContent('hidden');
 });

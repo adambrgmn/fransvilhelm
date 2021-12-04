@@ -3,13 +3,10 @@ import { render } from '@testing-library/react';
 
 import { useIsMounted } from './';
 
-const TestComponent = ({
-  fn,
-  delay,
-}: {
+const TestComponent: React.FC<{
   fn: () => void;
   delay: number;
-}): JSX.Element => {
+}> = ({ fn, delay }) => {
   const isMounted = useIsMounted();
 
   useEffect(() => {

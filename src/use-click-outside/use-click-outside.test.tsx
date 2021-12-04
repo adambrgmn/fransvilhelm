@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useRef, useState } from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
@@ -7,8 +7,8 @@ import { useClickOutside } from './';
 const TestComponent: React.FC<{ onClickOutside?: () => void }> = ({
   onClickOutside,
 }) => {
-  const elRef = React.useRef<HTMLButtonElement>(null);
-  const [count, setCount] = React.useState(0);
+  const elRef = useRef<HTMLButtonElement>(null);
+  const [count, setCount] = useState(0);
 
   useClickOutside(elRef, () => {
     if (onClickOutside) onClickOutside();

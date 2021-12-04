@@ -18,7 +18,7 @@ afterEach(() => {
 });
 
 it('should be a drop in replacement for the useState hook', () => {
-  const Comp = (): JSX.Element => {
+  const Comp: React.FC = () => {
     const [count, setState] = usePersistedState(0);
     return <button onClick={() => setState(count + 1)}>{count}</button>;
   };
@@ -37,7 +37,7 @@ it('should be a drop in replacement for the useState hook', () => {
 
 it('should use persisted value as initial state (if set)', () => {
   localStorageMock.getItem.mockImplementationOnce(() => '100');
-  const Comp = (): JSX.Element => {
+  const Comp: React.FC = () => {
     const [count, setCount] = usePersistedState(0);
     return <button onClick={() => setCount(count + 1)}>{count}</button>;
   };
@@ -49,7 +49,7 @@ it('should use persisted value as initial state (if set)', () => {
 });
 
 it('should emit updates to other components using the same key', () => {
-  const CountButton = ({ testId }: { testId: string }): JSX.Element => {
+  const CountButton: React.FC<{ testId: string }> = ({ testId }) => {
     const [count, setCount] = usePersistedState(0, 'counter');
     return (
       <button data-testid={testId} onClick={() => setCount(count + 1)}>
@@ -58,7 +58,7 @@ it('should emit updates to other components using the same key', () => {
     );
   };
 
-  const Comp = (): JSX.Element => {
+  const Comp: React.FC = () => {
     return (
       <div>
         <CountButton testId="btn-1" />
@@ -78,7 +78,7 @@ it('should emit updates to other components using the same key', () => {
 });
 
 it('should update state in reaction to window storage event', () => {
-  const Comp = (): JSX.Element => {
+  const Comp: React.FC = () => {
     const [count, setState] = usePersistedState(0, 'test-key');
     return <button onClick={() => setState(count + 1)}>{count}</button>;
   };

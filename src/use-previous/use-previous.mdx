@@ -15,14 +15,14 @@ want to compare a new value to its previous value when it was last rendered.
 ## Usage
 
 ```jsx
-import React from 'react';
+import { useEffect } from 'react';
 import { usePrevious, useInput } from '@fransvilhelm/hooks';
 
 const Checkbox = () => {
   const input = useInput('');
   const previous = usePrevious(input.value);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (input.value !== previous) {
       // do side effect
     }

@@ -1,11 +1,11 @@
-import * as React from 'react';
+import { useRef, useMemo } from 'react';
 
 import { useInView } from './';
 
-const UseInViewExample = (): JSX.Element => {
-  const paragraphRef = React.useRef<HTMLParagraphElement>(null);
-  const containerRef = React.useRef<HTMLDivElement>(null);
-  const opts = React.useMemo(
+const UseInViewExample: React.FC = () => {
+  const paragraphRef = useRef<HTMLParagraphElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const opts = useMemo(
     () => ({ rootMargin: '-15%', root: containerRef.current }),
     [containerRef],
   );

@@ -6,7 +6,7 @@ import { EffectCallback, useEffect, useRef } from 'react';
  *
  * @param callback Effect callback called on initial mount
  */
-export const useMount = (callback: EffectCallback) => {
+export function useMount(callback: EffectCallback) {
   const initialMounted = useRef(false);
   const callbackRef = useRef(callback);
 
@@ -15,7 +15,7 @@ export const useMount = (callback: EffectCallback) => {
     initialMounted.current = true;
     return callbackRef.current();
   }, []);
-};
+}
 
 /**
  * useUpdate hook can be used as a replacement for `componentDidUpdate` found on
@@ -26,7 +26,7 @@ export const useMount = (callback: EffectCallback) => {
  * @param callback Effect calback to call on every update
  * @param deps Optional effect deps
  */
-export const useUpdate = (callback: EffectCallback, deps?: any[]) => {
+export function useUpdate(callback: EffectCallback, deps?: any[]) {
   const initialMounted = useRef(false);
   const callbackRef = useRef(callback);
 
@@ -38,7 +38,7 @@ export const useUpdate = (callback: EffectCallback, deps?: any[]) => {
     if (initialMounted.current) return callbackRef.current();
     initialMounted.current = true;
   }, deps); // eslint-disable-line react-hooks/exhaustive-deps
-};
+}
 
 /**
  * `useUnmount` hook can be used as a replacement for `componentWillUnmount`
@@ -47,11 +47,11 @@ export const useUpdate = (callback: EffectCallback, deps?: any[]) => {
  *
  * @param callback Callback fired when component is unmounted
  */
-export const useUnmount = (callback: () => void) => {
+export function useUnmount(callback: () => void) {
   const callbackRef = useRef(callback);
   useEffect(() => {
     callbackRef.current = callback;
   }, [callback]);
 
   useEffect(() => () => callbackRef.current(), []);
-};
+}

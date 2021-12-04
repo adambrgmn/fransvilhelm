@@ -19,11 +19,11 @@ This hook is heavily inspired by
 ## Usage
 
 ```jsx
-import React from 'react';
+import { useRef } from 'react';
 import { useDimensions } from '@fransvilhelm/hooks';
 
 const SquareWithDimensions = () => {
-  const ref = React.useRef(null);
+  const ref = useRef(null);
   const rect = useDimensions(ref);
   return (
     <div ref={ref}>

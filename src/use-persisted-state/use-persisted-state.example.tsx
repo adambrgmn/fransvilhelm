@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { usePersistedState } from './';
 
-const Counter = (): JSX.Element => {
+const Counter: React.FC = () => {
   const [count, setCount] = usePersistedState(0, 'persisted-count');
   return (
     <div>
@@ -13,7 +13,7 @@ const Counter = (): JSX.Element => {
   );
 };
 
-const UsePersistedStateExample = (): JSX.Element => {
+const UsePersistedStateExample: React.FC = () => {
   return (
     <div>
       <p>

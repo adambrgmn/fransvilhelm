@@ -29,58 +29,54 @@
     "start": "./build.js --watch",
     "build": "./build.js",
     "test": "jest",
-    "lint": "eslint src --ext .ts --ext .tsx --ext .js",
+    "lint": "eslint . --ext .ts --ext .tsx --ext .js --ignore-pattern dist",
     "release": "yarn build && yarn changeset publish",
     "plop": "plop",
     "plop:hook": "plop hook",
     "docz:dev": "docz dev",
-    "docz:build": "docz build"
+    "docz:build": "docz build",
+    "prepare": "husky install"
   },
   "dependencies": {
     "react-fast-compare": "^3.2.0",
-    "use-subscription": "^1.5.0"
+    "use-subscription": "^1.5.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.3",
-    "@babel/preset-env": "^7.12.1",
-    "@babel/preset-react": "^7.12.5",
-    "@babel/preset-typescript": "^7.12.1",
-    "@changesets/cli": "^2.11.2",
-    "@fransvilhelm/changeset-changelog": "^1.0.0",
-    "@testing-library/jest-dom": "^5.11.5",
-    "@testing-library/react": "^11.1.1",
-    "@testing-library/user-event": "^12.2.0",
-    "@types/jest": "^26.0.15",
-    "@types/node": "^14.14.7",
-    "@types/react": "^16.9.56",
-    "@types/react-dom": "^16.9.9",
-    "@types/testing-library__jest-dom": "^5.9.5",
-    "@types/testing-library__react": "^10.2.0",
-    "@types/testing-library__user-event": "^4.2.0",
+    "@changesets/cli": "^2.18.1",
+    "@fransvilhelm/changeset-changelog": "^1.0.1",
+    "@testing-library/jest-dom": "^5.15.1",
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.0.3",
+    "@types/node": "^16.11.11",
+    "@types/react": "^17.0.37",
+    "@types/react-dom": "^17.0.11",
     "@types/use-subscription": "^1.0.0",
-    "@typescript-eslint/eslint-plugin": "^4.7.0",
-    "@typescript-eslint/parser": "^4.7.0",
+    "@typescript-eslint/eslint-plugin": "^4.33.0",
+    "@typescript-eslint/parser": "^4.33.0",
     "babel-eslint": "^10.1.0",
     "docz": "^2.2.0",
-    "eslint": "^7.13.0",
+    "esbuild-jest": "^0.5.0",
+    "eslint": "^7.32.0",
     "eslint-config-react-app": "^6.0.0",
-    "eslint-plugin-flowtype": "^5.2.0",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jest": "^24.1.0",
-    "eslint-plugin-jsx-a11y": "^6.4.1",
-    "eslint-plugin-react": "^7.21.5",
-    "eslint-plugin-react-hooks": "^4.2.0",
-    "eslint-plugin-testing-library": "^3.10.0",
+    "eslint-plugin-flowtype": "^5.10.0",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jest": "^24.7.0",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.27.1",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "eslint-plugin-testing-library": "^3.10.2",
     "estrella": "^1.4.1",
-    "husky": "^4.3.0",
-    "jest": "^26.6.3",
-    "lint-staged": "^10.5.1",
-    "plop": "^2.5.4",
-    "prettier": "^2.1.2",
-    "react": "17.0.1",
-    "react-dom": "17.0.1",
+    "husky": "^7.0.0",
+    "jest": "^27.4.3",
+    "jest-fail-on-console": "^2.1.1",
+    "lint-staged": "^12.1.2",
+    "plop": "^3.0.2",
+    "prettier": "^2.5.0",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
     "rimraf": "^3.0.2",
-    "typescript": "^4.0.5"
+    "typescript": "^4.5.2"
   },
   "peerDependencies": {
     "react": "^16.8.0 || ^17.0.0"
@@ -93,8 +89,15 @@
       "path": "cz-conventional-changelog"
     }
   },
+  "bugs": {
+    "url": "https://github.com/adambrgmn/hooks/issues"
+  },
   "eslintConfig": {
-    "extends": "react-app",
+    "extends": [
+      "react-app",
+      "react-app/jest",
+      "plugin:testing-library/react"
+    ],
     "rules": {
       "import/order": [
         "warn",
@@ -112,11 +115,6 @@
           ]
         }
       ]
-    }
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {

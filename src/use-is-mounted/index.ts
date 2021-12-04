@@ -25,7 +25,7 @@ import { useRef, useEffect, useCallback } from 'react';
  *     return <p>Username: {username}</p>
  *   };
  */
-const useIsMounted = (): (() => boolean) => {
+export function useIsMounted(): () => boolean {
   const ref = useRef(false);
   const cb = useCallback(() => ref.current, []);
 
@@ -37,6 +37,4 @@ const useIsMounted = (): (() => boolean) => {
   }, []);
 
   return cb;
-};
-
-export { useIsMounted };
+}

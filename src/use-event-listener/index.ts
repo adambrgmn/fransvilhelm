@@ -9,11 +9,11 @@ import { Subscription, useSubscription } from 'use-subscription';
  * @param handler Event handler
  * @param options Event listener options
  */
-const useEventListener = <K extends keyof WindowEventMap>(
+export function useEventListener<K extends keyof WindowEventMap>(
   type: K,
   handler: (ev: WindowEventMap[K]) => any,
   options?: boolean | AddEventListenerOptions,
-): void => {
+): void {
   const handlerRef = useRef(handler);
   const optionsRef = useRef(options);
 
@@ -28,13 +28,13 @@ const useEventListener = <K extends keyof WindowEventMap>(
       window.removeEventListener(type, listener);
     };
   }, [type, options]);
-};
+}
 
-const useWindowSubscription = <K extends keyof WindowEventMap, V>(
+export function useWindowSubscription<K extends keyof WindowEventMap, V>(
   event: K,
   getCurrentValue: () => V,
   options?: boolean | AddEventListenerOptions,
-): V => {
+): V {
   const optionsRef = useRef(options);
   const subscription: Subscription<V> = useMemo(
     () => ({
@@ -49,6 +49,4 @@ const useWindowSubscription = <K extends keyof WindowEventMap, V>(
 
   const value = useSubscription(subscription);
   return value;
-};
-
-export { useEventListener, useWindowSubscription };
+}

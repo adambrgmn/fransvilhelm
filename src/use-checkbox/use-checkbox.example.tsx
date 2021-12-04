@@ -1,11 +1,11 @@
-import * as React from 'react';
+import { Fragment } from 'react';
 
 import { useCheckbox } from './';
 
 const UseCheckboxExample: React.FC = () => {
   const checkbox = useCheckbox();
   return (
-    <React.Fragment>
+    <Fragment>
       <input
         type="checkbox"
         id="checkbox"
@@ -13,7 +13,7 @@ const UseCheckboxExample: React.FC = () => {
         onChange={checkbox.onChange}
       />
       <label htmlFor="checkbox">Check me!</label>
-    </React.Fragment>
+    </Fragment>
   );
 };
 

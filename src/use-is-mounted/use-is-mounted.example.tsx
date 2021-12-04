@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState, useEffect } from 'react';
 
 import { useIsMounted } from './';
 import { useCheckbox } from '../use-checkbox';
@@ -8,11 +8,11 @@ const getUsername = (): Promise<string> =>
     setTimeout(() => resolve('adambrgmn'), 2000);
   });
 
-const SafeUsername = (): JSX.Element => {
+const SafeUsername: React.FC = () => {
   const isMounted = useIsMounted();
-  const [username, setUsername] = React.useState('[loading]');
+  const [username, setUsername] = useState('[loading]');
 
-  React.useEffect(() => {
+  useEffect(() => {
     console.log('Safe: fetching username');
     getUsername().then((u) => {
       if (isMounted()) {
@@ -33,10 +33,10 @@ const SafeUsername = (): JSX.Element => {
   return <span>{username}</span>;
 };
 
-const UnsafeUsername = (): JSX.Element => {
-  const [username, setUsername] = React.useState('[loading]');
+const UnsafeUsername: React.FC = () => {
+  const [username, setUsername] = useState('[loading]');
 
-  React.useEffect(() => {
+  useEffect(() => {
     console.log('Unsafe: fetching username');
     getUsername().then((u) => {
       console.log('Unsafe: username fetched will update state regardless');
@@ -51,7 +51,7 @@ const UnsafeUsername = (): JSX.Element => {
   return <span>{username}</span>;
 };
 
-const UseIsMountedExample = (): JSX.Element => {
+const UseIsMountedExample: React.FC = () => {
   const safeCheckbox = useCheckbox(false);
   const unsafeCheckbox = useCheckbox(false);
 

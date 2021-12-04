@@ -13,10 +13,10 @@ import { useIsomorphicLayoutEffect } from '../utils';
  * @param options Options applied to the new IntersectionObserver
  * @returns Boolean indicating if the element is in view or not
  */
-const useInView = <E extends Element>(
+export function useInView<E extends Element>(
   ref: RefObject<E>,
   options?: IntersectionObserverInit | undefined,
-): boolean => {
+): boolean {
   const [inView, setInView] = useState(false);
 
   useIsomorphicLayoutEffect(() => {
@@ -36,6 +36,4 @@ const useInView = <E extends Element>(
   }, [ref, options]);
 
   return inView;
-};
-
-export { useInView };
+}

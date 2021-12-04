@@ -14,7 +14,7 @@ it. This hook is used in the same way as `useEffect` but will do a deeper
 equality check on the dependecy array than React's version.
 
 There is also a `useDeepEqualLayoutEffect` exported that behaves exactly the
-same, but will run at the same stage as `React.useLayoutEffect`.
+same, but will run at the same stage as `useLayoutEffect`.
 
 ```js
 const dep = { an: 'object' };
@@ -45,7 +45,7 @@ const Checkbox = ({ dep }) => {
 ## Parameters
 
 `useDeepEqualEffect` and `useDeepEqualLayoutEffect` accepts same kind of
-arguments as `React.useEffect`.
+arguments as `useEffect`.
 
 | Param       | Type                         | Required | Default     | Description                                                          |
 | :---------- | :--------------------------- | :------- | :---------- | :------------------------------------------------------------------- |

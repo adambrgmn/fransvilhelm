@@ -1,9 +1,9 @@
-import * as React from 'react';
+import { useState } from 'react';
 
 import { useEventListener } from './';
 
-const UseEventListenerExample = (): JSX.Element => {
-  const [keys, setKeys] = React.useState<string[]>([]);
+const UseEventListenerExample: React.FC = () => {
+  const [keys, setKeys] = useState<string[]>([]);
   useEventListener('keypress', (ev) => {
     setKeys([...keys, ev.key]);
   });

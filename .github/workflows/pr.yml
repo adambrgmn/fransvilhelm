@@ -13,7 +13,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@master
         with:
-          node-version: 12.x
+          node-version: 16.x
 
       - name: Yarn Cache
         id: yarn-cache-dir-path
@@ -39,3 +39,23 @@ jobs:
 
       - name: Build
         run: yarn build
+
+  validate-react-18:
+    name: Validate React v18
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@master
+
+      - name: Setup Node
+        uses: actions/setup-node@master
+        with:
+          node-version: 16.x
+
+      - name: Install
+        run: |
+          yarn add react@beta react-dom@beta
+          yarn add --dev @testing-library/react@alpha
+
+      - name: Test
+        run: yarn test
