@@ -1,4 +1,5 @@
-type CompoundRefArg<T> = React.Ref<T> | undefined | null;
+import { InternalRefArg } from './types';
+import { assignRef } from './utils';
 
 /**
  * `useComposedRefs` can be used to compose an unknown amount of refs into one
@@ -9,7 +10,7 @@ type CompoundRefArg<T> = React.Ref<T> | undefined | null;
  * @returns React ref callback
  */
 export function useComposedRefs<T>(
-  ...refs: [CompoundRefArg<T>, ...CompoundRefArg<T>[]]
+  ...refs: [InternalRefArg<T>, ...InternalRefArg<T>[]]
 ): React.RefCallback<T> {
   let callback: React.RefCallback<T> = (value) => {
     for (let ref of refs) {
@@ -18,18 +19,4 @@ export function useComposedRefs<T>(
   };
 
   return callback;
-}
-
-function assignRef<T>(ref: CompoundRefArg<T>, value: T) {
-  if (ref == null) return;
-
-  if (typeof ref === 'function') {
-    ref(value);
-  } else {
-    try {
-      (ref as any).current = value;
-    } catch (error) {
-      throw new Error(`Cannot assign value "${value}" to ref "${ref}"`);
-    }
-  }
 }

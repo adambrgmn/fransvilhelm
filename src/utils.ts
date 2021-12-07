@@ -1,5 +1,7 @@
 import { useLayoutEffect, useEffect } from 'react';
 
+import { InternalRefArg } from './types';
+
 export function canUseDOM() {
   return !!(
     typeof window !== 'undefined' &&
@@ -79,4 +81,14 @@ export function observeRect(node: Element, cb: (rect: DOMRect) => void) {
       }
     },
   };
+}
+
+export function assignRef<T>(ref: InternalRefArg<T>, value: T) {
+  if (ref == null) return;
+
+  if (typeof ref === 'function') {
+    ref(value);
+  } else {
+    Reflect.set(ref, 'current', value);
+  }
 }
