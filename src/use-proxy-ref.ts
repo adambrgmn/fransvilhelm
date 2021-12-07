@@ -11,6 +11,12 @@ import { assignRef } from './utils';
  * works as standard react refs object with the added benefit that the any
  * attempts to set `ref.current` will also propagate to the provided refs.
  *
+ * Note that this hook use the built-in `Proxy` and `Reflect` apis which is not
+ * available in all browsers. Make sure you can use this with and still keep the
+ * same browser compatability.
+ *
+ * @link https://caniuse.com/proxy
+ *
  * @param initialValue Initial ref value
  * @param refs Ref objects or callbacks
  * @return React RefObject
