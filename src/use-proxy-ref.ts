@@ -1,20 +1,36 @@
-import { useEffect, useRef, useMemo } from 'react';
+import React, { useEffect, useRef, useMemo } from 'react';
 
+import { InternalRefArg } from './types';
 import { assignRef } from './utils';
 
+/**
+ * `useProxyRef` is similar to `useComposedRefs` with the difference that this
+ * will return a "proper" ref object (one with `current` prop). It is useful for
+ * when a third party api explicitly requires a ref object and can't accept a
+ * ref callback, which you get from `useComposedRefs`. The returned ref object
+ * works as standard react refs object with the added benefit that the any
+ * attempts to set `ref.current` will also propagate to the provided refs.
+ *
+ * @param initialValue Initial ref value
+ * @param refs Ref objects or callbacks
+ * @return React RefObject
+ */
 export function useProxyRef<T>(
   initialValue: T,
-  ...refs: React.Ref<T>[]
+  ...refs: InternalRefArg<T>[]
 ): React.MutableRefObject<T>;
 export function useProxyRef<T = undefined>(
   initialValue: undefined,
-  ...refs: React.Ref<T>[]
+  ...refs: InternalRefArg<T>[]
 ): React.MutableRefObject<T | undefined>;
 export function useProxyRef<T>(
   initialValue: T | null,
-  ...refs: React.Ref<T>[]
+  ...refs: InternalRefArg<T>[]
 ): React.RefObject<T>;
-export function useProxyRef<T>(initialValue: T, ...refs: React.Ref<T>[]) {
+export function useProxyRef<T>(
+  initialValue: T,
+  ...refs: InternalRefArg<T>[]
+): React.RefObject<T> | React.MutableRefObject<T> {
   let ref = useRef<T>(initialValue);
   let refsRef = useRef(refs);
 
