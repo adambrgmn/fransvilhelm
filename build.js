@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const { build, ts, tsconfig, dirname, glob, log } = require('estrella');
+const { build, ts, tsconfig, dirname, log } = require('estrella');
 const rimraf = require('rimraf');
 
 const pkg = require('./package.json');
