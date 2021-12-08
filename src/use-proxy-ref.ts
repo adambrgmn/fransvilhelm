@@ -38,35 +38,26 @@ export function useProxyRef<T>(
   ...refs: InternalRefArg<T>[]
 ): React.RefObject<T> | React.MutableRefObject<T> {
   let ref = useRef<T>(initialValue);
-  let refsRef = useRef(refs);
-
-  useEffect(() => {
-    refsRef.current = refs;
-  }, [refs]);
 
   let proxy = useMemo(() => {
-    let handler: ProxyHandler<typeof ref> = {
+    let handler: ProxyHandler<React.MutableRefObject<T>> = {
       get(target, prop, receiver) {
         return Reflect.get(target, prop, receiver);
       },
       set(target, prop, value, receiver) {
-        if (prop !== 'current') {
-          throw new Error(
-            `It is not allowed to set any other property than 'current' on a ref. Tried to set '${prop.toString()}'`,
-          );
-        }
-
-        for (let ref of refsRef.current) {
-          assignRef(ref, value);
+        if (prop === 'current') {
+          for (let ref of refs) {
+            assignRef(ref, value);
+          }
         }
 
         return Reflect.set(target, prop, value, receiver);
       },
     };
 
-    let proxy = new Proxy(ref, handler);
-    return proxy;
-  }, []);
+    return new Proxy(ref, handler);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, refs);
 
   return proxy;
 }
