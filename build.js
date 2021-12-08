@@ -41,7 +41,7 @@ function generateTypeDefs(tsconfig, entryfiles, outdir) {
     ),
   ).filter((v) => v);
 
-  log.info('Generating type declaration files for', filenames.join(',\n'));
+  log.info('Generating type declaration files for', filenames.join(', '));
 
   const compilerOptions = {
     ...tsconfig.compilerOptions,
@@ -68,5 +68,9 @@ function generateTypeDefs(tsconfig, entryfiles, outdir) {
     let file = diagnose.file;
     log.error(`${file.fileName}`);
     log.error(diagnose.messageText + '\n');
+  }
+
+  if (result.diagnostics.length > 0) {
+    throw new Error('TS build failed');
   }
 }
