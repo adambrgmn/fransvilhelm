@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const { build, ts, tsconfig, dirname, glob, log } = require('estrella');
+const { build, ts, tsconfig, dirname, log } = require('estrella');
 const rimraf = require('rimraf');
 
 const pkg = require('./package.json');
@@ -37,6 +37,7 @@ function generateTypeDefs(tsconfig, entryfiles, outdir) {
     new Set(
       (Array.isArray(entryfiles) ? entryfiles : [entryfiles]).concat(
         tsconfig.include || [],
+        ['src/env.d.ts'],
       ),
     ),
   ).filter((v) => v);
@@ -57,12 +58,20 @@ function generateTypeDefs(tsconfig, entryfiles, outdir) {
   const cancellationToken = undefined;
   const emitOnlyDtsFiles = true;
 
-  program.emit(
+  let result = program.emit(
     targetSourceFile,
     writeFile,
     cancellationToken,
     emitOnlyDtsFiles,
   );
 
-  log.info('Wrote', glob(outdir + '/*.d.ts').join(', '));
+  for (let diagnose of result.diagnostics) {
+    let file = diagnose.file;
+    log.error(`${file.fileName}`);
+    log.error(diagnose.messageText + '\n');
+  }
+
+  if (result.diagnostics.length > 0) {
+    throw new Error('TS build failed');
+  }
 }
