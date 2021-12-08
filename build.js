@@ -37,6 +37,7 @@ function generateTypeDefs(tsconfig, entryfiles, outdir) {
     new Set(
       (Array.isArray(entryfiles) ? entryfiles : [entryfiles]).concat(
         tsconfig.include || [],
+        ['src/env.d.ts'],
       ),
     ),
   ).filter((v) => v);
