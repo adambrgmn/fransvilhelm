@@ -13,6 +13,7 @@ export * from './use-input';
 export * from './use-interval';
 export * from './use-is-mounted';
 export * from './use-keypress';
+export * from './use-lazy-init';
 export * from './use-lifecycle';
 export * from './use-lock-body-scroll';
 export * from './use-media-query';
