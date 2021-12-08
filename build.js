@@ -41,7 +41,7 @@ function generateTypeDefs(tsconfig, entryfiles, outdir) {
     ),
   ).filter((v) => v);
 
-  log.info('Generating type declaration files for', filenames.join(', '));
+  log.info('Generating type declaration files for', filenames.join(',\n'));
 
   const compilerOptions = {
     ...tsconfig.compilerOptions,
@@ -57,12 +57,16 @@ function generateTypeDefs(tsconfig, entryfiles, outdir) {
   const cancellationToken = undefined;
   const emitOnlyDtsFiles = true;
 
-  program.emit(
+  let result = program.emit(
     targetSourceFile,
     writeFile,
     cancellationToken,
     emitOnlyDtsFiles,
   );
 
-  log.info('Wrote', glob(outdir + '/*.d.ts').join(', '));
+  for (let diagnose of result.diagnostics) {
+    let file = diagnose.file;
+    log.error(`${file.fileName}`);
+    log.error(diagnose.messageText + '\n');
+  }
 }
