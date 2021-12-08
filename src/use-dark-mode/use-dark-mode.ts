@@ -31,7 +31,7 @@ export function useDarkMode(
         element.classList.remove(className);
       };
     }
-  }, [active]);
+  }, [active, className]);
 
   return [active, setEnabled, isUserOverridden];
 }

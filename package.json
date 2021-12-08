@@ -101,6 +101,12 @@
       "plugin:testing-library/react"
     ],
     "rules": {
+      "react-hooks/exhaustive-deps": [
+        "warn",
+        {
+          "additionalHooks": "(useIsomorphicLayoutEffect)"
+        }
+      ],
       "import/order": [
         "warn",
         {

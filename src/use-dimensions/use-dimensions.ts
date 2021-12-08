@@ -37,7 +37,7 @@ export function useDimensions(
     if (ref.current !== element) {
       setElement(ref.current);
     }
-  });
+  }, [callback, element, ref]);
 
   useIsomorphicLayoutEffect(() => {
     if (element && !initialRectSet.current) {
@@ -71,7 +71,7 @@ export function useDimensions(
     observe && observer.observe();
 
     return cleanup;
-  }, [observe, element]);
+  }, [observe, element, ref]);
 
   return rect;
 }
