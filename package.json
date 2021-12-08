@@ -3,8 +3,12 @@
   "version": "3.0.0",
   "description": "A set of reusable React hooks",
   "source": "src/index.ts",
-  "main": "dist/index.cjs.js",
-  "module": "dist/index.esm.js",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "exports": {
+    "import": "./dist/index.js",
+    "require": "./dist/index.cjs"
+  },
   "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
@@ -26,8 +30,8 @@
     "utils"
   ],
   "scripts": {
-    "start": "./build.js --watch",
-    "build": "./build.js",
+    "start": "./build.cjs --watch",
+    "build": "./build.cjs",
     "test": "jest",
     "lint": "eslint . --ext .ts --ext .tsx --ext .js --ignore-pattern dist",
     "release": "yarn build && yarn changeset publish",

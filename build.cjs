@@ -28,7 +28,7 @@ build({
 
 build({
   ...baseOptions,
-  outfile: 'dist/index.cjs.js',
+  outfile: 'dist/index.cjs',
   format: 'cjs',
 });
 
