@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useMemo } from 'react';
+import React, { useRef, useMemo } from 'react';
 
 import { InternalRefArg } from './types';
 import { assignRef } from './utils';
