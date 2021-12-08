@@ -7,6 +7,7 @@ export * from './use-debounce';
 export * from './use-deep-equal-effect';
 export * from './use-dimensions';
 export * from './use-event-listener';
+export * from './use-hover';
 export * from './use-in-view';
 export * from './use-input';
 export * from './use-interval';
