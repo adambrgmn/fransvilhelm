@@ -1,5 +1,6 @@
 export * from './use-checkbox';
 export * from './use-click-outside';
+export * from './use-composed-refs';
 export * from './use-controlled-state';
 export * from './use-dark-mode';
 export * from './use-debounce';
@@ -18,4 +19,5 @@ export * from './use-online';
 export * from './use-persisted-state';
 export * from './use-previous';
 export * from './use-promise';
+export * from './use-proxy-ref';
 export * from './use-scroll-position';
