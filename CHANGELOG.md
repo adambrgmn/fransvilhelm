@@ -1,5 +1,12 @@
 # @fransvilhelm/hooks
 
+## 3.1.1
+
+### Patch Changes
+
+- Export utils (by [@adambrgmn](https://github.com/adambrgmn) in
+  [#36](https://github.com/adambrgmn/hooks/pull/36))
+
 ## 3.1.0
 
 ### Minor Changes
