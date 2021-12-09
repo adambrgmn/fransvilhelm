@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 const { build, ts, tsconfig, dirname, log } = require('estrella');
 const rimraf = require('rimraf');
+const { DiagnosticCategory } = require('typescript');
 
 const pkg = require('./package.json');
 
@@ -71,7 +72,11 @@ function generateTypeDefs(tsconfig, entryfiles, outdir) {
     log.error(diagnose.messageText + '\n');
   }
 
-  if (result.diagnostics.length > 0) {
+  let hasError = result.diagnostics.some(
+    (diagnostic) => diagnostic.category === DiagnosticCategory.Error,
+  );
+
+  if (hasError) {
     throw new Error('TS build failed');
   }
 }
