@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
-import debounce from 'lodash.debounce';
 
-import { useDebouncedCallback } from '..';
+import { useDebouncedCallback } from '../use-debounced-callback';
 
 /**
  * Use this hook to debounce a value only updating it once within the given
