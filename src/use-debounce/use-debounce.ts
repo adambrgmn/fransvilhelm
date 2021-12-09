@@ -1,4 +1,7 @@
 import { useState, useEffect } from 'react';
+import debounce from 'lodash.debounce';
+
+import { useDebouncedCallback } from '..';
 
 /**
  * Use this hook to debounce a value only updating it once within the given
@@ -33,16 +36,14 @@ import { useState, useEffect } from 'react';
  */
 export function useDebounce<T>(value: T, delay: number): T {
   const [debouncedValue, setDebouncedValue] = useState(value);
+  const updateValue = useDebouncedCallback(
+    (value: T) => setDebouncedValue(value),
+    delay,
+  );
 
   useEffect(() => {
-    const id = setTimeout(() => {
-      setDebouncedValue(value);
-    }, delay);
-
-    return () => {
-      clearTimeout(id);
-    };
-  }, [value, delay]);
+    updateValue(value);
+  }, [updateValue, value]);
 
   return debouncedValue;
 }

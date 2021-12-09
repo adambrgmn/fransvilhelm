@@ -36,6 +36,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "lodash.debounce": "^4.0.8",
     "react-fast-compare": "^3.2.0",
     "use-subscription": "^1.5.1"
   },
@@ -50,6 +51,7 @@
     "@testing-library/react": "^13.0.0-alpha.5",
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.0.3",
+    "@types/lodash.debounce": "^4.0.6",
     "@types/node": "^16.11.11",
     "@types/react": "^17.0.37",
     "@types/react-dom": "^17.0.11",

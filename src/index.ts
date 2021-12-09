@@ -4,6 +4,7 @@ export * from './use-composed-refs';
 export * from './use-controlled-state';
 export * from './use-dark-mode';
 export * from './use-debounce';
+export * from './use-debounced-callback';
 export * from './use-deep-equal-effect';
 export * from './use-dimensions';
 export * from './use-event-listener';

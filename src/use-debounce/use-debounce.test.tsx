@@ -3,12 +3,9 @@ import userEvent from '@testing-library/user-event';
 
 import { useDebounce } from './use-debounce';
 import { useInput } from '../use-input';
+import { advanceTimersByTime } from '../test-utils/jest';
 
-const advanceByTime = (time: number): void => {
-  act(() => {
-    jest.advanceTimersByTime(time);
-  });
-};
+jest.useFakeTimers();
 
 const TestComponent: React.FC<{ delay: number }> = ({ delay }) => {
   const input = useInput('');
@@ -22,8 +19,7 @@ const TestComponent: React.FC<{ delay: number }> = ({ delay }) => {
   );
 };
 
-it('should debounce a value and only update once within the given delay', async () => {
-  jest.useFakeTimers();
+it('should debounce a value and only update once within the given delay', () => {
   render(<TestComponent delay={100} />);
   const debouncedValue = screen.getByTestId('debounced');
   const input = screen.getByTestId('input');
@@ -35,12 +31,12 @@ it('should debounce a value and only update once within the given delay', async 
     }, 50 * (index + 1));
   });
 
-  advanceByTime(100);
+  advanceTimersByTime(100);
   expect(debouncedValue).toBeEmptyDOMElement();
 
-  advanceByTime(100);
+  advanceTimersByTime(100);
   expect(debouncedValue).toBeEmptyDOMElement();
 
-  advanceByTime(100);
+  advanceTimersByTime(100);
   expect(debouncedValue).toHaveTextContent('abc');
 });
