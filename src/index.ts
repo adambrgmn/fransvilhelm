@@ -23,4 +23,5 @@ export * from './use-previous';
 export * from './use-promise';
 export * from './use-proxy-ref';
 export * from './use-scroll-position';
+export * from './use-textarea-resize';
 export * from './use-toggle';
