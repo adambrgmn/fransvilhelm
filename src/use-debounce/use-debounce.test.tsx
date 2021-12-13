@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { useDebounce } from './use-debounce';
-import { useInput } from '../use-input';
 import { advanceTimersByTime } from '../test-utils/jest';
+import { useInput } from '../use-input';
+import { useDebounce } from './use-debounce';
 
 jest.useFakeTimers();
 

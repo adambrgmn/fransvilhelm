@@ -1,12 +1,12 @@
-import { useState } from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { useState } from 'react';
 
+import { useInput } from '../use-input';
 import {
   useDeepEqualEffect,
   useDeepEqualLayoutEffect,
 } from './use-deep-equal-effect';
-import { useInput } from '../use-input';
 
 describe('useDeepEqualEffect', () => {
   it('should only run effect if dependencies are on deeply equal', () => {

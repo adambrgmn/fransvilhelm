@@ -1,6 +1,6 @@
-import { useRef, useState } from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { useRef, useState } from 'react';
 
 import { useClickOutside } from './use-click-outside';
 

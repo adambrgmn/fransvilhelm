@@ -1,5 +1,5 @@
-import { createRef, useRef } from 'react';
 import { render } from '@testing-library/react';
+import { createRef, useRef } from 'react';
 
 import { useComposedRefs } from './use-composed-refs';
 

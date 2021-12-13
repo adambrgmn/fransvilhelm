@@ -1,5 +1,5 @@
-import { useMemo, useRef, useEffect } from 'react';
 import debounce from 'lodash.debounce';
+import { useMemo, useRef, useEffect } from 'react';
 
 export function useDebouncedCallback<T extends (...args: any[]) => any>(
   callback: T,

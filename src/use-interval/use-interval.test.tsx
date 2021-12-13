@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { render, fireEvent, act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { useState } from 'react';
 
 import { useInterval } from './use-interval';
 

@@ -1,7 +1,7 @@
 import { act, render, screen } from '@testing-library/react';
 
-import * as utils from '../utils';
 import { setupMatchMedia } from '../test-utils/setup-match-media';
+import * as utils from '../utils';
 import { useMediaQuery } from './use-media-query';
 
 jest.mock('../utils.ts', () => ({ canUseDOM: jest.fn(() => true) }));

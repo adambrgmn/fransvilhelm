@@ -1,5 +1,5 @@
-import { useRef } from 'react';
 import { render, act, screen } from '@testing-library/react';
+import { useRef } from 'react';
 
 import { setupIntersectionObserverMock } from '../test-utils/setup-intersection-observer';
 import { useInView } from './use-in-view';

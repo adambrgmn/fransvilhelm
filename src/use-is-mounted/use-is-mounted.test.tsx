@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
 import { render } from '@testing-library/react';
+import { useEffect } from 'react';
 
 import { useIsMounted } from './use-is-mounted';
 

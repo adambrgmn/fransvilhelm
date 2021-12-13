@@ -6,6 +6,10 @@
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/adambrgmn/hooks.git"
@@ -56,18 +60,6 @@
     "@types/react": "^17.0.37",
     "@types/react-dom": "^17.0.11",
     "@types/use-subscription": "^1.0.0",
-    "@typescript-eslint/eslint-plugin": "^4.33.0",
-    "@typescript-eslint/parser": "^4.33.0",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^7.32.0",
-    "eslint-config-react-app": "^6.0.0",
-    "eslint-plugin-flowtype": "^5.10.0",
-    "eslint-plugin-import": "^2.25.3",
-    "eslint-plugin-jest": "^24.7.0",
-    "eslint-plugin-jsx-a11y": "^6.5.1",
-    "eslint-plugin-react": "^7.27.1",
-    "eslint-plugin-react-hooks": "^4.3.0",
-    "eslint-plugin-testing-library": "^3.10.2",
     "estrella": "^1.4.1",
     "husky": "^7.0.0",
     "jest": "^27.4.3",
@@ -98,34 +90,8 @@
   },
   "eslintConfig": {
     "extends": [
-      "react-app",
-      "react-app/jest",
-      "plugin:testing-library/react"
-    ],
-    "rules": {
-      "react-hooks/exhaustive-deps": [
-        "warn",
-        {
-          "additionalHooks": "(useIsomorphicLayoutEffect)"
-        }
-      ],
-      "import/order": [
-        "warn",
-        {
-          "newlines-between": "always",
-          "groups": [
-            "builtin",
-            "external",
-            "internal",
-            [
-              "parent",
-              "sibling",
-              "index"
-            ]
-          ]
-        }
-      ]
-    }
+      "./packages/config/eslint-preset.js"
+    ]
   },
   "lint-staged": {
     "*.{js,ts,jsx,tsx}": [
