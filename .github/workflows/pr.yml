@@ -24,7 +24,7 @@ jobs:
         run: echo "::set-output name=dir::$(yarn cache dir)"
 
       - name: Yarn cache
-        uses: actions/cache@latest
+        uses: actions/cache@v2
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
@@ -32,7 +32,7 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: Turbo cache
-        uses: actions/cache@latest
+        uses: actions/cache@v2
         with:
           path: ~/**/.turbo
           key: ${{ runner.os }}-turbo
@@ -42,3 +42,5 @@ jobs:
 
       - name: Validate
         run: yarn turbo run build test lint
+        env:
+          REACT_VERSION: ${{ matrix.react }}
