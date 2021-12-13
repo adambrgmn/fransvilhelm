@@ -1,14 +1,16 @@
 #!/usr/bin/env node
+const path = require('path');
+
 const { build, ts, tsconfig, dirname, log } = require('estrella');
 const rimraf = require('rimraf');
 const { DiagnosticCategory } = require('typescript');
 
 const pkg = require('./package.json');
 
-rimraf.sync('./dist');
+rimraf.sync(path.join(__dirname, './dist'));
 
 let baseOptions = {
-  entry: 'src/index.ts',
+  entry: path.join(__dirname, 'src/index.ts'),
   bundle: true,
   minify: false,
   external: [
@@ -19,7 +21,7 @@ let baseOptions = {
 
 build({
   ...baseOptions,
-  outfile: 'dist/index.js',
+  outfile: path.join(__dirname, 'dist/index.js'),
   format: 'esm',
   onEnd(config) {
     const dtsFilesOutdir = dirname(config.outfile);
@@ -29,7 +31,7 @@ build({
 
 build({
   ...baseOptions,
-  outfile: 'dist/index.cjs.js',
+  outfile: path.join(__dirname, 'dist/index.cjs.js'),
   format: 'cjs',
 });
 
