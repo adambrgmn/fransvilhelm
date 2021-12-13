@@ -25,7 +25,6 @@ jobs:
 
       - name: Yarn cache
         uses: actions/cache@latest
-        id: yarn-cache
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
@@ -34,7 +33,6 @@ jobs:
 
       - name: Turbo cache
         uses: actions/cache@latest
-        id: yarn-cache
         with:
           path: ~/**/.turbo
           key: ${{ runner.os }}-turbo
