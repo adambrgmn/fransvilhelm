@@ -33,6 +33,8 @@ jobs:
 
       - name: Install
         run: yarn
+        env:
+          HUSKY: 0
 
       - name: Validate
         run: yarn turbo run build test lint
