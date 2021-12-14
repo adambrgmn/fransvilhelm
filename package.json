@@ -5,25 +5,13 @@
   "workspaces": [
     "packages/*"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/adambrgmn/hooks.git"
-  },
+  "repository": "https://github.com/adambrgmn/hooks",
   "author": {
     "name": "Adam Bergman",
     "email": "adam@fransvilhelm.com"
   },
   "homepage": "https://github.com/adambrgmn/hooks",
   "license": "MIT",
-  "files": [
-    "dist"
-  ],
-  "keywords": [
-    "react-hooks",
-    "hooks",
-    "react",
-    "utils"
-  ],
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",

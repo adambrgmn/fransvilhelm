@@ -6,15 +6,12 @@
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/adambrgmn/hooks.git"
-  },
+  "repository": "https://github.com/adambrgmn/hooks/tree/main/packages/hooks",
   "author": {
     "name": "Adam Bergman",
     "email": "adam@fransvilhelm.com"
   },
-  "homepage": "https://github.com/adambrgmn/hooks",
+  "homepage": "https://github.com/adambrgmn/hooks/tree/main/packages/hooks",
   "license": "MIT",
   "files": [
     "dist"
