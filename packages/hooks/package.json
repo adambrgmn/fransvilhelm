@@ -29,8 +29,9 @@
     "dev": "./build.js --watch",
     "build": "./build.js",
     "test": "jest",
+    "test:ci": "jest --coverage",
+    "test:ci:react-18": "REACT_VERSION=18 jest",
     "lint": "eslint . --ext .ts --ext .tsx --ext .js --ignore-pattern dist",
-    "release": "yarn build && yarn changeset publish",
     "plop": "plop",
     "plop:hook": "plop hook"
   },

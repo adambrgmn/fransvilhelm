@@ -4,12 +4,8 @@ on: pull_request
 
 jobs:
   validate:
-    name: 'CI | Node ${{ matrix.node }} | React ${{ matrix.react }}'
+    name: 'PR | CI'
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node: [16]
-        react: [17, 18]
     steps:
       - name: Checkout Repo
         uses: actions/checkout@master
@@ -17,7 +13,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@master
         with:
-          node-version: ${{ matrix.node }}
+          node-version: '16'
 
       - name: Yarn cache
         uses: actions/cache@v2
@@ -32,11 +28,12 @@ jobs:
           key: ${{ runner.os }}-turbo
 
       - name: Install
-        run: yarn
+        run: yarn install --frozen-lockfile
         env:
           HUSKY: 0
 
       - name: Validate
-        run: yarn turbo run build test lint
-        env:
-          REACT_VERSION: ${{ matrix.react }}
+        run: yarn turbo run build test:ci lint
+
+      - name: Validate | React 18
+        run: yarn turbo run test:ci:react-18

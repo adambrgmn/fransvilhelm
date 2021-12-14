@@ -5,9 +5,11 @@
   "include": ["src"],
   "exclude": ["node_modules"],
   "compilerOptions": {
-    "lib": ["ES2015"],
+    "target": "ES2017",
+    "lib": ["dom", "dom.iterable", "esnext"],
     "module": "ESNext",
+    "moduleResolution": "node",
     "outDir": "dist",
-    "jsx": "react"
+    "jsx": "preserve"
   }
 }

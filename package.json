@@ -29,7 +29,7 @@
     "dev": "turbo run dev --parallel",
     "test": "turbo run test",
     "lint": "turbo run lint",
-    "release": "yarn build && yarn changeset publish",
+    "release": "turbo run build && yarn changeset publish",
     "prepare": "husky install"
   },
   "dependencies": {},
@@ -65,6 +65,18 @@
       "test": {
         "dependsOn": [],
         "outputs": []
+      },
+      "test:ci": {
+        "dependsOn": [],
+        "outputs": [
+          "coverage/**"
+        ]
+      },
+      "test:ci:react-18": {
+        "dependsOn": [],
+        "outputs": [
+          "coverage/**"
+        ]
       },
       "lint": {
         "dependsOn": [],
