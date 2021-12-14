@@ -1,144 +1,79 @@
 {
   "name": "@fransvilhelm/hooks",
-  "version": "3.1.1",
-  "description": "A set of reusable React hooks",
-  "source": "src/index.ts",
-  "main": "dist/index.cjs.js",
-  "module": "dist/index.esm.js",
-  "types": "dist/index.d.ts",
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/adambrgmn/hooks.git"
-  },
+  "version": "0.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "repository": "https://github.com/adambrgmn/hooks",
   "author": {
     "name": "Adam Bergman",
     "email": "adam@fransvilhelm.com"
   },
-  "homepage": "https://hooks.fransvilhelm.com",
+  "homepage": "https://github.com/adambrgmn/hooks",
   "license": "MIT",
-  "files": [
-    "dist"
-  ],
-  "keywords": [
-    "react-hooks",
-    "hooks",
-    "react",
-    "utils"
-  ],
   "scripts": {
-    "start": "./build.js --watch",
-    "build": "./build.js",
-    "test": "jest",
-    "lint": "eslint . --ext .ts --ext .tsx --ext .js --ignore-pattern dist",
-    "release": "yarn build && yarn changeset publish",
-    "plop": "plop",
-    "plop:hook": "plop hook",
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "test": "turbo run test",
+    "lint": "turbo run lint",
+    "release": "turbo run build && yarn changeset publish",
     "prepare": "husky install"
   },
-  "dependencies": {
-    "lodash.debounce": "^4.0.8",
-    "react-fast-compare": "^3.2.0",
-    "use-subscription": "^1.5.1"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "@babel/core": "^7.16.0",
-    "@babel/preset-env": "^7.16.4",
-    "@babel/preset-react": "^7.16.0",
-    "@babel/preset-typescript": "^7.16.0",
     "@changesets/cli": "^2.18.1",
     "@fransvilhelm/changeset-changelog": "^1.0.1",
-    "@testing-library/jest-dom": "^5.15.1",
-    "@testing-library/react": "^13.0.0-alpha.5",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.0.3",
-    "@types/lodash.debounce": "^4.0.6",
-    "@types/node": "^16.11.11",
-    "@types/react": "^17.0.37",
-    "@types/react-dom": "^17.0.11",
-    "@types/use-subscription": "^1.0.0",
-    "@typescript-eslint/eslint-plugin": "^4.33.0",
-    "@typescript-eslint/parser": "^4.33.0",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^7.32.0",
-    "eslint-config-react-app": "^6.0.0",
-    "eslint-plugin-flowtype": "^5.10.0",
-    "eslint-plugin-import": "^2.25.3",
-    "eslint-plugin-jest": "^24.7.0",
-    "eslint-plugin-jsx-a11y": "^6.5.1",
-    "eslint-plugin-react": "^7.27.1",
-    "eslint-plugin-react-hooks": "^4.3.0",
-    "eslint-plugin-testing-library": "^3.10.2",
-    "estrella": "^1.4.1",
     "husky": "^7.0.0",
-    "jest": "^27.4.3",
-    "jest-fail-on-console": "^2.1.1",
     "lint-staged": "^12.1.2",
-    "plop": "^3.0.2",
+    "plop": "^3.0.4",
     "prettier": "^2.5.0",
-    "react": "17.0.2",
-    "react-18": "npm:react@^18.0.0-beta-c7917fe76-20211206",
-    "react-dom": "17.0.2",
-    "react-dom-18": "npm:react-dom@^18.0.0-beta-c7917fe76-20211206",
-    "rimraf": "^3.0.2",
+    "turbo": "^1.0.7",
     "typescript": "^4.5.2"
   },
-  "peerDependencies": {
-    "react": "^16.8.0 || ^17.0.0 || ^18.0.0-alpha || ^18.0.0-beta"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
-  "config": {
-    "commitizen": {
-      "path": "cz-conventional-changelog"
-    }
-  },
-  "bugs": {
-    "url": "https://github.com/adambrgmn/hooks/issues"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest",
-      "plugin:testing-library/react"
-    ],
-    "rules": {
-      "react-hooks/exhaustive-deps": [
-        "warn",
-        {
-          "additionalHooks": "(useIsomorphicLayoutEffect)"
-        }
-      ],
-      "import/order": [
-        "warn",
-        {
-          "newlines-between": "always",
-          "groups": [
-            "builtin",
-            "external",
-            "internal",
-            [
-              "parent",
-              "sibling",
-              "index"
-            ]
-          ]
-        }
-      ]
-    }
-  },
   "lint-staged": {
-    "*.{js,ts,jsx,tsx}": [
-      "eslint --fix"
-    ],
-    "*.{js,ts,jsx,tsx,json,md,yml,html}": [
-      "prettier --write"
-    ]
+    "*.{js,ts,jsx,tsx,json,md,yml,html}": "prettier --write"
   },
   "prettier": {
     "semi": true,
     "singleQuote": true,
     "trailingComma": "all",
     "proseWrap": "always"
+  },
+  "turbo": {
+    "baseBranch": "origin/main",
+    "pipeline": {
+      "build": {
+        "dependsOn": [
+          "^build"
+        ],
+        "outputs": [
+          "dist/**"
+        ]
+      },
+      "test": {
+        "dependsOn": [],
+        "outputs": []
+      },
+      "test:ci": {
+        "dependsOn": [],
+        "outputs": [
+          "coverage/**"
+        ]
+      },
+      "test:ci:react-18": {
+        "dependsOn": [],
+        "outputs": [
+          "coverage/**"
+        ]
+      },
+      "lint": {
+        "dependsOn": [],
+        "outputs": []
+      },
+      "dev": {
+        "cache": false
+      }
+    }
   }
 }

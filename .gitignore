@@ -1,11 +1,8 @@
 # Build output
 dist
 
-# Docs index (this is created by running node scripts/create-index-doc.js) – generated from README.md
-src/index.mdx
-
-# Docz
-.docz
+# Turbo
+.turbo
 
 # Logs
 logs

@@ -6169,10 +6169,10 @@ pkg-dir@^4.2.0:
   dependencies:
     find-up "^4.0.0"
 
-plop@^3.0.2:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/plop/-/plop-3.0.2.tgz#babd613c0efc0a650b3325a9917fa325f088e044"
-  integrity sha512-jP9JPwISnwd+wQvVv4JbCWI1JoNvwSATneVvXtsuDf3dQdr4m1C/OEpPhHt6h0mB1i0CJ+nsVHqzcCNgxRvTEA==
+plop@^3.0.4:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/plop/-/plop-3.0.4.tgz#625802a210678c721364840a63187be529399cd7"
+  integrity sha512-Qc7Mrj1uuMu6B8Qmj/2KyR2sjxRDZnbAcPf/udg5/24dYWL4lMBgUKGLs7wmatQ5AqKCMiZVbAlnEXHO2cil3Q==
   dependencies:
     "@types/liftoff" "^4.0.0"
     chalk "^5.0.0"
@@ -7203,6 +7203,13 @@ tty-table@^2.8.10:
     wcwidth "^1.0.1"
     yargs "^15.1.0"
 
+turbo@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/turbo/-/turbo-1.0.7.tgz#59816a0cd6df4467732b76a2cf28115b4eeb79d4"
+  integrity sha512-EJRTi3UamxaeXHsSvZxio4DfOv392dt7P7EDGfQ24F3P9oJdD6ffLJhBdQZN2EmCNq5qRnePzzKwNNL2TldmuA==
+  dependencies:
+    zlib "^1.0.5"
+
 type-check@^0.4.0, type-check@~0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/type-check/-/type-check-0.4.0.tgz#07b8203bfa7056c0657050e3ccd2c37730bab8f1"
@@ -7603,3 +7610,8 @@ yargs@^16.2.0:
     string-width "^4.2.0"
     y18n "^5.0.5"
     yargs-parser "^20.2.2"
+
+zlib@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/zlib/-/zlib-1.0.5.tgz#6e7c972fc371c645a6afb03ab14769def114fcc0"
+  integrity sha1-bnyXL8NxxkWmr7A6sUdp3vEU/MA=

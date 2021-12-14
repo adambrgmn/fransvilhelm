@@ -4,12 +4,8 @@ on: pull_request
 
 jobs:
   validate:
-    name: 'Validate | Node ${{ matrix.node }} | React ${{ matrix.react }}'
+    name: Validate
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node: [16]
-        react: [17, 18]
     steps:
       - name: Checkout Repo
         uses: actions/checkout@master
@@ -17,31 +13,27 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@master
         with:
-          node-version: ${{ matrix.node }}
+          node-version: '16'
 
-      - name: Yarn Cache
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-
-      - name: Yarn Cache
-        uses: actions/cache@v1
-        id: yarn-cache
+      - name: Yarn cache
+        uses: actions/cache@v2
         with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Turbo cache
+        uses: actions/cache@v2
+        with:
+          path: '**/.turbo'
+          key: ${{ runner.os }}-turbo
 
       - name: Install
-        run: yarn
-
-      - name: Lint
-        run: yarn lint --max-warnings=0
-
-      - name: Test
-        run: yarn test --coverage
+        run: yarn install --frozen-lockfile
         env:
-          REACT_VERSION: ${{ matrix.react }}
+          HUSKY: 0
 
-      - name: Build
-        run: yarn build
+      - name: Validate
+        run: yarn turbo run build test:ci lint
+
+      - name: Validate | React 18
+        run: yarn turbo run test:ci:react-18
