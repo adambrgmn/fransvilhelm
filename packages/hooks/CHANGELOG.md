@@ -1,5 +1,12 @@
 # @fransvilhelm/hooks
 
+## 3.1.2
+
+### Patch Changes
+
+- Fix main export field (by [@adambrgmn](https://github.com/adambrgmn) in
+  [#42](https://github.com/adambrgmn/fransvilhelm/pull/42))
+
 ## 3.1.1
 
 ### Patch Changes
