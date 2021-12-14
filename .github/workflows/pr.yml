@@ -28,7 +28,7 @@ jobs:
       - name: Turbo cache
         uses: actions/cache@v2
         with:
-          path: ~/**/.turbo
+          path: '**/.turbo'
           key: ${{ runner.os }}-turbo
 
       - name: Install
