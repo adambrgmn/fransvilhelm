@@ -1,5 +1,12 @@
 # @fransvilhelm/changeset-changelog
 
+## 1.1.0
+
+### Minor Changes
+
+- Move into monorepo architecture (by [@adambrgmn](https://github.com/adambrgmn)
+  in [#42](https://github.com/adambrgmn/fransvilhelm/pull/42))
+
 ## 1.0.1
 
 ### Patch Changes
