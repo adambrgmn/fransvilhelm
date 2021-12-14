@@ -1,13 +1,14 @@
 {
   "name": "@fransvilhelm/build-package",
   "version": "0.0.0",
+  "private": true,
   "license": "MIT",
-  "main": "./build.js",
+  "main": "build.js",
   "bin": {
-    "build-package": "./build.js"
+    "build-package": "build.js"
   },
   "files": [
-    "./build.js"
+    "build.js"
   ],
   "scripts": {
     "lint": "eslint ."

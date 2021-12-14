@@ -35,5 +35,4 @@ typings/
 # dotenv environment variables file
 .env
 
-# Microbundle cache
-.rts2*
+.DS_Store
