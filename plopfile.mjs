@@ -1,22 +1,10 @@
-const { promises: fs } = require('fs');
-const path = require('path');
+import * as fs from 'fs/promises';
+import * as path from 'path';
 
-module.exports = function (
+export default function (
   /** @type {import('plop').NodePlopAPI} */
   plop,
 ) {
-  plop.setGenerator('docz-index', {
-    description: 'Generate Docz index page',
-    prompts: [],
-    actions: [
-      {
-        type: 'add',
-        path: 'src/index.mdx',
-        templateFile: 'README.md',
-      },
-    ],
-  });
-
   const kebabCase = plop.getHelper('kebabCase');
   plop.setGenerator('hook', {
     description: 'Create everything related to a hook',
@@ -31,13 +19,13 @@ module.exports = function (
     actions: [
       {
         type: 'addMany',
-        destination: 'src/{{kebabCase name}}',
-        templateFiles: 'plop-templates/hook/**/*',
-        base: 'plop-templates/hook',
+        destination: 'packages/hooks/src/{{kebabCase name}}',
+        templateFiles: '.plop/hook/**/*',
+        base: '.plop/hook',
       },
       {
         type: 'append-sorted',
-        path: 'src/index.ts',
+        path: 'packages/hooks/src/index.ts',
         template: "export * from './{{ kebabCase name }}';\n",
       },
     ],
@@ -64,4 +52,4 @@ module.exports = function (
     await fs.writeFile(dest, sortedContent);
     return `Appended and sorted ${config.path}`;
   });
-};
+}
