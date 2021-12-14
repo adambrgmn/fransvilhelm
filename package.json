@@ -23,7 +23,7 @@
   "dependencies": {},
   "devDependencies": {
     "@changesets/cli": "^2.18.1",
-    "@fransvilhelm/changeset-changelog": "^1.0.1",
+    "@fransvilhelm/changeset-changelog": "*",
     "husky": "^7.0.0",
     "lint-staged": "^12.1.2",
     "plop": "^3.0.4",
