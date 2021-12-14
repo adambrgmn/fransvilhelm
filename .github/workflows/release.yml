@@ -38,6 +38,9 @@ jobs:
         env:
           HUSKY: 0
 
+      - name: Prepare
+        run: yarn build --scope="*changeset*"
+
       - name: Create Release Pull Request or Publish to npm
         id: changesets
         uses: changesets/action@v1
