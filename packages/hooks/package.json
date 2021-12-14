@@ -4,14 +4,14 @@
   "description": "A set of reusable React hooks",
   "source": "src/index.ts",
   "main": "dist/index.cjs.js",
-  "module": "dist/index.esm.js",
+  "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "repository": "https://github.com/adambrgmn/hooks/tree/main/packages/hooks",
+  "homepage": "https://github.com/adambrgmn/hooks/tree/main/packages/hooks",
   "author": {
     "name": "Adam Bergman",
     "email": "adam@fransvilhelm.com"
   },
-  "homepage": "https://github.com/adambrgmn/hooks/tree/main/packages/hooks",
   "license": "MIT",
   "files": [
     "dist"
