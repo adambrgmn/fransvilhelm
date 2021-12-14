@@ -12,7 +12,7 @@ const changelogFunctions: ChangelogFunctions = {
     }
     const [firstLine, ...summary] = changeset.summary
       .split('\n')
-      .map((l) => l.trimRight());
+      .map((l) => l.trimEnd());
 
     if (changeset.commit) {
       let { links } = await getInfo({
