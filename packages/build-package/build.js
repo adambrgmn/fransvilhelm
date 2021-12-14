@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-const path = require('path');
 const fs = require('fs');
+const path = require('path');
 
 const { build, ts, tsconfig, dirname, log } = require('estrella');
 const rimraf = require('rimraf');

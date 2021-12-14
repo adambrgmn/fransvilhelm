@@ -10,7 +10,7 @@
     "./build.js"
   ],
   "scripts": {
-    "lint": "eslint"
+    "lint": "eslint ."
   },
   "dependencies": {
     "estrella": "^1.4.1",
