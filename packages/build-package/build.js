@@ -1,27 +1,30 @@
 #!/usr/bin/env node
 const path = require('path');
+const fs = require('fs');
 
 const { build, ts, tsconfig, dirname, log } = require('estrella');
 const rimraf = require('rimraf');
 const { DiagnosticCategory } = require('typescript');
 
-const pkg = require('./package.json');
+let cwd = process.cwd();
+let relative = (...fragments) => path.join(cwd, ...fragments);
+let pkg = readJson(relative('./package.json'));
 
-rimraf.sync(path.join(__dirname, './dist'));
+rimraf.sync(relative('./dist'));
 
 let baseOptions = {
-  entry: path.join(__dirname, 'src/index.ts'),
+  entry: relative('src/index.ts'),
   bundle: true,
   minify: false,
   external: [
-    ...Object.keys(pkg.dependencies),
-    ...Object.keys(pkg.peerDependencies),
+    ...Object.keys(pkg.dependencies ?? {}),
+    ...Object.keys(pkg.peerDependencies ?? {}),
   ],
 };
 
 build({
   ...baseOptions,
-  outfile: path.join(__dirname, 'dist/index.js'),
+  outfile: relative('dist/index.js'),
   format: 'esm',
   onEnd(config) {
     const dtsFilesOutdir = dirname(config.outfile);
@@ -31,12 +34,12 @@ build({
 
 build({
   ...baseOptions,
-  outfile: path.join(__dirname, 'dist/index.cjs.js'),
+  outfile: relative('dist/index.cjs.js'),
   format: 'cjs',
 });
 
 function generateTypeDefs(tsconfig, entryfiles, outdir) {
-  const filenames = Array.from(
+  let filenames = Array.from(
     new Set(
       (Array.isArray(entryfiles) ? entryfiles : [entryfiles]).concat(
         tsconfig.include || [],
@@ -47,7 +50,7 @@ function generateTypeDefs(tsconfig, entryfiles, outdir) {
 
   log.info('Generating type declaration files for', filenames.join(', '));
 
-  const compilerOptions = {
+  let compilerOptions = {
     ...tsconfig.compilerOptions,
     moduleResolution: undefined,
     declaration: true,
@@ -55,11 +58,11 @@ function generateTypeDefs(tsconfig, entryfiles, outdir) {
     noEmit: false,
   };
 
-  const program = ts.ts.createProgram(filenames, compilerOptions);
-  const targetSourceFile = undefined;
-  const writeFile = undefined;
-  const cancellationToken = undefined;
-  const emitOnlyDtsFiles = true;
+  let program = ts.ts.createProgram(filenames, compilerOptions);
+  let targetSourceFile = undefined;
+  let writeFile = undefined;
+  let cancellationToken = undefined;
+  let emitOnlyDtsFiles = true;
 
   let result = program.emit(
     targetSourceFile,
@@ -81,4 +84,9 @@ function generateTypeDefs(tsconfig, entryfiles, outdir) {
   if (hasError) {
     throw new Error('TS build failed');
   }
+}
+
+function readJson(file) {
+  let content = fs.readFileSync(file, 'utf-8');
+  return JSON.parse(content);
 }
