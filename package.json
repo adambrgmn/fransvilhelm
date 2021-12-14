@@ -5,12 +5,12 @@
   "workspaces": [
     "packages/*"
   ],
-  "repository": "https://github.com/adambrgmn/hooks",
+  "repository": "https://github.com/adambrgmn/fransvilhelm",
+  "homepage": "https://github.com/adambrgmn/fransvilhelm",
   "author": {
     "name": "Adam Bergman",
     "email": "adam@fransvilhelm.com"
   },
-  "homepage": "https://github.com/adambrgmn/hooks",
   "license": "MIT",
   "scripts": {
     "build": "turbo run build",

@@ -9,8 +9,8 @@
   "files": [
     "./dist"
   ],
-  "repository": "https://github.com/adambrgmn/hooks/tree/main/packages/changeset-changelog",
-  "homepage": "https://github.com/adambrgmn/hooks/tree/main/packages/changeset-changelog",
+  "repository": "https://github.com/adambrgmn/fransvilhelm/tree/main/packages/changeset-changelog",
+  "homepage": "https://github.com/adambrgmn/fransvilhelm/tree/main/packages/changeset-changelog",
   "author": {
     "name": "Adam Bergman",
     "email": "adam@fransvilhelm.com"
