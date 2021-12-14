@@ -3,11 +3,11 @@
   "version": "1.0.1",
   "description": "Changeset changelog generator",
   "source": "src/index.ts",
-  "main": "dist/index.cjs.js",
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "./dist/index.cjs.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "files": [
-    "dist"
+    "./dist"
   ],
   "repository": "https://github.com/adambrgmn/hooks/tree/main/packages/changeset-changelog",
   "homepage": "https://github.com/adambrgmn/hooks/tree/main/packages/changeset-changelog",
@@ -21,7 +21,7 @@
     "changelog"
   ],
   "scripts": {
-    "build": "./build.js",
+    "build": "build-package",
     "test": "jest",
     "test:ci": "jest --coverage",
     "lint": "eslint src --ext .ts"
@@ -32,17 +32,15 @@
     "@changesets/types": "^4.0.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.16.0",
-    "@babel/preset-env": "^7.16.4",
-    "@babel/preset-typescript": "^7.16.0",
+    "@babel/core": "^7.16.5",
+    "@babel/preset-env": "^7.16.5",
+    "@babel/preset-typescript": "^7.16.5",
+    "@fransvilhelm/build-package": "*",
     "@fransvilhelm/config": "*",
     "@fransvilhelm/tsconfig": "*",
     "@types/jest": "^27.0.3",
-    "@types/node": "^16.11.11",
-    "estrella": "^1.4.1",
-    "jest": "^27.4.3",
-    "jest-fail-on-console": "^2.1.1",
-    "rimraf": "^3.0.2",
-    "typescript": "^4.5.2"
+    "@types/node": "^16.11.12",
+    "jest": "^27.4.5",
+    "typescript": "^4.5.4"
   }
 }
