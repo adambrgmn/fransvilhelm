@@ -1,5 +1,12 @@
 # @fransvilhelm/hooks
 
+## 3.1.3
+
+### Patch Changes
+
+- Try fixing distributed files (by [@adambrgmn](https://github.com/adambrgmn) in
+  [#47](https://github.com/adambrgmn/fransvilhelm/pull/47))
+
 ## 3.1.2
 
 ### Patch Changes

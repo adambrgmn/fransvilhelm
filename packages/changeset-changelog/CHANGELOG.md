@@ -1,5 +1,12 @@
 # @fransvilhelm/changeset-changelog
 
+## 1.1.1
+
+### Patch Changes
+
+- Try fixing distributed files (by [@adambrgmn](https://github.com/adambrgmn) in
+  [#47](https://github.com/adambrgmn/fransvilhelm/pull/47))
+
 ## 1.1.0
 
 ### Minor Changes
