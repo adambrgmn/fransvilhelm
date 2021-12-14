@@ -54,7 +54,6 @@
     "@types/react-dom": "^17.0.11",
     "@types/use-subscription": "^1.0.0",
     "jest": "^27.4.5",
-    "jest-fail-on-console": "^2.1.1",
     "react": "17.0.2",
     "react-18": "npm:react@^18.0.0-beta-c7917fe76-20211206",
     "react-dom": "17.0.2",
