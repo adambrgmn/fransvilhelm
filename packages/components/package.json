@@ -1,13 +1,13 @@
 {
-  "name": "@fransvilhelm/hooks",
-  "version": "3.1.4",
-  "description": "A set of reusable React hooks",
+  "name": "@fransvilhelm/components",
+  "version": "0.0.0",
+  "description": "A set of reusable React components",
   "source": "src/index.ts",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
-  "repository": "https://github.com/adambrgmn/fransvilhelm/tree/main/packages/hooks",
-  "homepage": "https://github.com/adambrgmn/fransvilhelm/tree/main/packages/hooks",
+  "repository": "https://github.com/adambrgmn/fransvilhelm/tree/main/packages/components",
+  "homepage": "https://github.com/adambrgmn/fransvilhelm/tree/main/packages/components",
   "author": {
     "name": "Adam Bergman",
     "email": "adam@fransvilhelm.com"
@@ -17,8 +17,8 @@
     "dist"
   ],
   "keywords": [
-    "react-hooks",
-    "hooks",
+    "react-components",
+    "components",
     "react",
     "utils"
   ],
@@ -30,11 +30,7 @@
     "test:ci:react-18": "REACT_VERSION=18 jest",
     "lint": "eslint . --ext .ts --ext .tsx --ext .js --ignore-pattern dist"
   },
-  "dependencies": {
-    "lodash.debounce": "^4.0.8",
-    "react-fast-compare": "^3.2.0",
-    "use-subscription": "^1.5.1"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.16.5",
     "@babel/preset-env": "^7.16.5",
