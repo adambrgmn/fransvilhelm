@@ -8,7 +8,7 @@ import { useDebounce } from './use-debounce';
 jest.useFakeTimers();
 
 const TestComponent: React.FC<{ delay: number }> = ({ delay }) => {
-  const input = useInput('');
+  const input = useInput();
   const debouncedValue = useDebounce(input.value, delay);
 
   return (

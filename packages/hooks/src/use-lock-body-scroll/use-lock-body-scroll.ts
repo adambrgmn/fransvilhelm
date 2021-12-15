@@ -26,15 +26,12 @@ export function useLockBodyScroll(
   ref?: RefObject<HTMLElement>,
 ): void {
   useIsomorphicLayoutEffect(() => {
-    if (ref && !ref.current) return;
-
-    const el = ref?.current ?? document.body;
+    let el = ref?.current ?? document.body;
 
     if (lock) {
-      const previousValue = el.style.overflow || 'visible';
+      let previousValue = el.style.overflow || 'visible';
       el.style.overflow = 'hidden';
       return () => {
-        if (!el) return;
         el.style.overflow = previousValue;
       };
     }
