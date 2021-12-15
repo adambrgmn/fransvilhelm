@@ -2,6 +2,7 @@
   "name": "@fransvilhelm/config",
   "version": "0.0.0",
   "private": true,
+  "main": "index.js",
   "files": [
     "eslint-preset.js",
     "jest-preset.js"
@@ -12,6 +13,10 @@
   "dependencies": {
     "eslint": "^8.4.1",
     "eslint-config-react-app": "^7.0.0",
-    "jest-fail-on-console": "^2.1.1"
+    "jest-fail-on-console": "^2.1.1",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.178"
   }
 }
