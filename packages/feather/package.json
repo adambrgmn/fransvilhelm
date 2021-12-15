@@ -22,6 +22,7 @@
     "lint": "eslint . --ext .ts --ext .tsx --ext .js --ignore-pattern dist",
     "test": "jest",
     "test:ci": "jest --coverage",
+    "test:ci:react-18": "REACT_VERSION=18 jest",
     "feather": "node ./scripts/update-feather.mjs"
   },
   "dependencies": {
@@ -49,8 +50,10 @@
     "execa": "^5.0.0",
     "jest": "^27.4.5",
     "lodash": "^4.17.20",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
+    "react": "17.0.2",
+    "react-18": "npm:react@^18.0.0-beta-c7917fe76-20211206",
+    "react-dom": "17.0.2",
+    "react-dom-18": "npm:react-dom@^18.0.0-beta-c7917fe76-20211206",
     "semver": "^7.3.4",
     "typescript": "^4.5.4"
   },
