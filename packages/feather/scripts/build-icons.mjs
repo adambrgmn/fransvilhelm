@@ -62,12 +62,13 @@ export const All: Story<IconProps & { icon: keyof typeof Icons }> = (props) => {
     let fileContent = [componentBase.trim(), ...components].join('\n\n') + '\n';
     await fs.writeFile(relPath('./src/Icons.tsx'), fileContent);
 
-    let storyContent = [storyBase.trim(), ...stories].join('\n\n') + '\n';
-    await fs.mkdir(relPath('./src/stories'), { recursive: true });
-    await fs.writeFile(
-      relPath('./src/stories/Icons.stories.tsx'),
-      storyContent,
-    );
+    // We skip this until we bring back storybook in the monorepo
+    // let storyContent = [storyBase.trim(), ...stories].join('\n\n') + '\n';
+    // await fs.mkdir(relPath('./src/stories'), { recursive: true });
+    // await fs.writeFile(
+    //   relPath('./src/stories/Icons.stories.tsx'),
+    //   storyContent,
+    // );
   } catch (error) {
     console.error(error);
     process.exit(1);

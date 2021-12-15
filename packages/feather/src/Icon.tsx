@@ -29,7 +29,7 @@ const styles: Record<'span' | 'svg' | 'baseline', React.CSSProperties> = {
 
 export const Icon = forwardRef<
   HTMLSpanElement,
-  IconProps & { children: React.ReactNode }
+  React.PropsWithChildren<IconProps>
 >(({ baseline, children }, ref) => {
   const ctx = useContext(IconContext);
 
