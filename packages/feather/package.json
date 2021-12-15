@@ -1,13 +1,13 @@
 {
-  "name": "@fransvilhelm/hooks",
-  "version": "3.1.4",
-  "description": "A set of reusable React hooks",
+  "name": "@fransvilhelm/feather",
+  "version": "1.0.1",
+  "description": "Feather Icons as React components",
   "source": "src/index.ts",
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
-  "repository": "https://github.com/adambrgmn/fransvilhelm/tree/main/packages/hooks",
-  "homepage": "https://github.com/adambrgmn/fransvilhelm/tree/main/packages/hooks",
+  "repository": "https://github.com/adambrgmn/fransvilhelm/tree/main/packages/feather",
+  "homepage": "https://github.com/adambrgmn/fransvilhelm/tree/main/packages/feather",
   "author": {
     "name": "Adam Bergman",
     "email": "adam@fransvilhelm.com"
@@ -16,57 +16,49 @@
   "files": [
     "dist"
   ],
-  "keywords": [
-    "react-hooks",
-    "hooks",
-    "react",
-    "utils"
-  ],
   "scripts": {
-    "dev": "build-package --watch",
-    "build": "build-package",
+    "icons": "node ./scripts/build-icons.mjs",
+    "build": "yarn run icons && build-package",
+    "lint": "eslint . --ext .ts --ext .tsx --ext .js --ignore-pattern dist",
     "test": "jest",
     "test:ci": "jest --coverage",
     "test:ci:react-18": "REACT_VERSION=18 jest",
-    "lint": "eslint . --ext .ts --ext .tsx --ext .js --ignore-pattern dist"
+    "feather": "node ./scripts/update-feather.mjs"
   },
   "dependencies": {
-    "lodash.debounce": "^4.0.8",
-    "react-fast-compare": "^3.2.0",
-    "use-subscription": "^1.5.1"
+    "feather-icons": "^4.28.0"
   },
   "devDependencies": {
     "@babel/core": "^7.16.5",
     "@babel/preset-env": "^7.16.5",
     "@babel/preset-react": "^7.16.5",
     "@babel/preset-typescript": "^7.16.5",
-    "@changesets/cli": "^2.18.1",
     "@fransvilhelm/build-package": "*",
     "@fransvilhelm/config": "*",
     "@fransvilhelm/tsconfig": "*",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^13.0.0-alpha.5",
-    "@testing-library/user-event": "^13.5.0",
+    "@types/axios": "^0.14.0",
+    "@types/feather-icons": "^4.7.0",
     "@types/jest": "^27.0.3",
-    "@types/lodash.debounce": "^4.0.6",
+    "@types/lodash": "^4.14.165",
     "@types/node": "^16.11.13",
-    "@types/react": "^17.0.37",
-    "@types/react-dom": "^17.0.11",
-    "@types/use-subscription": "^1.0.0",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@types/semver": "^7.3.4",
+    "axios": "^0.24.0",
+    "execa": "^5.0.0",
     "jest": "^27.4.5",
+    "lodash": "^4.17.20",
     "react": "17.0.2",
     "react-18": "npm:react@^18.0.0-beta-c7917fe76-20211206",
     "react-dom": "17.0.2",
     "react-dom-18": "npm:react-dom@^18.0.0-beta-c7917fe76-20211206",
+    "semver": "^7.3.4",
     "typescript": "^4.5.4"
   },
   "peerDependencies": {
-    "react": "^16.8.0 || ^17.0.0 || ^18.0.0-alpha || ^18.0.0-beta"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
-  "bugs": {
-    "url": "https://github.com/adambrgmn/fransvilhelm/issues"
+    "react": "^16.8.0 || ^17.0.0 || ^18.0.0-alpha || ^18.0.0-beta",
+    "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0-alpha || ^18.0.0-beta"
   }
 }

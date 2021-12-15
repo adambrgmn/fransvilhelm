@@ -1,0 +1,36 @@
+name: Feather
+
+on:
+  workflow_dispatch: {}
+  schedule:
+    - cron: '0 9 * * 1'
+
+jobs:
+  integration:
+    runs-on: ubuntu-latest
+    name: Update Feather
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: install
+        run: yarn install
+
+      - name: check feather
+        run: yarn feather
+        working-directory: packages/feather
+
+      - name: create pull request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: Update feather-icons
+          title: Update feather-icons
+          body: Update feather-icons
+          branch: update-feather-icons
+          base: main

@@ -1,7 +1,10 @@
 const path = require('path');
 
 module.exports = {
-  setupFilesAfterEnv: [path.join(__dirname, './jest/setup-tests.js')],
+  setupFilesAfterEnv: [
+    '@testing-library/jest-dom',
+    path.join(__dirname, './jest/setup-tests.js'),
+  ],
   coverageReporters: ['clover', 'json', 'lcov', 'text-summary'],
   collectCoverageFrom: [
     '**/src/**/*.{js,jsx}',
