@@ -1,14 +1,6 @@
-module.exports = {
-  preset: '@fransvilhelm/config',
-  testEnvironment: 'jsdom',
-  collectCoverageFrom: [
-    '**/src/**/*.{js,jsx}',
-    '**/src/**/*.{ts,tsx}',
-    '!**/src/Icons.tsx',
-    '!**/*.d.ts',
-    '!**/node_modules/**',
-    '!**/dist/**',
-    '!**/coverage/**',
-    '!**/test-utils/**',
-  ],
-};
+const { createJestConfig } = require('@fransvilhelm/config');
+
+module.exports = createJestConfig('jsdom', (config) => {
+  config.collectCoverageFrom.push('!**/src/Icons.tsx');
+  return config;
+});

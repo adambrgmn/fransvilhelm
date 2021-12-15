@@ -41,7 +41,8 @@
     "semi": true,
     "singleQuote": true,
     "trailingComma": "all",
-    "proseWrap": "always"
+    "proseWrap": "always",
+    "arrowParens": "always"
   },
   "turbo": {
     "baseBranch": "origin/main",
