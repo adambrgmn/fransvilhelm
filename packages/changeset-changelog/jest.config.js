@@ -1,4 +1,3 @@
-module.exports = {
-  preset: '@fransvilhelm/config',
-  testEnvironment: 'node',
-};
+const { createJestConfig } = require('@fransvilhelm/config');
+
+module.exports = createJestConfig('node');
