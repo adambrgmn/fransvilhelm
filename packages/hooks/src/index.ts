@@ -8,6 +8,7 @@ export * from './use-debounced-callback';
 export * from './use-deep-equal-effect';
 export * from './use-dimensions';
 export * from './use-event-listener';
+export * from './use-force-update';
 export * from './use-hover';
 export * from './use-in-view';
 export * from './use-input';
