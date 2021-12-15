@@ -19,7 +19,7 @@
   "scripts": {
     "icons": "node ./scripts/build-icons.mjs",
     "build": "yarn run icons && build-package",
-    "lint": "eslint . --ext .ts --ext .tsx --ext .js",
+    "lint": "eslint . --ext .ts --ext .tsx --ext .js --ignore-pattern dist",
     "test": "jest",
     "test:ci": "jest --coverage",
     "feather": "node ./scripts/update-feather.mjs"
