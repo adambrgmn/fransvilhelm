@@ -7268,10 +7268,10 @@ tty-table@^2.8.10:
     wcwidth "^1.0.1"
     yargs "^15.1.0"
 
-turbo@^1.0.11:
-  version "1.0.11"
-  resolved "https://registry.yarnpkg.com/turbo/-/turbo-1.0.11.tgz#e832459ed4ec98bdd41fa7c9a12f2720c10ad5b3"
-  integrity sha512-hTvO3EXaa4D7bfuKE7w2Ba1WpoS5vTfUAbA7Y8szLcmxCTpvfiDGtudl8iu82HRRRn+v1LvpgLSPr/N+ZXbYFQ==
+turbo@^1.0.12:
+  version "1.0.12"
+  resolved "https://registry.yarnpkg.com/turbo/-/turbo-1.0.12.tgz#268254ccd58303a3756eddeaf37a270d69acf36e"
+  integrity sha512-Bw8cUAcz58+9IVyfotYOF3J6+oumCftetq9r+caop0vztRXSQ/O4Iv58tNPjGyZ9RNee6OjZb6KhV/csWD+p0Q==
   dependencies:
     zlib "^1.0.5"
 
