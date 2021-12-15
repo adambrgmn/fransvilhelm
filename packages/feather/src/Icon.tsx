@@ -33,12 +33,18 @@ export const Icon = forwardRef<
 >(({ baseline, children }, ref) => {
   const ctx = useContext(IconContext);
 
+  let testProps: undefined | Record<string, string> = undefined;
+  if (process.env.NODE_ENV === 'test') {
+    testProps = { 'data-testid': 'icon' };
+  }
+
   return (
     <span ref={ref} style={styles.span}>
       <svg
         aria-hidden
         focusable={false}
         {...ctx}
+        {...testProps}
         xmlns="http://www.w3.org/2000/svg"
         width="24"
         height="24"

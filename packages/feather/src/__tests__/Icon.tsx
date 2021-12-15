@@ -1,5 +1,6 @@
+import { render, screen } from '@testing-library/react';
 import React from 'react';
-import { render } from '@testing-library/react';
+
 import { Icon, IconProvider } from '../Icon';
 
 it('renders an icon', () => {
@@ -10,8 +11,8 @@ it('renders an icon', () => {
     </Icon>,
   );
 
-  let svg = document.querySelector('svg');
-  expect(svg).toHaveAttribute('aria-hidden', 'true');
+  let svg = screen.getByTestId('icon');
+  expect(svg).toHaveAttribute('aria-hidden', 'true'); // document.querySelector('svg');
   expect(svg).toHaveAttribute('focusable', 'false');
   expect(svg).toHaveStyle(
     'fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; width: 1em; height: 1em;',
@@ -26,7 +27,7 @@ it('can be adjusted to baseline', () => {
     </Icon>,
   );
 
-  let svg = document.querySelector('svg');
+  let svg = screen.getByTestId('icon');
   expect(svg).toHaveStyle('position: absolute; bottom: -0.150em;');
 });
 
@@ -45,7 +46,7 @@ it('can be configured via context', () => {
     </IconProvider>,
   );
 
-  let svg = document.querySelector('svg');
+  let svg = screen.getByTestId('icon');
   expect(svg).toHaveAttribute('aria-hidden', 'false');
   expect(svg).toHaveStyle('stroke-width: 10;');
 });
