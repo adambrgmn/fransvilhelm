@@ -24,7 +24,7 @@ let baseOptions = {
 
 build({
   ...baseOptions,
-  outfile: relative('dist/index.js'),
+  outfile: relative('dist/index.mjs'),
   format: 'esm',
   onEnd(config) {
     const dtsFilesOutdir = dirname(config.outfile);
@@ -34,7 +34,7 @@ build({
 
 build({
   ...baseOptions,
-  outfile: relative('dist/index.cjs.js'),
+  outfile: relative('dist/index.cjs'),
   format: 'cjs',
 });
 
