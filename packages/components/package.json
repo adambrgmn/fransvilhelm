@@ -30,7 +30,9 @@
     "test:ci:react-18": "REACT_VERSION=18 jest",
     "lint": "eslint . --ext .ts --ext .tsx --ext .js --ignore-pattern dist"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@fransvilhelm/hooks": "*"
+  },
   "devDependencies": {
     "@babel/core": "^7.16.5",
     "@babel/preset-env": "^7.16.5",
