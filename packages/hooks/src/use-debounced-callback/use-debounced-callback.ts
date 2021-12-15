@@ -3,7 +3,7 @@ import { useMemo, useRef, useEffect } from 'react';
 
 export function useDebouncedCallback<T extends (...args: any[]) => any>(
   callback: T,
-  wait: number,
+  waitMs: number,
 ) {
   let callbackRef = useRef(callback);
   let debouncedCallback = useMemo(() => {
@@ -11,8 +11,8 @@ export function useDebouncedCallback<T extends (...args: any[]) => any>(
       return callbackRef.current(...args);
     }) as T;
 
-    return debounce(handler, wait);
-  }, [wait]);
+    return debounce(handler, waitMs);
+  }, [waitMs]);
 
   useEffect(() => {
     callbackRef.current = callback;
