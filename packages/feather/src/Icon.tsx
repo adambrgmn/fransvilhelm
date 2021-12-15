@@ -34,6 +34,7 @@ export const Icon = forwardRef<
   const ctx = useContext(IconContext);
 
   let testProps: undefined | Record<string, string> = undefined;
+  /* istanbul ignore next */
   if (process.env.NODE_ENV === 'test') {
     testProps = { 'data-testid': 'icon' };
   }
