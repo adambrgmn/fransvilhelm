@@ -1,5 +1,12 @@
 # @fransvilhelm/hooks
 
+## 3.1.4
+
+### Patch Changes
+
+- Fix packaged files (by [@adambrgmn](https://github.com/adambrgmn) in
+  [#49](https://github.com/adambrgmn/fransvilhelm/pull/49))
+
 ## 3.1.3
 
 ### Patch Changes
