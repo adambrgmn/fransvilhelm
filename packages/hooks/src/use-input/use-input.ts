@@ -26,7 +26,9 @@ export function useInput(
 ): UseInputResult {
   const [value, setValue] = useState(initialValue);
   const onChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    callback?.(event.currentTarget.value);
+    if (callback != null) {
+      callback(event.currentTarget.value);
+    }
     setValue(event.currentTarget.value);
   };
 

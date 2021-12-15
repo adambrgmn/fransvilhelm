@@ -12,8 +12,9 @@ it('should determine if a client is online or not', () => {
 
   expect(screen.getByText('online')).toBeInTheDocument();
 
-  const evt = new Event('offline', { bubbles: true });
-  fireEvent(window, evt);
-
+  fireEvent(window, new Event('offline', { bubbles: true }));
   expect(screen.getByText('offline')).toBeInTheDocument();
+
+  fireEvent(window, new Event('online', { bubbles: true }));
+  expect(screen.getByText('online')).toBeInTheDocument();
 });

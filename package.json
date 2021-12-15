@@ -1,5 +1,5 @@
 {
-  "name": "@fransvilhelm/hooks",
+  "name": "@fransvilhelm/fransvilhelm",
   "version": "0.0.0",
   "private": true,
   "workspaces": [
@@ -16,6 +16,8 @@
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
     "test": "turbo run test",
+    "test:ci": "turbo run test:ci",
+    "coverage:combine": "npx istanbul-merge --out coverage/coverage-combined.json ./**/coverage/coverage-final.json && npx istanbul report --dir coverage --include coverage/coverage-combined.json lcov text-summary",
     "lint": "turbo run lint",
     "release": "turbo run build --force && yarn changeset publish",
     "prepare": "husky install"
