@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { createRef } from 'react';
+import { createRef, Fragment } from 'react';
 
 import { Portal } from './Portal';
 
@@ -23,18 +23,21 @@ it('renders a portal', () => {
 
 it('can render as any given element', () => {
   const TestComponent: React.FC<{
-    portalRef: React.RefObject<HTMLHeadingElement>;
+    portalRef: React.Ref<HTMLLabelElement>;
   }> = ({ portalRef }) => {
     return (
-      <Portal ref={portalRef} as="h1">
-        <span>Heading</span>
-      </Portal>
+      <Fragment>
+        <Portal ref={portalRef} as="label" htmlFor="email-input">
+          <span>E-mail</span>
+        </Portal>
+        <input id="email-input" type="email" />
+      </Fragment>
     );
   };
 
-  let ref = createRef<HTMLHeadingElement>();
+  let ref = createRef<HTMLLabelElement>();
   render(<TestComponent portalRef={ref} />);
 
-  expect(screen.getByRole('heading')).toBeInTheDocument();
-  expect(ref.current).toBeInstanceOf(HTMLHeadingElement);
+  expect(screen.getByLabelText('E-mail')).toBeInTheDocument();
+  expect(ref.current).toBeInstanceOf(HTMLLabelElement);
 });

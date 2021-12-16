@@ -2,12 +2,12 @@ import { useIsomorphicLayoutEffect, useForceUpdate } from '@fransvilhelm/hooks';
 import { useRef } from 'react';
 import { createPortal } from 'react-dom';
 
-import { forwardRef } from '../utils/forward-ref';
+import { forwardRefWithAs } from '../utils/forward-ref';
 
 interface PortalProps {}
 
-export const Portal = forwardRef<PortalProps, 'div'>(
-  ({ as, children }, ref) => {
+export const Portal = forwardRefWithAs<PortalProps, 'div'>(
+  ({ as: Component = 'div', children, ...props }, ref) => {
     let tempRef = useRef<HTMLSpanElement>(null);
     let portalRef = useRef<HTMLDivElement | undefined>();
     let forceUpdate = useForceUpdate();
@@ -33,9 +33,10 @@ export const Portal = forwardRef<PortalProps, 'div'>(
     }, [forceUpdate]);
 
     if (portalRef.current != null) {
-      let Component = as ?? 'div';
       return createPortal(
-        <Component ref={ref}>{children}</Component>,
+        <Component ref={ref} {...props}>
+          {children}
+        </Component>,
         portalRef.current,
       );
     }
