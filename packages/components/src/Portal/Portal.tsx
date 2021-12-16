@@ -22,6 +22,10 @@ export const Portal: React.FC<PortalProps> = ({
   return <span ref={mountNode} />;
 };
 
+if (process.env.NODE_ENV !== 'production') {
+  Portal.displayName = 'Portal';
+}
+
 export function usePortal({
   type = 'fransvilhelm-portal',
   containerRef,
