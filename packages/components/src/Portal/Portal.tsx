@@ -34,7 +34,7 @@ export const Portal = forwardRefWithAs<PortalProps, 'div'>(
 
     if (portalRef.current != null) {
       return createPortal(
-        <Component ref={ref} {...props}>
+        <Component ref={ref} {...props} data-fransvilhelm="portal">
           {children}
         </Component>,
         portalRef.current,
