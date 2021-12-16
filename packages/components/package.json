@@ -28,7 +28,9 @@
     "test": "jest",
     "test:ci": "jest --coverage",
     "test:ci:react-18": "REACT_VERSION=18 jest",
-    "lint": "eslint . --ext .ts --ext .tsx --ext .js --ignore-pattern dist"
+    "lint": "eslint . --ext .ts --ext .tsx --ext .js --ignore-pattern dist",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "dependencies": {
     "@fransvilhelm/hooks": "*"
@@ -41,6 +43,10 @@
     "@fransvilhelm/build-package": "*",
     "@fransvilhelm/config": "*",
     "@fransvilhelm/tsconfig": "*",
+    "@storybook/addon-actions": "^6.4.9",
+    "@storybook/addon-essentials": "^6.4.9",
+    "@storybook/addon-links": "^6.4.9",
+    "@storybook/react": "^6.4.9",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^13.0.0-alpha.5",
     "@testing-library/user-event": "^13.5.0",
@@ -50,6 +56,7 @@
     "@types/react": "^17.0.37",
     "@types/react-dom": "^17.0.11",
     "@types/use-subscription": "^1.0.0",
+    "babel-loader": "^8.2.3",
     "jest": "^27.4.5",
     "react": "17.0.2",
     "react-18": "npm:react@^18.0.0-beta-c7917fe76-20211206",
