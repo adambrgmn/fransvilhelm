@@ -65,7 +65,8 @@
     "typescript": "^4.5.4"
   },
   "peerDependencies": {
-    "react": "^16.8.0 || ^17.0.0 || ^18.0.0-alpha || ^18.0.0-beta"
+    "react": "^16.8.0 || ^17.0.0 || ^18.0.0-alpha || ^18.0.0-beta",
+    "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0-alpha || ^18.0.0-beta"
   },
   "publishConfig": {
     "access": "public"
