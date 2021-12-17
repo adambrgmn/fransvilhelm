@@ -80,14 +80,6 @@
           "coverage/**"
         ]
       },
-      "e2e": {
-        "dependsOn": [
-          "build"
-        ],
-        "outputs": [
-          "coverage/**"
-        ]
-      },
       "lint": {
         "dependsOn": [],
         "outputs": []

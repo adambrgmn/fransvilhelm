@@ -1,7 +1,7 @@
 {
   "extends": "@fransvilhelm/tsconfig/react-library.json",
   "compilerOptions": {
-    "types": ["cypress", "@testing-library/cypress"]
+    "types": ["node", "cypress", "@testing-library/cypress"]
   },
-  "include": ["src", "./cypress/support/index.ts"]
+  "include": ["src", "cypress"]
 }
