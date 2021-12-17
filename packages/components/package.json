@@ -25,7 +25,7 @@
   "scripts": {
     "dev": "build-package --watch",
     "build": "build-package",
-    "test": "cypress open-cy",
+    "test": "cypress open-ct",
     "test:ci": "cypress run-ct",
     "lint": "eslint src cypress --ext .ts --ext .tsx --ext .js --ignore-pattern dist",
     "storybook": "start-storybook -p 6006",
