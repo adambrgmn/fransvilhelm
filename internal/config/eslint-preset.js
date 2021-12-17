@@ -27,7 +27,7 @@ module.exports = {
     {
       extends: ['plugin:cypress/recommended'],
       plugins: ['cypress'],
-      files: ['**/*.spec.ts'],
+      files: ['**/*.spec.ts', 'cypress/**/*'],
     },
   ],
 };

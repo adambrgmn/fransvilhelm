@@ -1,4 +1,4 @@
-import { useHover } from '@fransvilhelm/hooks';
+import { useToggle } from '@fransvilhelm/hooks';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { useRef } from 'react';
 
@@ -12,19 +12,19 @@ export default {
 } as ComponentMeta<PopoverType>;
 
 const Template: ComponentStory<PopoverType> = (args) => {
-  let [isHovering, props] = useHover();
+  let [show, toggle] = useToggle(false);
   let ref = useRef<HTMLButtonElement>(null);
 
   return (
-    <button ref={ref} {...props} className="border px-8 py-4">
-      Hover me
+    <button ref={ref} onClick={toggle} className="border px-8 py-4">
+      Click me
       <Popover
         {...args}
         targetRef={ref}
-        hidden={!isHovering}
+        hidden={!show}
         className="border p-4 text-center"
       >
-        <p>Hello world</p>
+        Hello world
       </Popover>
     </button>
   );
@@ -41,4 +41,12 @@ PositionRight.args = {
 export const PositionMatchWidth = Template.bind({});
 PositionMatchWidth.args = {
   position: positionMatchWidth,
+};
+
+export const CollisionDetection: ComponentStory<PopoverType> = (args) => {
+  return (
+    <div style={{ paddingTop: 'calc(100vh - 100px)', paddingBottom: '100vh' }}>
+      <Template {...args} />
+    </div>
+  );
 };
