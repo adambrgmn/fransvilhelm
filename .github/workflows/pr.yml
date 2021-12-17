@@ -33,7 +33,7 @@ jobs:
           HUSKY: 0
 
       - name: Validate
-        run: yarn turbo run build test:ci e2e lint
+        run: yarn turbo run build test:ci lint
 
       - name: Validate | React 18
         run: yarn turbo run test:ci:react-18
@@ -46,3 +46,19 @@ jobs:
         with:
           lcov-file: ./coverage/lcov.info
           github-token: ${{ secrets.GITHUB_TOKEN }}
+
+  e2e:
+    name: E2E
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+
+      - name: E2E
+        uses: cypress-io/github-action@v2
+        with:
+          project: ./packages/components
+          install-command: yarn --frozen-lockfile --silent
+          build: yarn storybook:build
+          start: npx http-server storybook-static
+          wait-on: http://localhost:8080
