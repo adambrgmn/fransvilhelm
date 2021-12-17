@@ -74,7 +74,7 @@ describe('Popover', () => {
     );
   });
 
-  it.only('adapts to the edges of the screen', () => {
+  it('adapts to the edges of the screen', () => {
     mount(
       <div style={{ paddingTop: 'calc(100vh - 30px)', paddingBottom: '100vh' }}>
         <TestComponent />
