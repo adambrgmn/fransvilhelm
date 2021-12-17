@@ -33,7 +33,7 @@ jobs:
           HUSKY: 0
 
       - name: Validate
-        run: yarn turbo run build test:ci lint
+        run: yarn turbo run build test:ci e2e lint
 
       - name: Validate | React 18
         run: yarn turbo run test:ci:react-18

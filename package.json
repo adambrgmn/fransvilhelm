@@ -59,23 +59,31 @@
         ]
       },
       "test": {
-        "dependsOn": [],
+        "dependsOn": [
+          "build"
+        ],
         "outputs": []
       },
       "test:ci": {
-        "dependsOn": [],
+        "dependsOn": [
+          "build"
+        ],
         "outputs": [
           "coverage/**"
         ]
       },
       "test:ci:react-18": {
-        "dependsOn": [],
+        "dependsOn": [
+          "build"
+        ],
         "outputs": [
           "coverage/**"
         ]
       },
       "e2e": {
-        "dependsOn": [],
+        "dependsOn": [
+          "build"
+        ],
         "outputs": [
           "coverage/**"
         ]
