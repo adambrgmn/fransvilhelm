@@ -57,8 +57,8 @@ jobs:
       - name: E2E
         uses: cypress-io/github-action@v2
         with:
-          project: ./packages/components
+          working-directory: packages/components
           install-command: yarn --frozen-lockfile --silent
-          build: 'cd packages/components && yarn storybook:build'
-          start: 'cd packages/components && npx http-server storybook-static'
+          build: yarn storybook:build
+          start: npx http-server storybook-static
           wait-on: http://localhost:8080
