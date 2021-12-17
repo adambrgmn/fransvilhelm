@@ -43,9 +43,9 @@ jobs:
         with:
           working-directory: packages/components
           install-command: yarn --frozen-lockfile --silent
-          build: yarn storybook:build
-          start: npx http-server storybook-static
-          wait-on: http://localhost:8080
+          build: yarn storybook:build --quiet
+          start: npx http-server --port 6006 storybook-static
+          wait-on: http://localhost:6006
 
       - name: Check combined code coverage
         run: yarn coverage
