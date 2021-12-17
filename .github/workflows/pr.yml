@@ -33,19 +33,10 @@ jobs:
           HUSKY: 0
 
       - name: Validate
-        run: yarn turbo run build test:ci lint
+        run: yarn turbo run build test:ci e2e lint
 
       - name: Validate | React 18
         run: yarn turbo run test:ci:react-18
-
-      - name: E2E
-        uses: cypress-io/github-action@v2
-        with:
-          working-directory: packages/components
-          install-command: yarn --frozen-lockfile --silent
-          build: yarn storybook:build --quiet
-          start: npx http-server --port 6006 storybook-static
-          wait-on: http://localhost:6006
 
       - name: Check combined code coverage
         run: yarn coverage

@@ -1,13 +1,38 @@
-describe('Component: Popover', () => {
-  it('shows a popover', () => {
-    cy.visitStory('popover', 'default');
+import { mount } from '@cypress/react';
+import { useToggle } from '@fransvilhelm/hooks';
+import { useRef } from 'react';
+
+import {
+  Popover,
+  Position,
+  positionRight,
+  positionMatchWidth,
+} from './Popover';
+
+const TestComponent: React.FC<{ position?: Position }> = ({ position }) => {
+  let [show, toggle] = useToggle(false);
+  let ref = useRef<HTMLButtonElement>(null);
+
+  return (
+    <button ref={ref} onClick={toggle} style={{ padding: '0.35rem 2rem' }}>
+      Click me
+      <Popover targetRef={ref} hidden={!show} position={position}>
+        Hello world
+      </Popover>
+    </button>
+  );
+};
+
+describe('Popover', () => {
+  it('renders as expected', () => {
+    mount(<TestComponent />);
 
     cy.findByRole('button').click();
     cy.findByText('Hello world').should('be.visible');
   });
 
   it('alignes to the left side by default', () => {
-    cy.visitStory('popover', 'default');
+    mount(<TestComponent />);
     cy.findByRole('button').click();
 
     cy.compareRects(
@@ -21,7 +46,7 @@ describe('Component: Popover', () => {
   });
 
   it('alignes to the right side if given positionRight', () => {
-    cy.visitStory('popover', 'position-right');
+    mount(<TestComponent position={positionRight} />);
     cy.findByRole('button').click();
 
     cy.compareRects(
@@ -35,7 +60,7 @@ describe('Component: Popover', () => {
   });
 
   it('is stretches full width if given positionMatchWidth', () => {
-    cy.visitStory('popover', 'position-match-width');
+    mount(<TestComponent position={positionMatchWidth} />);
     cy.findByRole('button').click();
 
     cy.compareRects(
@@ -49,8 +74,12 @@ describe('Component: Popover', () => {
     );
   });
 
-  it('adapts to the edges of the screen', () => {
-    cy.visitStory('popover', 'collision-detection');
+  it.only('adapts to the edges of the screen', () => {
+    mount(
+      <div style={{ paddingTop: 'calc(100vh - 30px)', paddingBottom: '100vh' }}>
+        <TestComponent />
+      </div>,
+    );
 
     cy.findByRole('button').click();
     cy.findByRole('button').parent().scrollIntoView();

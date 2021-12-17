@@ -5,7 +5,7 @@ import { Portal } from '../Portal';
 import { forwardRefWithAs } from '../utils/forward-ref';
 
 type PossibleNode = null | undefined | HTMLElement | SVGElement;
-type Position = (
+export type Position = (
   targetRect?: PRect | null,
   popoverRect?: PRect | null,
   ...unstable_observableNodes: PossibleNode[]
