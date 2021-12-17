@@ -32,7 +32,7 @@
     "e2e:watch": "start-server-and-test 'yarn storybook --ci' 6006 'yarn cypress open'",
     "lint": "eslint . --ext .ts --ext .tsx --ext .js --ignore-pattern dist",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "storybook:build": "build-storybook"
   },
   "dependencies": {
     "@fransvilhelm/hooks": "*"
