@@ -77,14 +77,9 @@ function getStyles(
   position: Position,
   targetRect: PRect | null,
   popoverRect: PRect | null,
-  ...unstable_observableRefs: React.RefObject<PossibleNode>[]
 ): React.CSSProperties {
   return popoverRect
-    ? position(
-        targetRect,
-        popoverRect,
-        ...unstable_observableRefs.map((ref) => ref.current),
-      )
+    ? position(targetRect, popoverRect)
     : { visibility: 'hidden' };
 }
 
