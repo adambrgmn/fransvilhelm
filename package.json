@@ -18,7 +18,8 @@
     "dev": "turbo run dev --parallel",
     "test": "turbo run test",
     "test:ci": "turbo run test:ci",
-    "coverage:combine": "npx istanbul-merge --out coverage/coverage-combined.json ./**/coverage/coverage-final.json && npx istanbul report --dir coverage --include coverage/coverage-combined.json lcov text-summary",
+    "e2e": "turbo run e2e",
+    "coverage": "fv coverage",
     "lint": "turbo run lint",
     "release": "turbo run build --force && yarn changeset publish",
     "prepare": "husky install"
@@ -27,8 +28,10 @@
   "devDependencies": {
     "@changesets/cli": "^2.18.1",
     "@fransvilhelm/changeset-changelog": "*",
+    "@fransvilhelm/scripts": "*",
     "husky": "^7.0.0",
     "lint-staged": "^12.1.2",
+    "nyc": "^15.1.0",
     "plop": "^3.0.5",
     "prettier": "^2.5.1",
     "turbo": "^1.0.11",
@@ -71,6 +74,12 @@
           "coverage/**"
         ]
       },
+      "e2e": {
+        "dependsOn": [],
+        "outputs": [
+          "coverage/**"
+        ]
+      },
       "lint": {
         "dependsOn": [],
         "outputs": []
@@ -79,5 +88,29 @@
         "cache": false
       }
     }
+  },
+  "nyc": {
+    "report-dir": "./coverage",
+    "include": [
+      "**/*.{ts,tsx}"
+    ],
+    "exclude": [
+      "**/*.stories.{ts,tsx}",
+      "**/*.test.{ts,tsx}",
+      "**/__tests__/**",
+      "**/.storybook/**/*",
+      "node_modules"
+    ],
+    "reporter": [
+      "lcov",
+      "json",
+      "text-summary"
+    ],
+    "excludeAfterRemap": true,
+    "check-coverage": true,
+    "branches": 75,
+    "lines": 80,
+    "functions": 80,
+    "statements": 80
   }
 }

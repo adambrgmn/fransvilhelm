@@ -16,6 +16,7 @@ exports.createJestConfig = function createJestConfig(env, override) {
   let base = {
     testEnvironment: env,
     setupFilesAfterEnv: [path.join(__dirname, './jest/setup-tests.js')],
+    testPathIgnorePatterns: ['/node_modules/', '/cypress/'],
     coverageReporters: ['clover', 'json', 'lcov', 'text-summary'],
     collectCoverageFrom: [
       '**/src/**/*.{js,jsx}',
@@ -24,17 +25,10 @@ exports.createJestConfig = function createJestConfig(env, override) {
       '!**/node_modules/**',
       '!**/dist/**',
       '!**/coverage/**',
+      '!**/cypress/**',
       '!**/test-utils/**',
     ],
     coveragePathIgnorePatterns: ['/node_modules/', '/dist/', '/coverage/'],
-    coverageThreshold: {
-      global: {
-        branches: 75,
-        functions: 95,
-        lines: 95,
-        statements: -20,
-      },
-    },
   };
 
   /** @type {JestConfig | undefined} */
