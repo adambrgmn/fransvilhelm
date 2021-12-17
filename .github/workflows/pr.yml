@@ -38,22 +38,6 @@ jobs:
       - name: Validate | React 18
         run: yarn turbo run test:ci:react-18
 
-      - name: Check combined code coverage
-        run: yarn coverage
-
-      - name: Code Coverage Report
-        uses: romeovs/lcov-reporter-action@v0.3.1
-        with:
-          lcov-file: ./coverage/lcov.info
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-
-  e2e:
-    name: E2E
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v2
-
       - name: E2E
         uses: cypress-io/github-action@v2
         with:
@@ -62,3 +46,12 @@ jobs:
           build: yarn storybook:build
           start: npx http-server storybook-static
           wait-on: http://localhost:8080
+
+      - name: Check combined code coverage
+        run: yarn coverage
+
+      - name: Code Coverage Report
+        uses: romeovs/lcov-reporter-action@v0.3.1
+        with:
+          lcov-file: ./coverage/lcov.info
+          github-token: ${{ secrets.GITHUB_TOKEN }}
