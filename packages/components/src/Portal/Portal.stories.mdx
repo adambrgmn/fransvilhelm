@@ -1,0 +1,17 @@
+import { Meta, Story } from '@storybook/addon-docs';
+import { Portal } from './Portal';
+
+<Meta title="Portal" component={Portal} />
+
+# Portal
+
+<Story name="Primary">
+  <div>
+    <h1 className="text-2xl">
+      A heading
+      <Portal>
+        <h2 className="text-lg">Another heading in another dom node</h2>
+      </Portal>
+    </h1>
+  </div>
+</Story>

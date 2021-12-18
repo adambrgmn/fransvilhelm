@@ -38,8 +38,8 @@ jobs:
       - name: Validate | React 18
         run: yarn turbo run test:ci:react-18
 
-      - name: Collect code coverage
-        run: yarn coverage:combine
+      - name: Check combined code coverage
+        run: yarn coverage
 
       - name: Code Coverage Report
         uses: romeovs/lcov-reporter-action@v0.3.1

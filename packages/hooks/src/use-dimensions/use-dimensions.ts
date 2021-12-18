@@ -2,6 +2,17 @@ import { useRef, useState } from 'react';
 
 import { observeRect, useIsomorphicLayoutEffect } from '../utils';
 
+type PossibleNode = null | undefined | HTMLElement | SVGElement;
+
+export type PRect = Partial<DOMRect> & {
+  readonly bottom: number;
+  readonly height: number;
+  readonly left: number;
+  readonly right: number;
+  readonly top: number;
+  readonly width: number;
+};
+
 /**
  * Get the current measurements of an element in the document. It will also
  * listen for resize changes.
@@ -9,7 +20,7 @@ import { observeRect, useIsomorphicLayoutEffect } from '../utils';
  * @param ref React ref object containing an Element
  * @param observe Boolean flag indicating wether to observe changes or not
  * @param callback Callback function fired each time an objects dimension changes
- * @returns A (possibly null) DOMRect object with measurements
+ * @returns A (possibly null) PRect object with measurements
  *
  * @example
  *   import { useDimensions } from '@fransvilhelm/hooks';
@@ -22,12 +33,12 @@ import { observeRect, useIsomorphicLayoutEffect } from '../utils';
  *   };
  */
 export function useDimensions(
-  ref: React.RefObject<Element>,
+  ref: React.RefObject<PossibleNode>,
   observe?: boolean,
-  callback?: (rect: DOMRect) => void,
-): DOMRect | null {
+  callback?: (rect: PRect) => void,
+): PRect | null {
   const [element, setElement] = useState(ref.current);
-  const [rect, setRect] = useState<DOMRect | null>(null);
+  const [rect, setRect] = useState<PRect | null>(null);
   const initialRectSet = useRef(false);
   const initialRefSet = useRef(false);
   const callbackRef = useRef<typeof callback>(callback);

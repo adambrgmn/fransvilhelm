@@ -1,0 +1,76 @@
+{
+  "name": "@fransvilhelm/components",
+  "version": "0.0.0",
+  "description": "A set of reusable React components",
+  "source": "src/index.ts",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "repository": "https://github.com/adambrgmn/fransvilhelm/tree/main/packages/components",
+  "homepage": "https://github.com/adambrgmn/fransvilhelm/tree/main/packages/components",
+  "author": {
+    "name": "Adam Bergman",
+    "email": "adam@fransvilhelm.com"
+  },
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "react-components",
+    "components",
+    "react",
+    "utils"
+  ],
+  "scripts": {
+    "dev": "build-package --watch",
+    "build": "build-package",
+    "test": "cypress open-ct",
+    "test:ci": "cypress run-ct",
+    "lint": "eslint src cypress --ext .ts --ext .tsx --ext .js --ignore-pattern dist",
+    "storybook": "start-storybook -p 6006",
+    "storybook:build": "build-storybook"
+  },
+  "dependencies": {
+    "@fransvilhelm/hooks": "*"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.16.5",
+    "@babel/preset-env": "^7.16.5",
+    "@babel/preset-react": "^7.16.5",
+    "@babel/preset-typescript": "^7.16.5",
+    "@cypress/code-coverage": "^3.9.12",
+    "@cypress/react": "^5.11.0",
+    "@cypress/webpack-dev-server": "^1.8.0",
+    "@fransvilhelm/build-package": "*",
+    "@fransvilhelm/config": "*",
+    "@fransvilhelm/tsconfig": "*",
+    "@storybook/addon-actions": "^6.4.9",
+    "@storybook/addon-essentials": "^6.4.9",
+    "@storybook/addon-links": "^6.4.9",
+    "@storybook/react": "^6.4.9",
+    "@storybook/testing-react": "^1.2.2",
+    "@testing-library/cypress": "^8.0.2",
+    "@types/lodash.debounce": "^4.0.6",
+    "@types/node": "^17.0.0",
+    "@types/react": "^17.0.37",
+    "@types/react-dom": "^17.0.11",
+    "@types/use-subscription": "^1.0.0",
+    "babel-loader": "^8.2.3",
+    "babel-plugin-istanbul": "^6.1.1",
+    "cypress": "^9.1.1",
+    "html-webpack-plugin": "^5.5.0",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "typescript": "^4.5.4",
+    "webpack": "^5.65.0",
+    "webpack-dev-server": "^4.6.0"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0 || ^17.0.0 || ^18.0.0-alpha || ^18.0.0-beta",
+    "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0-alpha || ^18.0.0-beta"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

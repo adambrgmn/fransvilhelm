@@ -26,11 +26,10 @@ import { useRef, useEffect, useCallback } from 'react';
  *   };
  */
 export function useIsMounted(): () => boolean {
-  const ref = useRef(false);
+  const ref = useRef(true);
   const cb = useCallback(() => ref.current, []);
 
   useEffect(() => {
-    ref.current = true;
     return () => {
       ref.current = false;
     };
