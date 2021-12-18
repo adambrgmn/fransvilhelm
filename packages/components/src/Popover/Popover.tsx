@@ -15,9 +15,6 @@ export interface PopoverProps {
   targetRef: React.RefObject<PossibleNode>;
   position?: Position;
   hidden?: boolean;
-
-  className?: string;
-  style?: React.CSSProperties;
   children: React.ReactNode;
 }
 
@@ -40,9 +37,8 @@ const InternalPopover = forwardRefWithAs<PopoverProps, 'div'>(
       targetRef,
       position = positionDefault,
       hidden,
-      style,
-      className,
       children,
+      ...props
     },
     forwardedRef,
   ) => {
@@ -55,12 +51,12 @@ const InternalPopover = forwardRefWithAs<PopoverProps, 'div'>(
     return (
       <Comp
         ref={ref}
-        className={className}
         hidden={hidden}
+        {...props}
         style={{
           position: 'absolute',
           ...getStyles(position, targetRect, popoverRect),
-          ...style,
+          ...props.style,
         }}
       >
         {children}
