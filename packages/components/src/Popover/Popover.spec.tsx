@@ -1,42 +1,24 @@
-import { mount } from '@cypress/react';
-import { useToggle } from '@fransvilhelm/hooks';
-import { useRef } from 'react';
+import { composeStories } from '@storybook/testing-react';
 
-import {
-  Popover,
-  Position,
-  positionRight,
-  positionMatchWidth,
-} from './Popover';
+import { mount } from '../test-utils';
+import * as stories from './Popover.stories';
 
-const TestComponent: React.FC<{ position?: Position }> = ({ position }) => {
-  let [show, toggle] = useToggle(false);
-  let ref = useRef<HTMLButtonElement>(null);
-
-  return (
-    <button ref={ref} onClick={toggle} style={{ padding: '0.35rem 2rem' }}>
-      Click me
-      <Popover targetRef={ref} hidden={!show} position={position}>
-        Hello world
-      </Popover>
-    </button>
-  );
-};
+const Story = composeStories(stories);
 
 describe('Popover', () => {
   it('renders as expected', () => {
-    mount(<TestComponent />);
+    mount(<Story.Default />, { strict: true });
 
-    cy.findByRole('button').click();
+    cy.findByText('Click me').click();
     cy.findByText('Hello world').should('be.visible');
   });
 
   it('alignes to the left side by default', () => {
-    mount(<TestComponent />);
-    cy.findByRole('button').click();
+    mount(<Story.Default />);
+    cy.findByText('Click me').click();
 
     cy.compareRects(
-      () => cy.findByRole('button'),
+      () => cy.findByText('Click me'),
       () => cy.findByText('Hello world'),
       (parent, popover) => {
         expect(popover.left).to.equal(parent.left);
@@ -46,11 +28,11 @@ describe('Popover', () => {
   });
 
   it('alignes to the right side if given positionRight', () => {
-    mount(<TestComponent position={positionRight} />);
-    cy.findByRole('button').click();
+    mount(<Story.PositionRight />);
+    cy.findByText('Click me').click();
 
     cy.compareRects(
-      () => cy.findByRole('button'),
+      () => cy.findByText('Click me'),
       () => cy.findByText('Hello world'),
       (parent, popover) => {
         expect(popover.right).to.equal(parent.right);
@@ -60,11 +42,11 @@ describe('Popover', () => {
   });
 
   it('is stretches full width if given positionMatchWidth', () => {
-    mount(<TestComponent position={positionMatchWidth} />);
-    cy.findByRole('button').click();
+    mount(<Story.PositionMatchWidth />);
+    cy.findByText('Click me').click();
 
     cy.compareRects(
-      () => cy.findByRole('button'),
+      () => cy.findByText('Click me'),
       () => cy.findByText('Hello world'),
       (parent, popover) => {
         expect(popover.left).to.equal(parent.left);
@@ -75,18 +57,16 @@ describe('Popover', () => {
   });
 
   it('adapts to the edges of the screen', () => {
-    mount(
-      <div style={{ paddingTop: 'calc(100vh - 30px)', paddingBottom: '100vh' }}>
-        <TestComponent />
-      </div>,
-    );
+    mount(<Story.CollisionDetection />);
 
-    cy.findByRole('button').click();
-    cy.findByRole('button').parent().scrollIntoView();
+    cy.findByText('Click me').click();
+    cy.findByText('Click me')
+      .parent()
+      .scrollIntoView();
 
     cy.requestAnimationFrame();
     cy.compareRects(
-      () => cy.findByRole('button'),
+      () => cy.findByText('Click me'),
       () => cy.findByText('Hello world'),
       (parent, popover) => {
         expect(popover.left).to.equal(parent.left);
@@ -94,11 +74,11 @@ describe('Popover', () => {
       },
     );
 
-    cy.findByRole('button').scrollIntoView();
+    cy.findByText('Click me').scrollIntoView();
 
     cy.requestAnimationFrame();
     cy.compareRects(
-      () => cy.findByRole('button'),
+      () => cy.findByText('Click me'),
       () => cy.findByText('Hello world'),
       (parent, popover) => {
         expect(popover.left).to.equal(parent.left);

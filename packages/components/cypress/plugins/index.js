@@ -22,6 +22,7 @@ module.exports = (on, config) => {
           }
         }
 
+        config.resolve.fallback = { path: false };
         return config;
       },
     });
