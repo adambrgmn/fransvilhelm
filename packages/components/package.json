@@ -32,7 +32,8 @@
     "storybook:build": "build-storybook"
   },
   "dependencies": {
-    "@fransvilhelm/hooks": "*"
+    "@fransvilhelm/descendants": "0.0.0",
+    "@fransvilhelm/hooks": "3.1.4"
   },
   "devDependencies": {
     "@babel/core": "^7.16.5",
