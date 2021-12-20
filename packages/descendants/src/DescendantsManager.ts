@@ -1,34 +1,43 @@
-export type DescendantOptions<T = {}> = T & {
+export type DescendantOptions<
+  DescendantData extends Record<string, unknown> = {},
+> = DescendantData & {
   disabled?: boolean;
   id?: string;
 };
 
-export type Descendant<T, K> = DescendantOptions<K> & {
-  node: T;
+export type Descendant<
+  DescendantNode,
+  DescendantData extends Record<string, unknown>,
+> = DescendantOptions<DescendantData> & {
+  node: DescendantNode;
   index: number;
 };
 
 export class DescendantsManager<
-  T extends HTMLElement,
-  K extends Record<string, unknown> = {},
+  DescendantNode extends HTMLElement,
+  DescendantData extends Record<string, unknown> = {},
 > {
-  #descendants = new Map<Node, Descendant<T, K>>();
+  #descendants = new Map<Node, Descendant<DescendantNode, DescendantData>>();
 
-  register(nodeOrOptions: DescendantOptions<K>): (node: T | null) => void;
-  register(nodeOrOptions: T | null): void;
-  register(nodeOrOptions: DescendantOptions<K> | T | null) {
+  register(
+    nodeOrOptions: DescendantOptions<DescendantData>,
+  ): (node: DescendantNode | null) => void;
+  register(nodeOrOptions: DescendantNode | null): void;
+  register(
+    nodeOrOptions: DescendantOptions<DescendantData> | DescendantNode | null,
+  ) {
     if (nodeOrOptions == null) return;
 
     if (isElement(nodeOrOptions)) {
       return this.#registerNode(nodeOrOptions);
     }
 
-    return (node: T | null) => {
+    return (node: DescendantNode | null) => {
       this.#registerNode(node, nodeOrOptions);
     };
   }
 
-  unregister(node: T) {
+  unregister(node: DescendantNode) {
     this.#descendants.delete(node);
     this.#updateIndices();
   }
@@ -113,13 +122,13 @@ export class DescendantsManager<
     return this.enabledItem(prev);
   }
 
-  indexOf(node: T | null) {
+  indexOf(node: DescendantNode | null) {
     if (node == null) return -1;
     let descendant = this.#descendants.get(node);
     return descendant?.index ?? -1;
   }
 
-  enabledIndexOf(node: T | null) {
+  enabledIndexOf(node: DescendantNode | null) {
     if (node == null) return -1;
     return this.#enabledValues().findIndex((item) =>
       item.node.isSameNode(node),
@@ -135,11 +144,17 @@ export class DescendantsManager<
     return this.#values().filter((item) => !item.disabled);
   }
 
-  #registerNode(node: T | null, options?: DescendantOptions<K>) {
+  #registerNode(
+    node: DescendantNode | null,
+    options?: DescendantOptions<DescendantData>,
+  ) {
     if (node == null || this.#descendants.has(node)) return;
 
     let descendant = { node, index: -1, ...options };
-    this.#descendants.set(node, descendant as Descendant<T, K>);
+    this.#descendants.set(
+      node,
+      descendant as Descendant<DescendantNode, DescendantData>,
+    );
     this.#updateIndices();
   }
 

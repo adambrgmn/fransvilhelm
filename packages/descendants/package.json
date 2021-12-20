@@ -24,7 +24,9 @@
     "test:ci": "jest --coverage",
     "lint": "eslint . --ext .ts --ext .tsx --ext .js --ignore-pattern dist"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@fransvilhelm/hooks": "3.1.4"
+  },
   "devDependencies": {
     "@babel/core": "^7.16.5",
     "@babel/preset-env": "^7.16.5",
