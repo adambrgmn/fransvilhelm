@@ -6,7 +6,25 @@ export default function (
   plop,
 ) {
   const kebabCase = plop.getHelper('kebabCase');
-  const pascalCase = plop.getHelper('pascalCase');
+
+  plop.setGenerator('package', {
+    description: 'Create a new package',
+    prompts: [
+      {
+        type: 'input',
+        name: 'name',
+        message: 'package name please',
+      },
+    ],
+    actions: [
+      {
+        type: 'addMany',
+        destination: 'packages/{{name}}',
+        templateFiles: '.plop/package/**/*',
+        base: '.plop/package',
+      },
+    ],
+  });
 
   plop.setGenerator('hook', {
     description: 'Create everything related to a hook',
