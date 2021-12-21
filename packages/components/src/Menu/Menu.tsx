@@ -195,10 +195,10 @@ export function useMenuList(
 
 export const List = forwardRefWithAs<{}, 'div'>(
   ({ as = 'div', children, ...props }, forwardedRef) => {
-    let [ref, popoverProps] = useMenuList(props, forwardedRef);
+    let [ref, menuListProps] = useMenuList(props, forwardedRef);
 
     return (
-      <Popover {...popoverProps} ref={ref}>
+      <Popover {...menuListProps} ref={ref}>
         {children}
       </Popover>
     );
@@ -210,18 +210,9 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 export function useMenuItem(
-  forwardedProps: ElementProps<'a'>,
-  forwardedRef: React.ForwardedRef<HTMLAnchorElement>,
-): [React.RefCallback<HTMLAnchorElement>, ElementProps<'a'>];
-export function useMenuItem(
   forwardedProps: ElementProps<'button'>,
   forwardedRef: React.ForwardedRef<HTMLButtonElement>,
-): [React.RefCallback<HTMLButtonElement>, ElementProps<'button'>];
-export function useMenuItem(
-  forwardedProps: ElementProps<'button'> | ElementProps<'a'>,
-  forwardedRef:
-    | React.ForwardedRef<HTMLButtonElement>
-    | React.ForwardedRef<HTMLAnchorElement>,
+  elementType?: any,
 ) {
   let disabled = !!(
     forwardedProps['aria-disabled'] ??
@@ -230,7 +221,6 @@ export function useMenuItem(
 
   let [, send] = useMenuMachineContext();
   let { register, index } = useDescendant({ disabled });
-
   let { generateItemId } = useMenuContext();
 
   let ref = useComposedRefs(forwardedRef, register);
@@ -240,6 +230,7 @@ export function useMenuItem(
     id: generateItemId(index),
     role: 'menuitem',
     'aria-disabled': disabled,
+    disabled: elementType === 'button' ? forwardedProps.disabled : undefined,
 
     onClick: composeEventHandlers(forwardedProps.onClick, () =>
       send.click(index),
@@ -251,7 +242,7 @@ export function useMenuItem(
 
 export const Item = forwardRefWithAs<{}, 'button'>(
   ({ as: Component = 'button', children, ...props }, forwardedRef) => {
-    let [ref, menuItemProps] = useMenuItem(props, forwardedRef);
+    let [ref, menuItemProps] = useMenuItem(props, forwardedRef, Component);
 
     return (
       <Component {...menuItemProps} ref={ref}>
