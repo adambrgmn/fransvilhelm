@@ -8,10 +8,32 @@ import { useRef, useState } from 'react';
 import { DescendantsManager, DescendantOptions } from './DescendantsManager';
 import { createStrictContext } from './utils';
 
+type UseDescendantReturn<
+  DescendantNode extends HTMLElement = HTMLElement,
+  DescendantData extends Record<string, unknown> = {},
+> = {
+  manager: DescendantsManager<DescendantNode, DescendantData>;
+  register: React.RefCallback<DescendantNode>;
+  index: number;
+  enabledIndex: number;
+};
+
+type DescendantsReturn<
+  DescendantNode extends HTMLElement = HTMLElement,
+  DescendantData extends Record<string, unknown> = {},
+> = [
+  React.FC<{ value: DescendantsManager<DescendantNode, DescendantData> }>,
+  () => DescendantsManager<DescendantNode, DescendantData>,
+  () => DescendantsManager<DescendantNode, DescendantData>,
+  (
+    options?: DescendantOptions<DescendantData>,
+  ) => UseDescendantReturn<DescendantNode, DescendantData>,
+];
+
 export function createDescendantContext<
   DescendantNode extends HTMLElement = HTMLElement,
   DescendantData extends Record<string, unknown> = {},
->() {
+>(): DescendantsReturn<DescendantNode, DescendantData> {
   const [DescendantContextProvider, useDescendantContext] = createStrictContext<
     DescendantsManager<DescendantNode, DescendantData>
   >({
@@ -32,7 +54,9 @@ export function createDescendantContext<
     return manager;
   }
 
-  function useDescendant(options?: DescendantOptions<DescendantData>) {
+  function useDescendant(
+    options?: DescendantOptions<DescendantData>,
+  ): UseDescendantReturn<DescendantNode, DescendantData> {
     let manager = useDescendantContext();
     let [index, setIndex] = useState(-1);
     let ref = useRef<DescendantNode>(null);
@@ -66,7 +90,7 @@ export function createDescendantContext<
       register,
       index,
       enabledIndex: manager.enabledIndexOf(ref.current),
-    } as const;
+    };
   }
 
   return [
@@ -74,5 +98,5 @@ export function createDescendantContext<
     useDescendantContext,
     useDescendants,
     useDescendant,
-  ] as const;
+  ];
 }

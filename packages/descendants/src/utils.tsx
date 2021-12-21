@@ -1,7 +1,4 @@
-import {
-  createContext as _createContext,
-  useContext as _useContext,
-} from 'react';
+import React, { createContext, useContext } from 'react';
 
 interface CreateContextOptions {
   name: string;
@@ -12,7 +9,7 @@ export function createStrictContext<ContextType>({
   name,
   errorMessage,
 }: CreateContextOptions) {
-  let Context = _createContext<ContextType | undefined>(undefined);
+  let Context = createContext<ContextType | undefined>(undefined);
 
   const Provider: React.FC<{ value: ContextType }> = ({ value, children }) => {
     return <Context.Provider value={value}>{children}</Context.Provider>;
@@ -21,7 +18,7 @@ export function createStrictContext<ContextType>({
   Provider.displayName = name;
 
   function useStrictContext() {
-    let value = _useContext(Context);
+    let value = useContext(Context);
     if (value === undefined) {
       throw new Error(errorMessage);
     }
@@ -30,22 +27,4 @@ export function createStrictContext<ContextType>({
   }
 
   return [Provider, useStrictContext] as const;
-}
-
-export function createContext<ContextType>({
-  name,
-}: Omit<CreateContextOptions, 'errorMessage'>) {
-  let Context = _createContext<ContextType | undefined>(undefined);
-
-  const Provider: React.FC<{ value: ContextType }> = ({ value, children }) => {
-    return <Context.Provider value={value}>{children}</Context.Provider>;
-  };
-
-  Provider.displayName = name;
-
-  function useContext() {
-    return _useContext(Context);
-  }
-
-  return [Provider, useContext] as const;
 }
