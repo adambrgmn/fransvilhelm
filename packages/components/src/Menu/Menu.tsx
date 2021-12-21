@@ -174,7 +174,7 @@ export function useMenuList(
   forwardedRef?: React.ForwardedRef<HTMLDivElement>,
 ) {
   let [state] = useMenuMachineContext();
-  let { menuListRef, buttonRef, menuId } = useMenuContext();
+  let { menuListRef, buttonRef, menuId, buttonId } = useMenuContext();
   let ref = useComposedRefs(forwardedRef, menuListRef);
 
   let props: Omit<React.ComponentProps<typeof Popover>, 'children'> = {
@@ -187,6 +187,7 @@ export function useMenuList(
 
     role: 'menu',
     'aria-orientation': 'vertical',
+    'aria-describedby': buttonId,
   };
 
   return [ref, props] as const;
@@ -222,10 +223,13 @@ export function useMenuItem(
     | React.ForwardedRef<HTMLButtonElement>
     | React.ForwardedRef<HTMLAnchorElement>,
 ) {
+  let disabled = !!(
+    forwardedProps['aria-disabled'] ??
+    ('disabled' in forwardedProps ? forwardedProps.disabled : false)
+  );
+
   let [, send] = useMenuMachineContext();
-  let { register, index } = useDescendant({
-    disabled: 'disabled' in forwardedProps ? !!forwardedProps.disabled : false,
-  });
+  let { register, index } = useDescendant({ disabled });
 
   let { generateItemId } = useMenuContext();
 
@@ -235,6 +239,7 @@ export function useMenuItem(
     ...forwardedProps,
     id: generateItemId(index),
     role: 'menuitem',
+    'aria-disabled': disabled,
 
     onClick: composeEventHandlers(forwardedProps.onClick, () =>
       send.click(index),

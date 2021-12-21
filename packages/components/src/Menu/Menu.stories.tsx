@@ -17,27 +17,28 @@ const Template: ComponentStory<MenuType> = (args) => {
       <Menu.Button className="px-4 py-2 border rounded hover:bg-gray-200">
         Open menu
       </Menu.Button>
-      <Menu.List className="flex flex-col p-2 px-4 space-y-2 border rounded">
+      <Menu.List className="flex flex-col border rounded">
         <Menu.Item
-          className="hover:bg-gray-200 focus:outline-black"
+          className="hover:bg-gray-200 focus:outline-black px-4 py-2"
           onClick={onClick}
         >
           Item A
         </Menu.Item>
         <Menu.Item
-          className="hover:bg-gray-200 focus:outline-black"
+          className="hover:bg-gray-200 focus:outline-black px-4 py-2"
           onClick={onClick}
         >
           Item B
         </Menu.Item>
         <Menu.Item
-          className="hover:bg-gray-200 focus:outline-black"
+          className="hover:bg-gray-200 focus:outline-black px-4 py-2"
           onClick={onClick}
+          disabled
         >
           Item C
         </Menu.Item>
         <Menu.Item
-          className="hover:bg-gray-200 focus:outline-black"
+          className="hover:bg-gray-200 focus:outline-black px-4 py-2"
           onClick={onClick}
         >
           Item D
