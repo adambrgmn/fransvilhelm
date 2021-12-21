@@ -3,8 +3,10 @@ import { render, screen } from '@testing-library/react';
 import { createDescendantContext } from './useDescendants';
 
 describe('useDescendants', () => {
-  let [Provider, useDescendantsContext, useDescendants, useDescendant] =
-    createDescendantContext<HTMLElement, {}>();
+  let [Provider, , useDescendants, useDescendant] = createDescendantContext<
+    HTMLElement,
+    {}
+  >();
 
   let Wrapper: React.FC = ({ children }) => {
     let manager = useDescendants();

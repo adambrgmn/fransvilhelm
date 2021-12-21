@@ -95,7 +95,11 @@ export class DescendantsManager<
   }
 
   nextEnabled(currentIndex: number) {
-    let next = currentIndex + 1;
+    let item = this.item(currentIndex);
+    if (item == null) return undefined;
+
+    let enabledIndex = this.enabledIndexOf(item.node);
+    let next = enabledIndex + 1;
     let max = this.enabledCount() - 1;
     if (next > max) {
       next = 0;
@@ -114,7 +118,11 @@ export class DescendantsManager<
   }
 
   prevEnabled(currentIndex: number) {
-    let prev = currentIndex - 1;
+    let item = this.item(currentIndex);
+    if (item == null) return undefined;
+
+    let enabledIndex = this.enabledIndexOf(item.node);
+    let prev = enabledIndex - 1;
     if (prev < 0) {
       prev = this.enabledCount() - 1;
     }

@@ -1,8 +1,6 @@
-import { screen } from '@testing-library/react';
 import { DescendantsManager } from './DescendantsManager';
 
 afterEach(() => {
-  // document.body.innerHTML = '';
   while (document.body.lastChild) {
     document.body.removeChild(document.body.lastChild);
   }
@@ -118,7 +116,7 @@ describe('DescendantsManager', () => {
     expect(manager.nextEnabled(1)?.node).toBe(el1);
 
     expect(manager.prev(3)?.node).toBe(el3);
-    expect(manager.prevEnabled(1)?.node).toBe(el1);
+    expect(manager.prevEnabled(1)?.node).toBe(el3);
 
     expect(manager.prev(0)?.node).toBe(el4);
     expect(manager.prevEnabled(0)?.node).toBe(el3);
