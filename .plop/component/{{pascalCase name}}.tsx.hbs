@@ -1,0 +1,13 @@
+import { forwardRefWithAs } from '../utils/forward-ref';
+
+export interface {{ pascalCase name }}Props {
+  children: React.ReactNode;
+}
+
+export const {{ pascalCase name }} = forwardRefWithAs<{{ pascalCase name}}Props, 'div'>(({ children, ...props }, ref) => {
+  return <div ref={ref} {...props}>{children}</div>
+});
+
+if (process.env.NODE_ENV !== 'production') {
+  {{ pascalCase name }}.displayName = '{{ pascalCase name }}';
+}

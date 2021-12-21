@@ -20,10 +20,14 @@ function compareRects(
   compare: (rect1: DOMRect, rect2: DOMRect) => void,
 ) {
   target1().then((target1El) => {
-    let target1Rect = target1El[0].getBoundingClientRect();
+    let target1Rect = target1El[0]?.getBoundingClientRect();
     target2().then((target2El) => {
-      let target2Rect = target2El[0].getBoundingClientRect();
-      compare(target1Rect, target2Rect);
+      let target2Rect = target2El[0]?.getBoundingClientRect();
+      if (target1Rect != null && target2Rect != null) {
+        compare(target1Rect, target2Rect);
+      } else {
+        throw new Error('Could not retrieve dom rect objects from targets.');
+      }
     });
   });
 }

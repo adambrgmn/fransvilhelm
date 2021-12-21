@@ -6,6 +6,26 @@ export default function (
   plop,
 ) {
   const kebabCase = plop.getHelper('kebabCase');
+
+  plop.setGenerator('package', {
+    description: 'Create a new package',
+    prompts: [
+      {
+        type: 'input',
+        name: 'name',
+        message: 'package name please',
+      },
+    ],
+    actions: [
+      {
+        type: 'addMany',
+        destination: 'packages/{{name}}',
+        templateFiles: '.plop/package/**/*',
+        base: '.plop/package',
+      },
+    ],
+  });
+
   plop.setGenerator('hook', {
     description: 'Create everything related to a hook',
     prompts: [
@@ -27,6 +47,30 @@ export default function (
         type: 'append-sorted',
         path: 'packages/hooks/src/index.ts',
         template: "export * from './{{ kebabCase name }}';\n",
+      },
+    ],
+  });
+
+  plop.setGenerator('component', {
+    description: 'Create everything related to a component',
+    prompts: [
+      {
+        type: 'input',
+        name: 'name',
+        message: 'component name please',
+      },
+    ],
+    actions: [
+      {
+        type: 'addMany',
+        destination: 'packages/components/src/{{pascalCase name}}',
+        templateFiles: '.plop/component/**/*',
+        base: '.plop/component',
+      },
+      {
+        type: 'append-sorted',
+        path: 'packages/components/src/index.ts',
+        template: "export * from './{{ pascalCase name }}';\n",
       },
     ],
   });

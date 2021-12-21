@@ -41,7 +41,7 @@ export function useTextareaResize(
         options.maxRows,
       );
 
-      if (heightRef.current !== height) {
+      if (heightRef.current !== height && typeof height === 'number') {
         heightRef.current = height;
         node.style.setProperty('height', `${height}px`, 'important');
       }

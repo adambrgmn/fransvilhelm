@@ -60,10 +60,9 @@ describe('Popover', () => {
     mount(<Story.CollisionDetection />);
 
     cy.findByText('Click me').click();
-    cy.findByText('Click me')
-      .parent()
-      .scrollIntoView();
+    cy.findByText('Click me').parent().scrollIntoView();
 
+    cy.requestAnimationFrame();
     cy.requestAnimationFrame();
     cy.compareRects(
       () => cy.findByText('Click me'),
@@ -76,6 +75,7 @@ describe('Popover', () => {
 
     cy.findByText('Click me').scrollIntoView();
 
+    cy.requestAnimationFrame();
     cy.requestAnimationFrame();
     cy.compareRects(
       () => cy.findByText('Click me'),

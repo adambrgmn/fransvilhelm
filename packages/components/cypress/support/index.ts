@@ -1,5 +1,6 @@
 import '@cypress/code-coverage/support';
 import '@testing-library/cypress/add-commands';
+import 'cypress-plugin-tab';
 import './commands';
 import { setGlobalConfig } from '@storybook/testing-react';
 
@@ -8,19 +9,22 @@ import * as storybookPreview from '../../.storybook/preview';
 
 setGlobalConfig(storybookPreview);
 
-let el: HTMLScriptElement;
+let elements = new Set<HTMLElement>();
+
 before(() => {
   return new Promise((resolve, reject) => {
-    el = document.createElement('script');
-    el.onload = resolve;
-    el.onerror = reject;
-    el.src = 'https://cdn.tailwindcss.com';
-    document.body.appendChild(el);
-  });
-});
+    let styleEl = document.createElement('style');
+    styleEl.appendChild(
+      document.createTextNode('[hidden] { display: none; };'),
+    );
+    document.body.appendChild(styleEl);
+    elements.add(styleEl);
 
-after(() => {
-  if (el) {
-    document.body.removeChild(el);
-  }
+    let scriptEl = document.createElement('script');
+    scriptEl.onload = resolve;
+    scriptEl.onerror = reject;
+    scriptEl.src = 'https://cdn.tailwindcss.com';
+    document.body.appendChild(scriptEl);
+    elements.add(scriptEl);
+  });
 });
