@@ -1,22 +1,40 @@
 import { DescendantsManager } from '@fransvilhelm/descendants';
 import { useMachine } from '@xstate/react';
 import { useMemo } from 'react';
+import { ContextFrom } from 'xstate';
 import { createModel } from 'xstate/lib/model';
 
 import { createStrictContext } from '../utils/context';
+import { applyFocus } from '../utils/focus';
 
 const menuModel = createModel(
   {
-    activeIndex: -1,
     manager: undefined as unknown as DescendantsManager<HTMLElement, {}>,
+
+    // State
+    activeIndex: -1,
+
+    // Callbacks
+    returnFocus: (() => null) as unknown as () =>
+      | HTMLElement
+      | null
+      | undefined,
+
+    // Config options
+    closeOnClick: true,
   },
   {
     events: {
       toggle: () => ({}),
-      select: (index: number) => ({ index }),
+      close: () => ({}),
+      click: (index: number) => ({ index }),
+      next: () => ({}),
+      previous: () => ({}),
     },
   },
 );
+
+export type MenuMachineContextType = ContextFrom<typeof menuMachine>;
 
 const menuMachine = menuModel.createMachine(
   {
@@ -36,17 +54,38 @@ const menuMachine = menuModel.createMachine(
       },
       expanded: {
         entry: 'focusInitial',
+        exit: 'returnFocus',
         on: {
           toggle: {
             target: 'idle',
-            actions: menuModel.assign({
-              activeIndex: () => -1,
-            }),
+            actions: menuModel.assign({ activeIndex: () => -1 }),
           },
-          select: {
-            actions: menuModel.assign({
-              activeIndex: (_, event) => event.index,
-            }),
+          close: {
+            target: 'idle',
+            actions: menuModel.assign({ activeIndex: () => -1 }),
+          },
+          click: [{ target: 'idle', cond: 'shouldCloseOnClick' }],
+          next: {
+            actions: [
+              menuModel.assign({
+                activeIndex: (context) => {
+                  let next = context.manager.nextEnabled(context.activeIndex);
+                  applyFocus(next?.node, { nextTick: true });
+                  return next?.index ?? -1;
+                },
+              }),
+            ],
+          },
+          previous: {
+            actions: [
+              menuModel.assign({
+                activeIndex: (context) => {
+                  let prev = context.manager.prevEnabled(context.activeIndex);
+                  applyFocus(prev?.node, { nextTick: true });
+                  return prev?.index ?? -1;
+                },
+              }),
+            ],
           },
         },
       },
@@ -56,10 +95,15 @@ const menuMachine = menuModel.createMachine(
     actions: {
       focusInitial: (context) => {
         let descendant = context.manager.enabledItem(context.activeIndex);
-        if (descendant != null) {
-          descendant.node.focus();
-        }
+        applyFocus(descendant?.node, { nextTick: true });
       },
+      returnFocus: (context) => {
+        let to = context.returnFocus();
+        applyFocus(to, { nextTick: true });
+      },
+    },
+    guards: {
+      shouldCloseOnClick: (context) => context.closeOnClick,
     },
   },
 );
@@ -67,13 +111,11 @@ const menuMachine = menuModel.createMachine(
 export type MenuModelEvents = typeof menuModel.events;
 export type MenuMachineContext = ReturnType<typeof useMenuMachine>;
 
-interface MenuMachineOptions {
-  manager: DescendantsManager<HTMLElement, {}>;
-}
+export type MenuMachineOptions = Omit<MenuMachineContextType, 'activeIndex'>;
 
 export function useMenuMachine(options: MenuMachineOptions) {
   let [state, send] = useMachine(menuMachine, {
-    context: { manager: options.manager },
+    context: options,
   });
 
   let events = useMemo<MenuModelEvents>(() => {
