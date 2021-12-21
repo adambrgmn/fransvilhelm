@@ -16,9 +16,9 @@ it('renders a portal', () => {
   mount(<TestComponent />);
 
   cy.findByTestId('parent').then(($parent) => {
-    let parent = $parent[0];
+    let parent = $parent[0]!;
     cy.findByRole('heading').then(($heading) => {
-      let heading = $heading[0];
+      let heading = $heading[0]!;
       expect(parent.contains(heading)).to.equal(false);
     });
   });

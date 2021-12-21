@@ -15,10 +15,7 @@ const menuModel = createModel(
     activeIndex: -1,
 
     // Callbacks
-    returnFocus: (() => null) as unknown as () =>
-      | HTMLElement
-      | null
-      | undefined,
+    returnFocus: null as unknown as () => HTMLElement | null | undefined,
 
     // Config options
     closeOnClick: true,
@@ -70,7 +67,7 @@ const menuMachine = menuModel.createMachine(
               menuModel.assign({
                 activeIndex: (context) => {
                   let next = context.manager.nextEnabled(context.activeIndex);
-                  applyFocus(next?.node, { nextTick: true });
+                  applyFocus(next?.node);
                   return next?.index ?? -1;
                 },
               }),
@@ -81,7 +78,7 @@ const menuMachine = menuModel.createMachine(
               menuModel.assign({
                 activeIndex: (context) => {
                   let prev = context.manager.prevEnabled(context.activeIndex);
-                  applyFocus(prev?.node, { nextTick: true });
+                  applyFocus(prev?.node);
                   return prev?.index ?? -1;
                 },
               }),
@@ -95,11 +92,11 @@ const menuMachine = menuModel.createMachine(
     actions: {
       focusInitial: (context) => {
         let descendant = context.manager.enabledItem(context.activeIndex);
-        applyFocus(descendant?.node, { nextTick: true });
+        applyFocus(descendant?.node);
       },
       returnFocus: (context) => {
         let to = context.returnFocus();
-        applyFocus(to, { nextTick: true });
+        applyFocus(to);
       },
     },
     guards: {

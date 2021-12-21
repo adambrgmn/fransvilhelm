@@ -264,19 +264,3 @@ export const Item = forwardRefWithAs<{}, 'button'>(
 if (process.env.NODE_ENV !== 'production') {
   Item.displayName = 'Item';
 }
-
-export const Link = forwardRefWithAs<{}, 'a'>(
-  ({ as: Component = 'a', children, ...props }, forwardedRef) => {
-    let [ref, menuItemProps] = useMenuItem(props, forwardedRef);
-
-    return (
-      <Component {...menuItemProps} ref={ref}>
-        {children}
-      </Component>
-    );
-  },
-);
-
-if (process.env.NODE_ENV !== 'production') {
-  Link.displayName = 'Link';
-}

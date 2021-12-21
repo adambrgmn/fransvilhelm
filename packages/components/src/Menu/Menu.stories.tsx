@@ -1,5 +1,5 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import React from 'react';
+import React, { Fragment, useState } from 'react';
 
 import * as Menu from './Menu';
 
@@ -10,39 +10,21 @@ export default {
   component: Menu.Menu,
 } as ComponentMeta<MenuType>;
 
+let c = {
+  button: 'px-4 py-2 border rounded hover:bg-gray-200',
+  list: 'flex flex-col border rounded',
+  item: 'hover:bg-gray-200 focus:outline-black px-4 py-2',
+};
+
 const Template: ComponentStory<MenuType> = (args) => {
-  let onClick = () => console.log('click');
   return (
     <Menu.Menu {...args}>
-      <Menu.Button className="px-4 py-2 border rounded hover:bg-gray-200">
-        Open menu
-      </Menu.Button>
-      <Menu.List className="flex flex-col border rounded">
-        <Menu.Item
-          className="hover:bg-gray-200 focus:outline-black px-4 py-2"
-          onClick={onClick}
-        >
-          Item A
-        </Menu.Item>
-        <Menu.Item
-          className="hover:bg-gray-200 focus:outline-black px-4 py-2"
-          onClick={onClick}
-        >
-          Item B
-        </Menu.Item>
-        <Menu.Item
-          className="hover:bg-gray-200 focus:outline-black px-4 py-2"
-          onClick={onClick}
-          disabled
-        >
-          Item C
-        </Menu.Item>
-        <Menu.Item
-          className="hover:bg-gray-200 focus:outline-black px-4 py-2"
-          onClick={onClick}
-        >
-          Item D
-        </Menu.Item>
+      <Menu.Button className={c.button}>Open menu</Menu.Button>
+      <Menu.List className={c.list}>
+        <Menu.Item className={c.item}>Item A</Menu.Item>
+        <Menu.Item className={c.item}>Item B</Menu.Item>
+        <Menu.Item className={c.item}>Item C</Menu.Item>
+        <Menu.Item className={c.item}>Item D</Menu.Item>
       </Menu.List>
     </Menu.Menu>
   );
@@ -50,3 +32,45 @@ const Template: ComponentStory<MenuType> = (args) => {
 
 export const Default = Template.bind({});
 Default.args = {};
+
+export const WithOnClick: ComponentStory<MenuType> = (args) => {
+  let [selected, setSelected] = useState<string | null>(null);
+  return (
+    <Fragment>
+      <p>Value: {selected}</p>
+      <Menu.Menu {...args}>
+        <Menu.Button className={c.button}>Open menu</Menu.Button>
+        <Menu.List className={c.list}>
+          <Menu.Item className={c.item} onClick={() => setSelected('Item A')}>
+            Item A
+          </Menu.Item>
+          <Menu.Item className={c.item} onClick={() => setSelected('Item B')}>
+            Item B
+          </Menu.Item>
+          <Menu.Item className={c.item} onClick={() => setSelected('Item C')}>
+            Item C
+          </Menu.Item>
+          <Menu.Item className={c.item} onClick={() => setSelected('Item D')}>
+            Item D
+          </Menu.Item>
+        </Menu.List>
+      </Menu.Menu>
+    </Fragment>
+  );
+};
+
+export const WithDisabledItems: ComponentStory<MenuType> = (args) => {
+  return (
+    <Menu.Menu {...args}>
+      <Menu.Button className={c.button}>Open menu</Menu.Button>
+      <Menu.List className={c.list}>
+        <Menu.Item className={c.item}>Item A</Menu.Item>
+        <Menu.Item disabled className={c.item}>
+          Item B
+        </Menu.Item>
+        <Menu.Item className={c.item}>Item C</Menu.Item>
+        <Menu.Item className={c.item}>Item D</Menu.Item>
+      </Menu.List>
+    </Menu.Menu>
+  );
+};

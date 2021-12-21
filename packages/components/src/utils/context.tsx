@@ -31,21 +31,3 @@ export function createStrictContext<ContextType>({
 
   return [Provider, useStrictContext] as const;
 }
-
-export function createContext<ContextType>({
-  name,
-}: Omit<CreateContextOptions, 'errorMessage'>) {
-  let Context = _createContext<ContextType | undefined>(undefined);
-
-  const Provider: React.FC<{ value: ContextType }> = ({ value, children }) => {
-    return <Context.Provider value={value}>{children}</Context.Provider>;
-  };
-
-  Provider.displayName = name;
-
-  function useContext() {
-    return _useContext(Context);
-  }
-
-  return [Provider, useContext] as const;
-}

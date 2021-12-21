@@ -5,7 +5,7 @@ import { Portal } from '../Portal';
 import { forwardRefWithAs } from '../utils/forward-ref';
 
 type PossibleNode = null | undefined | HTMLElement | SVGElement;
-export type Position = (
+export type PopoverPosition = (
   targetRect?: PRect | null,
   popoverRect?: PRect | null,
   ...unstable_observableNodes: PossibleNode[]
@@ -13,7 +13,7 @@ export type Position = (
 
 export interface PopoverProps {
   targetRef: React.RefObject<PossibleNode>;
-  position?: Position;
+  position?: PopoverPosition;
   hidden?: boolean;
   children: React.ReactNode;
 }
@@ -70,7 +70,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 function getStyles(
-  position: Position,
+  position: PopoverPosition,
   targetRect: PRect | null,
   popoverRect: PRect | null,
 ): React.CSSProperties {
@@ -91,7 +91,7 @@ function getTopPosition(
   };
 }
 
-export const positionDefault: Position = (targetRect, popoverRect) => {
+export const positionDefault: PopoverPosition = (targetRect, popoverRect) => {
   if (!targetRect || !popoverRect) {
     return {};
   }
@@ -108,7 +108,7 @@ export const positionDefault: Position = (targetRect, popoverRect) => {
   };
 };
 
-export const positionRight: Position = (targetRect, popoverRect) => {
+export const positionRight: PopoverPosition = (targetRect, popoverRect) => {
   if (!targetRect || !popoverRect) {
     return {};
   }
@@ -122,7 +122,10 @@ export const positionRight: Position = (targetRect, popoverRect) => {
   };
 };
 
-export const positionMatchWidth: Position = (targetRect, popoverRect) => {
+export const positionMatchWidth: PopoverPosition = (
+  targetRect,
+  popoverRect,
+) => {
   if (!targetRect || !popoverRect) {
     return {};
   }
