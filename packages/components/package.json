@@ -62,9 +62,10 @@
     "babel-loader": "^8.2.3",
     "babel-plugin-istanbul": "^6.1.1",
     "cypress": "^9.1.1",
+    "cypress-plugin-tab": "^1.0.5",
     "html-webpack-plugin": "^5.5.0",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
+    "react": "^18.0.0-beta-24dd07bd2-20211208",
+    "react-dom": "^18.0.0-beta-24dd07bd2-20211208",
     "typescript": "^4.5.4",
     "webpack": "^5.65.0",
     "webpack-dev-server": "^4.6.0"

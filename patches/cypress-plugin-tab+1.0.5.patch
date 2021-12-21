@@ -1,0 +1,12 @@
+diff --git a/node_modules/cypress-plugin-tab/package.json b/node_modules/cypress-plugin-tab/package.json
+index 90db85c..b2da1ab 100644
+--- a/node_modules/cypress-plugin-tab/package.json
++++ b/node_modules/cypress-plugin-tab/package.json
+@@ -3,6 +3,7 @@
+   "version": "1.0.5",
+   "description": "",
+   "main": "src",
++  "types": "src/index.d.ts",
+   "scripts": {
+     "lint": "eslint --ext .js,.ts,.eslintrc,.json .",
+     "test-e2e": "cypress run"
