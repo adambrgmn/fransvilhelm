@@ -35,7 +35,6 @@
     "@babel/core": "^7.16.5",
     "@babel/preset-env": "^7.16.5",
     "@babel/preset-typescript": "^7.16.5",
-    "@fransvilhelm/build-package": "*",
     "@fransvilhelm/config": "*",
     "@fransvilhelm/tsconfig": "*",
     "@types/jest": "^27.0.3",

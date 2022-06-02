@@ -33,7 +33,6 @@
     "@babel/preset-env": "^7.16.5",
     "@babel/preset-react": "^7.16.5",
     "@babel/preset-typescript": "^7.16.5",
-    "@fransvilhelm/build-package": "*",
     "@fransvilhelm/config": "*",
     "@fransvilhelm/tsconfig": "*",
     "@testing-library/jest-dom": "^5.16.1",
