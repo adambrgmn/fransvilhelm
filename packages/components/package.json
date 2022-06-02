@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "description": "A set of reusable React components",
   "source": "src/index.ts",
-  "main": "dist/index.cjs.js",
-  "module": "dist/index.esm.js",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "repository": "https://github.com/adambrgmn/fransvilhelm/tree/main/packages/components",
   "homepage": "https://github.com/adambrgmn/fransvilhelm/tree/main/packages/components",
@@ -23,8 +23,8 @@
     "utils"
   ],
   "scripts": {
-    "dev": "build-package --watch",
-    "build": "build-package",
+    "dev": "tsup --dts --watch",
+    "build": "tsup --dts",
     "test": "cypress open-ct",
     "test:ci": "cypress run-ct",
     "lint": "eslint src cypress --ext .ts --ext .tsx --ext .js --ignore-pattern dist",
@@ -45,7 +45,6 @@
     "@cypress/code-coverage": "^3.9.12",
     "@cypress/react": "^5.12.0",
     "@cypress/webpack-dev-server": "^1.8.0",
-    "@fransvilhelm/build-package": "*",
     "@fransvilhelm/config": "*",
     "@fransvilhelm/tsconfig": "*",
     "@storybook/addon-a11y": "^6.4.9",
@@ -67,6 +66,7 @@
     "html-webpack-plugin": "^5.5.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "tsup": "^6.0.1",
     "typescript": "^4.5.4",
     "webpack": "^5.65.0",
     "webpack-dev-server": "^4.7.0"
