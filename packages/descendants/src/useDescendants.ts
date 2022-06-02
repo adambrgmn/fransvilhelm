@@ -1,11 +1,8 @@
-import {
-  useComposedRefs,
-  useIsomorphicLayoutEffect,
-  useLazyInit,
-} from '@fransvilhelm/hooks';
 import { useRef, useState } from 'react';
 
-import { DescendantsManager, DescendantOptions } from './DescendantsManager';
+import { useComposedRefs, useIsomorphicLayoutEffect, useLazyInit } from '@fransvilhelm/hooks';
+
+import { DescendantOptions, DescendantsManager } from './DescendantsManager';
 import { createStrictContext } from './utils';
 
 type UseDescendantReturn<
@@ -25,9 +22,7 @@ type DescendantsReturn<
   React.FC<{ value: DescendantsManager<DescendantNode, DescendantData> }>,
   () => DescendantsManager<DescendantNode, DescendantData>,
   () => DescendantsManager<DescendantNode, DescendantData>,
-  (
-    options?: DescendantOptions<DescendantData>,
-  ) => UseDescendantReturn<DescendantNode, DescendantData>,
+  (options?: DescendantOptions<DescendantData>) => UseDescendantReturn<DescendantNode, DescendantData>,
 ];
 
 export function createDescendantContext<
@@ -38,14 +33,11 @@ export function createDescendantContext<
     DescendantsManager<DescendantNode, DescendantData>
   >({
     name: 'DescendantContextProvider',
-    errorMessage:
-      'useDescendantsContext must be used within DescendantContextProvider',
+    errorMessage: 'useDescendantsContext must be used within DescendantContextProvider',
   });
 
   function useDescendants() {
-    let manager = useLazyInit(
-      () => new DescendantsManager<DescendantNode, DescendantData>(),
-    );
+    let manager = useLazyInit(() => new DescendantsManager<DescendantNode, DescendantData>());
 
     useIsomorphicLayoutEffect(() => {
       return () => manager.destroy();
@@ -93,10 +85,5 @@ export function createDescendantContext<
     };
   }
 
-  return [
-    DescendantContextProvider,
-    useDescendantContext,
-    useDescendants,
-    useDescendant,
-  ];
+  return [DescendantContextProvider, useDescendantContext, useDescendants, useDescendant];
 }

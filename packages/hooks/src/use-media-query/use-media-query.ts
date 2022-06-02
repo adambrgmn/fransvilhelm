@@ -21,10 +21,7 @@ import { canUseDOM } from '../utils';
  *   };
  */
 export function useMediaQuery(query: string): boolean {
-  const mediaQueryList = useMemo(
-    () => (canUseDOM() ? window.matchMedia(query) : null),
-    [query],
-  );
+  const mediaQueryList = useMemo(() => (canUseDOM() ? window.matchMedia(query) : null), [query]);
 
   const subscription: Subscription<boolean> = useMemo(
     () => ({

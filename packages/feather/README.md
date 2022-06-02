@@ -19,14 +19,12 @@ npm i @fransvilhelm/feather
 yarn add @fransvilhelm/feather
 ```
 
-The package will now be available to import and use in any of you react
-components.
+The package will now be available to import and use in any of you react components.
 
 ## Usage
 
-All icons are created individually, unrelated to each other. And all icons found
-on [Feather](https://feathericons.com/) are exported as named exports. They
-names are transformed to pascal case: `align-center -> AlignCenter`.
+All icons are created individually, unrelated to each other. And all icons found on [Feather](https://feathericons.com/)
+are exported as named exports. They names are transformed to pascal case: `align-center -> AlignCenter`.
 
 ```jsx
 import { Trash } from '@fransvilhelm/feather';
@@ -40,14 +38,13 @@ export const RemoveButton = () => {
 };
 ```
 
-Since all icons are named exports and unrelated to eachother the library is
-easily tree-shaken. This means that if your bundler supports tree-shaking only
-the icons you actually use will be included in your final bundle.
+Since all icons are named exports and unrelated to eachother the library is easily tree-shaken. This means that if your
+bundler supports tree-shaking only the icons you actually use will be included in your final bundle.
 
 ### Setting the color
 
-The icons uses `currentColor` as the color of the strokes. That means the color
-will be inherited from the wrapping element:
+The icons uses `currentColor` as the color of the strokes. That means the color will be inherited from the wrapping
+element:
 
 ```jsx
 <div style={{ color: 'rebeccapurple' }}>
@@ -57,9 +54,8 @@ will be inherited from the wrapping element:
 
 ### Text alignment
 
-The icons only accept one prop; `baseline`. When set it will align the icon to
-the baseline of your text. This makes it very easy to add the icons as inline in
-text, easily replacing old font icons. If you are aligning with flex and
+The icons only accept one prop; `baseline`. When set it will align the icon to the baseline of your text. This makes it
+very easy to add the icons as inline in text, easily replacing old font icons. If you are aligning with flex and
 `align-items: center` you should not set `baseline` on the icons.
 
 ## License

@@ -19,8 +19,7 @@ const defaultGitHubInfo = {
   },
 };
 
-const getInfo: jest.MockedFunction<typeof github.getInfo> =
-  github.getInfo as unknown as any;
+const getInfo: jest.MockedFunction<typeof github.getInfo> = github.getInfo as unknown as any;
 
 it('handles single line summaries', async () => {
   const changeset: NewChangesetWithCommit = {
@@ -39,11 +38,7 @@ it('handles single line summaries', async () => {
     },
   });
 
-  const result = await changelogFunction.getReleaseLine(
-    changeset,
-    'minor',
-    options,
-  );
+  const result = await changelogFunction.getReleaseLine(changeset, 'minor', options);
 
   expect(result).toEqual('- Change summary (by @adambrgmn in #1)');
 });
@@ -69,11 +64,7 @@ Comes here`,
     },
   });
 
-  const result = await changelogFunction.getReleaseLine(
-    changeset,
-    'minor',
-    options,
-  );
+  const result = await changelogFunction.getReleaseLine(changeset, 'minor', options);
 
   expect(result).toEqual(`- First line (by @adambrgmn in #1)
   Rest if the lines
@@ -97,11 +88,7 @@ it('handles commits without a user and/or pull request', async () => {
     },
   });
 
-  const result = await changelogFunction.getReleaseLine(
-    changeset,
-    'minor',
-    options,
-  );
+  const result = await changelogFunction.getReleaseLine(changeset, 'minor', options);
 
   expect(result).toEqual('- Change summary (by (unknown) in abc123)');
 });
@@ -114,9 +101,7 @@ it('throws an error if no config is passed', async () => {
     releases: [],
   };
 
-  await expect(() =>
-    changelogFunction.getReleaseLine(changeset, 'minor', {}),
-  ).rejects.toThrow();
+  await expect(() => changelogFunction.getReleaseLine(changeset, 'minor', {})).rejects.toThrow();
 });
 
 it('passes everything along to @changesets/changelog-github if no commit exists on changeset', async () => {
@@ -137,11 +122,7 @@ Comes here`,
     },
   });
 
-  const result = await changelogFunction.getReleaseLine(
-    changeset,
-    'minor',
-    options,
-  );
+  const result = await changelogFunction.getReleaseLine(changeset, 'minor', options);
 
   expect(result).toEqual('changelog-github');
 });

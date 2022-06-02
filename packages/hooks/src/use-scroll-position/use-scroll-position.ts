@@ -34,11 +34,7 @@ try {
  *   }
  */
 export function useScrollPosition(): ScrollPosition {
-  const position = useWindowSubscription(
-    'scroll',
-    getPosition,
-    supportsPassive ? { passive: true } : false,
-  );
+  const position = useWindowSubscription('scroll', getPosition, supportsPassive ? { passive: true } : false);
 
   return position;
 }

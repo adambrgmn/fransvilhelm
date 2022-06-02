@@ -3,10 +3,7 @@ import { useState } from 'react';
 import { useEventListener } from '../use-event-listener';
 
 const getInitialStatus = (): boolean => {
-  return typeof navigator !== 'undefined' &&
-    typeof navigator.onLine === 'boolean'
-    ? navigator.onLine
-    : true;
+  return typeof navigator !== 'undefined' && typeof navigator.onLine === 'boolean' ? navigator.onLine : true;
 };
 
 /**

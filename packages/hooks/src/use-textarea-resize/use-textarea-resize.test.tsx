@@ -17,13 +17,7 @@ beforeEach(() => {
 const TestComponent: React.FC = () => {
   const ref = useRef<HTMLTextAreaElement>(null);
   useTextareaResize(ref);
-  return (
-    <textarea
-      data-testid="textarea"
-      ref={ref}
-      style={{ boxSizing: 'border-box' }}
-    />
-  );
+  return <textarea data-testid="textarea" ref={ref} style={{ boxSizing: 'border-box' }} />;
 };
 
 it('should resize the textarea while typing', () => {
@@ -38,9 +32,7 @@ it('does not break if ref is not attached immediatedly', () => {
   let Test = () => {
     const ref = useRef<HTMLTextAreaElement>(null);
     useTextareaResize(ref);
-    return (
-      <textarea data-testid="textarea" style={{ boxSizing: 'border-box' }} />
-    );
+    return <textarea data-testid="textarea" style={{ boxSizing: 'border-box' }} />;
   };
 
   render(<Test />);

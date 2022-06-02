@@ -1,26 +1,16 @@
-import { createDescendantContext } from '@fransvilhelm/descendants';
-import {
-  useClickOutside,
-  useComposedRefs,
-  useEventListener,
-  useIds,
-} from '@fransvilhelm/hooks';
 import React, { useMemo, useRef } from 'react';
+
+import { createDescendantContext } from '@fransvilhelm/descendants';
+import { useClickOutside, useComposedRefs, useEventListener, useIds } from '@fransvilhelm/hooks';
 
 import { Popover } from '../Popover';
 import { ElementProps } from '../types';
 import { createStrictContext } from '../utils/context';
 import { composeEventHandlers } from '../utils/event-handlers';
 import { forwardRefWithAs } from '../utils/forward-ref';
-import {
-  useMenuMachine,
-  useMenuMachineContext,
-  MenuMachineContextProvider,
-  MenuMachineOptions,
-} from './state-machine';
+import { MenuMachineContextProvider, MenuMachineOptions, useMenuMachine, useMenuMachineContext } from './state-machine';
 
-const [DescendantsProvider, , useDescendants, useDescendant] =
-  createDescendantContext<HTMLElement, {}>();
+const [DescendantsProvider, , useDescendants, useDescendant] = createDescendantContext<HTMLElement, {}>();
 
 interface MenuContext {
   menuListRef: React.RefObject<HTMLElement>;
@@ -38,11 +28,7 @@ const [MenuContextProvider, useMenuContext] = createStrictContext<MenuContext>({
 export function useMenu(options: Partial<Omit<MenuMachineOptions, 'manager'>>) {
   let menuListRef = useRef<HTMLElement>(null);
   let buttonRef = useRef<HTMLElement>(null);
-  let [buttonId, menuId, itemIdBase] = useIds(
-    'menu-button',
-    'menu-list',
-    'menu-item',
-  );
+  let [buttonId, menuId, itemIdBase] = useIds('menu-button', 'menu-list', 'menu-item');
 
   const returnFocus = () => buttonRef.current;
 
@@ -72,8 +58,7 @@ export function useMenu(options: Partial<Omit<MenuMachineOptions, 'manager'>>) {
   useClickOutside(menuListRef, (event) => {
     if (
       event.target instanceof HTMLElement &&
-      (event.target === buttonRef.current ||
-        buttonRef.current?.contains(event.target))
+      (event.target === buttonRef.current || buttonRef.current?.contains(event.target))
     ) {
       return;
     }
@@ -129,10 +114,7 @@ if (process.env.NODE_ENV !== 'production') {
   Menu.displayName = 'Menu';
 }
 
-function useMenuButton(
-  forwardedProps: ElementProps<'button'>,
-  forwardedRef?: React.ForwardedRef<HTMLElement>,
-) {
+function useMenuButton(forwardedProps: ElementProps<'button'>, forwardedRef?: React.ForwardedRef<HTMLElement>) {
   let [state, send] = useMenuMachineContext();
   let { buttonRef, buttonId, menuId } = useMenuContext();
   let ref = useComposedRefs(forwardedRef, buttonRef);
@@ -169,10 +151,7 @@ if (process.env.NODE_ENV !== 'production') {
   Button.displayName = 'Button';
 }
 
-export function useMenuList(
-  forwardedProps: ElementProps<'div'>,
-  forwardedRef?: React.ForwardedRef<HTMLDivElement>,
-) {
+export function useMenuList(forwardedProps: ElementProps<'div'>, forwardedRef?: React.ForwardedRef<HTMLDivElement>) {
   let [state] = useMenuMachineContext();
   let { menuListRef, buttonRef, menuId, buttonId } = useMenuContext();
   let ref = useComposedRefs(forwardedRef, menuListRef);
@@ -193,17 +172,15 @@ export function useMenuList(
   return [ref, props] as const;
 }
 
-export const List = forwardRefWithAs<{}, 'div'>(
-  ({ as = 'div', children, ...props }, forwardedRef) => {
-    let [ref, menuListProps] = useMenuList(props, forwardedRef);
+export const List = forwardRefWithAs<{}, 'div'>(({ as = 'div', children, ...props }, forwardedRef) => {
+  let [ref, menuListProps] = useMenuList(props, forwardedRef);
 
-    return (
-      <Popover {...menuListProps} ref={ref}>
-        {children}
-      </Popover>
-    );
-  },
-);
+  return (
+    <Popover {...menuListProps} ref={ref}>
+      {children}
+    </Popover>
+  );
+});
 
 if (process.env.NODE_ENV !== 'production') {
   List.displayName = 'List';
@@ -215,8 +192,7 @@ export function useMenuItem(
   elementType?: any,
 ) {
   let disabled = !!(
-    forwardedProps['aria-disabled'] ??
-    ('disabled' in forwardedProps ? forwardedProps.disabled : false)
+    forwardedProps['aria-disabled'] ?? ('disabled' in forwardedProps ? forwardedProps.disabled : false)
   );
 
   let [, send] = useMenuMachineContext();
@@ -232,25 +208,21 @@ export function useMenuItem(
     'aria-disabled': disabled,
     disabled: elementType === 'button' ? forwardedProps.disabled : undefined,
 
-    onClick: composeEventHandlers(forwardedProps.onClick, () =>
-      send.click(index),
-    ),
+    onClick: composeEventHandlers(forwardedProps.onClick, () => send.click(index)),
   };
 
   return [ref, props] as const;
 }
 
-export const Item = forwardRefWithAs<{}, 'button'>(
-  ({ as: Component = 'button', children, ...props }, forwardedRef) => {
-    let [ref, menuItemProps] = useMenuItem(props, forwardedRef, Component);
+export const Item = forwardRefWithAs<{}, 'button'>(({ as: Component = 'button', children, ...props }, forwardedRef) => {
+  let [ref, menuItemProps] = useMenuItem(props, forwardedRef, Component);
 
-    return (
-      <Component {...menuItemProps} ref={ref}>
-        {children}
-      </Component>
-    );
-  },
-);
+  return (
+    <Component {...menuItemProps} ref={ref}>
+      {children}
+    </Component>
+  );
+});
 
 if (process.env.NODE_ENV !== 'production') {
   Item.displayName = 'Item';

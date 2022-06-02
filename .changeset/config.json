@@ -1,9 +1,6 @@
 {
   "$schema": "https://unpkg.com/@changesets/config@1.3.0/schema.json",
-  "changelog": [
-    "../packages/changeset-changelog",
-    { "repo": "adambrgmn/fransvilhelm" }
-  ],
+  "changelog": ["../packages/changeset-changelog", { "repo": "adambrgmn/fransvilhelm" }],
   "commit": false,
   "linked": [],
   "access": "public",

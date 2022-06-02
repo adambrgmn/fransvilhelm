@@ -5,10 +5,7 @@ interface CreateContextOptions {
   errorMessage: string;
 }
 
-export function createStrictContext<ContextType>({
-  name,
-  errorMessage,
-}: CreateContextOptions) {
+export function createStrictContext<ContextType>({ name, errorMessage }: CreateContextOptions) {
   let Context = createContext<ContextType | undefined>(undefined);
 
   const Provider: React.FC<{ value: ContextType }> = ({ value, children }) => {

@@ -9,13 +9,7 @@ type Props = { provided?: string; onChange?: SetState<string> };
 
 const TestComponent: React.FC<Props> = ({ provided, onChange }) => {
   const [value, setValue] = useControlledState<string>(provided, '', onChange);
-  return (
-    <input
-      type="text"
-      value={value}
-      onChange={(e) => setValue(e.target.value)}
-    />
-  );
+  return <input type="text" value={value} onChange={(e) => setValue(e.target.value)} />;
 };
 
 it('should control state if none is provided', () => {
@@ -47,9 +41,7 @@ it('should log a warning if moving from uncontrolled to controlled', () => {
   let { rerender } = render(<TestComponent provided={undefined} />);
   rerender(<TestComponent provided="Value" />);
 
-  expect(console.warn).toHaveBeenCalledWith(
-    'WARN: A component changed from uncontrolled to controlled.',
-  );
+  expect(console.warn).toHaveBeenCalledWith('WARN: A component changed from uncontrolled to controlled.');
 });
 
 it('should log a warning if moving from controlled to uncontrolled', () => {
@@ -58,7 +50,5 @@ it('should log a warning if moving from controlled to uncontrolled', () => {
   let { rerender } = render(<TestComponent provided="Value" />);
   rerender(<TestComponent provided={undefined} />);
 
-  expect(console.warn).toHaveBeenCalledWith(
-    'WARN: A component changed from controlled to uncontrolled.',
-  );
+  expect(console.warn).toHaveBeenCalledWith('WARN: A component changed from controlled to uncontrolled.');
 });

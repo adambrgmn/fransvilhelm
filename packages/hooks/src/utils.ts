@@ -1,18 +1,12 @@
-import { useLayoutEffect, useEffect } from 'react';
+import { useEffect, useLayoutEffect } from 'react';
 
 import { InternalRefArg } from './types';
 
 export function canUseDOM() {
-  return !!(
-    typeof window !== 'undefined' &&
-    window.document &&
-    window.document.createElement
-  );
+  return !!(typeof window !== 'undefined' && window.document && window.document.createElement);
 }
 
-export const useIsomorphicLayoutEffect = canUseDOM()
-  ? useLayoutEffect
-  : useEffect;
+export const useIsomorphicLayoutEffect = canUseDOM() ? useLayoutEffect : useEffect;
 
 type RectProps = {
   rect: DOMRect | undefined;
@@ -20,14 +14,7 @@ type RectProps = {
   callbacks: Function[];
 };
 
-let rectProps: (keyof DOMRect)[] = [
-  'height',
-  'width',
-  'top',
-  'bottom',
-  'left',
-  'right',
-];
+let rectProps: (keyof DOMRect)[] = ['height', 'width', 'top', 'bottom', 'left', 'right'];
 
 let rectChanged = (a: DOMRect = {} as DOMRect, b: DOMRect = {} as DOMRect) => {
   return rectProps.some((prop) => a[prop] !== b[prop]);

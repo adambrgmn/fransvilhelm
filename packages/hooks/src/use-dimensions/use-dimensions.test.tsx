@@ -3,12 +3,10 @@ import { useRef } from 'react';
 
 import { useDimensions } from './use-dimensions';
 
-let getBoundingClientRect = jest
-  .fn<Partial<DOMRect>, void[]>()
-  .mockImplementation(() => ({
-    width: 0,
-    height: 0,
-  }));
+let getBoundingClientRect = jest.fn<Partial<DOMRect>, void[]>().mockImplementation(() => ({
+  width: 0,
+  height: 0,
+}));
 
 beforeEach(() => {
   getBoundingClientRect.mockClear();

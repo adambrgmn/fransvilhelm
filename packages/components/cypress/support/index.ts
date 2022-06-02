@@ -1,11 +1,11 @@
 import '@cypress/code-coverage/support';
+import { setGlobalConfig } from '@storybook/testing-react';
 import '@testing-library/cypress/add-commands';
 import 'cypress-plugin-tab';
-import './commands';
-import { setGlobalConfig } from '@storybook/testing-react';
 
 // @ts-ignore
 import * as storybookPreview from '../../.storybook/preview';
+import './commands';
 
 setGlobalConfig(storybookPreview);
 
@@ -14,9 +14,7 @@ let elements = new Set<HTMLElement>();
 before(() => {
   return new Promise((resolve, reject) => {
     let styleEl = document.createElement('style');
-    styleEl.appendChild(
-      document.createTextNode('[hidden] { display: none; };'),
-    );
+    styleEl.appendChild(document.createTextNode('[hidden] { display: none; };'));
     document.body.appendChild(styleEl);
     elements.add(styleEl);
 

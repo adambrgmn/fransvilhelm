@@ -1,12 +1,4 @@
-import {
-  useState,
-  SetStateAction,
-  Dispatch,
-  useEffect,
-  useMemo,
-  useRef,
-  useCallback,
-} from 'react';
+import { Dispatch, SetStateAction, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { useEventListener } from '../use-event-listener';
 import { canUseDOM } from '../utils';
@@ -33,10 +25,7 @@ const createStorageAdapter = <S>(key: string): StorageAdapter<S> => {
   };
 };
 
-const globalStates = new Map<
-  string,
-  { callbacks: ((v: any) => void)[]; value: any }
->();
+const globalStates = new Map<string, { callbacks: ((v: any) => void)[]; value: any }>();
 
 interface GlobalState<S> {
   emit(value: S): void;
@@ -105,11 +94,7 @@ export function usePersistedState<S>(
   const globalState = useRef<GlobalState<S> | null>(null);
   const storage = useMemo(() => createStorageAdapter<S>(key), [key]);
   const [state, setState] = useState(() =>
-    canUseDOM()
-      ? storage.get(initialState)
-      : isFn(initialState)
-      ? initialState()
-      : initialState,
+    canUseDOM() ? storage.get(initialState) : isFn(initialState) ? initialState() : initialState,
   );
 
   const storageListener = useCallback(

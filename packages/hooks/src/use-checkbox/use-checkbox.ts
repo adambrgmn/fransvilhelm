@@ -20,10 +20,7 @@ interface UseCheckboxResult {
  *     // Or spread props for easier use: <input type="checkbox" {...checkbox} />
  *   };
  */
-export function useCheckbox(
-  initialValue: boolean = false,
-  callback?: (checked: boolean) => void,
-): UseCheckboxResult {
+export function useCheckbox(initialValue: boolean = false, callback?: (checked: boolean) => void): UseCheckboxResult {
   const [checked, setChecked] = useState(initialValue);
   const onChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     callback?.(event.currentTarget.checked);

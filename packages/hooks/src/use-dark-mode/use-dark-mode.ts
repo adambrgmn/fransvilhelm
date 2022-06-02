@@ -10,13 +10,8 @@ import { useIsomorphicLayoutEffect } from '../utils';
 
  * @param className Optional class name to append to body element
  */
-export function useDarkMode(
-  className?: string,
-): [boolean, SetState<boolean | null>, boolean] {
-  const [enabled, setEnabled] = usePersistedState<boolean | null>(
-    null,
-    'dark-mode',
-  );
+export function useDarkMode(className?: string): [boolean, SetState<boolean | null>, boolean] {
+  const [enabled, setEnabled] = usePersistedState<boolean | null>(null, 'dark-mode');
 
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
 

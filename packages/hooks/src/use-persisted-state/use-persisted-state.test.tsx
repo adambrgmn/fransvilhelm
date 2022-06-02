@@ -1,4 +1,4 @@
-import { render, fireEvent, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { usePersistedState } from './use-persisted-state';
@@ -28,10 +28,7 @@ it('should be a drop in replacement for the useState hook', () => {
   userEvent.click(btn);
 
   expect(btn).toHaveTextContent('1');
-  expect(localStorageMock.setItem).toHaveBeenCalledWith(
-    'local-storage-hook',
-    '1',
-  );
+  expect(localStorageMock.setItem).toHaveBeenCalledWith('local-storage-hook', '1');
 });
 
 it('should use persisted value as initial state (if set)', () => {

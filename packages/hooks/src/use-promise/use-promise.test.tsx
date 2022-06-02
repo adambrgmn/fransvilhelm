@@ -75,9 +75,7 @@ it('should resolve correct value in the end', async () => {
 
 it('handles errors', async () => {
   let onError = jest.fn();
-  let callback = jest
-    .fn<Promise<string>, []>()
-    .mockRejectedValue(new Error('alert!'));
+  let callback = jest.fn<Promise<string>, []>().mockRejectedValue(new Error('alert!'));
 
   render(<TestComponent callback={callback} immediate onError={onError} />);
 

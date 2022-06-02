@@ -1,8 +1,9 @@
-import { DescendantsManager } from '@fransvilhelm/descendants';
 import { useMachine } from '@xstate/react';
 import { useMemo } from 'react';
 import { ContextFrom } from 'xstate';
 import { createModel } from 'xstate/lib/model';
+
+import { DescendantsManager } from '@fransvilhelm/descendants';
 
 import { createStrictContext } from '../utils/context';
 import { applyFocus } from '../utils/focus';
@@ -127,9 +128,7 @@ export function useMenuMachine(options: MenuMachineOptions) {
   return useMemo(() => [state, events] as const, [events, state]);
 }
 
-export const [MenuMachineContextProvider, useMenuMachineContext] =
-  createStrictContext<MenuMachineContext>({
-    name: 'MenuMachineContextProvider',
-    errorMessage:
-      'useMenuMachineContext must be used within a MenuMachineContextProvider',
-  });
+export const [MenuMachineContextProvider, useMenuMachineContext] = createStrictContext<MenuMachineContext>({
+  name: 'MenuMachineContextProvider',
+  errorMessage: 'useMenuMachineContext must be used within a MenuMachineContextProvider',
+});

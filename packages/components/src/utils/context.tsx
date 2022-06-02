@@ -1,17 +1,11 @@
-import {
-  createContext as _createContext,
-  useContext as _useContext,
-} from 'react';
+import { createContext as _createContext, useContext as _useContext } from 'react';
 
 interface CreateContextOptions {
   name: string;
   errorMessage: string;
 }
 
-export function createStrictContext<ContextType>({
-  name,
-  errorMessage,
-}: CreateContextOptions) {
+export function createStrictContext<ContextType>({ name, errorMessage }: CreateContextOptions) {
   let Context = _createContext<ContextType | undefined>(undefined);
 
   const Provider: React.FC<{ value: ContextType }> = ({ value, children }) => {

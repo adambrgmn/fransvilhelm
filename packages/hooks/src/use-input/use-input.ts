@@ -20,10 +20,7 @@ interface UseInputResult {
  *     // Or spread props for easier use: <input {...input} />
  *   };
  */
-export function useInput(
-  initialValue: string = '',
-  callback?: (value: string) => void,
-): UseInputResult {
+export function useInput(initialValue: string = '', callback?: (value: string) => void): UseInputResult {
   const [value, setValue] = useState(initialValue);
   const onChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     if (callback != null) {

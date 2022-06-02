@@ -40,8 +40,8 @@
   [#32](https://github.com/adambrgmn/fransvilhelm/pull/32))
 - Add useControlledState hook (by [@adambrgmn](https://github.com/adambrgmn) in
   [#30](https://github.com/adambrgmn/fransvilhelm/pull/30))
-- Add useDebouncedCallback hook (by [@adambrgmn](https://github.com/adambrgmn)
-  in [#35](https://github.com/adambrgmn/fransvilhelm/pull/35))
+- Add useDebouncedCallback hook (by [@adambrgmn](https://github.com/adambrgmn) in
+  [#35](https://github.com/adambrgmn/fransvilhelm/pull/35))
 - Add useToggle hook (by [@adambrgmn](https://github.com/adambrgmn) in
   [#35](https://github.com/adambrgmn/fransvilhelm/pull/35))
 - Add useTextareaResize hook (by [@adambrgmn](https://github.com/adambrgmn) in
@@ -58,16 +58,14 @@
 
 ### Major Changes
 
-- Update api interface for usePromise hook (by
-  [@adambrgmn](https://github.com/adambrgmn) in
+- Update api interface for usePromise hook (by [@adambrgmn](https://github.com/adambrgmn) in
   [`291a21c`](https://github.com/adambrgmn/fransvilhelm/commit/291a21c85dbc3613e017c56c54e6c9785b2e8d02))
 - Remove useTaskRunner hook (by [@adambrgmn](https://github.com/adambrgmn) in
   [`0e586ad`](https://github.com/adambrgmn/fransvilhelm/commit/0e586ad6c19831a1faf61915e35b1769ea8bc95e))
 
 ### Minor Changes
 
-- Skip resize observer in useDimensions hook (by
-  [@adambrgmn](https://github.com/adambrgmn) in
+- Skip resize observer in useDimensions hook (by [@adambrgmn](https://github.com/adambrgmn) in
   [`291a21c`](https://github.com/adambrgmn/fransvilhelm/commit/291a21c85dbc3613e017c56c54e6c9785b2e8d02))
 - Add useClickOutside hook (by [@adambrgmn](https://github.com/adambrgmn) in
   [#24](https://github.com/adambrgmn/fransvilhelm/pull/24))
@@ -75,14 +73,12 @@
   [#20](https://github.com/adambrgmn/fransvilhelm/pull/20))
 - Add usePrevious hook (by [@adambrgmn](https://github.com/adambrgmn) in
   [#20](https://github.com/adambrgmn/fransvilhelm/pull/20))
-- Add useDeepEqualLayoutEffect hook (by
-  [@adambrgmn](https://github.com/adambrgmn) in
+- Add useDeepEqualLayoutEffect hook (by [@adambrgmn](https://github.com/adambrgmn) in
   [#20](https://github.com/adambrgmn/fransvilhelm/pull/20))
 - Add useDarkMode hook (by [@adambrgmn](https://github.com/adambrgmn) in
   [#25](https://github.com/adambrgmn/fransvilhelm/pull/25))
 
 ### Patch Changes
 
-- Clear localstorage item if passed undefined/null (by
-  [@adambrgmn](https://github.com/adambrgmn) in
+- Clear localstorage item if passed undefined/null (by [@adambrgmn](https://github.com/adambrgmn) in
   [#25](https://github.com/adambrgmn/fransvilhelm/pull/25))
