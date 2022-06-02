@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "description": "",
   "source": "src/index.ts",
-  "main": "dist/index.cjs.js",
-  "module": "dist/index.esm.js",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "repository": "https://github.com/adambrgmn/fransvilhelm/tree/main/packages/{{name}}",
   "homepage": "https://github.com/adambrgmn/fransvilhelm/tree/main/packages/{{name}}",
@@ -18,8 +18,8 @@
   ],
   "keywords": [],
   "scripts": {
-    "dev": "build-package --watch",
-    "build": "build-package",
+    "dev": "tsup --dts --watch",
+    "build": "tsup --dts",
     "test": "jest",
     "test:ci": "jest --coverage",
     "lint": "eslint . --ext .ts --ext .tsx --ext .js --ignore-pattern dist"
@@ -31,7 +31,6 @@
     "@babel/preset-env": "^7.16.5",
     "@babel/preset-react": "^7.16.5",
     "@babel/preset-typescript": "^7.16.5",
-    "@fransvilhelm/build-package": "*",
     "@fransvilhelm/config": "*",
     "@fransvilhelm/tsconfig": "*",
     "@testing-library/jest-dom": "^5.16.1",
@@ -44,6 +43,7 @@
     "jest": "^27.4.5",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "tsup": "^6.0.1",
     "typescript": "^4.5.4"
   },
   "peerDependencies": {
