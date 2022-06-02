@@ -1,8 +1,9 @@
-import { useToggle } from '@fransvilhelm/hooks';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { useRef } from 'react';
 
-import { Popover, positionRight, positionMatchWidth } from './Popover';
+import { useToggle } from '@fransvilhelm/hooks';
+
+import { Popover, positionMatchWidth, positionRight } from './Popover';
 
 type PopoverType = typeof Popover;
 
@@ -18,12 +19,7 @@ const Template: ComponentStory<PopoverType> = (args) => {
   return (
     <button ref={ref} onClick={toggle} className="border px-8 py-4">
       Click me
-      <Popover
-        {...args}
-        targetRef={ref}
-        hidden={!show}
-        className="border p-4 text-center"
-      >
+      <Popover {...args} targetRef={ref} hidden={!show} className="border p-4 text-center">
         Hello world
       </Popover>
     </button>

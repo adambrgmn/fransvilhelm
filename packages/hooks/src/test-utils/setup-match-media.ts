@@ -36,9 +36,7 @@ export function setupMatchMedia(initialMatches: boolean) {
     ) {
       if (type === 'change') this.#listeners.add(listener);
     }
-    addListener(
-      callback: (this: MediaQueryList, ev: MediaQueryListEvent) => any,
-    ) {
+    addListener(callback: (this: MediaQueryList, ev: MediaQueryListEvent) => any) {
       this.addEventListener('change', callback);
     }
 
@@ -49,9 +47,7 @@ export function setupMatchMedia(initialMatches: boolean) {
     ) {
       this.#listeners.delete(listener);
     }
-    removeListener(
-      callback: (this: MediaQueryList, ev: MediaQueryListEvent) => any,
-    ) {
+    removeListener(callback: (this: MediaQueryList, ev: MediaQueryListEvent) => any) {
       this.removeEventListener('change', callback);
     }
 

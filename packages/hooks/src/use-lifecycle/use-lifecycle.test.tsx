@@ -23,9 +23,7 @@ it('should ...', () => {
   const onUpdate = jest.fn();
   const onUnmount = jest.fn();
 
-  const { unmount } = render(
-    <TestComponent {...{ onMount, onUpdate, onUnmount }} />,
-  );
+  const { unmount } = render(<TestComponent {...{ onMount, onUpdate, onUnmount }} />);
 
   const btn = screen.getByText('+');
 

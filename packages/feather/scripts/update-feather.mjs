@@ -1,8 +1,8 @@
-import * as path from 'path';
-import { promises as fs } from 'fs';
-import { exec } from '@actions/exec';
 import * as core from '@actions/core';
+import { exec } from '@actions/exec';
 import axios from 'axios';
+import { promises as fs } from 'fs';
+import * as path from 'path';
 import semver from 'semver';
 
 const relativePath = (...paths) => path.join(process.cwd(), ...paths);
@@ -11,13 +11,9 @@ const readJson = async (filePath) => {
 };
 
 (async () => {
-  let currentFeather = await readJson(
-    'node_modules/feather-icons/package.json',
-  );
+  let currentFeather = await readJson('node_modules/feather-icons/package.json');
 
-  let { data: feather } = await axios.get(
-    'https://unpkg.com/feather-icons/package.json',
-  );
+  let { data: feather } = await axios.get('https://unpkg.com/feather-icons/package.json');
 
   let diff = semver.diff(currentFeather.version, feather.version);
   switch (diff) {
@@ -47,10 +43,7 @@ const readJson = async (filePath) => {
 Bump feather-icons to version ${feather.version}.
 `;
 
-  await fs.writeFile(
-    relativePath('.changeset/feather.md'),
-    changeset.trim() + '\n',
-  );
+  await fs.writeFile(relativePath('.changeset/feather.md'), changeset.trim() + '\n');
 
   core.setOutput('feather-bumped', 'true');
 })();

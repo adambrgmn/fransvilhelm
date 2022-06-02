@@ -9,9 +9,7 @@ import { assignRef } from '../utils';
  * @param refs React ref objects or callbacks, or undefined or null
  * @returns React ref callback
  */
-export function useComposedRefs<T>(
-  ...refs: [InternalRefArg<T>, ...InternalRefArg<T>[]]
-): React.RefCallback<T> {
+export function useComposedRefs<T>(...refs: [InternalRefArg<T>, ...InternalRefArg<T>[]]): React.RefCallback<T> {
   let callback: React.RefCallback<T> = (value) => {
     for (let ref of refs) {
       assignRef(ref, value);

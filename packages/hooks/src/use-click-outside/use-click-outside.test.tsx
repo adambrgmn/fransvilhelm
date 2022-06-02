@@ -4,9 +4,7 @@ import { useRef, useState } from 'react';
 
 import { useClickOutside } from './use-click-outside';
 
-const TestComponent: React.FC<{ onClickOutside?: () => void }> = ({
-  onClickOutside,
-}) => {
+const TestComponent: React.FC<{ onClickOutside?: () => void }> = ({ onClickOutside }) => {
   const elRef = useRef<HTMLButtonElement>(null);
   const [count, setCount] = useState(0);
 

@@ -1,13 +1,11 @@
 # @fransvilhelm/changeset-changelog
 
 This is a package very similar to
-[`@changeset/changelog-github`](https://github.com/atlassian/changesets/tree/master/packages/changelog-github)
-but with tweaks on how each release line is formatted. The goal is to make the
-changelog inputs look more like they do on the
+[`@changeset/changelog-github`](https://github.com/atlassian/changesets/tree/master/packages/changelog-github) but with
+tweaks on how each release line is formatted. The goal is to make the changelog inputs look more like they do on the
 [react repository](https://github.com/facebook/react/blob/master/CHANGELOG.md).
 
-While `@changeset/changelog-github` would format a changelog entry something
-like this:
+While `@changeset/changelog-github` would format a changelog entry something like this:
 
 ```
 - [commitsha] #1 Thanks @adambrgmn! - [summary]
@@ -31,8 +29,7 @@ yarn add --dev @fransvilhelm/changeset-changelog
 
 ## Setup
 
-The configuration is done in your projects
-[`.changeset/config.json`](.changeset/config.json):
+The configuration is done in your projects [`.changeset/config.json`](.changeset/config.json):
 
 ```js
 {
@@ -44,9 +41,8 @@ The configuration is done in your projects
 }
 ```
 
-Also note that for this changelog generator to work properly you need to set the
-environment variable `GITHUB_TOKEN`. This can easily be done with
-[changesets's official GitHub action](https://github.com/changesets/action):
+Also note that for this changelog generator to work properly you need to set the environment variable `GITHUB_TOKEN`.
+This can easily be done with [changesets's official GitHub action](https://github.com/changesets/action):
 
 ```yml
 - name: Create Release Pull Request or Publish to npm
@@ -56,8 +52,8 @@ environment variable `GITHUB_TOKEN`. This can easily be done with
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
-If you use this together with some other CI service make sure to set the token
-according to that vendors recommended methods.
+If you use this together with some other CI service make sure to set the token according to that vendors recommended
+methods.
 
 ## License
 

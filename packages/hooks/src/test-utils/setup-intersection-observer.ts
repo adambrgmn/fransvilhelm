@@ -52,10 +52,7 @@ export function setupIntersectionObserverMock({
     #handlers = new Set<IntersectionObserverCallback>();
     #options: IntersectionObserverInit | undefined = undefined;
 
-    constructor(
-      handler: IntersectionObserverCallback,
-      options?: IntersectionObserverInit,
-    ) {
+    constructor(handler: IntersectionObserverCallback, options?: IntersectionObserverInit) {
       this.#handlers.add(handler);
       this.#options = options;
 

@@ -10,9 +10,7 @@ const changelogFunctions: ChangelogFunctions = {
         'Please provide a repo to this changelog generator like this:\n"changelog": ["@fransvilhelm/changeset-changelog", { "repo": "org/repo" }]',
       );
     }
-    const [firstLine, ...summary] = changeset.summary
-      .split('\n')
-      .map((l) => l.trimEnd());
+    const [firstLine, ...summary] = changeset.summary.split('\n').map((l) => l.trimEnd());
 
     if (changeset.commit) {
       let { links } = await getInfo({

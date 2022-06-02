@@ -1,4 +1,4 @@
-import React, { useRef, useMemo } from 'react';
+import React, { useMemo, useRef } from 'react';
 
 import { InternalRefArg } from '../types';
 import { assignRef } from '../utils';
@@ -21,18 +21,12 @@ import { assignRef } from '../utils';
  * @param refs Ref objects or callbacks
  * @return React RefObject
  */
-export function useProxyRef<T>(
-  initialValue: T,
-  ...refs: InternalRefArg<T>[]
-): React.MutableRefObject<T>;
+export function useProxyRef<T>(initialValue: T, ...refs: InternalRefArg<T>[]): React.MutableRefObject<T>;
 export function useProxyRef<T = undefined>(
   initialValue: undefined,
   ...refs: InternalRefArg<T>[]
 ): React.MutableRefObject<T | undefined>;
-export function useProxyRef<T>(
-  initialValue: T | null,
-  ...refs: InternalRefArg<T>[]
-): React.RefObject<T>;
+export function useProxyRef<T>(initialValue: T | null, ...refs: InternalRefArg<T>[]): React.RefObject<T>;
 export function useProxyRef<T>(
   initialValue: T,
   ...refs: InternalRefArg<T>[]

@@ -1,10 +1,7 @@
 export {};
 
 Cypress.Commands.add('visitStory', visitStory);
-function visitStory(
-  story: string,
-  variant: string,
-): Cypress.Chainable<Cypress.AUTWindow> {
+function visitStory(story: string, variant: string): Cypress.Chainable<Cypress.AUTWindow> {
   let base = Cypress.config('baseUrl') ?? '';
   let url = new URL('/iframe.html', base);
   url.searchParams.set('id', `${story}--${variant}`);

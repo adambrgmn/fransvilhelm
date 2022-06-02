@@ -8,9 +8,7 @@ const rimraf = require('rimraf');
 const { hideBin } = require('yargs/helpers');
 const yargs = require('yargs/yargs');
 
-yargs(hideBin(process.argv))
-  .command('coverage', 'report combined coverage', {}, coverage)
-  .parse();
+yargs(hideBin(process.argv)).command('coverage', 'report combined coverage', {}, coverage).parse();
 
 function coverage() {
   rimraf.sync('./coverage');

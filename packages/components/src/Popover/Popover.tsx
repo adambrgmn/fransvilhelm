@@ -1,5 +1,6 @@
-import { useComposedRefs, useDimensions, PRect } from '@fransvilhelm/hooks';
 import { useRef } from 'react';
+
+import { PRect, useComposedRefs, useDimensions } from '@fransvilhelm/hooks';
 
 import { Portal } from '../Portal';
 import { forwardRefWithAs } from '../utils/forward-ref';
@@ -31,17 +32,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const InternalPopover = forwardRefWithAs<PopoverProps, 'div'>(
-  (
-    {
-      as: Comp = 'div',
-      targetRef,
-      position = positionDefault,
-      hidden,
-      children,
-      ...props
-    },
-    forwardedRef,
-  ) => {
+  ({ as: Comp = 'div', targetRef, position = positionDefault, hidden, children, ...props }, forwardedRef) => {
     let popoverRef = useRef<HTMLDivElement>(null);
     let popoverRect = useDimensions(popoverRef, !hidden);
     let targetRect = useDimensions(targetRef, !hidden);
@@ -74,16 +65,10 @@ function getStyles(
   targetRect: PRect | null,
   popoverRect: PRect | null,
 ): React.CSSProperties {
-  return popoverRect
-    ? position(targetRect, popoverRect)
-    : { visibility: 'hidden' };
+  return popoverRect ? position(targetRect, popoverRect) : { visibility: 'hidden' };
 }
 
-function getTopPosition(
-  targetRect: PRect,
-  popoverRect: PRect,
-  isDirectionUp: boolean,
-) {
+function getTopPosition(targetRect: PRect, popoverRect: PRect, isDirectionUp: boolean) {
   return {
     top: isDirectionUp
       ? `${targetRect.top - popoverRect.height + window.pageYOffset}px`
@@ -96,10 +81,7 @@ export const positionDefault: PopoverPosition = (targetRect, popoverRect) => {
     return {};
   }
 
-  const { directionRight, directionUp } = getCollisions(
-    targetRect,
-    popoverRect,
-  );
+  const { directionRight, directionUp } = getCollisions(targetRect, popoverRect);
   return {
     left: directionRight
       ? `${targetRect.right - popoverRect.width + window.pageXOffset}px`
@@ -122,10 +104,7 @@ export const positionRight: PopoverPosition = (targetRect, popoverRect) => {
   };
 };
 
-export const positionMatchWidth: PopoverPosition = (
-  targetRect,
-  popoverRect,
-) => {
+export const positionMatchWidth: PopoverPosition = (targetRect, popoverRect) => {
   if (!targetRect || !popoverRect) {
     return {};
   }
@@ -138,18 +117,11 @@ export const positionMatchWidth: PopoverPosition = (
   };
 };
 
-function getCollisions(
-  targetRect: PRect,
-  popoverRect: PRect,
-  offsetLeft: number = 0,
-  offsetBottom: number = 0,
-) {
+function getCollisions(targetRect: PRect, popoverRect: PRect, offsetLeft: number = 0, offsetBottom: number = 0) {
   const collisions = {
     top: targetRect.top - popoverRect.height < 0,
     right: window.innerWidth < targetRect.left + popoverRect.width - offsetLeft,
-    bottom:
-      window.innerHeight <
-      targetRect.bottom + popoverRect.height - offsetBottom,
+    bottom: window.innerHeight < targetRect.bottom + popoverRect.height - offsetBottom,
     left: targetRect.left + targetRect.width - popoverRect.width < 0,
   };
 

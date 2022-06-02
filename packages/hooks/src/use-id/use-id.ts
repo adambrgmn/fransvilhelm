@@ -1,6 +1,5 @@
 // Same implementation as reach ui, but with the conditional export of react's
 // own useId hook, if it exists.
-
 import React, { useEffect, useState } from 'react';
 
 import { useIsomorphicLayoutEffect } from '../utils';

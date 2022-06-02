@@ -16,10 +16,7 @@ export interface TextareaResizeOptions {
  * @param ref Textare ref object
  * @param minRows Min rows height
  */
-export function useTextareaResize(
-  ref: React.RefObject<HTMLTextAreaElement>,
-  options: TextareaResizeOptions = {},
-) {
+export function useTextareaResize(ref: React.RefObject<HTMLTextAreaElement>, options: TextareaResizeOptions = {}) {
   const heightRef = useRef(0);
   const hiddenTextarea = useHiddenTextarea();
 
@@ -105,10 +102,7 @@ const SIZING_STYLE = [
   'wordBreak',
 ] as const;
 
-type SizingProps = Extract<
-  typeof SIZING_STYLE[number],
-  keyof CSSStyleDeclaration
->;
+type SizingProps = Extract<typeof SIZING_STYLE[number], keyof CSSStyleDeclaration>;
 
 type SizingStyle = Pick<CSSStyleDeclaration, SizingProps>;
 
@@ -133,12 +127,10 @@ function getSizingData(node: HTMLElement): SizingData | null {
   }
 
   const paddingSize =
-    Number.parseFloat(sizingStyle.paddingBottom ?? 0) +
-    Number.parseFloat(sizingStyle.paddingTop ?? 0);
+    Number.parseFloat(sizingStyle.paddingBottom ?? 0) + Number.parseFloat(sizingStyle.paddingTop ?? 0);
 
   const borderSize =
-    Number.parseFloat(sizingStyle.borderBottomWidth ?? 0) +
-    Number.parseFloat(sizingStyle.borderTopWidth ?? 0);
+    Number.parseFloat(sizingStyle.borderBottomWidth ?? 0) + Number.parseFloat(sizingStyle.borderTopWidth ?? 0);
 
   return {
     sizingStyle,
@@ -226,10 +218,6 @@ const HIDDEN_TEXTAREA_STYLE = {
 
 function forceHiddenStyles(node: HTMLElement) {
   Object.keys(HIDDEN_TEXTAREA_STYLE).forEach((key) => {
-    node.style.setProperty(
-      key,
-      HIDDEN_TEXTAREA_STYLE[key as keyof typeof HIDDEN_TEXTAREA_STYLE],
-      'important',
-    );
+    node.style.setProperty(key, HIDDEN_TEXTAREA_STYLE[key as keyof typeof HIDDEN_TEXTAREA_STYLE], 'important');
   });
 }

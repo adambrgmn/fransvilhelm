@@ -1,6 +1,4 @@
-export type DescendantOptions<
-  DescendantData extends Record<string, unknown> = {},
-> = DescendantData & {
+export type DescendantOptions<DescendantData extends Record<string, unknown> = {}> = DescendantData & {
   disabled?: boolean;
   id?: string;
 };
@@ -19,13 +17,9 @@ export class DescendantsManager<
 > {
   #descendants = new Map<Node, Descendant<DescendantNode, DescendantData>>();
 
-  register(
-    nodeOrOptions: DescendantOptions<DescendantData>,
-  ): (node: DescendantNode | null) => void;
+  register(nodeOrOptions: DescendantOptions<DescendantData>): (node: DescendantNode | null) => void;
   register(nodeOrOptions: DescendantNode | null): void;
-  register(
-    nodeOrOptions: DescendantOptions<DescendantData> | DescendantNode | null,
-  ) {
+  register(nodeOrOptions: DescendantOptions<DescendantData> | DescendantNode | null) {
     if (nodeOrOptions == null) return;
 
     if (isElement(nodeOrOptions)) {
@@ -138,9 +132,7 @@ export class DescendantsManager<
 
   enabledIndexOf(node: DescendantNode | null) {
     if (node == null) return -1;
-    return this.#enabledValues().findIndex((item) =>
-      item.node.isSameNode(node),
-    );
+    return this.#enabledValues().findIndex((item) => item.node.isSameNode(node));
   }
 
   #values() {
@@ -152,17 +144,11 @@ export class DescendantsManager<
     return this.#values().filter((item) => !item.disabled);
   }
 
-  #registerNode(
-    node: DescendantNode | null,
-    options?: DescendantOptions<DescendantData>,
-  ) {
+  #registerNode(node: DescendantNode | null, options?: DescendantOptions<DescendantData>) {
     if (node == null || this.#descendants.has(node)) return;
 
     let descendant = { node, index: -1, ...options };
-    this.#descendants.set(
-      node,
-      descendant as Descendant<DescendantNode, DescendantData>,
-    );
+    this.#descendants.set(node, descendant as Descendant<DescendantNode, DescendantData>);
     this.#updateIndices();
   }
 
@@ -179,35 +165,22 @@ export class DescendantsManager<
 }
 
 function isElement(el: any): el is HTMLElement {
-  return (
-    typeof el == 'object' &&
-    'nodeType' in el &&
-    el.nodeType === Node.ELEMENT_NODE
-  );
+  return typeof el == 'object' && 'nodeType' in el && el.nodeType === Node.ELEMENT_NODE;
 }
 
 function sortNodes(nodes: Node[]): Node[] {
   return [...nodes].sort((a, b) => {
     let compare = a.compareDocumentPosition(b);
 
-    if (
-      compare & Node.DOCUMENT_POSITION_DISCONNECTED ||
-      compare & Node.DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC
-    ) {
+    if (compare & Node.DOCUMENT_POSITION_DISCONNECTED || compare & Node.DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC) {
       throw new Error('Can not sort given nodes');
     }
 
-    if (
-      compare & Node.DOCUMENT_POSITION_FOLLOWING ||
-      compare & Node.DOCUMENT_POSITION_CONTAINED_BY
-    ) {
+    if (compare & Node.DOCUMENT_POSITION_FOLLOWING || compare & Node.DOCUMENT_POSITION_CONTAINED_BY) {
       return -1;
     }
 
-    if (
-      compare & Node.DOCUMENT_POSITION_PRECEDING ||
-      compare & Node.DOCUMENT_POSITION_CONTAINS
-    ) {
+    if (compare & Node.DOCUMENT_POSITION_PRECEDING || compare & Node.DOCUMENT_POSITION_CONTAINS) {
       return 1;
     }
 

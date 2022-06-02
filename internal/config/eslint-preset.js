@@ -1,23 +1,7 @@
 module.exports = {
   extends: ['react-app'],
   rules: {
-    'react-hooks/exhaustive-deps': [
-      'warn',
-      { additionalHooks: '(useIsomorphicLayoutEffect)' },
-    ],
-    'import/order': [
-      'warn',
-      {
-        'newlines-between': 'always',
-        alphabetize: { order: 'asc', caseInsensitive: true },
-        groups: [
-          'builtin',
-          'external',
-          'internal',
-          ['parent', 'sibling', 'index'],
-        ],
-      },
-    ],
+    'react-hooks/exhaustive-deps': ['warn', { additionalHooks: '(useIsomorphicLayoutEffect)' }],
   },
   overrides: [
     {

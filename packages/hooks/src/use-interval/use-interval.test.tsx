@@ -1,4 +1,4 @@
-import { render, fireEvent, act, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { useState } from 'react';
 
@@ -16,11 +16,7 @@ interface Props {
   initialDelay?: number;
 }
 
-const MockComponent: React.FC<Props> = ({
-  initialCount = 1,
-  initialRunning = true,
-  initialDelay = 1000,
-}) => {
+const MockComponent: React.FC<Props> = ({ initialCount = 1, initialRunning = true, initialDelay = 1000 }) => {
   const [count, setCount] = useState(initialCount);
   const [running, setRunning] = useState(initialRunning);
   const [delay, setDelay] = useState(initialDelay);

@@ -1,7 +1,7 @@
-import { join } from 'path';
-import { promises as fs } from 'fs';
 import { icons } from 'feather-icons';
+import { promises as fs } from 'fs';
 import _ from 'lodash';
+import { join } from 'path';
 
 const pascalCase = (str) => _.upperFirst(_.camelCase(str));
 const relPath = (...p) => join(process.cwd(), ...p);

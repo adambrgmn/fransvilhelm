@@ -21,10 +21,7 @@ import { useIsomorphicLayoutEffect } from '../utils';
  *     );
  *   }
  */
-export function useLockBodyScroll(
-  lock: boolean = true,
-  ref?: RefObject<HTMLElement>,
-): void {
+export function useLockBodyScroll(lock: boolean = true, ref?: RefObject<HTMLElement>): void {
   useIsomorphicLayoutEffect(() => {
     let el = ref?.current ?? document.body;
 

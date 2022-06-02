@@ -11,15 +11,15 @@
 
 ### Minor Changes
 
-- Move into monorepo architecture (by [@adambrgmn](https://github.com/adambrgmn)
-  in [#42](https://github.com/adambrgmn/fransvilhelm/pull/42))
+- Move into monorepo architecture (by [@adambrgmn](https://github.com/adambrgmn) in
+  [#42](https://github.com/adambrgmn/fransvilhelm/pull/42))
 
 ## 1.0.1
 
 ### Patch Changes
 
-- Upgrade to latest dependencies (by [@adambrgmn](https://github.com/adambrgmn)
-  in [#6](https://github.com/adambrgmn/changeset-changelog/pull/6))
+- Upgrade to latest dependencies (by [@adambrgmn](https://github.com/adambrgmn) in
+  [#6](https://github.com/adambrgmn/changeset-changelog/pull/6))
 
 ## 1.0.0
 

@@ -1,4 +1,4 @@
-import React, { forwardRef, createContext, useContext } from 'react';
+import React, { createContext, forwardRef, useContext } from 'react';
 
 export interface IconProps {
   baseline?: boolean;
@@ -27,10 +27,7 @@ const styles: Record<'span' | 'svg' | 'baseline', React.CSSProperties> = {
   },
 };
 
-export const Icon = forwardRef<
-  HTMLSpanElement,
-  React.PropsWithChildren<IconProps>
->(({ baseline, children }, ref) => {
+export const Icon = forwardRef<HTMLSpanElement, React.PropsWithChildren<IconProps>>(({ baseline, children }, ref) => {
   const ctx = useContext(IconContext);
 
   let testProps: undefined | Record<string, string> = undefined;

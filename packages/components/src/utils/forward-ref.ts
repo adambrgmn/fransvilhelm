@@ -1,7 +1,6 @@
 /**
  * All credit here goes to https://github.dev/jaredpalmer/formik/blob/b9cc2536a1edb9f2d69c4cd20ecf4fa0f8059ade/website/src/components/forwardRefWithAs.tsx#L93
  */
-
 import * as React from 'react';
 
 /**
@@ -26,46 +25,31 @@ export type AssignableRef<ValueType> =
 
 export type As<BaseProps = any> = React.ElementType<BaseProps>;
 
-export type PropsWithAs<
-  ComponentType extends As,
-  ComponentProps,
-> = ComponentProps &
-  Omit<
-    React.ComponentPropsWithRef<ComponentType>,
-    'as' | keyof ComponentProps
-  > & {
+export type PropsWithAs<ComponentType extends As, ComponentProps> = ComponentProps &
+  Omit<React.ComponentPropsWithRef<ComponentType>, 'as' | keyof ComponentProps> & {
     as?: ComponentType;
   };
 
-export type PropsFromAs<
-  ComponentType extends As,
-  ComponentProps,
-> = (PropsWithAs<ComponentType, ComponentProps> & { as: ComponentType }) &
+export type PropsFromAs<ComponentType extends As, ComponentProps> = (PropsWithAs<ComponentType, ComponentProps> & {
+  as: ComponentType;
+}) &
   PropsWithAs<ComponentType, ComponentProps>;
 
 export type ComponentWithForwardedRef<
   ElementType extends React.ElementType,
   ComponentProps,
 > = React.ForwardRefExoticComponent<
-  ComponentProps &
-    React.HTMLProps<React.ElementType<ElementType>> &
-    React.ComponentPropsWithRef<ElementType>
+  ComponentProps & React.HTMLProps<React.ElementType<ElementType>> & React.ComponentPropsWithRef<ElementType>
 >;
 
 export interface ComponentWithAs<ComponentType extends As, ComponentProps> {
   // These types are a bit of a hack, but cover us in cases where the `as` prop
   // is not a JSX string type. Makes the compiler happy so 🤷‍♂️
-  <TT extends As>(
-    props: PropsWithAs<TT, ComponentProps>,
-  ): React.ReactElement | null;
-  (
-    props: PropsWithAs<ComponentType, ComponentProps>,
-  ): React.ReactElement | null;
+  <TT extends As>(props: PropsWithAs<TT, ComponentProps>): React.ReactElement | null;
+  (props: PropsWithAs<ComponentType, ComponentProps>): React.ReactElement | null;
 
   displayName?: string;
-  propTypes?: React.WeakValidationMap<
-    PropsWithAs<ComponentType, ComponentProps>
-  >;
+  propTypes?: React.WeakValidationMap<PropsWithAs<ComponentType, ComponentProps>>;
   contextTypes?: React.ValidationMap<any>;
   defaultProps?: Partial<PropsWithAs<ComponentType, ComponentProps>>;
 }
@@ -85,15 +69,9 @@ export interface ComponentWithAs<ComponentType extends As, ComponentProps> {
  * @param Comp
  */
 export function forwardRefWithAs<Props, ComponentType extends As>(
-  comp: (
-    props: PropsFromAs<ComponentType, Props>,
-    ref: React.RefObject<any>,
-  ) => React.ReactElement | null,
+  comp: (props: PropsFromAs<ComponentType, Props>, ref: React.RefObject<any>) => React.ReactElement | null,
 ) {
-  return React.forwardRef(comp as any) as unknown as ComponentWithAs<
-    ComponentType,
-    Props
-  >;
+  return React.forwardRef(comp as any) as unknown as ComponentWithAs<ComponentType, Props>;
 }
 
 /*

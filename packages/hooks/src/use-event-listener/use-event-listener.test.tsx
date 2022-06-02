@@ -1,11 +1,9 @@
-import { render, fireEvent, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { useState } from 'react';
 
 import { useEventListener } from './use-event-listener';
 
-const KeysPressed: React.FC<{ type?: 'keypress' | 'keydown' }> = ({
-  type = 'keypress',
-}) => {
+const KeysPressed: React.FC<{ type?: 'keypress' | 'keydown' }> = ({ type = 'keypress' }) => {
   const [keys, setKeys] = useState('');
   useEventListener(type, (ev) => {
     setKeys(`${keys}${ev.key}`);

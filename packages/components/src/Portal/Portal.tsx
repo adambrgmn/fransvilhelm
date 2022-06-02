@@ -1,6 +1,7 @@
-import { useIsomorphicLayoutEffect, useForceUpdate } from '@fransvilhelm/hooks';
 import React, { useRef } from 'react';
 import { createPortal } from 'react-dom';
+
+import { useForceUpdate, useIsomorphicLayoutEffect } from '@fransvilhelm/hooks';
 
 interface PortalProps {
   type?: string;
@@ -8,11 +9,7 @@ interface PortalProps {
   children: React.ReactNode;
 }
 
-export const Portal: React.FC<PortalProps> = ({
-  type = 'fransvilhelm-portal',
-  containerRef,
-  children,
-}) => {
+export const Portal: React.FC<PortalProps> = ({ type = 'fransvilhelm-portal', containerRef, children }) => {
   let { mountNode, portalNode } = usePortal({ type, containerRef });
 
   if (portalNode.current != null) {
@@ -26,10 +23,7 @@ if (process.env.NODE_ENV !== 'production') {
   Portal.displayName = 'Portal';
 }
 
-export function usePortal({
-  type = 'fransvilhelm-portal',
-  containerRef,
-}: Omit<PortalProps, 'children'>) {
+export function usePortal({ type = 'fransvilhelm-portal', containerRef }: Omit<PortalProps, 'children'>) {
   let mountNode = useRef<HTMLDivElement | null>(null);
   let portalNode = useRef<HTMLElement | null>(null);
   let forceUpdate = useForceUpdate();
