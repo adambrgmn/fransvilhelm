@@ -1,5 +1,14 @@
 # @fransvilhelm/hooks
 
+## 3.2.0
+
+### Minor Changes
+
+- Add useForceUpdate hook (by [@adambrgmn](https://github.com/adambrgmn) in
+  [#60](https://github.com/adambrgmn/fransvilhelm/pull/60))
+- Add useId hook (by [@adambrgmn](https://github.com/adambrgmn) in
+  [#62](https://github.com/adambrgmn/fransvilhelm/pull/62))
+
 ## 3.1.4
 
 ### Patch Changes

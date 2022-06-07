@@ -1,6 +1,6 @@
 {
   "name": "@fransvilhelm/descendants",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "",
   "source": "src/index.ts",
   "main": "dist/index.js",
@@ -25,7 +25,7 @@
     "lint": "eslint . --ext .ts --ext .tsx --ext .js --ignore-pattern dist"
   },
   "dependencies": {
-    "@fransvilhelm/hooks": "3.1.4"
+    "@fransvilhelm/hooks": "3.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.16.5",
