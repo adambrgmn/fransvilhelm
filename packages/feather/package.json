@@ -22,8 +22,7 @@
     "lint": "eslint . --ext .ts --ext .tsx --ext .js",
     "test": "jest",
     "test:ci": "jest --coverage",
-    "test:ci:react-18": "REACT_VERSION=18 jest",
-    "feather": "node ./scripts/update-feather.mjs"
+    "test:ci:react-18": "REACT_VERSION=18 jest"
   },
   "dependencies": {},
   "devDependencies": {
