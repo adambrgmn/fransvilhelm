@@ -22,12 +22,9 @@
     "lint": "eslint . --ext .ts --ext .tsx --ext .js",
     "test": "jest",
     "test:ci": "jest --coverage",
-    "test:ci:react-18": "REACT_VERSION=18 jest",
-    "feather": "node ./scripts/update-feather.mjs"
+    "test:ci:react-18": "REACT_VERSION=18 jest"
   },
-  "dependencies": {
-    "feather-icons": "^4.28.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.16.5",
     "@babel/preset-env": "^7.16.5",
@@ -46,6 +43,7 @@
     "@types/react-dom": "^17.0.0",
     "@types/semver": "^7.3.4",
     "axios": "^0.24.0",
+    "feather-icons": "^4.29.0",
     "jest": "^27.4.5",
     "lodash": "^4.17.20",
     "react": "17.0.2",
@@ -57,7 +55,7 @@
     "typescript": "^4.5.4"
   },
   "peerDependencies": {
-    "react": "^16.8.0 || ^17.0.0 || ^18.0.0-alpha || ^18.0.0-beta",
-    "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0-alpha || ^18.0.0-beta"
+    "react": ">=16.8",
+    "react-dom": ">=16.8"
   }
 }

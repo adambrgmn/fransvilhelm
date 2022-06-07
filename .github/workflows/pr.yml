@@ -39,9 +39,11 @@ jobs:
         run: yarn turbo run test:ci:react-18
 
       - name: Check combined code coverage
+        if: github.actor != 'dependabot[bot]'
         run: yarn coverage
 
       - name: Code Coverage Report
+        if: github.actor != 'dependabot[bot]'
         uses: romeovs/lcov-reporter-action@v0.3.1
         with:
           lcov-file: ./coverage/lcov.info
