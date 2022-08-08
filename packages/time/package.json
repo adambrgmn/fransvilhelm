@@ -1,6 +1,6 @@
 {
   "name": "@fransvilhelm/time",
-  "version": "3.1.4",
+  "version": "0.0.0",
   "description": "Time conversion",
   "source": "src/index.ts",
   "main": "dist/index.js",
