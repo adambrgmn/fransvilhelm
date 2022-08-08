@@ -1,0 +1,43 @@
+{
+  "name": "@fransvilhelm/time",
+  "version": "3.1.4",
+  "description": "Time conversion",
+  "source": "src/index.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "repository": "https://github.com/adambrgmn/fransvilhelm/tree/main/packages/time",
+  "homepage": "https://github.com/adambrgmn/fransvilhelm/tree/main/packages/time",
+  "author": {
+    "name": "Adam Bergman",
+    "email": "adam@fransvilhelm.com"
+  },
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "utils"
+  ],
+  "scripts": {
+    "dev": "tsup --dts --watch",
+    "build": "tsup --dts",
+    "lint": "eslint . --ext .ts --ext .tsx --ext .js --ignore-pattern dist"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@fransvilhelm/config": "*",
+    "@fransvilhelm/tsconfig": "*",
+    "@types/node": "^17.0.2",
+    "@types/react": "^17.0.37",
+    "@types/react-dom": "^17.0.11",
+    "tsup": "^6.0.1",
+    "typescript": "^4.5.4"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "bugs": {
+    "url": "https://github.com/adambrgmn/fransvilhelm/issues"
+  }
+}
